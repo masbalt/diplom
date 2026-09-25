@@ -28,33 +28,17 @@
 \usepackage{algpseudocode}
 \usepackage{listings}
 
-\newtheorem{theorem}{Theorem} % continuous numbers
-%%\newtheorem{theorem}{Theorem}[section] % sectionwise numbers
-%% optional argument [theorem] produces theorem numbering sequence instead of independent numbers for Proposition
-\newtheorem{proposition}[theorem]{Proposition}% 
-\newtheorem{lemma}{Lemma}% 
-%%\newtheorem{proposition}{Proposition} % to get separate numbers for theorem and proposition etc.
-
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}{Lemma}
 \newtheorem{example}{Example}
 \newtheorem{remark}{Remark}
-
 \newtheorem{definition}{Definition}
 \newtheorem{assumption}{Assumption}
 
 %%%
 
-
-\title{Title}
-
-
-% The \author macro works with any number of authors. There are two commands
-% used to separate the names and addresses of multiple authors: \And and \AND.
-%
-% Using \And between authors leaves it to LaTeX to determine where to break the
-% lines. Using \AND forces a line break at that point. So, if LaTeX puts 3 of 4
-% authors names on the first line, and the last on the second line, try using
-% \AND instead of \And before the third author name.
-
+\title{Arbitrage-Aware Reconstruction and Short-Horizon Forecasting of Implied Volatility Surfaces in Sparse Option Markets}
 
 \author{
   Name Surname\\
@@ -68,17 +52,15 @@
   \texttt{email@phystech.edu}\\
 }
 
-
 \begin{document}
-
 
 \maketitle
 
 \begin{abstract}
-    TODO
+Implied volatility surfaces summarize option prices across strikes and maturities and are widely used for derivative valuation and risk management. In practice, the surface is observed only at traded option contracts, while liquidity is distributed unevenly across strikes and expiration dates. As a result, market data form a sparse and noisy set of observations rather than a complete surface. This work studies two related problems: reconstruction of a complete implied volatility surface from sparse option quotes and short-horizon forecasting of its dynamics. The Moscow Exchange option market is considered as the main empirical setting. We plan to compare classical parametric approaches, including SABR and SVI-type models, with modern machine-learning and deep-learning methods. Special attention is paid to static no-arbitrage constraints, robustness to increasing data sparsity, and stability across volatility regimes. Reconstruction quality will be evaluated by masking observable quotes, while forecasting quality will be assessed using chronological out-of-sample testing. The central research question is whether flexible data-driven models can improve reconstruction and forecasting accuracy without sacrificing financial consistency.
 \end{abstract}
 
-\textbf{Keywords:} TODO
+\textbf{Keywords:} implied volatility surface, options, no-arbitrage constraints, deep learning, volatility forecasting, sparse data, Moscow Exchange
 
 \section{Introduction}\label{sec:intro}
 
@@ -86,28 +68,33 @@ TODO
 
 \textbf{Contributions.} Our contributions can be summarized as follows:
 \begin{itemize}
-    \item We present...
-    \item We demonstrate the validity of our theoretical results through empirical studies...
-    \item We highlight the implications of our findings for...
+    \item TODO
+    \item TODO
+    \item TODO
 \end{itemize}
 
-\textbf{Outline.} The rest of the paper is organized as follows...
+\textbf{Outline.} TODO
 
 \section{Related Work}\label{sec:rw}
 
-\textbf{Topic \#1.}
-TODO
+\textbf{Parametric volatility-surface models and no-arbitrage constraints.}
+Classical approaches describe the implied volatility smile or surface through a small number of interpretable parameters. The SABR model of \citet{hagan2002sabr} is a widely used stochastic-volatility specification for modelling the shape and dynamics of the volatility smile. Another important family is the SVI parameterization. \citet{gatheral2014arbitrage} derived conditions under which SVI can be calibrated so that the resulting surface is free of static arbitrage. These approaches provide strong financial structure and efficient calibration, which makes them natural baselines for data-driven methods. At the same time, a fixed parametric form may limit flexibility when observations are sparse, noisy, or change substantially across market regimes.
 
-\textbf{Topic \#2.}
-TODO
+\textbf{Deep learning for calibration and surface reconstruction.}
+Neural methods have increasingly been used to approximate computationally expensive pricing and calibration procedures. \citet{horvath2021deep} showed that neural networks can substantially accelerate calibration for a broad class of stochastic and rough-volatility models. More directly related to surface reconstruction, \citet{ackerer2020deep} proposed a neural approach for smoothing implied volatility surfaces and incorporated soft penalties for static arbitrage. Their method is designed to remain useful when quotes are sparse or erroneous and can also act as a correction on top of a classical volatility-surface model. Recent work by \citet{rodriguez2026reconstruction} systematically compared multilayer perceptrons, convolutional architectures, U-Nets, variational autoencoders, and Transformer-based models for reconstruction from sparse and noisy observations. The results indicate that modern neural architectures can improve reconstruction accuracy under severe sparsity, while arbitrage penalties reduce economically inconsistent outputs. These studies motivate treating the observed option board as a partially observed two-dimensional object rather than fitting each maturity independently.
+
+\textbf{Dynamic prediction and adaptation across market regimes.}
+Recent research has moved beyond static reconstruction toward forecasting the evolution of the entire implied volatility surface. \citet{liang2025hexagon} proposed a graph-attention architecture that explicitly models relationships between option contracts when predicting the surface. \citet{zhuang2026continual} considered online reconstruction from sparse quotes under volatility-regime shifts and developed a continual-learning procedure intended to retain information from previous regimes while adapting to new ones. Going further, \citet{buchegger2026arbitrage} proposed an arbitrage-aware latent diffusion framework for generating multi-step trajectories of implied volatility surfaces and the underlying return process. These works show that reconstruction, temporal dynamics, regime adaptation, and no-arbitrage consistency are closely related but technically distinct problems.
+
+The present work studies these components within a single empirical framework for a sparse option market. We focus on the joint question of how accurately unobserved parts of the surface can be reconstructed and whether the resulting representation can support reliable short-horizon forecasting. The experimental design therefore compares classical parametric baselines and data-driven models under the same sparsity scenarios, chronological train--test protocol, and explicit tests for static arbitrage violations.
 
 \section{Preliminaries}\label{sec:prelim}
 
 \subsection{General notation}
 
-In this section, we introduce the general notation used in the rest of the paper and the basic assumptions. 
+In this section, we introduce the general notation used in the rest of the paper and the basic assumptions.
 
-\subsection{Assumptions} 
+\subsection{Assumptions}
 
 TODO
 
@@ -124,7 +111,6 @@ TODO
 \section{Conclusion}\label{sec:concl}
 
 TODO
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
