@@ -1,4 +1,4 @@
-# LinkReview
+# Обзор литературы (LinkReview)
 
 - Рабочий обзор литературы по теме восстановления и прогнозирования поверхности подразумеваемой волатильности.
 - В соответствии с требованиями курса собран пул **40+ релевантных работ**; в основной текст статьи войдут только наиболее важные.
@@ -8,7 +8,7 @@
 > [!NOTE]
 > Центральный вопрос работы: **даёт ли использование исторической динамики поверхности и взаимосвязей между опционными контрактами преимущество над классическими безарбитражными методами именно тогда, когда текущая опционная доска содержит мало наблюдений?** Обзор литературы используется, чтобы отделить этот вопрос от уже решённых задач статической интерполяции, работы с разреженностью и простого применения нейросетей.
 
-| # | Topic | Title | Year | Authors | Paper | Relevance / critical summary |
+| № | Направление | Название | Год | Авторы | Ссылка | Значение для работы / критический комментарий |
 |---:|:---|:---|:---:|:---|:---:|:---|
 | 1 | Теория опционов | The Pricing of Options and Corporate Liabilities | 1973 | Black, Scholes | [DOI](https://doi.org/10.1086/260062) | Базовая модель, через обращение которой определяется подразумеваемая волатильность. Нужна как теоретическая отправная точка, но постоянная волатильность не описывает реальную улыбку. |
 | 2 | Теория опционов | Theory of Rational Option Pricing | 1973 | Merton | [JSTOR](https://www.jstor.org/stable/1831029) | Формализует безарбитражную теорию ценообразования опционов и расширяет Black--Scholes. |
@@ -18,15 +18,15 @@
 | 6 | Локальная волатильность | Implied Binomial Trees | 1994 | Rubinstein | [Scholar](https://scholar.google.com/scholar?q=Rubinstein+Implied+Binomial+Trees+1994) | Ещё один классический способ извлечения локальной динамики из опционных цен. |
 | 7 | Эмпирическая поверхность | Implied Volatility Functions: Empirical Tests | 1998 | Dumas, Fleming, Whaley | [Scholar](https://scholar.google.com/scholar?q=Implied+Volatility+Functions+Empirical+Tests) | Показывает практические ограничения простых параметрических функций подразумеваемой волатильности. |
 | 8 | Нейросети | A Bayesian Approach for Constructing Implied Volatility Surfaces through Neural Networks | 2000 | Avellaneda, Carelli, Stella | [Record](https://hdl.handle.net/10281/8367) | Ранняя непараметрическая нейросетевая модель поверхности; показывает давность идеи, поэтому сама нейросеть не может считаться новизной. |
-| 9 | SABR | Managing Smile Risk | 2002 | Hagan et al. | [Scholar](https://scholar.google.com/scholar?q=Hagan+Managing+Smile+Risk+2002) | Стандартный параметрический baseline для улыбки волатильности; интерпретируем, но ограничен функциональной формой. |
+| 9 | SABR | Managing Smile Risk | 2002 | Hagan et al. | [Scholar](https://scholar.google.com/scholar?q=Hagan+Managing+Smile+Risk+2002) | Стандартный параметрический базовый метод для улыбки волатильности; интерпретируем, но ограничен функциональной формой. |
 | 10 | Динамика поверхности | The Dynamics of Implied Volatility Surfaces | 2002 | Cont, da Fonseca | [Scholar](https://scholar.google.com/scholar?q=Cont+da+Fonseca+Dynamics+of+Implied+Volatility+Surfaces) | Показывает низкоразмерную факторную структуру движений поверхности и мотивирует PCA-подходы. |
-| 11 | Динамика поверхности | Predictable Dynamics in the S&P 500 Index Options Implied Volatility Surface | 2006 | Gonçalves, Guidolin | [DOI](https://doi.org/10.1086/500686) | Доказывает предсказуемость динамики параметров поверхности; важный эконометрический baseline. |
-| 12 | Безарбитражное сглаживание | Arbitrage-Free Smoothing of the Implied Volatility Surface | 2009 | Fengler | [DOI](https://doi.org/10.1080/14697680802595585) | Безарбитражные сплайны; сильный классический baseline для разреженных данных. |
-| 13 | SVI | Arbitrage-Free SVI Volatility Surfaces | 2014 | Gatheral, Jacquier | [DOI](https://doi.org/10.1080/14697688.2013.819986) | Формализует условия статического отсутствия арбитража для SVI; один из ключевых baseline нашей работы. |
+| 11 | Динамика поверхности | Predictable Dynamics in the S&P 500 Index Options Implied Volatility Surface | 2006 | Gonçalves, Guidolin | [DOI](https://doi.org/10.1086/500686) | Доказывает предсказуемость динамики параметров поверхности; важный эконометрический базовый метод. |
+| 12 | Безарбитражное сглаживание | Arbitrage-Free Smoothing of the Implied Volatility Surface | 2009 | Fengler | [DOI](https://doi.org/10.1080/14697680802595585) | Безарбитражные сплайны; сильный классический базовый метод для разреженных данных. |
+| 13 | SVI | Arbitrage-Free SVI Volatility Surfaces | 2014 | Gatheral, Jacquier | [DOI](https://doi.org/10.1080/14697688.2013.819986) | Формализует условия статического отсутствия арбитража для SVI; один из ключевых базовых методов нашей работы. |
 | 14 | Прогнозирование | An Efficient Estimate and Forecast of the Implied Volatility Surface: A Nonlinear Kalman Filter Approach | 2016 | Chen, Zhou, Li | [DOI](https://doi.org/10.1016/j.econmod.2016.06.003) | Прогнозирует динамику коэффициентов поверхности через нелинейный фильтр Калмана; классический конкурент нейросетям. |
 | 15 | Онлайн-обучение | Online Adaptive Machine Learning Based Algorithm for Implied Volatility Surface Modeling | 2019 | Zeng, Klabjan | [DOI](https://doi.org/10.1016/j.knosys.2018.08.039) | Адаптивная опорная регрессия для внутридневной поверхности; показывает важность дрейфа распределения и онлайн-обновления. |
 | 16 | Финансовые ограничения | Incorporating Prior Financial Domain Knowledge into Neural Networks for Implied Volatility Surface Prediction | 2019 | Zheng, Yang, Chen | [arXiv](https://arxiv.org/abs/1904.12834) | Встраивает финансовые знания и ограничения в архитектуру и функцию ошибки; прямой предшественник структурно-информированного обучения. |
-| 17 | Прогнозирование | Forecasting Implied Volatility Smile Surface via Deep Learning and Attention Mechanism | 2019 | Chen, Zhang | [arXiv](https://arxiv.org/abs/1912.11059) | LSTM с механизмом внимания для прогноза поверхности; полезный ранний нейросетевой baseline. |
+| 17 | Прогнозирование | Forecasting Implied Volatility Smile Surface via Deep Learning and Attention Mechanism | 2019 | Chen, Zhang | [arXiv](https://arxiv.org/abs/1912.11059) | LSTM с механизмом внимания для прогноза поверхности; полезный ранний нейросетевой базовый метод. |
 | 18 | Глубокое обучение | Deep Smoothing of the Implied Volatility Surface | 2020 | Ackerer, Tagasovska, Vatter | [NeurIPS](https://proceedings.neurips.cc/paper/2020/hash/858e47701162578e5e627cd93ab0938a-Abstract.html) | Одна из центральных работ: нейросетевое сглаживание, разреженные/ошибочные котировки и штрафы за статический арбитраж. |
 | 19 | Глубокая калибровка | Deep Learning Volatility: A Deep Neural Network Perspective on Pricing and Calibration in (Rough) Volatility Models | 2021 | Horvath, Muguruza, Tomas | [DOI](https://doi.org/10.1080/14697688.2020.1817974) | Показывает, что нейросети эффективно аппроксимируют отображение параметров модели в полную поверхность и ускоряют калибровку. |
 | 20 | Ограниченное обучение | Beyond Surrogate Modeling: Learning the Local Volatility via Shape Constraints | 2021 | Chataigner et al. | [DOI](https://doi.org/10.1137/20M1381538) | Сравнивает Гауссовы процессы с жёсткими ограничениями и нейросети со штрафами за арбитраж; важен для выбора способа наложения ограничений. |
@@ -46,10 +46,10 @@
 | 34 | Реальное время | A Framework for Real-Time Modeling and Forecasting of Large Unbalanced Option Implied Volatility Surfaces | 2025 | Dufays, Jacobs, Rombouts | [SSRN](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5275880) | Работает с крупными несбалансированными поверхностями и последовательным обновлением; особенно релевантно разреженной неравномерной доске. |
 | 35 | Опционное ценообразование | Deep Learning Option Pricing with Market Implied Volatility Surfaces | 2025 | Ding, Lu, Cheung | [arXiv](https://arxiv.org/abs/2509.05911) | Сжимает поверхность VAE и использует её как состояние рынка для оценки других опционов; показывает прикладную ценность хорошего представления поверхности. |
 | 36 | Риск-менеджмент | Deep Hedging with Options Using the Implied Volatility Surface | 2025 | François et al. | [arXiv](https://arxiv.org/abs/2504.06208) | Использует полную поверхность в задаче хеджирования; полезно для обоснования практической ценности прогноза. |
-| 37 | Реконструкция | Volatility Surface Reconstruction using Deep Learning under No-Arbitrage Constraints | 2026 | Rodriguez Manzi | [arXiv](https://arxiv.org/abs/2605.24031) | Очень близкая работа: MLP/CNN/U-Net/VAE/Transformer против SVI при контролируемой разреженности; её необходимо использовать как основной современный benchmark. |
+| 37 | Реконструкция | Volatility Surface Reconstruction using Deep Learning under No-Arbitrage Constraints | 2026 | Rodriguez Manzi | [arXiv](https://arxiv.org/abs/2605.24031) | Очень близкая работа: MLP/CNN/U-Net/VAE/Transformer против SVI при контролируемой разреженности; её необходимо использовать как основной современный эталон для сравнения. |
 | 38 | Смена режимов | Continual Learning for Implied Volatility Surfaces under Regime Shifts | 2026 | Zhuang, Wu | [DOI](https://doi.org/10.1016/j.frl.2026.110046) | Разреженные котировки + смена режимов + сохранение знаний; показывает, что простое дообучение может забывать прошлые состояния рынка. |
 | 39 | Диффузионные модели | Forecasting Implied Volatility Surface with Generative Diffusion Models | 2025/2026 | Jin, Agarwal | [arXiv](https://arxiv.org/abs/2511.07571) | Однодневный вероятностный прогноз полной поверхности с динамическим штрафом за арбитраж. |
-| 40 | Диффузионные модели | Arbitrage-Aware Multi-Step Forecasting of Implied Volatility Surfaces: Modelling Surface Trajectories Using Latent Diffusion | 2026 | Buchegger, Gonon | [arXiv](https://arxiv.org/abs/2608.22478) | Современный верхний benchmark: генерирует целые траектории будущих поверхностей и явно учитывает арбитражность. |
+| 40 | Диффузионные модели | Arbitrage-Aware Multi-Step Forecasting of Implied Volatility Surfaces: Modelling Surface Trajectories Using Latent Diffusion | 2026 | Buchegger, Gonon | [arXiv](https://arxiv.org/abs/2608.22478) | Современный верхний эталон для сравнения: генерирует целые траектории будущих поверхностей и явно учитывает арбитражность. |
 | 41 | Машинное обучение | Machine Learning for Quantitative Finance: Fast Derivative Pricing, Hedging and Fitting | 2018 | De Spiegeleer et al. | [DOI](https://doi.org/10.1080/14697688.2018.1495335) | Показывает практические компромиссы между скоростью и точностью машинного обучения в количественных финансах. |
 | 42 | Нейросетевое ценообразование | Pricing Options and Computing Implied Volatilities using Neural Networks | 2019 | Liu et al. | [DOI](https://doi.org/10.3390/risks7010016) | Демонстрирует использование нейросетей как быстрых приближений численных процедур оценки и обращения подразумеваемой волатильности. |
 
@@ -57,13 +57,13 @@
 
 На текущем этапе наиболее обоснованный минимальный набор конкурентов:
 
-1. **SVI / SSVI** — структурный безарбитражный параметрический baseline.
-2. **Арбитражно-свободные сплайны Fengler** — непараметрический классический baseline.
-3. **Deep Smoothing (Ackerer et al.)** — ключевой нейросетевой baseline для разреженной поверхности.
+1. **SVI / SSVI** — структурный безарбитражный параметрический базовый метод.
+2. **Арбитражно-свободные сплайны Fengler** — непараметрический классический базовый метод.
+3. **Deep Smoothing (Ackerer et al.)** — ключевой нейросетевой базовый метод для разреженной поверхности.
 4. **U-Net / Transformer из Rodriguez Manzi (2026)** — современные сильные методы реконструкции.
 5. Для прогноза: **persistence**, **Kalman-factor model**, **LSTM/ConvLSTM**, а затем более современные графовые/генеративные модели при достаточном объёме данных.
 
-## Предварительный research gap
+## Предварительный пробел в исследованиях
 
 Обзор показывает, что **не являются самостоятельной новизной**:
 - применение нейросетей к поверхности подразумеваемой волатильности;
@@ -71,12 +71,12 @@
 - добавление штрафов за статический арбитраж;
 - само по себе прогнозирование будущей поверхности.
 
-Рабочий исследовательский пробел формулируется иначе: **неясно, насколько дополнительная информация из истории всей поверхности и из взаимосвязей между опционными контрактами улучшает результат по сравнению с классическими безарбитражными методами, использующими преимущественно текущую опционную доску, особенно при сильной разреженности текущих наблюдений.**
+Рабочий пробел в исследованиях формулируется иначе: **неясно, насколько дополнительная информация из истории всей поверхности и из взаимосвязей между опционными контрактами улучшает результат по сравнению с классическими безарбитражными методами, использующими преимущественно текущую опционную доску, особенно при сильной разреженности текущих наблюдений.**
 
 Поэтому основной эксперимент строится вокруг двух классов информации:
 
-1. **Current-board methods:** SVI/SSVI, безарбитражные сплайны и другие методы, строящие текущую поверхность главным образом по котировкам дня (t).
-2. **History-aware methods:** модели, использующие текущую разреженную доску вместе с последовательностью предыдущих поверхностей и связями между контрактами.
+1. **Методы текущей доски (current-board):** SVI/SSVI, безарбитражные сплайны и другие методы, строящие текущую поверхность главным образом по котировкам дня $t$.
+2. **Методы с учётом истории (history-aware):** модели, использующие текущую разреженную доску вместе с последовательностью предыдущих поверхностей и связями между контрактами.
 
 Проверяемые вопросы:
 - уменьшается ли ошибка восстановления скрытых реальных котировок при добавлении истории;
@@ -85,4 +85,4 @@
 - сохраняется ли преимущество в разных режимах волатильности;
 - сколько статических арбитражных нарушений создаёт каждый метод.
 
-Эмпирической площадкой предполагается рынок опционов Московской биржи. Окончательная постановка будет подтверждена после аудита доступности и плотности исторических данных.
+Эмпирическая площадка — рынок опционов Московской биржи. Аудит данных и пилотная проверка гипотезы — в [reports/moex_data_audit.md](reports/moex_data_audit.md): основной актив — Si, целевые наблюдения — сделки, синхронизированные по минутным свечам, а расчётные цены биржи — плотная модельная история, а не истина.

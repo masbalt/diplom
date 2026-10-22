@@ -1,4 +1,4 @@
-# Temporal and Cross-Contract Modeling of Sparse Implied Volatility Surfaces
+# Arbitrage-Aware Reconstruction and Short-Horizon Forecasting of Implied Volatility Surfaces from Sparse Option Trades Using Historical Dynamics and Cross-Contract Dependencies
 
 [![License](https://badgen.net/github/license/masbalt/diplom?color=green)](https://github.com/masbalt/diplom/blob/main/LICENSE)
 [![GitHub Contributors](https://img.shields.io/github/contributors/masbalt/diplom)](https://github.com/masbalt/diplom/graphs/contributors)
@@ -8,7 +8,7 @@
 <table>
     <tr>
         <td align="left"> <b> Author </b> </td>
-        <td> Name Surname </td>
+        <td> Aleksandr Sitnikov </td>
     </tr>
     <tr>
         <td align="left"> <b> Consultant </b> </td>
@@ -16,7 +16,7 @@
     </tr>
     <tr>
         <td align="left"> <b> Advisor </b> </td>
-        <td> Name Surname, PhD/DSc </td>
+        <td> S.I.Gurov, PhD/DSc </td>
     </tr>
 </table>
 
@@ -29,7 +29,13 @@
 
 ## Abstract
 
-Implied volatility surfaces are widely used for option valuation, hedging, and risk management, but on less liquid markets the observable option board can be sparse and uneven across strikes and maturities. The central research question of this project is whether historical surface dynamics and dependencies between option contracts provide an advantage over classical arbitrage-aware methods when the current option board contains few reliable observations. Using Moscow Exchange options, we study both reconstruction of the current surface from incomplete quotes and short-horizon forecasting of future surfaces. Classical SVI/SSVI-type and smoothing baselines are compared with machine-learning and deep-learning models that use previous market states and cross-contract structure. Evaluation combines controlled quote masking, chronological out-of-sample forecasting, static-arbitrage diagnostics, and robustness analysis across volatility regimes.
+Implied volatility surfaces are widely used in option pricing, hedging, and risk management. However, on less liquid markets, option trades are unevenly distributed across strike prices and maturities, making reliable surface reconstruction difficult.
+
+This study aims to develop and evaluate an arbitrage-aware method for reconstructing implied volatility surfaces from sparse market transactions using historical market information and dependencies between option contracts with different strikes and maturities. The Moscow Exchange options market, primarily options on USD/RUB futures (Si), serves as the empirical setting.
+
+The proposed approach will combine current transaction data with historical volatility curves and cross-contract information. Its reconstruction accuracy and financial consistency will be evaluated against classical methods, including SVI/SSVI, arbitrage-aware smoothing techniques, and historical baselines.
+
+Preliminary experiments indicate that historical information can substantially improve reconstruction accuracy when the number of current observations is particularly small. The study will further examine how this advantage depends on data sparsity, assess static-arbitrage violations, and investigate the possibility of short-horizon surface forecasting.
 
 ## Citation
 

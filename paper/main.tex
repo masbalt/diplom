@@ -1,10 +1,13 @@
 \documentclass{article}
 
 \PassOptionsToPackage{numbers, sort, compress}{natbib}
-\usepackage[main,final]{neurips_2025}
+\usepackage[preprint]{neurips_2025}
 
-\usepackage[T1]{fontenc}
+\usepackage[T1,T2A]{fontenc}
 \usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+% Times-подобный шрифт с кириллицей вместо ptm из стиля NeurIPS.
+\usepackage{tempora}
 \usepackage{hyperref}
 \usepackage{url}
 \usepackage{booktabs}
@@ -20,7 +23,6 @@
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{amsthm}
 \usepackage{mathrsfs}
-\usepackage{xcolor}
 \usepackage{textcomp}
 \usepackage{manyfoot}
 \usepackage{algorithm}
@@ -28,90 +30,129 @@
 \usepackage{algpseudocode}
 \usepackage{listings}
 
-\newtheorem{theorem}{Theorem}
-\newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{lemma}{Lemma}
-\newtheorem{example}{Example}
-\newtheorem{remark}{Remark}
-\newtheorem{definition}{Definition}
-\newtheorem{assumption}{Assumption}
+\newtheorem{theorem}{Теорема}
+\newtheorem{proposition}[theorem]{Утверждение}
+\newtheorem{lemma}{Лемма}
+\newtheorem{example}{Пример}
+\newtheorem{remark}{Замечание}
+\newtheorem{definition}{Определение}
+\newtheorem{assumption}{Предположение}
+
+% Русские заголовки и колонтитул вместо зашитых в стиль NeurIPS.
+\makeatletter
+\renewcommand{\@noticestring}{Рабочая версия.}
+\makeatother
+\renewcommand{\acksection}{\section*{Благодарности}}
+\renewenvironment{abstract}%
+  {\vskip 0.075in\centerline{\large\bf Аннотация}\vspace{0.5ex}\begin{quote}}%
+  {\par\end{quote}\vskip 1ex}
 
 %%%
 
-\title{Temporal and Cross-Contract Modeling of Sparse Implied Volatility Surfaces: Arbitrage-Aware Reconstruction and Forecasting on Moscow Exchange}
+\title{Восстановление и краткосрочное прогнозирование безарбитражной поверхности подразумеваемой волатильности на разреженном рынке опционов с учётом временной динамики и взаимосвязей между контрактами}
 
 \author{
-  Name Surname\\
-  Moscow State University\\
-  Moscow, Russia\\
+  Имя Фамилия\\
+  МГУ имени М.\,В.~Ломоносова\\
+  Москва, Россия\\
   \texttt{email@example.com}\\
   \And
-  Name Surname\\
-  Moscow State University\\
-  Moscow, Russia\\
+  Имя Фамилия\\
+  МГУ имени М.\,В.~Ломоносова\\
+  Москва, Россия\\
   \texttt{email@example.com}\\
 }
+
+% Числа пилотного эксперимента: генерируются командой python code/main.py
+\input{generated/pilot_numbers.tex}
 
 \begin{document}
 
 \maketitle
 
 \begin{abstract}
-Implied volatility surfaces are a central input for option valuation, hedging, and risk management, but on less liquid markets the observable option board is sparse, noisy, and unevenly distributed across strikes and maturities. This work studies whether historical surface dynamics and cross-contract dependencies provide an advantage over classical arbitrage-aware methods when the current option board contains only a limited number of reliable observations. Using Moscow Exchange options as the main empirical setting, we consider two related tasks: reconstruction of the current implied volatility surface from incomplete quotes and short-horizon forecasting of its future evolution. Classical baselines, including SVI/SSVI-type parameterizations and arbitrage-aware smoothing methods, are compared with machine-learning and deep-learning models that explicitly use previous market states and dependencies between contracts. Reconstruction quality is evaluated by hiding observed market quotes at controlled sparsity levels, while forecasting is assessed on strictly future chronological periods. In addition to statistical accuracy, each method is evaluated for static-arbitrage violations and robustness across volatility regimes. The central research question is whether temporal information and cross-sectional option structure become especially valuable as the current market snapshot becomes more sparse, and whether this additional flexibility can be obtained without sacrificing financial consistency.
+Поверхность подразумеваемой волатильности служит ключевым входом для оценки опционов, хеджирования и управления рисками, однако на менее ликвидных рынках наблюдаемая опционная доска разрежена, зашумлена и неравномерно покрывает страйки и сроки. В работе исследуется, дают ли историческая динамика поверхности и взаимосвязи между контрактами преимущество над классическими безарбитражными методами, когда текущая доска содержит лишь небольшое число надёжных наблюдений. На данных опционов Московской биржи рассматриваются две связанные задачи: восстановление текущей поверхности по неполным котировкам и краткосрочное прогнозирование её эволюции. Классические базовые методы, включая параметризации типа SVI/SSVI и безарбитражное сглаживание, сравниваются с моделями машинного и глубокого обучения, явно использующими предыдущие состояния рынка и зависимости между контрактами. Качество восстановления оценивается скрытием реальных рыночных наблюдений при контролируемых уровнях разреженности, качество прогноза "--- на строго будущих хронологических периодах. Помимо статистической точности, для каждого метода оцениваются нарушения статического арбитража и устойчивость в разных режимах волатильности. Центральный вопрос работы: становятся ли временная информация и структура связей между опционами особенно ценными по мере роста разреженности текущего среза рынка и можно ли получить эту дополнительную гибкость без потери финансовой корректности.
 \end{abstract}
 
-\textbf{Keywords:} implied volatility surface, options, no-arbitrage constraints, deep learning, volatility forecasting, sparse data, Moscow Exchange
+\textbf{Ключевые слова:} поверхность подразумеваемой волатильности, опционы, отсутствие арбитража, глубокое обучение, прогнозирование волатильности, разреженные данные, Московская биржа
 
-\section{Introduction}\label{sec:intro}
+\section{Введение}\label{sec:intro}
 
 TODO
 
-\textbf{Contributions.} Our planned contributions can be summarized as follows:
+\textbf{Вклад работы.} Планируемые результаты работы:
 \begin{itemize}
-    \item We formulate implied-volatility surface reconstruction as a controlled sparsity problem and test whether historical surface dynamics improve the recovery of deliberately hidden market quotes.
-    \item We compare classical arbitrage-aware baselines with models that use both temporal history and cross-contract dependencies, under a unified chronological evaluation protocol.
-    \item We evaluate statistical accuracy together with static-arbitrage diagnostics and regime robustness on Moscow Exchange option data.
+    \item задача восстановления поверхности подразумеваемой волатильности формулируется как задача с контролируемой разреженностью; проверяется, улучшает ли историческая динамика поверхности восстановление намеренно скрытых рыночных наблюдений;
+    \item классические безарбитражные базовые методы сравниваются с моделями, использующими как временную историю, так и зависимости между контрактами, в рамках единого хронологического протокола оценки;
+    \item статистическая точность оценивается совместно с диагностикой статического арбитража и устойчивостью к смене режимов на данных опционов Московской биржи.
 \end{itemize}
 
-\textbf{Outline.} TODO
+\textbf{Структура статьи.} TODO
 
-\section{Related Work}\label{sec:rw}
+\section{Обзор литературы}\label{sec:rw}
 
-Implied volatility surface modelling combines two requirements that are difficult to satisfy simultaneously: a model should reproduce an irregular set of market quotes accurately and should remain financially consistent away from the observed contracts. The literature therefore develops along three closely related directions: structured parametric and non-parametric surface construction, data-driven reconstruction from incomplete observations, and dynamic forecasting of the whole surface. The distinction is important for the present study because a model that fits a dense historical surface well is not necessarily suitable for a sparse option market, while a statistically accurate forecast may still be unusable for pricing if it creates static arbitrage.
+Моделирование поверхности подразумеваемой волатильности сочетает два требования, которые трудно выполнить одновременно: модель должна точно воспроизводить нерегулярный набор рыночных котировок и оставаться финансово корректной вдали от наблюдаемых контрактов. Поэтому литература развивается по трём тесно связанным направлениям: структурное параметрическое и непараметрическое построение поверхности, восстановление по неполным наблюдениям с помощью методов, основанных на данных, и динамическое прогнозирование поверхности целиком. Это разделение важно для настоящей работы: модель, хорошо описывающая плотную историческую поверхность, не обязательно подходит для разреженного опционного рынка, а статистически точный прогноз может быть непригоден для ценообразования, если он порождает статический арбитраж.
 
-\textbf{Structured surface construction and no-arbitrage constraints.}
-Classical approaches impose a low-dimensional structure on the volatility smile or surface. The SABR approximation of \citet{hagan2002sabr} is widely used for smile calibration, while the SVI family provides a flexible parameterization across strikes and maturities. \citet{gatheral2014arbitrage} derived conditions for constructing SVI surfaces without static arbitrage, and \citet{fengler2009arbitrage} proposed shape-constrained spline smoothing that also targets arbitrage-free interpolation. These methods are computationally efficient and economically interpretable, making them natural baselines. Their limitation is that a fixed functional form or a strongly regularized smoother can become restrictive when market quotes are irregular, sparse, or change abruptly across volatility regimes. This limitation is especially relevant for less liquid markets, where missing observations are part of the problem rather than an occasional data-cleaning issue.
+\textbf{Структурное построение поверхности и безарбитражные ограничения.}
+Классические подходы задают низкоразмерную структуру улыбки или поверхности волатильности. Приближение SABR \citep{hagan2002sabr} широко используется для калибровки улыбки, а семейство SVI даёт гибкую параметризацию по страйкам и срокам. \citet{gatheral2014arbitrage} получили условия построения поверхностей SVI без статического арбитража, а \citet{fengler2009arbitrage} предложил сплайновое сглаживание с ограничениями формы, также нацеленное на безарбитражную интерполяцию. Эти методы вычислительно эффективны и экономически интерпретируемы, поэтому являются естественными базовыми методами. Их ограничение в том, что фиксированная функциональная форма или сильно регуляризованный сглаживатель могут оказаться слишком жёсткими, когда котировки нерегулярны, разрежены или резко меняются при смене режима волатильности. Это особенно существенно для менее ликвидных рынков, где пропуски наблюдений "--- часть самой задачи, а не эпизодическая проблема очистки данных.
 
-\textbf{Machine learning for reconstruction and model correction.}
-Neural methods relax the fixed functional form while attempting to preserve financial restrictions. \citet{ackerer2020deep} proposed deep smoothing with soft penalties for static arbitrage and showed that the method remains useful with sparse or erroneous observations. \citet{chataigner2021shape} compared constrained Gaussian-process and neural-network approaches for no-arbitrage interpolation, illustrating the trade-off between hard guarantees, smoothness, and predictive accuracy. Rather than replacing a financial model entirely, \citet{almeida2023machine} trained a neural network to correct systematic errors of parametric option-pricing models, demonstrating that a hybrid model can outperform both the original parametric specification and a direct neural fit. Recent work has moved toward more complex reconstruction architectures: \citet{rodriguez2026reconstruction} compares multilayer, convolutional, U-Net, variational-autoencoder, and Transformer-based models under controlled sparsity and no-arbitrage penalties, while \citet{nteumagne2025vae} studies surface completion with variational autoencoders. Taken together, these results suggest that flexible models are most compelling when the evaluation explicitly includes unobserved contracts and varying degrees of quote sparsity, rather than only in-sample fitting error.
+\textbf{Машинное обучение для восстановления и коррекции моделей.}
+Нейросетевые методы ослабляют фиксированную функциональную форму, стараясь сохранить финансовые ограничения. \citet{ackerer2020deep} предложили глубокое сглаживание с мягкими штрафами за статический арбитраж и показали, что метод остаётся полезным при разреженных или ошибочных наблюдениях. \citet{chataigner2021shape} сравнили гауссовские процессы с ограничениями и нейросетевые подходы к безарбитражной интерполяции, проиллюстрировав компромисс между жёсткими гарантиями, гладкостью и точностью. Вместо полной замены финансовой модели \citet{almeida2023machine} обучали нейросеть исправлять систематические ошибки параметрических моделей ценообразования и показали, что гибридная модель превосходит как исходную параметрическую спецификацию, так и прямую нейросетевую аппроксимацию. Последние работы переходят к более сложным архитектурам восстановления: \citet{rodriguez2026reconstruction} сравнивает многослойные, свёрточные, U-Net, вариационные автокодировщики и трансформеры при контролируемой разреженности и штрафах за арбитраж, а \citet{nteumagne2025vae} изучают дополнение поверхности с помощью вариационных автокодировщиков. В совокупности эти результаты показывают, что гибкие модели наиболее убедительны тогда, когда оценка явно включает ненаблюдаемые контракты и разные степени разреженности, а не только ошибку на обучающих данных.
 
-\textbf{Dynamic forecasting of implied volatility surfaces.}
-A separate line of work treats the surface as a time-evolving object. Earlier econometric studies modelled low-dimensional surface coefficients or factors and found substantial predictability in their dynamics \citep{goncalves2006predictable,chen2016kalman}. More recently, \citet{medvedev2022multistep} used recurrent and convolutional-recurrent networks to produce multistep forecasts of the complete S\&P 500 implied volatility surface. Current research extends this idea with richer cross-sectional structure and generative models: graph-based architectures model dependencies between individual option contracts, continual-learning methods adapt reconstruction to volatility-regime shifts \citep{zhuang2026continual}, and diffusion models generate distributions of future surfaces while adding explicit arbitrage-aware refinement \citep{jin2025diffusion,buchegger2026arbitrage}. These methods show that forecasting accuracy, uncertainty, and financial consistency need to be considered jointly rather than as independent objectives.
+\textbf{Динамическое прогнозирование поверхности.}
+Отдельное направление рассматривает поверхность как объект, эволюционирующий во времени. Ранние эконометрические работы моделировали низкоразмерные коэффициенты или факторы поверхности и обнаружили существенную предсказуемость их динамики \citep{goncalves2006predictable,chen2016kalman}. \citet{medvedev2022multistep} использовали рекуррентные и свёрточно-рекуррентные сети для многошагового прогноза полной поверхности опционов на S\&P~500. Современные исследования дополняют эту идею более богатой поперечной структурой и генеративными моделями: графовые архитектуры моделируют зависимости между отдельными контрактами, методы непрерывного обучения адаптируют восстановление к смене режимов волатильности \citep{zhuang2026continual}, а диффузионные модели порождают распределения будущих поверхностей с явной безарбитражной коррекцией \citep{jin2025diffusion,buchegger2026arbitrage}. Эти работы показывают, что точность прогноза, неопределённость и финансовую корректность нужно рассматривать совместно, а не как независимые цели.
 
-\textbf{Research gap.}
-Existing work already shows that implied-volatility surfaces can be reconstructed from sparse observations, forecast dynamically, and regularized against static arbitrage. Therefore, neither sparsity nor the use of neural networks alone constitutes a sufficient research contribution. The less explored question is whether \emph{historical surface dynamics and cross-contract dependencies provide incremental information relative to classical arbitrage-aware methods that primarily use the current option board}, and whether this advantage becomes larger as current observations become more sparse. This question is especially relevant for a market such as Moscow Exchange, where liquidity can vary substantially across strikes, maturities, and time. The present study therefore compares methods using only the current cross-section with models using both the current sparse board and a history of previous market states, while jointly evaluating hidden-quote reconstruction, future-surface forecasting, static-arbitrage violations, and robustness across volatility regimes.
+\textbf{Пробел в исследованиях.}
+Существующие работы уже показывают, что поверхность подразумеваемой волатильности можно восстанавливать по разреженным наблюдениям, прогнозировать во времени и регуляризовать против статического арбитража. Поэтому ни разреженность, ни использование нейросетей сами по себе не являются достаточным научным вкладом. Менее изучен вопрос о том, \emph{дают ли историческая динамика поверхности и зависимости между контрактами дополнительную информацию по сравнению с классическими безарбитражными методами, использующими преимущественно текущую опционную доску}, и растёт ли это преимущество по мере разрежения текущих наблюдений. Вопрос особенно актуален для такого рынка, как Московская биржа, где ликвидность существенно различается по страйкам, срокам и во времени. Поэтому в работе методы, использующие только текущий поперечный срез, сравниваются с моделями, использующими текущую разреженную доску вместе с историей предыдущих состояний рынка, при совместной оценке восстановления скрытых котировок, прогноза будущей поверхности, нарушений статического арбитража и устойчивости в разных режимах волатильности.
 
-\section{Preliminaries}\label{sec:prelim}
+\section{Предварительные сведения}\label{sec:prelim}
 
-\subsection{General notation}
+\subsection{Основные обозначения}
 
-In this section, we introduce the general notation used in the rest of the paper and the basic assumptions.
+В этом разделе вводятся обозначения, используемые далее, и основные предположения.
 
-\subsection{Assumptions}
+Для опциона со страйком $K$ и сроком до экспирации $T$ (в долях года) на фьючерс с ценой $F$ обозначим через $k = \ln(K/F)$ логарифмическую денежность, через $\sigma(k, T)$ "--- подразумеваемую волатильность, через $w(k, T) = \sigma^2(k, T)\,T$ "--- полную дисперсию. Опционы на фьючерсы Московской биржи маржируемые, поэтому их цены не дисконтируются и в модели Блэка
+\[
+C = F\,N(d_1) - K\,N(d_2), \qquad P = C + K - F, \qquad d_{1,2} = \frac{\ln(F/K) \pm \sigma^2 T/2}{\sigma\sqrt{T}}.
+\]
+Опционная доска дня $t$ "--- множество наблюдений $\mathcal{O}_t = \{(k_i, T_i, \sigma_i)\}$, где для каждого наблюдения известен источник (сделка, котировка, расчётная цена биржи).
 
-TODO
-
-\section{Method}\label{sec:method}
-
-\section{Experiments}\label{sec:exp}
-
-TODO
-
-\section{Discussion}\label{sec:disc}
+\subsection{Предположения}
 
 TODO
 
-\section{Conclusion}\label{sec:concl}
+\section{Метод}\label{sec:method}
+
+TODO
+
+\section{Эксперименты}\label{sec:exp}
+
+\subsection{Данные}
+
+Используются итоги торгов опционами срочного рынка Московской биржи через информационно-статистический сервер ISS. Для каждого контракта за день доступны цены открытия, закрытия, минимальная, максимальная и средневзвешенная цены сделок, объём, число сделок, открытый интерес, расчётная и теоретическая цены. Исторические лучшие котировки и стаканы в открытом доступе отсутствуют, но доступны минутные свечи по сделкам опционов и фьючерсов, что позволяет синхронизировать цену опциона с ценой базового фьючерса.
+
+Расчётные и теоретические цены опционов вычисляются биржей по шестипараметрической кривой волатильности, которая подстраивается по лучшим заявкам каждой серии отдельно. Поэтому поверхность, построенная по расчётным ценам, плотная, но модельная; реальными рыночными наблюдениями являются сделки. Подробный аудит данных приведён в репозитории (\texttt{reports/moex\_data\_audit.md}).
+
+\subsection{Пилотный эксперимент: вклад истории при разреженной доске}\label{sec:pilot}
+
+Наблюдения "--- реальные сделки по опционам на фьючерс \PilotAsset{} за \PilotDays{} торговых дней (\PilotPeriod), всего \PilotTrades{} сделок, медианно \PilotTradesPerDay{} в день. Подразумеваемая волатильность каждой сделки рассчитывается по цене опциона и цене фьючерса в ту же минуту. В каждый день доля $m$ сделок скрывается и восстанавливается по остальным тремя способами: только по видимым сделкам текущего дня $f(\mathcal{O}^{\mathrm{vis}}_t)$ (квадратичная улыбка или SVI), только по расчётной кривой биржи предыдущего дня $S_{t-1}$ и по их сочетанию $f(\mathcal{O}^{\mathrm{vis}}_t, S_{t-1})$ "--- вчерашняя кривая служит априором, а по видимым сделкам оценивается поправка уровня и наклона.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\linewidth]{../reports/figures/oslide_pilot_\PilotAsset.pdf}
+    \caption{Ошибка восстановления скрытых сделок в зависимости от доли скрытых сделок дня $m$. Полосы "--- 95\,\% бутстреп-интервалы по дням; под долей $m$ указано медианное число видимых сделок в день.}
+    \label{fig:pilot}
+\end{figure}
+
+При $m=\PilotMaskLow\,\%$ методы, использующие только текущие сделки, не уступают методу с историей: RMSE \PilotCbLow{} и \PilotHistCbLow{} п.п., разность \PilotDiffLow{} (95\,\%: \PilotDiffLowCI). При $m=\PilotMaskHigh\,\%$ история снижает ошибку с \PilotCbHigh{} до \PilotHistCbHigh{} п.п. (разность \PilotDiffHigh, 95\,\%: \PilotDiffHighCI), рис.~\ref{fig:pilot}. Таким образом, ценность истории растёт с разреженностью текущей доски. Использованное сочетание "--- простой базовый метод; разрабатываемая модель должна его превзойти.
+
+TODO
+
+\section{Обсуждение}\label{sec:disc}
+
+TODO
+
+\section{Заключение}\label{sec:concl}
 
 TODO
 
@@ -124,9 +165,9 @@ TODO
 
 \newpage
 \appendix
-\section{Appendix / supplemental material}\label{app}
+\section{Дополнительные материалы}\label{app}
 
-\subsection{Additional experiments / Proofs of Theorems}\label{app:exp}
+\subsection{Дополнительные эксперименты и доказательства}\label{app:exp}
 
 TODO
 

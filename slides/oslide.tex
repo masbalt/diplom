@@ -1,0 +1,60 @@
+% One-slide talk (O-slide): основная идея работы на одном слайде.
+% Рисунок и числа порождаются командой  python code/main.py
+\documentclass[aspectratio=169]{beamer}
+
+\graphicspath{{../reports/figures/}}
+
+\usepackage{cmap}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{amssymb,amsfonts,amsmath}
+
+\usecolortheme{beaver}
+\usefonttheme[onlymath]{serif}
+\setbeamertemplate{navigation symbols}{}
+\setbeamersize{text margin left=0.35cm,text margin right=0.35cm}
+\setbeamerfont{frametitle}{size=\large}
+\setbeamertemplate{footline}{%
+  \hbox{\hspace{0.35cm}\tiny\color{gray}Ситников Александр МГУ имени М.\,В.~Ломоносова}\vspace{2pt}}
+
+\input{../paper/generated/pilot_numbers.tex}
+
+\begin{document}
+
+\begin{frame}[t]{При разреженной доске история рынка снижает ошибку восстановления IV}
+\vspace{-0.6em}
+{\scriptsize Опционы на фьючерс \PilotAsset{} (MOEX), \PilotDays{} торговых дней, \PilotTrades{} сделок: доля $m$ сделок дня скрывается и восстанавливается по остальным.}
+
+\vspace{0.1em}
+\begin{columns}[T]
+\begin{column}{0.64\textwidth}
+    \includegraphics[width=\linewidth,height=0.62\textheight,keepaspectratio]{oslide_pilot_\PilotAsset}
+\end{column}
+\begin{column}{0.35\textwidth}
+\scriptsize
+\textbf{Обозначения}
+\begin{itemize}\setlength{\itemsep}{1pt}
+    \item $\sigma(k,T)$ "--- подразумеваемая волатильность (IV), $k=\ln(K/F)$;
+    \item $\mathcal{O}^{\mathrm{vis}}_t$ "--- видимые сделки дня $t$;
+    \item $S_{t-1}$ "--- вчерашняя расчётная кривая биржи;
+    \item RMSE "--- ошибка IV в скрытых сделках, п.п.; полосы "--- 95\,\% интервал.
+\end{itemize}
+
+\medskip
+\textbf{Результат}
+\begin{itemize}\setlength{\itemsep}{1pt}
+    \item $m=\PilotMaskHigh\,\%$: \PilotCbHigh{} $\to$ \textbf{\PilotHistCbHigh} п.п.;
+    \item $m=\PilotMaskLow\,\%$: \PilotCbLow{} и \PilotHistCbLow{} п.п. "--- различие незначимо.
+\end{itemize}
+\end{column}
+\end{columns}
+
+\vspace{-0.3em}
+\begin{block}{}
+\scriptsize
+\textbf{Вывод:} при малом числе сделок точность даёт история рынка; при плотной доске хватает текущих сделок. Далее "--- метод, объединяющий историю, связи между сроками и безарбитражные ограничения.
+\end{block}
+\end{frame}
+
+\end{document}
