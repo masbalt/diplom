@@ -1,0 +1,220 @@
+{
+  "monthly_Si": {
+    "first_snapshot": "2012-01-16",
+    "snapshots": 177
+  },
+  "monthly_RTS": {
+    "first_snapshot": "2012-01-16",
+    "snapshots": 177
+  },
+  "monthly_BR": {
+    "first_snapshot": "2012-01-16",
+    "snapshots": 177
+  },
+  "monthly_MIX": {
+    "first_snapshot": "2012-01-16",
+    "snapshots": 177
+  },
+  "monthly_GOLD": {
+    "first_snapshot": "2012-01-16",
+    "snapshots": 177
+  },
+  "monthly_CNY": {
+    "first_snapshot": "2022-07-15",
+    "snapshots": 51
+  },
+  "dynamics_Si": {
+    "days": 428,
+    "rms_daily_change_vp": 3.1798114231902437,
+    "rms_daily_change_atm_vp": 2.6749975094905856,
+    "median_abs_daily_change_vp": 0.9130740096913476,
+    "median_abs_daily_change_atm30_vp": 0.5747898617474947,
+    "pca_explained_top3": [
+      0.3664664117655697,
+      0.17585717664954795,
+      0.13873718040720767
+    ],
+    "lag1_autocorr_atm30": -0.3076919239333705
+  },
+  "daily_Si": {
+    "days": 509,
+    "period": "2024-10-01..2026-09-30",
+    "density_quantiles": {
+      "series": {
+        "10%": 6.0,
+        "50%": 8.0,
+        "90%": 9.0
+      },
+      "series_zone": {
+        "10%": 5.0,
+        "50%": 7.0,
+        "90%": 8.0
+      },
+      "listed": {
+        "10%": 362.0,
+        "50%": 505.0,
+        "90%": 701.2
+      },
+      "listed_zone": {
+        "10%": 210.0,
+        "50%": 325.0,
+        "90%": 434.2
+      },
+      "oi_zone": {
+        "10%": 108.0,
+        "50%": 128.0,
+        "90%": 170.2
+      },
+      "traded_any": {
+        "10%": 99.0,
+        "50%": 119.0,
+        "90%": 143.0
+      },
+      "traded_otm_zone": {
+        "10%": 50.8,
+        "50%": 66.0,
+        "90%": 84.2
+      },
+      "series_ge5": {
+        "10%": 3.0,
+        "50%": 3.0,
+        "90%": 4.0
+      },
+      "series_ge1": {
+        "10%": 4.0,
+        "50%": 5.0,
+        "90%": 6.0
+      },
+      "volume": {
+        "10%": 34173.6,
+        "50%": 63838.0,
+        "90%": 110910.6
+      },
+      "atm30": {
+        "10%": 0.15,
+        "50%": 0.17,
+        "90%": 0.22
+      },
+      "coverage_zone": {
+        "10%": 0.15,
+        "50%": 0.2,
+        "90%": 0.33
+      }
+    },
+    "seen_yesterday_median": 0.7380832282471628,
+    "jaccard_median": 0.5810744810744811,
+    "settle_curve_rmse_vp_median": 0.011185597287852891,
+    "settle_curve_rmse_vp_p90": 0.06832244302692109,
+    "butterfly_series_with_viol_share": 0.022272842318400404,
+    "butterfly_triplet_viol_share": 0.00065897599836825,
+    "calendar_pairs_with_viol_share": 0.24383020730503455,
+    "calendar_bump_vp_median_if_viol": 2.309642032770154,
+    "calendar_bump_vp_p90_if_viol": 7.79965387192304,
+    "calendar_viol_share_T1_le_14d": 0.17063492063492064,
+    "calendar_viol_share_T1_gt_14d": 0.2583826429980276,
+    "forward_parity_vs_futures_rel_err_median": 0.0,
+    "forward_parity_vs_futures_rel_err_p99": 0.0,
+    "volume_contracts_median": 63838.0
+  },
+  "sync_Si": {
+    "contract_days": 16011,
+    "rms_naive_vp": 1.781402008836807,
+    "rms_sync_vp": 1.1615257001675912,
+    "mad_naive_vp": 0.8043902499637684,
+    "mad_sync_vp": 0.4593248780852488,
+    "intraday_std_vp_median": 0.23559631882716
+  },
+  "dynamics_RTS": {
+    "days": 503,
+    "rms_daily_change_vp": 3.7401871586375277,
+    "rms_daily_change_atm_vp": 3.5944819362967464,
+    "median_abs_daily_change_vp": 1.45216431839216,
+    "median_abs_daily_change_atm30_vp": 1.1209252449474572,
+    "pca_explained_top3": [
+      0.3938167839394362,
+      0.26908910432530325,
+      0.10957819945249184
+    ],
+    "lag1_autocorr_atm30": -0.036157372911061816
+  },
+  "daily_RTS": {
+    "days": 509,
+    "period": "2024-10-01..2026-09-30",
+    "density_quantiles": {
+      "series": {
+        "10%": 6.0,
+        "50%": 7.0,
+        "90%": 9.0
+      },
+      "series_zone": {
+        "10%": 5.0,
+        "50%": 7.0,
+        "90%": 8.0
+      },
+      "listed": {
+        "10%": 212.0,
+        "50%": 292.0,
+        "90%": 532.2
+      },
+      "listed_zone": {
+        "10%": 83.0,
+        "50%": 152.0,
+        "90%": 247.0
+      },
+      "oi_zone": {
+        "10%": 41.0,
+        "50%": 55.0,
+        "90%": 74.2
+      },
+      "traded_any": {
+        "10%": 52.0,
+        "50%": 64.0,
+        "90%": 79.0
+      },
+      "traded_otm_zone": {
+        "10%": 25.0,
+        "50%": 34.0,
+        "90%": 45.0
+      },
+      "series_ge5": {
+        "10%": 2.0,
+        "50%": 3.0,
+        "90%": 4.0
+      },
+      "series_ge1": {
+        "10%": 3.0,
+        "50%": 4.0,
+        "90%": 5.0
+      },
+      "volume": {
+        "10%": 10984.2,
+        "50%": 18874.0,
+        "90%": 31181.6
+      },
+      "atm30": {
+        "10%": 0.22,
+        "50%": 0.32,
+        "90%": 0.44
+      },
+      "coverage_zone": {
+        "10%": 0.14,
+        "50%": 0.23,
+        "90%": 0.38
+      }
+    },
+    "seen_yesterday_median": 0.7741935483870968,
+    "jaccard_median": 0.6238207547169812,
+    "settle_curve_rmse_vp_median": 0.04007247137686277,
+    "settle_curve_rmse_vp_p90": 0.18173257519539648,
+    "butterfly_series_with_viol_share": 0.025155601659751038,
+    "butterfly_triplet_viol_share": 0.0010613071665524498,
+    "calendar_pairs_with_viol_share": 0.15625,
+    "calendar_bump_vp_median_if_viol": 3.5794821725427264,
+    "calendar_bump_vp_p90_if_viol": 11.806077798911566,
+    "calendar_viol_share_T1_le_14d": 0.05555555555555555,
+    "calendar_viol_share_T1_gt_14d": 0.17704918032786884,
+    "forward_parity_vs_futures_rel_err_median": 0.0,
+    "forward_parity_vs_futures_rel_err_p99": 0.0,
+    "volume_contracts_median": 18874.0
+  }
+}

@@ -1,23 +1,69 @@
-# Code
+# Код
 
-This repository contains source code for our paper. The code includes data processing, model building, and visualization of results.
+Исходный код к работе: загрузка и обработка данных MOEX, построение поверхностей, модели и визуализация результатов.
 
 > [!IMPORTANT]
-> We use jupyter notebooks for visualization purposes only. Please, keep your code in Python scripts.
+> Jupyter-ноутбуки используются только для визуализации. Основной код храните в Python-скриптах.
 
-## Installation
+## Установка
 
-Clone the repo:
+Клонируйте репозиторий:
 ```bash
-git clone https://github.com/kisnisker/m1p-template.git
-cd m1p-template/code
+git clone https://github.com/masbalt/diplom.git
+cd diplom
 ```
 
-Install dependencies:
+Установите зависимости:
 ```bash
-pip install -r requirements.txt
+pip install -r code/requirements.txt
 ```
 
-## Usage
+## Структура
 
-TODO
+| Путь | Назначение |
+|:---|:---|
+| `main.py` | **единственная точка запуска** пилота: данные → синхронизация → пилот → таблицы → рисунки |
+| `config.py` | все параметры эксперимента и описание его потока |
+| `figures.py` | рисунки по сохранённым таблицам (вычисления не повторяет) |
+| `ivs/iss.py` | клиент MOEX ISS с дисковым кэшем |
+| `ivs/data.py` | загрузка итогов торгов и сборка дневных досок |
+| `ivs/contracts.py` | разбор кодов опционов, справочник серий (экспирация, базовый фьючерс) |
+| `ivs/black76.py` | модель Блэка для маржируемых опционов (r = 0), обращение в IV |
+| `ivs/moex_curve.py` | кривая волатильности НКЦ, по которой биржа считает расчётные цены |
+| `ivs/board.py` | дневная доска в OTM-соглашении: F по паритету, IV расчётных цен и сделок |
+| `ivs/intraday.py` | IV сделок, синхронизированная с фьючерсом по минутным свечам |
+| `ivs/recon.py` | методы восстановления: текущая доска, история, история + текущая доска |
+| `ivs/pilot.py` | пилот: скрытие сделок, восстановление, бутстреп-интервалы, TeX-макросы с числами |
+| `tests/` | юнит-тесты на синтетических данных |
+| `scripts/download_moex.py` | загрузка месячных/дневных срезов по нескольким активам (для аудита) |
+| `scripts/sync_trades.py` | синхронизация сделок для произвольного периода |
+| `scripts/audit_moex.py` | статистики аудита данных и графики |
+| `scripts/collect_live_board.py` | сбор текущих bid/ask (исторических стаканов в бесплатном ISS нет) |
+
+## Запуск
+
+Данные и кэш ISS складываются в `data/` (в git не попадают).
+
+```bash
+python -m unittest discover -s code/tests   # юнит-тесты, секунды
+python code/main.py --quick                 # тестовый прогон на одном месяце, ~1 мин из кэша
+python code/main.py                         # полный пилот: ~25 мин из кэша, первый запуск качает данные
+python code/main.py --stages figures        # только перерисовать рисунки по сохранённым таблицам
+```
+
+Результаты: таблицы — `reports/tables/pilot_*_Si.*`, рисунки (PDF и PNG) — `reports/figures/`,
+числа для статьи и слайдов — `paper/generated/pilot_numbers.tex`.
+
+Аудит данных (несколько активов, месячные срезы с 2012 г.):
+
+```bash
+python code/scripts/download_moex.py --data-dir data \
+    --monthly 2012-01:2026-09 --monthly-assets Si RTS BR MIX GOLD CNY \
+    --daily 2024-10-01:2026-09-30 --daily-assets Si RTS
+python code/scripts/audit_moex.py --data-dir data --out reports
+```
+
+Сбор текущих котировок (по расписанию, например раз в час в торговое время):
+```bash
+python code/scripts/collect_live_board.py --data-dir data --assets Si RTS
+```
