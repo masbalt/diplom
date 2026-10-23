@@ -1,5 +1,7 @@
+
 % One-slide talk (O-slide): основная идея работы на одном слайде.
-% Рисунок и числа порождаются командой  python code/main.py
+% Числа и рисунок воспроизводятся командой: python code/main.py
+% Разместить файл в папке slides/ проекта.
 \documentclass[aspectratio=169]{beamer}
 
 \graphicspath{{../reports/figures/}}
@@ -14,47 +16,89 @@
 \usefonttheme[onlymath]{serif}
 \setbeamertemplate{navigation symbols}{}
 \setbeamersize{text margin left=0.35cm,text margin right=0.35cm}
-\setbeamerfont{frametitle}{size=\large}
+\setbeamerfont{frametitle}{size=\normalsize}
+
 \setbeamertemplate{footline}{%
-  \hbox{\hspace{0.35cm}\tiny\color{gray}Ситников Александр МГУ имени М.\,В.~Ломоносова}\vspace{2pt}}
+  \hbox{\hspace{0.35cm}\tiny\color{gray}%
+    Александр Ситников \quad МГУ имени М.\,В.~Ломоносова}%
+  \vspace{2pt}%
+}
 
 \input{../paper/generated/pilot_numbers.tex}
 
 \begin{document}
 
-\begin{frame}[t]{При разреженной доске история рынка снижает ошибку восстановления IV}
+\begin{frame}[t]{История снижает ошибку восстановления волатильности при дефиците сделок}
+
 \vspace{-0.6em}
-{\scriptsize Опционы на фьючерс \PilotAsset{} (MOEX), \PilotDays{} торговых дней, \PilotTrades{} сделок: доля $m$ сделок дня скрывается и восстанавливается по остальным.}
+{\scriptsize
+Пилот: опционы на фьючерс \PilotAsset{} (MOEX),
+\PilotDays{} торговых дней, \PilotTrades{} сделок.
+Скрытые сделки восстанавливаются по оставшимся наблюдениям.
+}
 
-\vspace{0.1em}
-\begin{columns}[T]
-\begin{column}{0.64\textwidth}
-    \includegraphics[width=\linewidth,height=0.62\textheight,keepaspectratio]{oslide_pilot_\PilotAsset}
-\end{column}
-\begin{column}{0.35\textwidth}
-\scriptsize
-\textbf{Обозначения}
-\begin{itemize}\setlength{\itemsep}{1pt}
-    \item $\sigma(k,T)$ "--- подразумеваемая волатильность (IV), $k=\ln(K/F)$;
-    \item $\mathcal{O}^{\mathrm{vis}}_t$ "--- видимые сделки дня $t$;
-    \item $S_{t-1}$ "--- вчерашняя расчётная кривая биржи;
-    \item RMSE "--- ошибка IV в скрытых сделках, п.п.; полосы "--- 95\,\% интервал.
-\end{itemize}
+\vspace{0.3em}
+\begin{columns}[T,onlytextwidth]
 
-\medskip
-\textbf{Результат}
-\begin{itemize}\setlength{\itemsep}{1pt}
-    \item $m=\PilotMaskHigh\,\%$: \PilotCbHigh{} $\to$ \textbf{\PilotHistCbHigh} п.п.;
-    \item $m=\PilotMaskLow\,\%$: \PilotCbLow{} и \PilotHistCbLow{} п.п. "--- различие незначимо.
-\end{itemize}
-\end{column}
+  \begin{column}{0.67\textwidth}
+    \centering
+    \includegraphics[
+      width=\linewidth,
+      height=0.57\textheight,
+      keepaspectratio
+    ]{oslide_pilot_\PilotAsset}
+  \end{column}
+
+  \begin{column}{0.32\textwidth}
+    \scriptsize
+
+    \textbf{Результат пилота}
+    \begin{itemize}\setlength{\itemsep}{0pt}
+
+      \item Скрыто \PilotMaskHigh\,\% сделок:
+      \PilotCbHigh{} $\rightarrow$
+      \textbf{\PilotHistCbHigh{} п.п.}
+
+      \item Только вчерашняя кривая:
+      \PilotHistHigh{} п.п.
+
+      \item Скрыто \PilotMaskLow\,\%:
+      \PilotCbLow{} и \PilotHistCbLow{} п.п.
+      (без значимого различия).
+
+    \end{itemize}
+
+    \vspace{0.15em}
+    \textbf{Обозначения}
+    \begin{itemize}\setlength{\itemsep}{0pt}
+
+      \item $m$ --- доля скрытых сделок;
+
+      \item $S_{t-1}$ --- вчерашняя
+      расчётная кривая биржи;
+
+      \item RMSE --- ошибка на скрытых
+      сделках в п.п. IV;
+      полосы --- 95\,\% доверительные
+      интервалы.
+
+    \end{itemize}
+  \end{column}
+
 \end{columns}
 
-\vspace{-0.3em}
+\vspace{-0.4em}
 \begin{block}{}
-\scriptsize
-\textbf{Вывод:} при малом числе сделок точность даёт история рынка; при плотной доске хватает текущих сделок. Далее "--- метод, объединяющий историю, связи между сроками и безарбитражные ограничения.
-\end{block}
-\end{frame}
+  \scriptsize
+  \textbf{Вывод:}
+  в пилоте история существенно снижает ошибку
+  при сильной разреженности данных.
 
+  \textbf{Далее:}
+  разработка метода, учитывающего историю,
+  связи между контрактами и ограничения
+  отсутствия статического арбитража.
+\end{block}
+
+\end{frame}
 \end{document}
