@@ -1,0 +1,2556 @@
+% Сгенерировано code/main.py (этап figures) — не редактировать вручную.
+\newcommand{\E}[1]{\csname E/#1\endcsname}
+\expandafter\def\csname E/Si/info/train_days\endcsname{254}
+\expandafter\def\csname E/Si/info/train_points\endcsname{22\,385}
+\expandafter\def\csname E/Si/info/train_period\endcsname{2024-10-02\,--\,2025-09-30}
+\expandafter\def\csname E/Si/info/test_days\endcsname{254}
+\expandafter\def\csname E/Si/info/test_points\endcsname{21\,217}
+\expandafter\def\csname E/Si/info/test_period\endcsname{2025-10-01\,--\,2026-09-30}
+\expandafter\def\csname E/Si/info/points_per_day\endcsname{83}
+\expandafter\def\csname E/Si/info/series_per_day\endcsname{5}
+\expandafter\def\csname E/Si/info/gross_removed\endcsname{275}
+\expandafter\def\csname E/Si/gap/total\endcsname{1\,262}
+\expandafter\def\csname E/Si/gap/worst\endcsname{20}
+\expandafter\def\csname E/Si/gap/hist_rmse\endcsname{5{,}6}
+\expandafter\def\csname E/Si/gap/hist_rmse_rest\endcsname{1{,}2}
+\expandafter\def\csname E/Si/rmse/hist/random/0.1\endcsname{1{,}32}
+\expandafter\def\csname E/Si/mae/hist/random/0.1\endcsname{0{,}85}
+\expandafter\def\csname E/Si/price/hist/random/0.1\endcsname{7{,}1}
+\expandafter\def\csname E/Si/rmse/cb_quad/random/0.1\endcsname{1{,}05}
+\expandafter\def\csname E/Si/mae/cb_quad/random/0.1\endcsname{0{,}61}
+\expandafter\def\csname E/Si/price/cb_quad/random/0.1\endcsname{5{,}0}
+\expandafter\def\csname E/Si/rmse/cb_svi/random/0.1\endcsname{1{,}10}
+\expandafter\def\csname E/Si/mae/cb_svi/random/0.1\endcsname{0{,}60}
+\expandafter\def\csname E/Si/price/cb_svi/random/0.1\endcsname{4{,}4}
+\expandafter\def\csname E/Si/rmse/cb_ssvi/random/0.1\endcsname{1{,}16}
+\expandafter\def\csname E/Si/mae/cb_ssvi/random/0.1\endcsname{0{,}84}
+\expandafter\def\csname E/Si/price/cb_ssvi/random/0.1\endcsname{7{,}7}
+\expandafter\def\csname E/Si/rmse/hist_cb/random/0.1\endcsname{1{,}04}
+\expandafter\def\csname E/Si/mae/hist_cb/random/0.1\endcsname{0{,}68}
+\expandafter\def\csname E/Si/price/hist_cb/random/0.1\endcsname{5{,}7}
+\expandafter\def\csname E/Si/rmse/gp/random/0.1\endcsname{0{,}81}
+\expandafter\def\csname E/Si/mae/gp/random/0.1\endcsname{0{,}50}
+\expandafter\def\csname E/Si/price/gp/random/0.1\endcsname{4{,}0}
+\expandafter\def\csname E/Si/rmse/gp_af/random/0.1\endcsname{0{,}80}
+\expandafter\def\csname E/Si/mae/gp_af/random/0.1\endcsname{0{,}50}
+\expandafter\def\csname E/Si/price/gp_af/random/0.1\endcsname{4{,}0}
+\expandafter\def\csname E/Si/rmse/moex_today/random/0.1\endcsname{0{,}94}
+\expandafter\def\csname E/Si/mae/moex_today/random/0.1\endcsname{0{,}66}
+\expandafter\def\csname E/Si/price/moex_today/random/0.1\endcsname{5{,}7}
+\expandafter\def\csname E/Si/rmse/gp_cb/random/0.1\endcsname{0{,}77}
+\expandafter\def\csname E/Si/mae/gp_cb/random/0.1\endcsname{0{,}50}
+\expandafter\def\csname E/Si/price/gp_cb/random/0.1\endcsname{4{,}1}
+\expandafter\def\csname E/Si/rmse/gp_indep/random/0.1\endcsname{0{,}81}
+\expandafter\def\csname E/Si/mae/gp_indep/random/0.1\endcsname{0{,}51}
+\expandafter\def\csname E/Si/price/gp_indep/random/0.1\endcsname{4{,}0}
+\expandafter\def\csname E/Si/rmse/gp_homo/random/0.1\endcsname{0{,}80}
+\expandafter\def\csname E/Si/mae/gp_homo/random/0.1\endcsname{0{,}51}
+\expandafter\def\csname E/Si/price/gp_homo/random/0.1\endcsname{4{,}1}
+\expandafter\def\csname E/Si/rmse/gp_param/random/0.1\endcsname{0{,}85}
+\expandafter\def\csname E/Si/mae/gp_param/random/0.1\endcsname{0{,}55}
+\expandafter\def\csname E/Si/price/gp_param/random/0.1\endcsname{4{,}5}
+\expandafter\def\csname E/Si/rmse/best_cb/random/0.1\endcsname{1{,}05}
+\expandafter\def\csname E/Si/mae/best_cb/random/0.1\endcsname{0{,}61}
+\expandafter\def\csname E/Si/price/best_cb/random/0.1\endcsname{5{,}0}
+\expandafter\def\csname E/Si/visible/random/0.1\endcsname{75}
+\expandafter\def\csname E/Si/bestcb/random/0.1\endcsname{квадратичная улыбка}
+\expandafter\def\csname E/Si/rmse/hist/random/0.3\endcsname{1{,}31}
+\expandafter\def\csname E/Si/mae/hist/random/0.3\endcsname{0{,}84}
+\expandafter\def\csname E/Si/price/hist/random/0.3\endcsname{7{,}1}
+\expandafter\def\csname E/Si/rmse/cb_quad/random/0.3\endcsname{1{,}30}
+\expandafter\def\csname E/Si/mae/cb_quad/random/0.3\endcsname{0{,}66}
+\expandafter\def\csname E/Si/price/cb_quad/random/0.3\endcsname{5{,}1}
+\expandafter\def\csname E/Si/rmse/cb_svi/random/0.3\endcsname{1{,}38}
+\expandafter\def\csname E/Si/mae/cb_svi/random/0.3\endcsname{0{,}66}
+\expandafter\def\csname E/Si/price/cb_svi/random/0.3\endcsname{4{,}6}
+\expandafter\def\csname E/Si/rmse/cb_ssvi/random/0.3\endcsname{1{,}16}
+\expandafter\def\csname E/Si/mae/cb_ssvi/random/0.3\endcsname{0{,}84}
+\expandafter\def\csname E/Si/price/cb_ssvi/random/0.3\endcsname{7{,}8}
+\expandafter\def\csname E/Si/rmse/hist_cb/random/0.3\endcsname{1{,}05}
+\expandafter\def\csname E/Si/mae/hist_cb/random/0.3\endcsname{0{,}68}
+\expandafter\def\csname E/Si/price/hist_cb/random/0.3\endcsname{5{,}8}
+\expandafter\def\csname E/Si/rmse/gp/random/0.3\endcsname{0{,}85}
+\expandafter\def\csname E/Si/mae/gp/random/0.3\endcsname{0{,}53}
+\expandafter\def\csname E/Si/price/gp/random/0.3\endcsname{4{,}2}
+\expandafter\def\csname E/Si/rmse/gp_af/random/0.3\endcsname{0{,}84}
+\expandafter\def\csname E/Si/mae/gp_af/random/0.3\endcsname{0{,}52}
+\expandafter\def\csname E/Si/price/gp_af/random/0.3\endcsname{4{,}2}
+\expandafter\def\csname E/Si/rmse/moex_today/random/0.3\endcsname{0{,}92}
+\expandafter\def\csname E/Si/mae/moex_today/random/0.3\endcsname{0{,}65}
+\expandafter\def\csname E/Si/price/moex_today/random/0.3\endcsname{5{,}7}
+\expandafter\def\csname E/Si/rmse/gp_cb/random/0.3\endcsname{0{,}80}
+\expandafter\def\csname E/Si/mae/gp_cb/random/0.3\endcsname{0{,}52}
+\expandafter\def\csname E/Si/price/gp_cb/random/0.3\endcsname{4{,}2}
+\expandafter\def\csname E/Si/rmse/gp_indep/random/0.3\endcsname{0{,}85}
+\expandafter\def\csname E/Si/mae/gp_indep/random/0.3\endcsname{0{,}53}
+\expandafter\def\csname E/Si/price/gp_indep/random/0.3\endcsname{4{,}2}
+\expandafter\def\csname E/Si/rmse/gp_homo/random/0.3\endcsname{0{,}85}
+\expandafter\def\csname E/Si/mae/gp_homo/random/0.3\endcsname{0{,}53}
+\expandafter\def\csname E/Si/price/gp_homo/random/0.3\endcsname{4{,}3}
+\expandafter\def\csname E/Si/rmse/gp_param/random/0.3\endcsname{0{,}87}
+\expandafter\def\csname E/Si/mae/gp_param/random/0.3\endcsname{0{,}56}
+\expandafter\def\csname E/Si/price/gp_param/random/0.3\endcsname{4{,}6}
+\expandafter\def\csname E/Si/rmse/best_cb/random/0.3\endcsname{1{,}16}
+\expandafter\def\csname E/Si/mae/best_cb/random/0.3\endcsname{0{,}84}
+\expandafter\def\csname E/Si/price/best_cb/random/0.3\endcsname{7{,}8}
+\expandafter\def\csname E/Si/visible/random/0.3\endcsname{58}
+\expandafter\def\csname E/Si/bestcb/random/0.3\endcsname{SSVI}
+\expandafter\def\csname E/Si/rmse/hist/random/0.5\endcsname{1{,}29}
+\expandafter\def\csname E/Si/mae/hist/random/0.5\endcsname{0{,}84}
+\expandafter\def\csname E/Si/price/hist/random/0.5\endcsname{7{,}1}
+\expandafter\def\csname E/Si/rmse/cb_quad/random/0.5\endcsname{1{,}31}
+\expandafter\def\csname E/Si/mae/cb_quad/random/0.5\endcsname{0{,}70}
+\expandafter\def\csname E/Si/price/cb_quad/random/0.5\endcsname{5{,}3}
+\expandafter\def\csname E/Si/rmse/cb_svi/random/0.5\endcsname{1{,}43}
+\expandafter\def\csname E/Si/mae/cb_svi/random/0.5\endcsname{0{,}72}
+\expandafter\def\csname E/Si/price/cb_svi/random/0.5\endcsname{5{,}0}
+\expandafter\def\csname E/Si/rmse/cb_ssvi/random/0.5\endcsname{1{,}21}
+\expandafter\def\csname E/Si/mae/cb_ssvi/random/0.5\endcsname{0{,}87}
+\expandafter\def\csname E/Si/price/cb_ssvi/random/0.5\endcsname{7{,}9}
+\expandafter\def\csname E/Si/rmse/hist_cb/random/0.5\endcsname{1{,}06}
+\expandafter\def\csname E/Si/mae/hist_cb/random/0.5\endcsname{0{,}69}
+\expandafter\def\csname E/Si/price/hist_cb/random/0.5\endcsname{5{,}8}
+\expandafter\def\csname E/Si/rmse/gp/random/0.5\endcsname{0{,}89}
+\expandafter\def\csname E/Si/mae/gp/random/0.5\endcsname{0{,}55}
+\expandafter\def\csname E/Si/price/gp/random/0.5\endcsname{4{,}4}
+\expandafter\def\csname E/Si/rmse/gp_af/random/0.5\endcsname{0{,}87}
+\expandafter\def\csname E/Si/mae/gp_af/random/0.5\endcsname{0{,}55}
+\expandafter\def\csname E/Si/price/gp_af/random/0.5\endcsname{4{,}4}
+\expandafter\def\csname E/Si/rmse/moex_today/random/0.5\endcsname{0{,}93}
+\expandafter\def\csname E/Si/mae/moex_today/random/0.5\endcsname{0{,}64}
+\expandafter\def\csname E/Si/price/moex_today/random/0.5\endcsname{5{,}7}
+\expandafter\def\csname E/Si/rmse/gp_cb/random/0.5\endcsname{0{,}85}
+\expandafter\def\csname E/Si/mae/gp_cb/random/0.5\endcsname{0{,}54}
+\expandafter\def\csname E/Si/price/gp_cb/random/0.5\endcsname{4{,}4}
+\expandafter\def\csname E/Si/rmse/gp_indep/random/0.5\endcsname{0{,}89}
+\expandafter\def\csname E/Si/mae/gp_indep/random/0.5\endcsname{0{,}55}
+\expandafter\def\csname E/Si/price/gp_indep/random/0.5\endcsname{4{,}4}
+\expandafter\def\csname E/Si/rmse/gp_homo/random/0.5\endcsname{0{,}89}
+\expandafter\def\csname E/Si/mae/gp_homo/random/0.5\endcsname{0{,}55}
+\expandafter\def\csname E/Si/price/gp_homo/random/0.5\endcsname{4{,}4}
+\expandafter\def\csname E/Si/rmse/gp_param/random/0.5\endcsname{0{,}91}
+\expandafter\def\csname E/Si/mae/gp_param/random/0.5\endcsname{0{,}58}
+\expandafter\def\csname E/Si/price/gp_param/random/0.5\endcsname{4{,}8}
+\expandafter\def\csname E/Si/rmse/best_cb/random/0.5\endcsname{1{,}21}
+\expandafter\def\csname E/Si/mae/best_cb/random/0.5\endcsname{0{,}87}
+\expandafter\def\csname E/Si/price/best_cb/random/0.5\endcsname{7{,}9}
+\expandafter\def\csname E/Si/visible/random/0.5\endcsname{41}
+\expandafter\def\csname E/Si/bestcb/random/0.5\endcsname{SSVI}
+\expandafter\def\csname E/Si/rmse/hist/random/0.7\endcsname{1{,}30}
+\expandafter\def\csname E/Si/mae/hist/random/0.7\endcsname{0{,}84}
+\expandafter\def\csname E/Si/price/hist/random/0.7\endcsname{7{,}1}
+\expandafter\def\csname E/Si/rmse/cb_quad/random/0.7\endcsname{1{,}74}
+\expandafter\def\csname E/Si/mae/cb_quad/random/0.7\endcsname{0{,}88}
+\expandafter\def\csname E/Si/price/cb_quad/random/0.7\endcsname{5{,}9}
+\expandafter\def\csname E/Si/rmse/cb_svi/random/0.7\endcsname{1{,}94}
+\expandafter\def\csname E/Si/mae/cb_svi/random/0.7\endcsname{0{,}97}
+\expandafter\def\csname E/Si/price/cb_svi/random/0.7\endcsname{6{,}0}
+\expandafter\def\csname E/Si/rmse/cb_ssvi/random/0.7\endcsname{1{,}29}
+\expandafter\def\csname E/Si/mae/cb_ssvi/random/0.7\endcsname{0{,}92}
+\expandafter\def\csname E/Si/price/cb_ssvi/random/0.7\endcsname{8{,}4}
+\expandafter\def\csname E/Si/rmse/hist_cb/random/0.7\endcsname{1{,}11}
+\expandafter\def\csname E/Si/mae/hist_cb/random/0.7\endcsname{0{,}71}
+\expandafter\def\csname E/Si/price/hist_cb/random/0.7\endcsname{6{,}0}
+\expandafter\def\csname E/Si/rmse/gp/random/0.7\endcsname{0{,}99}
+\expandafter\def\csname E/Si/mae/gp/random/0.7\endcsname{0{,}60}
+\expandafter\def\csname E/Si/price/gp/random/0.7\endcsname{4{,}8}
+\expandafter\def\csname E/Si/rmse/gp_af/random/0.7\endcsname{0{,}97}
+\expandafter\def\csname E/Si/mae/gp_af/random/0.7\endcsname{0{,}60}
+\expandafter\def\csname E/Si/price/gp_af/random/0.7\endcsname{4{,}8}
+\expandafter\def\csname E/Si/rmse/moex_today/random/0.7\endcsname{0{,}93}
+\expandafter\def\csname E/Si/mae/moex_today/random/0.7\endcsname{0{,}65}
+\expandafter\def\csname E/Si/price/moex_today/random/0.7\endcsname{5{,}7}
+\expandafter\def\csname E/Si/rmse/gp_cb/random/0.7\endcsname{0{,}94}
+\expandafter\def\csname E/Si/mae/gp_cb/random/0.7\endcsname{0{,}60}
+\expandafter\def\csname E/Si/price/gp_cb/random/0.7\endcsname{4{,}9}
+\expandafter\def\csname E/Si/rmse/gp_indep/random/0.7\endcsname{0{,}99}
+\expandafter\def\csname E/Si/mae/gp_indep/random/0.7\endcsname{0{,}60}
+\expandafter\def\csname E/Si/price/gp_indep/random/0.7\endcsname{4{,}8}
+\expandafter\def\csname E/Si/rmse/gp_homo/random/0.7\endcsname{0{,}99}
+\expandafter\def\csname E/Si/mae/gp_homo/random/0.7\endcsname{0{,}61}
+\expandafter\def\csname E/Si/price/gp_homo/random/0.7\endcsname{4{,}8}
+\expandafter\def\csname E/Si/rmse/gp_param/random/0.7\endcsname{1{,}01}
+\expandafter\def\csname E/Si/mae/gp_param/random/0.7\endcsname{0{,}63}
+\expandafter\def\csname E/Si/price/gp_param/random/0.7\endcsname{5{,}1}
+\expandafter\def\csname E/Si/rmse/best_cb/random/0.7\endcsname{1{,}29}
+\expandafter\def\csname E/Si/mae/best_cb/random/0.7\endcsname{0{,}92}
+\expandafter\def\csname E/Si/price/best_cb/random/0.7\endcsname{8{,}4}
+\expandafter\def\csname E/Si/visible/random/0.7\endcsname{25}
+\expandafter\def\csname E/Si/bestcb/random/0.7\endcsname{SSVI}
+\expandafter\def\csname E/Si/rmse/hist/random/0.9\endcsname{1{,}29}
+\expandafter\def\csname E/Si/mae/hist/random/0.9\endcsname{0{,}84}
+\expandafter\def\csname E/Si/price/hist/random/0.9\endcsname{7{,}1}
+\expandafter\def\csname E/Si/rmse/cb_quad/random/0.9\endcsname{3{,}78}
+\expandafter\def\csname E/Si/mae/cb_quad/random/0.9\endcsname{2{,}09}
+\expandafter\def\csname E/Si/price/cb_quad/random/0.9\endcsname{11{,}9}
+\expandafter\def\csname E/Si/rmse/cb_svi/random/0.9\endcsname{3{,}81}
+\expandafter\def\csname E/Si/mae/cb_svi/random/0.9\endcsname{2{,}12}
+\expandafter\def\csname E/Si/price/cb_svi/random/0.9\endcsname{12{,}2}
+\expandafter\def\csname E/Si/rmse/cb_ssvi/random/0.9\endcsname{1{,}97}
+\expandafter\def\csname E/Si/mae/cb_ssvi/random/0.9\endcsname{1{,}32}
+\expandafter\def\csname E/Si/price/cb_ssvi/random/0.9\endcsname{11{,}2}
+\expandafter\def\csname E/Si/rmse/hist_cb/random/0.9\endcsname{1{,}21}
+\expandafter\def\csname E/Si/mae/hist_cb/random/0.9\endcsname{0{,}79}
+\expandafter\def\csname E/Si/price/hist_cb/random/0.9\endcsname{6{,}7}
+\expandafter\def\csname E/Si/rmse/gp/random/0.9\endcsname{1{,}13}
+\expandafter\def\csname E/Si/mae/gp/random/0.9\endcsname{0{,}72}
+\expandafter\def\csname E/Si/price/gp/random/0.9\endcsname{5{,}9}
+\expandafter\def\csname E/Si/rmse/gp_af/random/0.9\endcsname{1{,}12}
+\expandafter\def\csname E/Si/mae/gp_af/random/0.9\endcsname{0{,}72}
+\expandafter\def\csname E/Si/price/gp_af/random/0.9\endcsname{5{,}9}
+\expandafter\def\csname E/Si/rmse/moex_today/random/0.9\endcsname{0{,}93}
+\expandafter\def\csname E/Si/mae/moex_today/random/0.9\endcsname{0{,}65}
+\expandafter\def\csname E/Si/price/moex_today/random/0.9\endcsname{5{,}7}
+\expandafter\def\csname E/Si/rmse/gp_cb/random/0.9\endcsname{1{,}30}
+\expandafter\def\csname E/Si/mae/gp_cb/random/0.9\endcsname{0{,}86}
+\expandafter\def\csname E/Si/price/gp_cb/random/0.9\endcsname{7{,}0}
+\expandafter\def\csname E/Si/rmse/gp_indep/random/0.9\endcsname{1{,}14}
+\expandafter\def\csname E/Si/mae/gp_indep/random/0.9\endcsname{0{,}72}
+\expandafter\def\csname E/Si/price/gp_indep/random/0.9\endcsname{5{,}9}
+\expandafter\def\csname E/Si/rmse/gp_homo/random/0.9\endcsname{1{,}14}
+\expandafter\def\csname E/Si/mae/gp_homo/random/0.9\endcsname{0{,}72}
+\expandafter\def\csname E/Si/price/gp_homo/random/0.9\endcsname{6{,}0}
+\expandafter\def\csname E/Si/rmse/gp_param/random/0.9\endcsname{1{,}15}
+\expandafter\def\csname E/Si/mae/gp_param/random/0.9\endcsname{0{,}74}
+\expandafter\def\csname E/Si/price/gp_param/random/0.9\endcsname{6{,}1}
+\expandafter\def\csname E/Si/rmse/best_cb/random/0.9\endcsname{1{,}97}
+\expandafter\def\csname E/Si/mae/best_cb/random/0.9\endcsname{1{,}32}
+\expandafter\def\csname E/Si/price/best_cb/random/0.9\endcsname{11{,}2}
+\expandafter\def\csname E/Si/visible/random/0.9\endcsname{8}
+\expandafter\def\csname E/Si/bestcb/random/0.9\endcsname{SSVI}
+\expandafter\def\csname E/Si/rmse/hist/wings\endcsname{1{,}38}
+\expandafter\def\csname E/Si/mae/hist/wings\endcsname{0{,}92}
+\expandafter\def\csname E/Si/price/hist/wings\endcsname{12{,}2}
+\expandafter\def\csname E/Si/rmse/cb_quad/wings\endcsname{3{,}12}
+\expandafter\def\csname E/Si/mae/cb_quad/wings\endcsname{1{,}87}
+\expandafter\def\csname E/Si/price/cb_quad/wings\endcsname{19{,}9}
+\expandafter\def\csname E/Si/rmse/cb_svi/wings\endcsname{4{,}30}
+\expandafter\def\csname E/Si/mae/cb_svi/wings\endcsname{2{,}78}
+\expandafter\def\csname E/Si/price/cb_svi/wings\endcsname{31{,}2}
+\expandafter\def\csname E/Si/rmse/cb_ssvi/wings\endcsname{3{,}03}
+\expandafter\def\csname E/Si/mae/cb_ssvi/wings\endcsname{2{,}14}
+\expandafter\def\csname E/Si/price/cb_ssvi/wings\endcsname{25{,}5}
+\expandafter\def\csname E/Si/rmse/hist_cb/wings\endcsname{1{,}33}
+\expandafter\def\csname E/Si/mae/hist_cb/wings\endcsname{0{,}89}
+\expandafter\def\csname E/Si/price/hist_cb/wings\endcsname{11{,}9}
+\expandafter\def\csname E/Si/rmse/gp/wings\endcsname{1{,}20}
+\expandafter\def\csname E/Si/mae/gp/wings\endcsname{0{,}79}
+\expandafter\def\csname E/Si/price/gp/wings\endcsname{10{,}3}
+\expandafter\def\csname E/Si/rmse/gp_af/wings\endcsname{1{,}19}
+\expandafter\def\csname E/Si/mae/gp_af/wings\endcsname{0{,}79}
+\expandafter\def\csname E/Si/price/gp_af/wings\endcsname{10{,}4}
+\expandafter\def\csname E/Si/rmse/moex_today/wings\endcsname{0{,}98}
+\expandafter\def\csname E/Si/mae/moex_today/wings\endcsname{0{,}70}
+\expandafter\def\csname E/Si/price/moex_today/wings\endcsname{9{,}8}
+\expandafter\def\csname E/Si/rmse/gp_cb/wings\endcsname{1{,}93}
+\expandafter\def\csname E/Si/mae/gp_cb/wings\endcsname{1{,}32}
+\expandafter\def\csname E/Si/price/gp_cb/wings\endcsname{16{,}2}
+\expandafter\def\csname E/Si/rmse/gp_indep/wings\endcsname{1{,}20}
+\expandafter\def\csname E/Si/mae/gp_indep/wings\endcsname{0{,}79}
+\expandafter\def\csname E/Si/price/gp_indep/wings\endcsname{10{,}2}
+\expandafter\def\csname E/Si/rmse/gp_homo/wings\endcsname{1{,}19}
+\expandafter\def\csname E/Si/mae/gp_homo/wings\endcsname{0{,}79}
+\expandafter\def\csname E/Si/price/gp_homo/wings\endcsname{10{,}2}
+\expandafter\def\csname E/Si/rmse/gp_param/wings\endcsname{1{,}32}
+\expandafter\def\csname E/Si/mae/gp_param/wings\endcsname{0{,}89}
+\expandafter\def\csname E/Si/price/gp_param/wings\endcsname{11{,}4}
+\expandafter\def\csname E/Si/rmse/best_cb/wings\endcsname{3{,}03}
+\expandafter\def\csname E/Si/mae/best_cb/wings\endcsname{2{,}14}
+\expandafter\def\csname E/Si/price/best_cb/wings\endcsname{25{,}5}
+\expandafter\def\csname E/Si/visible/wings\endcsname{43}
+\expandafter\def\csname E/Si/bestcb/wings\endcsname{SSVI}
+\expandafter\def\csname E/Si/rmse/hist/slice\endcsname{1{,}28}
+\expandafter\def\csname E/Si/mae/hist/slice\endcsname{0{,}83}
+\expandafter\def\csname E/Si/price/hist/slice\endcsname{7{,}1}
+\expandafter\def\csname E/Si/rmse/cb_quad/slice\endcsname{1{,}96}
+\expandafter\def\csname E/Si/mae/cb_quad/slice\endcsname{1{,}39}
+\expandafter\def\csname E/Si/price/cb_quad/slice\endcsname{12{,}9}
+\expandafter\def\csname E/Si/rmse/cb_svi/slice\endcsname{1{,}96}
+\expandafter\def\csname E/Si/mae/cb_svi/slice\endcsname{1{,}39}
+\expandafter\def\csname E/Si/price/cb_svi/slice\endcsname{12{,}9}
+\expandafter\def\csname E/Si/rmse/cb_ssvi/slice\endcsname{2{,}06}
+\expandafter\def\csname E/Si/mae/cb_ssvi/slice\endcsname{1{,}53}
+\expandafter\def\csname E/Si/price/cb_ssvi/slice\endcsname{15{,}1}
+\expandafter\def\csname E/Si/rmse/hist_cb/slice\endcsname{1{,}39}
+\expandafter\def\csname E/Si/mae/hist_cb/slice\endcsname{0{,}98}
+\expandafter\def\csname E/Si/price/hist_cb/slice\endcsname{9{,}2}
+\expandafter\def\csname E/Si/rmse/gp/slice\endcsname{1{,}28}
+\expandafter\def\csname E/Si/mae/gp/slice\endcsname{0{,}85}
+\expandafter\def\csname E/Si/price/gp/slice\endcsname{7{,}5}
+\expandafter\def\csname E/Si/rmse/gp_af/slice\endcsname{1{,}30}
+\expandafter\def\csname E/Si/mae/gp_af/slice\endcsname{0{,}87}
+\expandafter\def\csname E/Si/price/gp_af/slice\endcsname{7{,}7}
+\expandafter\def\csname E/Si/rmse/moex_today/slice\endcsname{0{,}92}
+\expandafter\def\csname E/Si/mae/moex_today/slice\endcsname{0{,}64}
+\expandafter\def\csname E/Si/price/moex_today/slice\endcsname{5{,}7}
+\expandafter\def\csname E/Si/rmse/gp_cb/slice\endcsname{1{,}58}
+\expandafter\def\csname E/Si/mae/gp_cb/slice\endcsname{1{,}20}
+\expandafter\def\csname E/Si/price/gp_cb/slice\endcsname{12{,}4}
+\expandafter\def\csname E/Si/rmse/gp_indep/slice\endcsname{1{,}28}
+\expandafter\def\csname E/Si/mae/gp_indep/slice\endcsname{0{,}83}
+\expandafter\def\csname E/Si/price/gp_indep/slice\endcsname{7{,}1}
+\expandafter\def\csname E/Si/rmse/gp_homo/slice\endcsname{1{,}27}
+\expandafter\def\csname E/Si/mae/gp_homo/slice\endcsname{0{,}85}
+\expandafter\def\csname E/Si/price/gp_homo/slice\endcsname{7{,}5}
+\expandafter\def\csname E/Si/rmse/gp_param/slice\endcsname{1{,}28}
+\expandafter\def\csname E/Si/mae/gp_param/slice\endcsname{0{,}86}
+\expandafter\def\csname E/Si/price/gp_param/slice\endcsname{7{,}6}
+\expandafter\def\csname E/Si/rmse/best_cb/slice\endcsname{1{,}96}
+\expandafter\def\csname E/Si/mae/best_cb/slice\endcsname{1{,}39}
+\expandafter\def\csname E/Si/price/best_cb/slice\endcsname{12{,}9}
+\expandafter\def\csname E/Si/visible/slice\endcsname{66}
+\expandafter\def\csname E/Si/bestcb/slice\endcsname{квадратичная улыбка}
+\expandafter\def\csname E/Si/rmse/hist/far\endcsname{1{,}08}
+\expandafter\def\csname E/Si/mae/hist/far\endcsname{0{,}68}
+\expandafter\def\csname E/Si/price/hist/far\endcsname{5{,}3}
+\expandafter\def\csname E/Si/rmse/cb_quad/far\endcsname{7{,}43}
+\expandafter\def\csname E/Si/mae/cb_quad/far\endcsname{4{,}53}
+\expandafter\def\csname E/Si/price/cb_quad/far\endcsname{32{,}7}
+\expandafter\def\csname E/Si/rmse/cb_svi/far\endcsname{7{,}43}
+\expandafter\def\csname E/Si/mae/cb_svi/far\endcsname{4{,}53}
+\expandafter\def\csname E/Si/price/cb_svi/far\endcsname{32{,}7}
+\expandafter\def\csname E/Si/rmse/cb_ssvi/far\endcsname{2{,}16}
+\expandafter\def\csname E/Si/mae/cb_ssvi/far\endcsname{1{,}64}
+\expandafter\def\csname E/Si/price/cb_ssvi/far\endcsname{15{,}2}
+\expandafter\def\csname E/Si/rmse/hist_cb/far\endcsname{1{,}39}
+\expandafter\def\csname E/Si/mae/hist_cb/far\endcsname{0{,}99}
+\expandafter\def\csname E/Si/price/hist_cb/far\endcsname{8{,}7}
+\expandafter\def\csname E/Si/rmse/gp/far\endcsname{1{,}10}
+\expandafter\def\csname E/Si/mae/gp/far\endcsname{0{,}72}
+\expandafter\def\csname E/Si/price/gp/far\endcsname{5{,}9}
+\expandafter\def\csname E/Si/rmse/gp_af/far\endcsname{1{,}21}
+\expandafter\def\csname E/Si/mae/gp_af/far\endcsname{0{,}78}
+\expandafter\def\csname E/Si/price/gp_af/far\endcsname{6{,}1}
+\expandafter\def\csname E/Si/rmse/moex_today/far\endcsname{0{,}85}
+\expandafter\def\csname E/Si/mae/moex_today/far\endcsname{0{,}57}
+\expandafter\def\csname E/Si/price/moex_today/far\endcsname{4{,}5}
+\expandafter\def\csname E/Si/rmse/gp_cb/far\endcsname{1{,}86}
+\expandafter\def\csname E/Si/mae/gp_cb/far\endcsname{1{,}42}
+\expandafter\def\csname E/Si/price/gp_cb/far\endcsname{13{,}3}
+\expandafter\def\csname E/Si/rmse/gp_indep/far\endcsname{1{,}08}
+\expandafter\def\csname E/Si/mae/gp_indep/far\endcsname{0{,}68}
+\expandafter\def\csname E/Si/price/gp_indep/far\endcsname{5{,}3}
+\expandafter\def\csname E/Si/rmse/gp_homo/far\endcsname{1{,}10}
+\expandafter\def\csname E/Si/mae/gp_homo/far\endcsname{0{,}72}
+\expandafter\def\csname E/Si/price/gp_homo/far\endcsname{5{,}8}
+\expandafter\def\csname E/Si/rmse/gp_param/far\endcsname{1{,}11}
+\expandafter\def\csname E/Si/mae/gp_param/far\endcsname{0{,}72}
+\expandafter\def\csname E/Si/price/gp_param/far\endcsname{6{,}0}
+\expandafter\def\csname E/Si/rmse/best_cb/far\endcsname{2{,}16}
+\expandafter\def\csname E/Si/mae/best_cb/far\endcsname{1{,}64}
+\expandafter\def\csname E/Si/price/best_cb/far\endcsname{15{,}2}
+\expandafter\def\csname E/Si/visible/far\endcsname{36}
+\expandafter\def\csname E/Si/bestcb/far\endcsname{SSVI}
+\expandafter\def\csname E/Si/rmse/hist/topn/40\endcsname{1{,}53}
+\expandafter\def\csname E/Si/mae/hist/topn/40\endcsname{0{,}99}
+\expandafter\def\csname E/Si/price/hist/topn/40\endcsname{8{,}9}
+\expandafter\def\csname E/Si/rmse/cb_quad/topn/40\endcsname{2{,}07}
+\expandafter\def\csname E/Si/mae/cb_quad/topn/40\endcsname{1{,}13}
+\expandafter\def\csname E/Si/price/cb_quad/topn/40\endcsname{8{,}4}
+\expandafter\def\csname E/Si/rmse/cb_svi/topn/40\endcsname{2{,}21}
+\expandafter\def\csname E/Si/mae/cb_svi/topn/40\endcsname{1{,}19}
+\expandafter\def\csname E/Si/price/cb_svi/topn/40\endcsname{8{,}4}
+\expandafter\def\csname E/Si/rmse/cb_ssvi/topn/40\endcsname{1{,}57}
+\expandafter\def\csname E/Si/mae/cb_ssvi/topn/40\endcsname{1{,}12}
+\expandafter\def\csname E/Si/price/cb_ssvi/topn/40\endcsname{11{,}3}
+\expandafter\def\csname E/Si/rmse/hist_cb/topn/40\endcsname{1{,}40}
+\expandafter\def\csname E/Si/mae/hist_cb/topn/40\endcsname{0{,}89}
+\expandafter\def\csname E/Si/price/hist_cb/topn/40\endcsname{7{,}9}
+\expandafter\def\csname E/Si/rmse/gp/topn/40\endcsname{1{,}32}
+\expandafter\def\csname E/Si/mae/gp/topn/40\endcsname{0{,}81}
+\expandafter\def\csname E/Si/price/gp/topn/40\endcsname{6{,}8}
+\expandafter\def\csname E/Si/rmse/gp_af/topn/40\endcsname{1{,}29}
+\expandafter\def\csname E/Si/mae/gp_af/topn/40\endcsname{0{,}80}
+\expandafter\def\csname E/Si/price/gp_af/topn/40\endcsname{6{,}8}
+\expandafter\def\csname E/Si/rmse/moex_today/topn/40\endcsname{1{,}08}
+\expandafter\def\csname E/Si/mae/moex_today/topn/40\endcsname{0{,}76}
+\expandafter\def\csname E/Si/price/moex_today/topn/40\endcsname{7{,}2}
+\expandafter\def\csname E/Si/rmse/gp_cb/topn/40\endcsname{1{,}23}
+\expandafter\def\csname E/Si/mae/gp_cb/topn/40\endcsname{0{,}81}
+\expandafter\def\csname E/Si/price/gp_cb/topn/40\endcsname{7{,}1}
+\expandafter\def\csname E/Si/rmse/gp_indep/topn/40\endcsname{1{,}34}
+\expandafter\def\csname E/Si/mae/gp_indep/topn/40\endcsname{0{,}81}
+\expandafter\def\csname E/Si/price/gp_indep/topn/40\endcsname{6{,}8}
+\expandafter\def\csname E/Si/rmse/gp_homo/topn/40\endcsname{1{,}32}
+\expandafter\def\csname E/Si/mae/gp_homo/topn/40\endcsname{0{,}81}
+\expandafter\def\csname E/Si/price/gp_homo/topn/40\endcsname{6{,}8}
+\expandafter\def\csname E/Si/rmse/gp_param/topn/40\endcsname{1{,}35}
+\expandafter\def\csname E/Si/mae/gp_param/topn/40\endcsname{0{,}84}
+\expandafter\def\csname E/Si/price/gp_param/topn/40\endcsname{7{,}3}
+\expandafter\def\csname E/Si/rmse/best_cb/topn/40\endcsname{1{,}57}
+\expandafter\def\csname E/Si/mae/best_cb/topn/40\endcsname{1{,}12}
+\expandafter\def\csname E/Si/price/best_cb/topn/40\endcsname{11{,}3}
+\expandafter\def\csname E/Si/visible/topn/40\endcsname{40}
+\expandafter\def\csname E/Si/bestcb/topn/40\endcsname{SSVI}
+\expandafter\def\csname E/Si/rmse/hist/topn/20\endcsname{1{,}40}
+\expandafter\def\csname E/Si/mae/hist/topn/20\endcsname{0{,}90}
+\expandafter\def\csname E/Si/price/hist/topn/20\endcsname{7{,}9}
+\expandafter\def\csname E/Si/rmse/cb_quad/topn/20\endcsname{2{,}53}
+\expandafter\def\csname E/Si/mae/cb_quad/topn/20\endcsname{1{,}47}
+\expandafter\def\csname E/Si/price/cb_quad/topn/20\endcsname{10{,}2}
+\expandafter\def\csname E/Si/rmse/cb_svi/topn/20\endcsname{2{,}83}
+\expandafter\def\csname E/Si/mae/cb_svi/topn/20\endcsname{1{,}64}
+\expandafter\def\csname E/Si/price/cb_svi/topn/20\endcsname{11{,}1}
+\expandafter\def\csname E/Si/rmse/cb_ssvi/topn/20\endcsname{1{,}73}
+\expandafter\def\csname E/Si/mae/cb_ssvi/topn/20\endcsname{1{,}21}
+\expandafter\def\csname E/Si/price/cb_ssvi/topn/20\endcsname{11{,}2}
+\expandafter\def\csname E/Si/rmse/hist_cb/topn/20\endcsname{1{,}32}
+\expandafter\def\csname E/Si/mae/hist_cb/topn/20\endcsname{0{,}84}
+\expandafter\def\csname E/Si/price/hist_cb/topn/20\endcsname{7{,}3}
+\expandafter\def\csname E/Si/rmse/gp/topn/20\endcsname{1{,}28}
+\expandafter\def\csname E/Si/mae/gp/topn/20\endcsname{0{,}78}
+\expandafter\def\csname E/Si/price/gp/topn/20\endcsname{6{,}6}
+\expandafter\def\csname E/Si/rmse/gp_af/topn/20\endcsname{1{,}26}
+\expandafter\def\csname E/Si/mae/gp_af/topn/20\endcsname{0{,}78}
+\expandafter\def\csname E/Si/price/gp_af/topn/20\endcsname{6{,}6}
+\expandafter\def\csname E/Si/rmse/moex_today/topn/20\endcsname{0{,}99}
+\expandafter\def\csname E/Si/mae/moex_today/topn/20\endcsname{0{,}69}
+\expandafter\def\csname E/Si/price/moex_today/topn/20\endcsname{6{,}4}
+\expandafter\def\csname E/Si/rmse/gp_cb/topn/20\endcsname{1{,}35}
+\expandafter\def\csname E/Si/mae/gp_cb/topn/20\endcsname{0{,}89}
+\expandafter\def\csname E/Si/price/gp_cb/topn/20\endcsname{7{,}7}
+\expandafter\def\csname E/Si/rmse/gp_indep/topn/20\endcsname{1{,}29}
+\expandafter\def\csname E/Si/mae/gp_indep/topn/20\endcsname{0{,}79}
+\expandafter\def\csname E/Si/price/gp_indep/topn/20\endcsname{6{,}6}
+\expandafter\def\csname E/Si/rmse/gp_homo/topn/20\endcsname{1{,}28}
+\expandafter\def\csname E/Si/mae/gp_homo/topn/20\endcsname{0{,}78}
+\expandafter\def\csname E/Si/price/gp_homo/topn/20\endcsname{6{,}5}
+\expandafter\def\csname E/Si/rmse/gp_param/topn/20\endcsname{1{,}31}
+\expandafter\def\csname E/Si/mae/gp_param/topn/20\endcsname{0{,}82}
+\expandafter\def\csname E/Si/price/gp_param/topn/20\endcsname{6{,}8}
+\expandafter\def\csname E/Si/rmse/best_cb/topn/20\endcsname{1{,}73}
+\expandafter\def\csname E/Si/mae/best_cb/topn/20\endcsname{1{,}21}
+\expandafter\def\csname E/Si/price/best_cb/topn/20\endcsname{11{,}2}
+\expandafter\def\csname E/Si/visible/topn/20\endcsname{20}
+\expandafter\def\csname E/Si/bestcb/topn/20\endcsname{SSVI}
+\expandafter\def\csname E/Si/rmse/hist/topn/10\endcsname{1{,}34}
+\expandafter\def\csname E/Si/mae/hist/topn/10\endcsname{0{,}87}
+\expandafter\def\csname E/Si/price/hist/topn/10\endcsname{7{,}6}
+\expandafter\def\csname E/Si/rmse/cb_quad/topn/10\endcsname{3{,}18}
+\expandafter\def\csname E/Si/mae/cb_quad/topn/10\endcsname{1{,}95}
+\expandafter\def\csname E/Si/price/cb_quad/topn/10\endcsname{14{,}4}
+\expandafter\def\csname E/Si/rmse/cb_svi/topn/10\endcsname{3{,}40}
+\expandafter\def\csname E/Si/mae/cb_svi/topn/10\endcsname{2{,}11}
+\expandafter\def\csname E/Si/price/cb_svi/topn/10\endcsname{15{,}6}
+\expandafter\def\csname E/Si/rmse/cb_ssvi/topn/10\endcsname{2{,}08}
+\expandafter\def\csname E/Si/mae/cb_ssvi/topn/10\endcsname{1{,}44}
+\expandafter\def\csname E/Si/price/cb_ssvi/topn/10\endcsname{12{,}6}
+\expandafter\def\csname E/Si/rmse/hist_cb/topn/10\endcsname{1{,}29}
+\expandafter\def\csname E/Si/mae/hist_cb/topn/10\endcsname{0{,}84}
+\expandafter\def\csname E/Si/price/hist_cb/topn/10\endcsname{7{,}5}
+\expandafter\def\csname E/Si/rmse/gp/topn/10\endcsname{1{,}25}
+\expandafter\def\csname E/Si/mae/gp/topn/10\endcsname{0{,}78}
+\expandafter\def\csname E/Si/price/gp/topn/10\endcsname{6{,}6}
+\expandafter\def\csname E/Si/rmse/gp_af/topn/10\endcsname{1{,}28}
+\expandafter\def\csname E/Si/mae/gp_af/topn/10\endcsname{0{,}80}
+\expandafter\def\csname E/Si/price/gp_af/topn/10\endcsname{6{,}7}
+\expandafter\def\csname E/Si/rmse/moex_today/topn/10\endcsname{0{,}96}
+\expandafter\def\csname E/Si/mae/moex_today/topn/10\endcsname{0{,}67}
+\expandafter\def\csname E/Si/price/moex_today/topn/10\endcsname{6{,}1}
+\expandafter\def\csname E/Si/rmse/gp_cb/topn/10\endcsname{1{,}79}
+\expandafter\def\csname E/Si/mae/gp_cb/topn/10\endcsname{1{,}20}
+\expandafter\def\csname E/Si/price/gp_cb/topn/10\endcsname{10{,}5}
+\expandafter\def\csname E/Si/rmse/gp_indep/topn/10\endcsname{1{,}27}
+\expandafter\def\csname E/Si/mae/gp_indep/topn/10\endcsname{0{,}79}
+\expandafter\def\csname E/Si/price/gp_indep/topn/10\endcsname{6{,}7}
+\expandafter\def\csname E/Si/rmse/gp_homo/topn/10\endcsname{1{,}25}
+\expandafter\def\csname E/Si/mae/gp_homo/topn/10\endcsname{0{,}78}
+\expandafter\def\csname E/Si/price/gp_homo/topn/10\endcsname{6{,}5}
+\expandafter\def\csname E/Si/rmse/gp_param/topn/10\endcsname{1{,}29}
+\expandafter\def\csname E/Si/mae/gp_param/topn/10\endcsname{0{,}82}
+\expandafter\def\csname E/Si/price/gp_param/topn/10\endcsname{6{,}9}
+\expandafter\def\csname E/Si/rmse/best_cb/topn/10\endcsname{2{,}08}
+\expandafter\def\csname E/Si/mae/best_cb/topn/10\endcsname{1{,}44}
+\expandafter\def\csname E/Si/price/best_cb/topn/10\endcsname{12{,}6}
+\expandafter\def\csname E/Si/visible/topn/10\endcsname{10}
+\expandafter\def\csname E/Si/bestcb/topn/10\endcsname{SSVI}
+\expandafter\def\csname E/Si/rmse/hist/topn/5\endcsname{1{,}32}
+\expandafter\def\csname E/Si/mae/hist/topn/5\endcsname{0{,}85}
+\expandafter\def\csname E/Si/price/hist/topn/5\endcsname{7{,}4}
+\expandafter\def\csname E/Si/rmse/cb_quad/topn/5\endcsname{3{,}66}
+\expandafter\def\csname E/Si/mae/cb_quad/topn/5\endcsname{2{,}37}
+\expandafter\def\csname E/Si/price/cb_quad/topn/5\endcsname{18{,}0}
+\expandafter\def\csname E/Si/rmse/cb_svi/topn/5\endcsname{3{,}69}
+\expandafter\def\csname E/Si/mae/cb_svi/topn/5\endcsname{2{,}42}
+\expandafter\def\csname E/Si/price/cb_svi/topn/5\endcsname{18{,}7}
+\expandafter\def\csname E/Si/rmse/cb_ssvi/topn/5\endcsname{2{,}90}
+\expandafter\def\csname E/Si/mae/cb_ssvi/topn/5\endcsname{1{,}92}
+\expandafter\def\csname E/Si/price/cb_ssvi/topn/5\endcsname{15{,}7}
+\expandafter\def\csname E/Si/rmse/hist_cb/topn/5\endcsname{1{,}29}
+\expandafter\def\csname E/Si/mae/hist_cb/topn/5\endcsname{0{,}85}
+\expandafter\def\csname E/Si/price/hist_cb/topn/5\endcsname{7{,}6}
+\expandafter\def\csname E/Si/rmse/gp/topn/5\endcsname{1{,}25}
+\expandafter\def\csname E/Si/mae/gp/topn/5\endcsname{0{,}79}
+\expandafter\def\csname E/Si/price/gp/topn/5\endcsname{6{,}6}
+\expandafter\def\csname E/Si/rmse/gp_af/topn/5\endcsname{1{,}30}
+\expandafter\def\csname E/Si/mae/gp_af/topn/5\endcsname{0{,}82}
+\expandafter\def\csname E/Si/price/gp_af/topn/5\endcsname{6{,}8}
+\expandafter\def\csname E/Si/rmse/moex_today/topn/5\endcsname{0{,}94}
+\expandafter\def\csname E/Si/mae/moex_today/topn/5\endcsname{0{,}66}
+\expandafter\def\csname E/Si/price/moex_today/topn/5\endcsname{5{,}9}
+\expandafter\def\csname E/Si/rmse/gp_cb/topn/5\endcsname{2{,}85}
+\expandafter\def\csname E/Si/mae/gp_cb/topn/5\endcsname{1{,}89}
+\expandafter\def\csname E/Si/price/gp_cb/topn/5\endcsname{15{,}0}
+\expandafter\def\csname E/Si/rmse/gp_indep/topn/5\endcsname{1{,}26}
+\expandafter\def\csname E/Si/mae/gp_indep/topn/5\endcsname{0{,}80}
+\expandafter\def\csname E/Si/price/gp_indep/topn/5\endcsname{6{,}7}
+\expandafter\def\csname E/Si/rmse/gp_homo/topn/5\endcsname{1{,}25}
+\expandafter\def\csname E/Si/mae/gp_homo/topn/5\endcsname{0{,}78}
+\expandafter\def\csname E/Si/price/gp_homo/topn/5\endcsname{6{,}6}
+\expandafter\def\csname E/Si/rmse/gp_param/topn/5\endcsname{1{,}28}
+\expandafter\def\csname E/Si/mae/gp_param/topn/5\endcsname{0{,}81}
+\expandafter\def\csname E/Si/price/gp_param/topn/5\endcsname{6{,}9}
+\expandafter\def\csname E/Si/rmse/best_cb/topn/5\endcsname{2{,}90}
+\expandafter\def\csname E/Si/mae/best_cb/topn/5\endcsname{1{,}92}
+\expandafter\def\csname E/Si/price/best_cb/topn/5\endcsname{15{,}7}
+\expandafter\def\csname E/Si/visible/topn/5\endcsname{5}
+\expandafter\def\csname E/Si/bestcb/topn/5\endcsname{SSVI}
+\expandafter\def\csname E/Si/diff/gp_af/best_cb/random/0.1\endcsname{\ensuremath{-}0{,}25}
+\expandafter\def\csname E/Si/ci/gp_af/best_cb/random/0.1\endcsname{[\ensuremath{-}0{,}32;\ \ensuremath{-}0{,}19]}
+\expandafter\def\csname E/Si/diff/gp_af/hist/random/0.1\endcsname{\ensuremath{-}0{,}52}
+\expandafter\def\csname E/Si/ci/gp_af/hist/random/0.1\endcsname{[\ensuremath{-}0{,}59;\ \ensuremath{-}0{,}45]}
+\expandafter\def\csname E/Si/diff/gp_af/hist_cb/random/0.1\endcsname{\ensuremath{-}0{,}24}
+\expandafter\def\csname E/Si/ci/gp_af/hist_cb/random/0.1\endcsname{[\ensuremath{-}0{,}30;\ \ensuremath{-}0{,}20]}
+\expandafter\def\csname E/Si/diff/gp_af/gp/random/0.1\endcsname{\ensuremath{-}0{,}01}
+\expandafter\def\csname E/Si/ci/gp_af/gp/random/0.1\endcsname{[\ensuremath{-}0{,}02;\ 0{,}01]}
+\expandafter\def\csname E/Si/diff/gp_af/gp_cb/random/0.1\endcsname{0{,}03}
+\expandafter\def\csname E/Si/ci/gp_af/gp_cb/random/0.1\endcsname{[0{,}00;\ 0{,}05]}
+\expandafter\def\csname E/Si/diff/gp_af/moex_today/random/0.1\endcsname{\ensuremath{-}0{,}14}
+\expandafter\def\csname E/Si/ci/gp_af/moex_today/random/0.1\endcsname{[\ensuremath{-}0{,}18;\ \ensuremath{-}0{,}10]}
+\expandafter\def\csname E/Si/diff/hist_cb/best_cb/random/0.1\endcsname{\ensuremath{-}0{,}01}
+\expandafter\def\csname E/Si/ci/hist_cb/best_cb/random/0.1\endcsname{[\ensuremath{-}0{,}09;\ 0{,}08]}
+\expandafter\def\csname E/Si/diff/gp/hist_cb/random/0.1\endcsname{\ensuremath{-}0{,}24}
+\expandafter\def\csname E/Si/ci/gp/hist_cb/random/0.1\endcsname{[\ensuremath{-}0{,}29;\ \ensuremath{-}0{,}19]}
+\expandafter\def\csname E/Si/diff/gp/gp_cb/random/0.1\endcsname{0{,}03}
+\expandafter\def\csname E/Si/ci/gp/gp_cb/random/0.1\endcsname{[\ensuremath{-}0{,}00;\ 0{,}07]}
+\expandafter\def\csname E/Si/diff/gp/gp_indep/random/0.1\endcsname{\ensuremath{-}0{,}00}
+\expandafter\def\csname E/Si/ci/gp/gp_indep/random/0.1\endcsname{[\ensuremath{-}0{,}00;\ 0{,}00]}
+\expandafter\def\csname E/Si/diff/gp/gp_homo/random/0.1\endcsname{0{,}00}
+\expandafter\def\csname E/Si/ci/gp/gp_homo/random/0.1\endcsname{[\ensuremath{-}0{,}00;\ 0{,}01]}
+\expandafter\def\csname E/Si/diff/gp/gp_param/random/0.1\endcsname{\ensuremath{-}0{,}04}
+\expandafter\def\csname E/Si/ci/gp/gp_param/random/0.1\endcsname{[\ensuremath{-}0{,}05;\ \ensuremath{-}0{,}03]}
+\expandafter\def\csname E/Si/diff/gp_af/best_cb/random/0.3\endcsname{\ensuremath{-}0{,}32}
+\expandafter\def\csname E/Si/ci/gp_af/best_cb/random/0.3\endcsname{[\ensuremath{-}0{,}36;\ \ensuremath{-}0{,}29]}
+\expandafter\def\csname E/Si/diff/gp_af/hist/random/0.3\endcsname{\ensuremath{-}0{,}48}
+\expandafter\def\csname E/Si/ci/gp_af/hist/random/0.3\endcsname{[\ensuremath{-}0{,}54;\ \ensuremath{-}0{,}41]}
+\expandafter\def\csname E/Si/diff/gp_af/hist_cb/random/0.3\endcsname{\ensuremath{-}0{,}22}
+\expandafter\def\csname E/Si/ci/gp_af/hist_cb/random/0.3\endcsname{[\ensuremath{-}0{,}27;\ \ensuremath{-}0{,}17]}
+\expandafter\def\csname E/Si/diff/gp_af/gp/random/0.3\endcsname{\ensuremath{-}0{,}01}
+\expandafter\def\csname E/Si/ci/gp_af/gp/random/0.3\endcsname{[\ensuremath{-}0{,}03;\ 0{,}01]}
+\expandafter\def\csname E/Si/diff/gp_af/gp_cb/random/0.3\endcsname{0{,}04}
+\expandafter\def\csname E/Si/ci/gp_af/gp_cb/random/0.3\endcsname{[0{,}01;\ 0{,}06]}
+\expandafter\def\csname E/Si/diff/gp_af/moex_today/random/0.3\endcsname{\ensuremath{-}0{,}09}
+\expandafter\def\csname E/Si/ci/gp_af/moex_today/random/0.3\endcsname{[\ensuremath{-}0{,}12;\ \ensuremath{-}0{,}05]}
+\expandafter\def\csname E/Si/diff/hist_cb/best_cb/random/0.3\endcsname{\ensuremath{-}0{,}11}
+\expandafter\def\csname E/Si/ci/hist_cb/best_cb/random/0.3\endcsname{[\ensuremath{-}0{,}17;\ \ensuremath{-}0{,}04]}
+\expandafter\def\csname E/Si/diff/gp/hist_cb/random/0.3\endcsname{\ensuremath{-}0{,}21}
+\expandafter\def\csname E/Si/ci/gp/hist_cb/random/0.3\endcsname{[\ensuremath{-}0{,}26;\ \ensuremath{-}0{,}17]}
+\expandafter\def\csname E/Si/diff/gp/gp_cb/random/0.3\endcsname{0{,}05}
+\expandafter\def\csname E/Si/ci/gp/gp_cb/random/0.3\endcsname{[0{,}02;\ 0{,}08]}
+\expandafter\def\csname E/Si/diff/gp/gp_indep/random/0.3\endcsname{\ensuremath{-}0{,}00}
+\expandafter\def\csname E/Si/ci/gp/gp_indep/random/0.3\endcsname{[\ensuremath{-}0{,}00;\ 0{,}00]}
+\expandafter\def\csname E/Si/diff/gp/gp_homo/random/0.3\endcsname{\ensuremath{-}0{,}00}
+\expandafter\def\csname E/Si/ci/gp/gp_homo/random/0.3\endcsname{[\ensuremath{-}0{,}01;\ 0{,}00]}
+\expandafter\def\csname E/Si/diff/gp/gp_param/random/0.3\endcsname{\ensuremath{-}0{,}02}
+\expandafter\def\csname E/Si/ci/gp/gp_param/random/0.3\endcsname{[\ensuremath{-}0{,}04;\ 0{,}00]}
+\expandafter\def\csname E/Si/diff/gp_af/best_cb/random/0.5\endcsname{\ensuremath{-}0{,}34}
+\expandafter\def\csname E/Si/ci/gp_af/best_cb/random/0.5\endcsname{[\ensuremath{-}0{,}37;\ \ensuremath{-}0{,}30]}
+\expandafter\def\csname E/Si/diff/gp_af/hist/random/0.5\endcsname{\ensuremath{-}0{,}42}
+\expandafter\def\csname E/Si/ci/gp_af/hist/random/0.5\endcsname{[\ensuremath{-}0{,}47;\ \ensuremath{-}0{,}37]}
+\expandafter\def\csname E/Si/diff/gp_af/hist_cb/random/0.5\endcsname{\ensuremath{-}0{,}19}
+\expandafter\def\csname E/Si/ci/gp_af/hist_cb/random/0.5\endcsname{[\ensuremath{-}0{,}23;\ \ensuremath{-}0{,}15]}
+\expandafter\def\csname E/Si/diff/gp_af/gp/random/0.5\endcsname{\ensuremath{-}0{,}01}
+\expandafter\def\csname E/Si/ci/gp_af/gp/random/0.5\endcsname{[\ensuremath{-}0{,}03;\ \ensuremath{-}0{,}00]}
+\expandafter\def\csname E/Si/diff/gp_af/gp_cb/random/0.5\endcsname{0{,}03}
+\expandafter\def\csname E/Si/ci/gp_af/gp_cb/random/0.5\endcsname{[\ensuremath{-}0{,}01;\ 0{,}06]}
+\expandafter\def\csname E/Si/diff/gp_af/moex_today/random/0.5\endcsname{\ensuremath{-}0{,}05}
+\expandafter\def\csname E/Si/ci/gp_af/moex_today/random/0.5\endcsname{[\ensuremath{-}0{,}09;\ \ensuremath{-}0{,}02]}
+\expandafter\def\csname E/Si/diff/hist_cb/best_cb/random/0.5\endcsname{\ensuremath{-}0{,}15}
+\expandafter\def\csname E/Si/ci/hist_cb/best_cb/random/0.5\endcsname{[\ensuremath{-}0{,}20;\ \ensuremath{-}0{,}09]}
+\expandafter\def\csname E/Si/diff/gp/hist_cb/random/0.5\endcsname{\ensuremath{-}0{,}18}
+\expandafter\def\csname E/Si/ci/gp/hist_cb/random/0.5\endcsname{[\ensuremath{-}0{,}21;\ \ensuremath{-}0{,}15]}
+\expandafter\def\csname E/Si/diff/gp/gp_cb/random/0.5\endcsname{0{,}04}
+\expandafter\def\csname E/Si/ci/gp/gp_cb/random/0.5\endcsname{[0{,}00;\ 0{,}08]}
+\expandafter\def\csname E/Si/diff/gp/gp_indep/random/0.5\endcsname{\ensuremath{-}0{,}00}
+\expandafter\def\csname E/Si/ci/gp/gp_indep/random/0.5\endcsname{[\ensuremath{-}0{,}01;\ 0{,}00]}
+\expandafter\def\csname E/Si/diff/gp/gp_homo/random/0.5\endcsname{\ensuremath{-}0{,}00}
+\expandafter\def\csname E/Si/ci/gp/gp_homo/random/0.5\endcsname{[\ensuremath{-}0{,}01;\ 0{,}00]}
+\expandafter\def\csname E/Si/diff/gp/gp_param/random/0.5\endcsname{\ensuremath{-}0{,}02}
+\expandafter\def\csname E/Si/ci/gp/gp_param/random/0.5\endcsname{[\ensuremath{-}0{,}04;\ \ensuremath{-}0{,}01]}
+\expandafter\def\csname E/Si/diff/gp_af/best_cb/random/0.7\endcsname{\ensuremath{-}0{,}32}
+\expandafter\def\csname E/Si/ci/gp_af/best_cb/random/0.7\endcsname{[\ensuremath{-}0{,}37;\ \ensuremath{-}0{,}28]}
+\expandafter\def\csname E/Si/diff/gp_af/hist/random/0.7\endcsname{\ensuremath{-}0{,}33}
+\expandafter\def\csname E/Si/ci/gp_af/hist/random/0.7\endcsname{[\ensuremath{-}0{,}37;\ \ensuremath{-}0{,}29]}
+\expandafter\def\csname E/Si/diff/gp_af/hist_cb/random/0.7\endcsname{\ensuremath{-}0{,}14}
+\expandafter\def\csname E/Si/ci/gp_af/hist_cb/random/0.7\endcsname{[\ensuremath{-}0{,}17;\ \ensuremath{-}0{,}12]}
+\expandafter\def\csname E/Si/diff/gp_af/gp/random/0.7\endcsname{\ensuremath{-}0{,}01}
+\expandafter\def\csname E/Si/ci/gp_af/gp/random/0.7\endcsname{[\ensuremath{-}0{,}03;\ 0{,}00]}
+\expandafter\def\csname E/Si/diff/gp_af/gp_cb/random/0.7\endcsname{0{,}04}
+\expandafter\def\csname E/Si/ci/gp_af/gp_cb/random/0.7\endcsname{[\ensuremath{-}0{,}01;\ 0{,}08]}
+\expandafter\def\csname E/Si/diff/gp_af/moex_today/random/0.7\endcsname{0{,}04}
+\expandafter\def\csname E/Si/ci/gp_af/moex_today/random/0.7\endcsname{[\ensuremath{-}0{,}01;\ 0{,}08]}
+\expandafter\def\csname E/Si/diff/hist_cb/best_cb/random/0.7\endcsname{\ensuremath{-}0{,}18}
+\expandafter\def\csname E/Si/ci/hist_cb/best_cb/random/0.7\endcsname{[\ensuremath{-}0{,}24;\ \ensuremath{-}0{,}12]}
+\expandafter\def\csname E/Si/diff/gp/hist_cb/random/0.7\endcsname{\ensuremath{-}0{,}13}
+\expandafter\def\csname E/Si/ci/gp/hist_cb/random/0.7\endcsname{[\ensuremath{-}0{,}15;\ \ensuremath{-}0{,}11]}
+\expandafter\def\csname E/Si/diff/gp/gp_cb/random/0.7\endcsname{0{,}05}
+\expandafter\def\csname E/Si/ci/gp/gp_cb/random/0.7\endcsname{[0{,}00;\ 0{,}10]}
+\expandafter\def\csname E/Si/diff/gp/gp_indep/random/0.7\endcsname{\ensuremath{-}0{,}00}
+\expandafter\def\csname E/Si/ci/gp/gp_indep/random/0.7\endcsname{[\ensuremath{-}0{,}01;\ 0{,}00]}
+\expandafter\def\csname E/Si/diff/gp/gp_homo/random/0.7\endcsname{\ensuremath{-}0{,}00}
+\expandafter\def\csname E/Si/ci/gp/gp_homo/random/0.7\endcsname{[\ensuremath{-}0{,}00;\ 0{,}00]}
+\expandafter\def\csname E/Si/diff/gp/gp_param/random/0.7\endcsname{\ensuremath{-}0{,}02}
+\expandafter\def\csname E/Si/ci/gp/gp_param/random/0.7\endcsname{[\ensuremath{-}0{,}03;\ \ensuremath{-}0{,}01]}
+\expandafter\def\csname E/Si/diff/gp_af/best_cb/random/0.9\endcsname{\ensuremath{-}0{,}85}
+\expandafter\def\csname E/Si/ci/gp_af/best_cb/random/0.9\endcsname{[\ensuremath{-}0{,}95;\ \ensuremath{-}0{,}76]}
+\expandafter\def\csname E/Si/diff/gp_af/hist/random/0.9\endcsname{\ensuremath{-}0{,}17}
+\expandafter\def\csname E/Si/ci/gp_af/hist/random/0.9\endcsname{[\ensuremath{-}0{,}21;\ \ensuremath{-}0{,}14]}
+\expandafter\def\csname E/Si/diff/gp_af/hist_cb/random/0.9\endcsname{\ensuremath{-}0{,}09}
+\expandafter\def\csname E/Si/ci/gp_af/hist_cb/random/0.9\endcsname{[\ensuremath{-}0{,}12;\ \ensuremath{-}0{,}07]}
+\expandafter\def\csname E/Si/diff/gp_af/gp/random/0.9\endcsname{\ensuremath{-}0{,}01}
+\expandafter\def\csname E/Si/ci/gp_af/gp/random/0.9\endcsname{[\ensuremath{-}0{,}03;\ 0{,}00]}
+\expandafter\def\csname E/Si/diff/gp_af/gp_cb/random/0.9\endcsname{\ensuremath{-}0{,}18}
+\expandafter\def\csname E/Si/ci/gp_af/gp_cb/random/0.9\endcsname{[\ensuremath{-}0{,}24;\ \ensuremath{-}0{,}12]}
+\expandafter\def\csname E/Si/diff/gp_af/moex_today/random/0.9\endcsname{0{,}19}
+\expandafter\def\csname E/Si/ci/gp_af/moex_today/random/0.9\endcsname{[0{,}14;\ 0{,}23]}
+\expandafter\def\csname E/Si/diff/hist_cb/best_cb/random/0.9\endcsname{\ensuremath{-}0{,}76}
+\expandafter\def\csname E/Si/ci/hist_cb/best_cb/random/0.9\endcsname{[\ensuremath{-}0{,}86;\ \ensuremath{-}0{,}65]}
+\expandafter\def\csname E/Si/diff/gp/hist_cb/random/0.9\endcsname{\ensuremath{-}0{,}08}
+\expandafter\def\csname E/Si/ci/gp/hist_cb/random/0.9\endcsname{[\ensuremath{-}0{,}10;\ \ensuremath{-}0{,}06]}
+\expandafter\def\csname E/Si/diff/gp/gp_cb/random/0.9\endcsname{\ensuremath{-}0{,}17}
+\expandafter\def\csname E/Si/ci/gp/gp_cb/random/0.9\endcsname{[\ensuremath{-}0{,}23;\ \ensuremath{-}0{,}11]}
+\expandafter\def\csname E/Si/diff/gp/gp_indep/random/0.9\endcsname{\ensuremath{-}0{,}01}
+\expandafter\def\csname E/Si/ci/gp/gp_indep/random/0.9\endcsname{[\ensuremath{-}0{,}01;\ \ensuremath{-}0{,}00]}
+\expandafter\def\csname E/Si/diff/gp/gp_homo/random/0.9\endcsname{\ensuremath{-}0{,}00}
+\expandafter\def\csname E/Si/ci/gp/gp_homo/random/0.9\endcsname{[\ensuremath{-}0{,}00;\ 0{,}00]}
+\expandafter\def\csname E/Si/diff/gp/gp_param/random/0.9\endcsname{\ensuremath{-}0{,}02}
+\expandafter\def\csname E/Si/ci/gp/gp_param/random/0.9\endcsname{[\ensuremath{-}0{,}02;\ \ensuremath{-}0{,}01]}
+\expandafter\def\csname E/Si/diff/gp_af/best_cb/wings\endcsname{\ensuremath{-}1{,}84}
+\expandafter\def\csname E/Si/ci/gp_af/best_cb/wings\endcsname{[\ensuremath{-}1{,}99;\ \ensuremath{-}1{,}70]}
+\expandafter\def\csname E/Si/diff/gp_af/hist/wings\endcsname{\ensuremath{-}0{,}19}
+\expandafter\def\csname E/Si/ci/gp_af/hist/wings\endcsname{[\ensuremath{-}0{,}25;\ \ensuremath{-}0{,}14]}
+\expandafter\def\csname E/Si/diff/gp_af/hist_cb/wings\endcsname{\ensuremath{-}0{,}14}
+\expandafter\def\csname E/Si/ci/gp_af/hist_cb/wings\endcsname{[\ensuremath{-}0{,}18;\ \ensuremath{-}0{,}10]}
+\expandafter\def\csname E/Si/diff/gp_af/gp/wings\endcsname{\ensuremath{-}0{,}01}
+\expandafter\def\csname E/Si/ci/gp_af/gp/wings\endcsname{[\ensuremath{-}0{,}03;\ 0{,}01]}
+\expandafter\def\csname E/Si/diff/gp_af/gp_cb/wings\endcsname{\ensuremath{-}0{,}73}
+\expandafter\def\csname E/Si/ci/gp_af/gp_cb/wings\endcsname{[\ensuremath{-}0{,}86;\ \ensuremath{-}0{,}60]}
+\expandafter\def\csname E/Si/diff/gp_af/moex_today/wings\endcsname{0{,}22}
+\expandafter\def\csname E/Si/ci/gp_af/moex_today/wings\endcsname{[0{,}15;\ 0{,}29]}
+\expandafter\def\csname E/Si/diff/hist_cb/best_cb/wings\endcsname{\ensuremath{-}1{,}69}
+\expandafter\def\csname E/Si/ci/hist_cb/best_cb/wings\endcsname{[\ensuremath{-}1{,}85;\ \ensuremath{-}1{,}55]}
+\expandafter\def\csname E/Si/diff/gp/hist_cb/wings\endcsname{\ensuremath{-}0{,}13}
+\expandafter\def\csname E/Si/ci/gp/hist_cb/wings\endcsname{[\ensuremath{-}0{,}16;\ \ensuremath{-}0{,}10]}
+\expandafter\def\csname E/Si/diff/gp/gp_cb/wings\endcsname{\ensuremath{-}0{,}72}
+\expandafter\def\csname E/Si/ci/gp/gp_cb/wings\endcsname{[\ensuremath{-}0{,}85;\ \ensuremath{-}0{,}59]}
+\expandafter\def\csname E/Si/diff/gp/gp_indep/wings\endcsname{0{,}01}
+\expandafter\def\csname E/Si/ci/gp/gp_indep/wings\endcsname{[0{,}00;\ 0{,}01]}
+\expandafter\def\csname E/Si/diff/gp/gp_homo/wings\endcsname{0{,}02}
+\expandafter\def\csname E/Si/ci/gp/gp_homo/wings\endcsname{[0{,}01;\ 0{,}03]}
+\expandafter\def\csname E/Si/diff/gp/gp_param/wings\endcsname{\ensuremath{-}0{,}11}
+\expandafter\def\csname E/Si/ci/gp/gp_param/wings\endcsname{[\ensuremath{-}0{,}15;\ \ensuremath{-}0{,}08]}
+\expandafter\def\csname E/Si/diff/gp_af/best_cb/slice\endcsname{\ensuremath{-}0{,}66}
+\expandafter\def\csname E/Si/ci/gp_af/best_cb/slice\endcsname{[\ensuremath{-}0{,}81;\ \ensuremath{-}0{,}53]}
+\expandafter\def\csname E/Si/diff/gp_af/hist/slice\endcsname{0{,}02}
+\expandafter\def\csname E/Si/ci/gp_af/hist/slice\endcsname{[\ensuremath{-}0{,}02;\ 0{,}07]}
+\expandafter\def\csname E/Si/diff/gp_af/hist_cb/slice\endcsname{\ensuremath{-}0{,}09}
+\expandafter\def\csname E/Si/ci/gp_af/hist_cb/slice\endcsname{[\ensuremath{-}0{,}14;\ \ensuremath{-}0{,}04]}
+\expandafter\def\csname E/Si/diff/gp_af/gp/slice\endcsname{0{,}02}
+\expandafter\def\csname E/Si/ci/gp_af/gp/slice\endcsname{[\ensuremath{-}0{,}02;\ 0{,}08]}
+\expandafter\def\csname E/Si/diff/gp_af/gp_cb/slice\endcsname{\ensuremath{-}0{,}28}
+\expandafter\def\csname E/Si/ci/gp_af/gp_cb/slice\endcsname{[\ensuremath{-}0{,}36;\ \ensuremath{-}0{,}20]}
+\expandafter\def\csname E/Si/diff/gp_af/moex_today/slice\endcsname{0{,}38}
+\expandafter\def\csname E/Si/ci/gp_af/moex_today/slice\endcsname{[0{,}30;\ 0{,}45]}
+\expandafter\def\csname E/Si/diff/hist_cb/best_cb/slice\endcsname{\ensuremath{-}0{,}56}
+\expandafter\def\csname E/Si/ci/hist_cb/best_cb/slice\endcsname{[\ensuremath{-}0{,}72;\ \ensuremath{-}0{,}43]}
+\expandafter\def\csname E/Si/diff/gp/hist_cb/slice\endcsname{\ensuremath{-}0{,}12}
+\expandafter\def\csname E/Si/ci/gp/hist_cb/slice\endcsname{[\ensuremath{-}0{,}14;\ \ensuremath{-}0{,}10]}
+\expandafter\def\csname E/Si/diff/gp/gp_cb/slice\endcsname{\ensuremath{-}0{,}30}
+\expandafter\def\csname E/Si/ci/gp/gp_cb/slice\endcsname{[\ensuremath{-}0{,}40;\ \ensuremath{-}0{,}21]}
+\expandafter\def\csname E/Si/diff/gp/gp_indep/slice\endcsname{\ensuremath{-}0{,}00}
+\expandafter\def\csname E/Si/ci/gp/gp_indep/slice\endcsname{[\ensuremath{-}0{,}02;\ 0{,}01]}
+\expandafter\def\csname E/Si/diff/gp/gp_homo/slice\endcsname{0{,}00}
+\expandafter\def\csname E/Si/ci/gp/gp_homo/slice\endcsname{[\ensuremath{-}0{,}00;\ 0{,}00]}
+\expandafter\def\csname E/Si/diff/gp/gp_param/slice\endcsname{\ensuremath{-}0{,}01}
+\expandafter\def\csname E/Si/ci/gp/gp_param/slice\endcsname{[\ensuremath{-}0{,}01;\ \ensuremath{-}0{,}00]}
+\expandafter\def\csname E/Si/diff/gp_af/best_cb/far\endcsname{\ensuremath{-}0{,}94}
+\expandafter\def\csname E/Si/ci/gp_af/best_cb/far\endcsname{[\ensuremath{-}1{,}12;\ \ensuremath{-}0{,}77]}
+\expandafter\def\csname E/Si/diff/gp_af/hist/far\endcsname{0{,}13}
+\expandafter\def\csname E/Si/ci/gp_af/hist/far\endcsname{[0{,}05;\ 0{,}23]}
+\expandafter\def\csname E/Si/diff/gp_af/hist_cb/far\endcsname{\ensuremath{-}0{,}17}
+\expandafter\def\csname E/Si/ci/gp_af/hist_cb/far\endcsname{[\ensuremath{-}0{,}28;\ \ensuremath{-}0{,}05]}
+\expandafter\def\csname E/Si/diff/gp_af/gp/far\endcsname{0{,}11}
+\expandafter\def\csname E/Si/ci/gp_af/gp/far\endcsname{[0{,}03;\ 0{,}20]}
+\expandafter\def\csname E/Si/diff/gp_af/gp_cb/far\endcsname{\ensuremath{-}0{,}65}
+\expandafter\def\csname E/Si/ci/gp_af/gp_cb/far\endcsname{[\ensuremath{-}0{,}79;\ \ensuremath{-}0{,}50]}
+\expandafter\def\csname E/Si/diff/gp_af/moex_today/far\endcsname{0{,}36}
+\expandafter\def\csname E/Si/ci/gp_af/moex_today/far\endcsname{[0{,}25;\ 0{,}48]}
+\expandafter\def\csname E/Si/diff/hist_cb/best_cb/far\endcsname{\ensuremath{-}0{,}77}
+\expandafter\def\csname E/Si/ci/hist_cb/best_cb/far\endcsname{[\ensuremath{-}0{,}94;\ \ensuremath{-}0{,}62]}
+\expandafter\def\csname E/Si/diff/gp/hist_cb/far\endcsname{\ensuremath{-}0{,}28}
+\expandafter\def\csname E/Si/ci/gp/hist_cb/far\endcsname{[\ensuremath{-}0{,}35;\ \ensuremath{-}0{,}22]}
+\expandafter\def\csname E/Si/diff/gp/gp_cb/far\endcsname{\ensuremath{-}0{,}76}
+\expandafter\def\csname E/Si/ci/gp/gp_cb/far\endcsname{[\ensuremath{-}0{,}89;\ \ensuremath{-}0{,}63]}
+\expandafter\def\csname E/Si/diff/gp/gp_indep/far\endcsname{0{,}02}
+\expandafter\def\csname E/Si/ci/gp/gp_indep/far\endcsname{[\ensuremath{-}0{,}00;\ 0{,}04]}
+\expandafter\def\csname E/Si/diff/gp/gp_homo/far\endcsname{0{,}00}
+\expandafter\def\csname E/Si/ci/gp/gp_homo/far\endcsname{[\ensuremath{-}0{,}00;\ 0{,}00]}
+\expandafter\def\csname E/Si/diff/gp/gp_param/far\endcsname{\ensuremath{-}0{,}00}
+\expandafter\def\csname E/Si/ci/gp/gp_param/far\endcsname{[\ensuremath{-}0{,}01;\ 0{,}01]}
+\expandafter\def\csname E/Si/diff/gp_af/best_cb/topn/40\endcsname{\ensuremath{-}0{,}28}
+\expandafter\def\csname E/Si/ci/gp_af/best_cb/topn/40\endcsname{[\ensuremath{-}0{,}37;\ \ensuremath{-}0{,}18]}
+\expandafter\def\csname E/Si/diff/gp_af/hist/topn/40\endcsname{\ensuremath{-}0{,}24}
+\expandafter\def\csname E/Si/ci/gp_af/hist/topn/40\endcsname{[\ensuremath{-}0{,}29;\ \ensuremath{-}0{,}19]}
+\expandafter\def\csname E/Si/diff/gp_af/hist_cb/topn/40\endcsname{\ensuremath{-}0{,}12}
+\expandafter\def\csname E/Si/ci/gp_af/hist_cb/topn/40\endcsname{[\ensuremath{-}0{,}15;\ \ensuremath{-}0{,}08]}
+\expandafter\def\csname E/Si/diff/gp_af/gp/topn/40\endcsname{\ensuremath{-}0{,}03}
+\expandafter\def\csname E/Si/ci/gp_af/gp/topn/40\endcsname{[\ensuremath{-}0{,}06;\ \ensuremath{-}0{,}01]}
+\expandafter\def\csname E/Si/diff/gp_af/gp_cb/topn/40\endcsname{0{,}05}
+\expandafter\def\csname E/Si/ci/gp_af/gp_cb/topn/40\endcsname{[\ensuremath{-}0{,}05;\ 0{,}15]}
+\expandafter\def\csname E/Si/diff/gp_af/moex_today/topn/40\endcsname{0{,}21}
+\expandafter\def\csname E/Si/ci/gp_af/moex_today/topn/40\endcsname{[0{,}13;\ 0{,}30]}
+\expandafter\def\csname E/Si/diff/hist_cb/best_cb/topn/40\endcsname{\ensuremath{-}0{,}16}
+\expandafter\def\csname E/Si/ci/hist_cb/best_cb/topn/40\endcsname{[\ensuremath{-}0{,}26;\ \ensuremath{-}0{,}06]}
+\expandafter\def\csname E/Si/diff/gp/hist_cb/topn/40\endcsname{\ensuremath{-}0{,}08}
+\expandafter\def\csname E/Si/ci/gp/hist_cb/topn/40\endcsname{[\ensuremath{-}0{,}11;\ \ensuremath{-}0{,}06]}
+\expandafter\def\csname E/Si/diff/gp/gp_cb/topn/40\endcsname{0{,}09}
+\expandafter\def\csname E/Si/ci/gp/gp_cb/topn/40\endcsname{[\ensuremath{-}0{,}02;\ 0{,}19]}
+\expandafter\def\csname E/Si/diff/gp/gp_indep/topn/40\endcsname{\ensuremath{-}0{,}02}
+\expandafter\def\csname E/Si/ci/gp/gp_indep/topn/40\endcsname{[\ensuremath{-}0{,}02;\ \ensuremath{-}0{,}01]}
+\expandafter\def\csname E/Si/diff/gp/gp_homo/topn/40\endcsname{0{,}00}
+\expandafter\def\csname E/Si/ci/gp/gp_homo/topn/40\endcsname{[0{,}00;\ 0{,}01]}
+\expandafter\def\csname E/Si/diff/gp/gp_param/topn/40\endcsname{\ensuremath{-}0{,}03}
+\expandafter\def\csname E/Si/ci/gp/gp_param/topn/40\endcsname{[\ensuremath{-}0{,}04;\ \ensuremath{-}0{,}02]}
+\expandafter\def\csname E/Si/diff/gp_af/best_cb/topn/20\endcsname{\ensuremath{-}0{,}47}
+\expandafter\def\csname E/Si/ci/gp_af/best_cb/topn/20\endcsname{[\ensuremath{-}0{,}56;\ \ensuremath{-}0{,}38]}
+\expandafter\def\csname E/Si/diff/gp_af/hist/topn/20\endcsname{\ensuremath{-}0{,}14}
+\expandafter\def\csname E/Si/ci/gp_af/hist/topn/20\endcsname{[\ensuremath{-}0{,}17;\ \ensuremath{-}0{,}10]}
+\expandafter\def\csname E/Si/diff/gp_af/hist_cb/topn/20\endcsname{\ensuremath{-}0{,}06}
+\expandafter\def\csname E/Si/ci/gp_af/hist_cb/topn/20\endcsname{[\ensuremath{-}0{,}09;\ \ensuremath{-}0{,}03]}
+\expandafter\def\csname E/Si/diff/gp_af/gp/topn/20\endcsname{\ensuremath{-}0{,}01}
+\expandafter\def\csname E/Si/ci/gp_af/gp/topn/20\endcsname{[\ensuremath{-}0{,}04;\ 0{,}01]}
+\expandafter\def\csname E/Si/diff/gp_af/gp_cb/topn/20\endcsname{\ensuremath{-}0{,}09}
+\expandafter\def\csname E/Si/ci/gp_af/gp_cb/topn/20\endcsname{[\ensuremath{-}0{,}18;\ 0{,}01]}
+\expandafter\def\csname E/Si/diff/gp_af/moex_today/topn/20\endcsname{0{,}27}
+\expandafter\def\csname E/Si/ci/gp_af/moex_today/topn/20\endcsname{[0{,}20;\ 0{,}34]}
+\expandafter\def\csname E/Si/diff/hist_cb/best_cb/topn/20\endcsname{\ensuremath{-}0{,}41}
+\expandafter\def\csname E/Si/ci/hist_cb/best_cb/topn/20\endcsname{[\ensuremath{-}0{,}50;\ \ensuremath{-}0{,}32]}
+\expandafter\def\csname E/Si/diff/gp/hist_cb/topn/20\endcsname{\ensuremath{-}0{,}04}
+\expandafter\def\csname E/Si/ci/gp/hist_cb/topn/20\endcsname{[\ensuremath{-}0{,}06;\ \ensuremath{-}0{,}03]}
+\expandafter\def\csname E/Si/diff/gp/gp_cb/topn/20\endcsname{\ensuremath{-}0{,}07}
+\expandafter\def\csname E/Si/ci/gp/gp_cb/topn/20\endcsname{[\ensuremath{-}0{,}17;\ 0{,}03]}
+\expandafter\def\csname E/Si/diff/gp/gp_indep/topn/20\endcsname{\ensuremath{-}0{,}01}
+\expandafter\def\csname E/Si/ci/gp/gp_indep/topn/20\endcsname{[\ensuremath{-}0{,}02;\ \ensuremath{-}0{,}01]}
+\expandafter\def\csname E/Si/diff/gp/gp_homo/topn/20\endcsname{0{,}00}
+\expandafter\def\csname E/Si/ci/gp/gp_homo/topn/20\endcsname{[\ensuremath{-}0{,}00;\ 0{,}00]}
+\expandafter\def\csname E/Si/diff/gp/gp_param/topn/20\endcsname{\ensuremath{-}0{,}04}
+\expandafter\def\csname E/Si/ci/gp/gp_param/topn/20\endcsname{[\ensuremath{-}0{,}05;\ \ensuremath{-}0{,}03]}
+\expandafter\def\csname E/Si/diff/gp_af/best_cb/topn/10\endcsname{\ensuremath{-}0{,}79}
+\expandafter\def\csname E/Si/ci/gp_af/best_cb/topn/10\endcsname{[\ensuremath{-}0{,}91;\ \ensuremath{-}0{,}69]}
+\expandafter\def\csname E/Si/diff/gp_af/hist/topn/10\endcsname{\ensuremath{-}0{,}06}
+\expandafter\def\csname E/Si/ci/gp_af/hist/topn/10\endcsname{[\ensuremath{-}0{,}09;\ \ensuremath{-}0{,}01]}
+\expandafter\def\csname E/Si/diff/gp_af/hist_cb/topn/10\endcsname{\ensuremath{-}0{,}01}
+\expandafter\def\csname E/Si/ci/gp_af/hist_cb/topn/10\endcsname{[\ensuremath{-}0{,}05;\ 0{,}03]}
+\expandafter\def\csname E/Si/diff/gp_af/gp/topn/10\endcsname{0{,}03}
+\expandafter\def\csname E/Si/ci/gp_af/gp/topn/10\endcsname{[0{,}00;\ 0{,}07]}
+\expandafter\def\csname E/Si/diff/gp_af/gp_cb/topn/10\endcsname{\ensuremath{-}0{,}50}
+\expandafter\def\csname E/Si/ci/gp_af/gp_cb/topn/10\endcsname{[\ensuremath{-}0{,}62;\ \ensuremath{-}0{,}37]}
+\expandafter\def\csname E/Si/diff/gp_af/moex_today/topn/10\endcsname{0{,}33}
+\expandafter\def\csname E/Si/ci/gp_af/moex_today/topn/10\endcsname{[0{,}26;\ 0{,}40]}
+\expandafter\def\csname E/Si/diff/hist_cb/best_cb/topn/10\endcsname{\ensuremath{-}0{,}78}
+\expandafter\def\csname E/Si/ci/hist_cb/best_cb/topn/10\endcsname{[\ensuremath{-}0{,}89;\ \ensuremath{-}0{,}67]}
+\expandafter\def\csname E/Si/diff/gp/hist_cb/topn/10\endcsname{\ensuremath{-}0{,}04}
+\expandafter\def\csname E/Si/ci/gp/hist_cb/topn/10\endcsname{[\ensuremath{-}0{,}06;\ \ensuremath{-}0{,}02]}
+\expandafter\def\csname E/Si/diff/gp/gp_cb/topn/10\endcsname{\ensuremath{-}0{,}53}
+\expandafter\def\csname E/Si/ci/gp/gp_cb/topn/10\endcsname{[\ensuremath{-}0{,}65;\ \ensuremath{-}0{,}41]}
+\expandafter\def\csname E/Si/diff/gp/gp_indep/topn/10\endcsname{\ensuremath{-}0{,}01}
+\expandafter\def\csname E/Si/ci/gp/gp_indep/topn/10\endcsname{[\ensuremath{-}0{,}02;\ \ensuremath{-}0{,}01]}
+\expandafter\def\csname E/Si/diff/gp/gp_homo/topn/10\endcsname{0{,}00}
+\expandafter\def\csname E/Si/ci/gp/gp_homo/topn/10\endcsname{[0{,}00;\ 0{,}01]}
+\expandafter\def\csname E/Si/diff/gp/gp_param/topn/10\endcsname{\ensuremath{-}0{,}04}
+\expandafter\def\csname E/Si/ci/gp/gp_param/topn/10\endcsname{[\ensuremath{-}0{,}05;\ \ensuremath{-}0{,}03]}
+\expandafter\def\csname E/Si/diff/gp_af/best_cb/topn/5\endcsname{\ensuremath{-}1{,}60}
+\expandafter\def\csname E/Si/ci/gp_af/best_cb/topn/5\endcsname{[\ensuremath{-}1{,}79;\ \ensuremath{-}1{,}41]}
+\expandafter\def\csname E/Si/diff/gp_af/hist/topn/5\endcsname{\ensuremath{-}0{,}02}
+\expandafter\def\csname E/Si/ci/gp_af/hist/topn/5\endcsname{[\ensuremath{-}0{,}06;\ 0{,}04]}
+\expandafter\def\csname E/Si/diff/gp_af/hist_cb/topn/5\endcsname{0{,}01}
+\expandafter\def\csname E/Si/ci/gp_af/hist_cb/topn/5\endcsname{[\ensuremath{-}0{,}04;\ 0{,}06]}
+\expandafter\def\csname E/Si/diff/gp_af/gp/topn/5\endcsname{0{,}05}
+\expandafter\def\csname E/Si/ci/gp_af/gp/topn/5\endcsname{[0{,}01;\ 0{,}10]}
+\expandafter\def\csname E/Si/diff/gp_af/gp_cb/topn/5\endcsname{\ensuremath{-}1{,}55}
+\expandafter\def\csname E/Si/ci/gp_af/gp_cb/topn/5\endcsname{[\ensuremath{-}1{,}72;\ \ensuremath{-}1{,}36]}
+\expandafter\def\csname E/Si/diff/gp_af/moex_today/topn/5\endcsname{0{,}36}
+\expandafter\def\csname E/Si/ci/gp_af/moex_today/topn/5\endcsname{[0{,}28;\ 0{,}44]}
+\expandafter\def\csname E/Si/diff/hist_cb/best_cb/topn/5\endcsname{\ensuremath{-}1{,}61}
+\expandafter\def\csname E/Si/ci/hist_cb/best_cb/topn/5\endcsname{[\ensuremath{-}1{,}79;\ \ensuremath{-}1{,}42]}
+\expandafter\def\csname E/Si/diff/gp/hist_cb/topn/5\endcsname{\ensuremath{-}0{,}04}
+\expandafter\def\csname E/Si/ci/gp/hist_cb/topn/5\endcsname{[\ensuremath{-}0{,}06;\ \ensuremath{-}0{,}03]}
+\expandafter\def\csname E/Si/diff/gp/gp_cb/topn/5\endcsname{\ensuremath{-}1{,}60}
+\expandafter\def\csname E/Si/ci/gp/gp_cb/topn/5\endcsname{[\ensuremath{-}1{,}77;\ \ensuremath{-}1{,}42]}
+\expandafter\def\csname E/Si/diff/gp/gp_indep/topn/5\endcsname{\ensuremath{-}0{,}01}
+\expandafter\def\csname E/Si/ci/gp/gp_indep/topn/5\endcsname{[\ensuremath{-}0{,}02;\ \ensuremath{-}0{,}01]}
+\expandafter\def\csname E/Si/diff/gp/gp_homo/topn/5\endcsname{0{,}00}
+\expandafter\def\csname E/Si/ci/gp/gp_homo/topn/5\endcsname{[0{,}00;\ 0{,}01]}
+\expandafter\def\csname E/Si/diff/gp/gp_param/topn/5\endcsname{\ensuremath{-}0{,}03}
+\expandafter\def\csname E/Si/ci/gp/gp_param/topn/5\endcsname{[\ensuremath{-}0{,}04;\ \ensuremath{-}0{,}02]}
+\expandafter\def\csname E/Si/by_visible/hist/0\endcsname{2{,}07}
+\expandafter\def\csname E/Si/by_visible/cb_quad/0\endcsname{3{,}08}
+\expandafter\def\csname E/Si/by_visible/cb_svi/0\endcsname{3{,}08}
+\expandafter\def\csname E/Si/by_visible/cb_ssvi/0\endcsname{2{,}49}
+\expandafter\def\csname E/Si/by_visible/hist_cb/0\endcsname{2{,}11}
+\expandafter\def\csname E/Si/by_visible/gp/0\endcsname{2{,}06}
+\expandafter\def\csname E/Si/by_visible/gp_af/0\endcsname{1{,}95}
+\expandafter\def\csname E/Si/by_visible/moex_today/0\endcsname{1{,}43}
+\expandafter\def\csname E/Si/by_visible/hist/1-2\endcsname{1{,}56}
+\expandafter\def\csname E/Si/by_visible/cb_quad/1-2\endcsname{4{,}70}
+\expandafter\def\csname E/Si/by_visible/cb_svi/1-2\endcsname{4{,}70}
+\expandafter\def\csname E/Si/by_visible/cb_ssvi/1-2\endcsname{2{,}13}
+\expandafter\def\csname E/Si/by_visible/hist_cb/1-2\endcsname{1{,}39}
+\expandafter\def\csname E/Si/by_visible/gp/1-2\endcsname{1{,}31}
+\expandafter\def\csname E/Si/by_visible/gp_af/1-2\endcsname{1{,}30}
+\expandafter\def\csname E/Si/by_visible/moex_today/1-2\endcsname{1{,}06}
+\expandafter\def\csname E/Si/by_visible/hist/3-4\endcsname{1{,}25}
+\expandafter\def\csname E/Si/by_visible/cb_quad/3-4\endcsname{2{,}83}
+\expandafter\def\csname E/Si/by_visible/cb_svi/3-4\endcsname{2{,}83}
+\expandafter\def\csname E/Si/by_visible/cb_ssvi/3-4\endcsname{1{,}56}
+\expandafter\def\csname E/Si/by_visible/hist_cb/3-4\endcsname{1{,}08}
+\expandafter\def\csname E/Si/by_visible/gp/3-4\endcsname{0{,}96}
+\expandafter\def\csname E/Si/by_visible/gp_af/3-4\endcsname{0{,}95}
+\expandafter\def\csname E/Si/by_visible/moex_today/3-4\endcsname{0{,}91}
+\expandafter\def\csname E/Si/by_visible/hist/5-9\endcsname{1{,}26}
+\expandafter\def\csname E/Si/by_visible/cb_quad/5-9\endcsname{1{,}32}
+\expandafter\def\csname E/Si/by_visible/cb_svi/5-9\endcsname{1{,}77}
+\expandafter\def\csname E/Si/by_visible/cb_ssvi/5-9\endcsname{1{,}25}
+\expandafter\def\csname E/Si/by_visible/hist_cb/5-9\endcsname{1{,}02}
+\expandafter\def\csname E/Si/by_visible/gp/5-9\endcsname{0{,}83}
+\expandafter\def\csname E/Si/by_visible/gp_af/5-9\endcsname{0{,}83}
+\expandafter\def\csname E/Si/by_visible/moex_today/5-9\endcsname{0{,}89}
+\expandafter\def\csname E/Si/by_visible/hist/10+\endcsname{1{,}02}
+\expandafter\def\csname E/Si/by_visible/cb_quad/10+\endcsname{0{,}80}
+\expandafter\def\csname E/Si/by_visible/cb_svi/10+\endcsname{0{,}92}
+\expandafter\def\csname E/Si/by_visible/cb_ssvi/10+\endcsname{1{,}09}
+\expandafter\def\csname E/Si/by_visible/hist_cb/10+\endcsname{0{,}83}
+\expandafter\def\csname E/Si/by_visible/gp/10+\endcsname{0{,}64}
+\expandafter\def\csname E/Si/by_visible/gp_af/10+\endcsname{0{,}64}
+\expandafter\def\csname E/Si/by_visible/moex_today/10+\endcsname{0{,}78}
+\expandafter\def\csname E/Si/by_T/hist/3-7\endcsname{1{,}13}
+\expandafter\def\csname E/Si/by_T/cb_quad/3-7\endcsname{1{,}68}
+\expandafter\def\csname E/Si/by_T/cb_svi/3-7\endcsname{1{,}90}
+\expandafter\def\csname E/Si/by_T/cb_ssvi/3-7\endcsname{1{,}35}
+\expandafter\def\csname E/Si/by_T/hist_cb/3-7\endcsname{0{,}93}
+\expandafter\def\csname E/Si/by_T/gp/3-7\endcsname{0{,}70}
+\expandafter\def\csname E/Si/by_T/gp_af/3-7\endcsname{0{,}70}
+\expandafter\def\csname E/Si/by_T/moex_today/3-7\endcsname{0{,}95}
+\expandafter\def\csname E/Si/by_T/hist/8-14\endcsname{1{,}74}
+\expandafter\def\csname E/Si/by_T/cb_quad/8-14\endcsname{2{,}01}
+\expandafter\def\csname E/Si/by_T/cb_svi/8-14\endcsname{2{,}34}
+\expandafter\def\csname E/Si/by_T/cb_ssvi/8-14\endcsname{1{,}38}
+\expandafter\def\csname E/Si/by_T/hist_cb/8-14\endcsname{1{,}39}
+\expandafter\def\csname E/Si/by_T/gp/8-14\endcsname{1{,}20}
+\expandafter\def\csname E/Si/by_T/gp_af/8-14\endcsname{1{,}20}
+\expandafter\def\csname E/Si/by_T/moex_today/8-14\endcsname{1{,}06}
+\expandafter\def\csname E/Si/by_T/hist/15-30\endcsname{1{,}39}
+\expandafter\def\csname E/Si/by_T/cb_quad/15-30\endcsname{1{,}81}
+\expandafter\def\csname E/Si/by_T/cb_svi/15-30\endcsname{1{,}97}
+\expandafter\def\csname E/Si/by_T/cb_ssvi/15-30\endcsname{1{,}25}
+\expandafter\def\csname E/Si/by_T/hist_cb/15-30\endcsname{1{,}26}
+\expandafter\def\csname E/Si/by_T/gp/15-30\endcsname{1{,}15}
+\expandafter\def\csname E/Si/by_T/gp_af/15-30\endcsname{1{,}12}
+\expandafter\def\csname E/Si/by_T/moex_today/15-30\endcsname{1{,}00}
+\expandafter\def\csname E/Si/by_T/hist/31-60\endcsname{1{,}12}
+\expandafter\def\csname E/Si/by_T/cb_quad/31-60\endcsname{1{,}62}
+\expandafter\def\csname E/Si/by_T/cb_svi/31-60\endcsname{1{,}76}
+\expandafter\def\csname E/Si/by_T/cb_ssvi/31-60\endcsname{1{,}16}
+\expandafter\def\csname E/Si/by_T/hist_cb/31-60\endcsname{0{,}97}
+\expandafter\def\csname E/Si/by_T/gp/31-60\endcsname{0{,}89}
+\expandafter\def\csname E/Si/by_T/gp_af/31-60\endcsname{0{,}86}
+\expandafter\def\csname E/Si/by_T/moex_today/31-60\endcsname{0{,}82}
+\expandafter\def\csname E/Si/by_T/hist/61-90\endcsname{0{,}82}
+\expandafter\def\csname E/Si/by_T/cb_quad/61-90\endcsname{0{,}99}
+\expandafter\def\csname E/Si/by_T/cb_svi/61-90\endcsname{1{,}28}
+\expandafter\def\csname E/Si/by_T/cb_ssvi/61-90\endcsname{1{,}16}
+\expandafter\def\csname E/Si/by_T/hist_cb/61-90\endcsname{0{,}79}
+\expandafter\def\csname E/Si/by_T/gp/61-90\endcsname{0{,}71}
+\expandafter\def\csname E/Si/by_T/gp_af/61-90\endcsname{0{,}69}
+\expandafter\def\csname E/Si/by_T/moex_today/61-90\endcsname{0{,}70}
+\expandafter\def\csname E/Si/by_T/hist/91-180\endcsname{1{,}20}
+\expandafter\def\csname E/Si/by_T/cb_quad/91-180\endcsname{2{,}06}
+\expandafter\def\csname E/Si/by_T/cb_svi/91-180\endcsname{2{,}14}
+\expandafter\def\csname E/Si/by_T/cb_ssvi/91-180\endcsname{1{,}50}
+\expandafter\def\csname E/Si/by_T/hist_cb/91-180\endcsname{1{,}08}
+\expandafter\def\csname E/Si/by_T/gp/91-180\endcsname{0{,}98}
+\expandafter\def\csname E/Si/by_T/gp_af/91-180\endcsname{0{,}98}
+\expandafter\def\csname E/Si/by_T/moex_today/91-180\endcsname{0{,}99}
+\expandafter\def\csname E/Si/by_z/hist/0-0.5\endcsname{1{,}21}
+\expandafter\def\csname E/Si/by_z/cb_quad/0-0.5\endcsname{1{,}21}
+\expandafter\def\csname E/Si/by_z/cb_svi/0-0.5\endcsname{1{,}26}
+\expandafter\def\csname E/Si/by_z/cb_ssvi/0-0.5\endcsname{1{,}12}
+\expandafter\def\csname E/Si/by_z/hist_cb/0-0.5\endcsname{0{,}99}
+\expandafter\def\csname E/Si/by_z/gp/0-0.5\endcsname{0{,}91}
+\expandafter\def\csname E/Si/by_z/gp_af/0-0.5\endcsname{0{,}89}
+\expandafter\def\csname E/Si/by_z/moex_today/0-0.5\endcsname{0{,}92}
+\expandafter\def\csname E/Si/by_z/hist/0.5-1\endcsname{1{,}22}
+\expandafter\def\csname E/Si/by_z/cb_quad/0.5-1\endcsname{1{,}24}
+\expandafter\def\csname E/Si/by_z/cb_svi/0.5-1\endcsname{1{,}35}
+\expandafter\def\csname E/Si/by_z/cb_ssvi/0.5-1\endcsname{1{,}01}
+\expandafter\def\csname E/Si/by_z/hist_cb/0.5-1\endcsname{1{,}01}
+\expandafter\def\csname E/Si/by_z/gp/0.5-1\endcsname{0{,}91}
+\expandafter\def\csname E/Si/by_z/gp_af/0.5-1\endcsname{0{,}89}
+\expandafter\def\csname E/Si/by_z/moex_today/0.5-1\endcsname{0{,}86}
+\expandafter\def\csname E/Si/by_z/hist/1-2\endcsname{1{,}28}
+\expandafter\def\csname E/Si/by_z/cb_quad/1-2\endcsname{1{,}70}
+\expandafter\def\csname E/Si/by_z/cb_svi/1-2\endcsname{1{,}88}
+\expandafter\def\csname E/Si/by_z/cb_ssvi/1-2\endcsname{1{,}23}
+\expandafter\def\csname E/Si/by_z/hist_cb/1-2\endcsname{1{,}09}
+\expandafter\def\csname E/Si/by_z/gp/1-2\endcsname{0{,}95}
+\expandafter\def\csname E/Si/by_z/gp_af/1-2\endcsname{0{,}92}
+\expandafter\def\csname E/Si/by_z/moex_today/1-2\endcsname{0{,}92}
+\expandafter\def\csname E/Si/by_z/hist/>2\endcsname{1{,}54}
+\expandafter\def\csname E/Si/by_z/cb_quad/>2\endcsname{2{,}74}
+\expandafter\def\csname E/Si/by_z/cb_svi/>2\endcsname{3{,}16}
+\expandafter\def\csname E/Si/by_z/cb_ssvi/>2\endcsname{1{,}83}
+\expandafter\def\csname E/Si/by_z/hist_cb/>2\endcsname{1{,}41}
+\expandafter\def\csname E/Si/by_z/gp/>2\endcsname{1{,}22}
+\expandafter\def\csname E/Si/by_z/gp_af/>2\endcsname{1{,}23}
+\expandafter\def\csname E/Si/by_z/moex_today/>2\endcsname{1{,}05}
+\expandafter\def\csname E/Si/by_n/hist/1\endcsname{1{,}75}
+\expandafter\def\csname E/Si/by_n/cb_quad/1\endcsname{2{,}43}
+\expandafter\def\csname E/Si/by_n/cb_svi/1\endcsname{2{,}60}
+\expandafter\def\csname E/Si/by_n/cb_ssvi/1\endcsname{1{,}65}
+\expandafter\def\csname E/Si/by_n/hist_cb/1\endcsname{1{,}59}
+\expandafter\def\csname E/Si/by_n/gp/1\endcsname{1{,}47}
+\expandafter\def\csname E/Si/by_n/gp_af/1\endcsname{1{,}44}
+\expandafter\def\csname E/Si/by_n/moex_today/1\endcsname{1{,}26}
+\expandafter\def\csname E/Si/by_n/hist/2-5\endcsname{1{,}46}
+\expandafter\def\csname E/Si/by_n/cb_quad/2-5\endcsname{2{,}15}
+\expandafter\def\csname E/Si/by_n/cb_svi/2-5\endcsname{2{,}39}
+\expandafter\def\csname E/Si/by_n/cb_ssvi/2-5\endcsname{1{,}42}
+\expandafter\def\csname E/Si/by_n/hist_cb/2-5\endcsname{1{,}25}
+\expandafter\def\csname E/Si/by_n/gp/2-5\endcsname{1{,}13}
+\expandafter\def\csname E/Si/by_n/gp_af/2-5\endcsname{1{,}12}
+\expandafter\def\csname E/Si/by_n/moex_today/2-5\endcsname{1{,}01}
+\expandafter\def\csname E/Si/by_n/hist/6-30\endcsname{1{,}05}
+\expandafter\def\csname E/Si/by_n/cb_quad/6-30\endcsname{1{,}25}
+\expandafter\def\csname E/Si/by_n/cb_svi/6-30\endcsname{1{,}47}
+\expandafter\def\csname E/Si/by_n/cb_ssvi/6-30\endcsname{1{,}13}
+\expandafter\def\csname E/Si/by_n/hist_cb/6-30\endcsname{0{,}87}
+\expandafter\def\csname E/Si/by_n/gp/6-30\endcsname{0{,}72}
+\expandafter\def\csname E/Si/by_n/gp_af/6-30\endcsname{0{,}71}
+\expandafter\def\csname E/Si/by_n/moex_today/6-30\endcsname{0{,}75}
+\expandafter\def\csname E/Si/by_n/hist/>30\endcsname{0{,}92}
+\expandafter\def\csname E/Si/by_n/cb_quad/>30\endcsname{0{,}84}
+\expandafter\def\csname E/Si/by_n/cb_svi/>30\endcsname{1{,}02}
+\expandafter\def\csname E/Si/by_n/cb_ssvi/>30\endcsname{0{,}93}
+\expandafter\def\csname E/Si/by_n/hist_cb/>30\endcsname{0{,}67}
+\expandafter\def\csname E/Si/by_n/gp/>30\endcsname{0{,}49}
+\expandafter\def\csname E/Si/by_n/gp_af/>30\endcsname{0{,}49}
+\expandafter\def\csname E/Si/by_n/moex_today/>30\endcsname{0{,}73}
+\expandafter\def\csname E/Si/regime/move_median/0.1/calm\endcsname{0{,}32}
+\expandafter\def\csname E/Si/regime/hist/0.1/calm\endcsname{1{,}15}
+\expandafter\def\csname E/Si/regime/cb_quad/0.1/calm\endcsname{1{,}00}
+\expandafter\def\csname E/Si/regime/cb_svi/0.1/calm\endcsname{1{,}07}
+\expandafter\def\csname E/Si/regime/cb_ssvi/0.1/calm\endcsname{1{,}16}
+\expandafter\def\csname E/Si/regime/hist_cb/0.1/calm\endcsname{0{,}99}
+\expandafter\def\csname E/Si/regime/gp/0.1/calm\endcsname{0{,}77}
+\expandafter\def\csname E/Si/regime/gp_af/0.1/calm\endcsname{0{,}75}
+\expandafter\def\csname E/Si/regime/moex_today/0.1/calm\endcsname{0{,}85}
+\expandafter\def\csname E/Si/regime/move_median/0.1/normal\endcsname{0{,}53}
+\expandafter\def\csname E/Si/regime/hist/0.1/normal\endcsname{1{,}33}
+\expandafter\def\csname E/Si/regime/cb_quad/0.1/normal\endcsname{0{,}98}
+\expandafter\def\csname E/Si/regime/cb_svi/0.1/normal\endcsname{1{,}02}
+\expandafter\def\csname E/Si/regime/cb_ssvi/0.1/normal\endcsname{1{,}11}
+\expandafter\def\csname E/Si/regime/hist_cb/0.1/normal\endcsname{1{,}06}
+\expandafter\def\csname E/Si/regime/gp/0.1/normal\endcsname{0{,}81}
+\expandafter\def\csname E/Si/regime/gp_af/0.1/normal\endcsname{0{,}79}
+\expandafter\def\csname E/Si/regime/moex_today/0.1/normal\endcsname{0{,}90}
+\expandafter\def\csname E/Si/regime/move_median/0.1/turbulent\endcsname{0{,}85}
+\expandafter\def\csname E/Si/regime/hist/0.1/turbulent\endcsname{1{,}44}
+\expandafter\def\csname E/Si/regime/cb_quad/0.1/turbulent\endcsname{1{,}16}
+\expandafter\def\csname E/Si/regime/cb_svi/0.1/turbulent\endcsname{1{,}19}
+\expandafter\def\csname E/Si/regime/cb_ssvi/0.1/turbulent\endcsname{1{,}20}
+\expandafter\def\csname E/Si/regime/hist_cb/0.1/turbulent\endcsname{1{,}08}
+\expandafter\def\csname E/Si/regime/gp/0.1/turbulent\endcsname{0{,}83}
+\expandafter\def\csname E/Si/regime/gp_af/0.1/turbulent\endcsname{0{,}85}
+\expandafter\def\csname E/Si/regime/moex_today/0.1/turbulent\endcsname{1{,}05}
+\expandafter\def\csname E/Si/regime/move_median/0.3/calm\endcsname{0{,}32}
+\expandafter\def\csname E/Si/regime/hist/0.3/calm\endcsname{1{,}17}
+\expandafter\def\csname E/Si/regime/cb_quad/0.3/calm\endcsname{1{,}46}
+\expandafter\def\csname E/Si/regime/cb_svi/0.3/calm\endcsname{1{,}48}
+\expandafter\def\csname E/Si/regime/cb_ssvi/0.3/calm\endcsname{1{,}20}
+\expandafter\def\csname E/Si/regime/hist_cb/0.3/calm\endcsname{1{,}03}
+\expandafter\def\csname E/Si/regime/gp/0.3/calm\endcsname{0{,}80}
+\expandafter\def\csname E/Si/regime/gp_af/0.3/calm\endcsname{0{,}79}
+\expandafter\def\csname E/Si/regime/moex_today/0.3/calm\endcsname{0{,}82}
+\expandafter\def\csname E/Si/regime/move_median/0.3/normal\endcsname{0{,}53}
+\expandafter\def\csname E/Si/regime/hist/0.3/normal\endcsname{1{,}27}
+\expandafter\def\csname E/Si/regime/cb_quad/0.3/normal\endcsname{1{,}07}
+\expandafter\def\csname E/Si/regime/cb_svi/0.3/normal\endcsname{1{,}16}
+\expandafter\def\csname E/Si/regime/cb_ssvi/0.3/normal\endcsname{1{,}12}
+\expandafter\def\csname E/Si/regime/hist_cb/0.3/normal\endcsname{1{,}03}
+\expandafter\def\csname E/Si/regime/gp/0.3/normal\endcsname{0{,}81}
+\expandafter\def\csname E/Si/regime/gp_af/0.3/normal\endcsname{0{,}81}
+\expandafter\def\csname E/Si/regime/moex_today/0.3/normal\endcsname{0{,}89}
+\expandafter\def\csname E/Si/regime/move_median/0.3/turbulent\endcsname{0{,}85}
+\expandafter\def\csname E/Si/regime/hist/0.3/turbulent\endcsname{1{,}47}
+\expandafter\def\csname E/Si/regime/cb_quad/0.3/turbulent\endcsname{1{,}34}
+\expandafter\def\csname E/Si/regime/cb_svi/0.3/turbulent\endcsname{1{,}48}
+\expandafter\def\csname E/Si/regime/cb_ssvi/0.3/turbulent\endcsname{1{,}17}
+\expandafter\def\csname E/Si/regime/hist_cb/0.3/turbulent\endcsname{1{,}10}
+\expandafter\def\csname E/Si/regime/gp/0.3/turbulent\endcsname{0{,}92}
+\expandafter\def\csname E/Si/regime/gp_af/0.3/turbulent\endcsname{0{,}90}
+\expandafter\def\csname E/Si/regime/moex_today/0.3/turbulent\endcsname{1{,}04}
+\expandafter\def\csname E/Si/regime/move_median/0.5/calm\endcsname{0{,}32}
+\expandafter\def\csname E/Si/regime/hist/0.5/calm\endcsname{1{,}18}
+\expandafter\def\csname E/Si/regime/cb_quad/0.5/calm\endcsname{1{,}33}
+\expandafter\def\csname E/Si/regime/cb_svi/0.5/calm\endcsname{1{,}46}
+\expandafter\def\csname E/Si/regime/cb_ssvi/0.5/calm\endcsname{1{,}25}
+\expandafter\def\csname E/Si/regime/hist_cb/0.5/calm\endcsname{1{,}04}
+\expandafter\def\csname E/Si/regime/gp/0.5/calm\endcsname{0{,}88}
+\expandafter\def\csname E/Si/regime/gp_af/0.5/calm\endcsname{0{,}87}
+\expandafter\def\csname E/Si/regime/moex_today/0.5/calm\endcsname{0{,}84}
+\expandafter\def\csname E/Si/regime/move_median/0.5/normal\endcsname{0{,}53}
+\expandafter\def\csname E/Si/regime/hist/0.5/normal\endcsname{1{,}24}
+\expandafter\def\csname E/Si/regime/cb_quad/0.5/normal\endcsname{1{,}20}
+\expandafter\def\csname E/Si/regime/cb_svi/0.5/normal\endcsname{1{,}33}
+\expandafter\def\csname E/Si/regime/cb_ssvi/0.5/normal\endcsname{1{,}17}
+\expandafter\def\csname E/Si/regime/hist_cb/0.5/normal\endcsname{1{,}03}
+\expandafter\def\csname E/Si/regime/gp/0.5/normal\endcsname{0{,}85}
+\expandafter\def\csname E/Si/regime/gp_af/0.5/normal\endcsname{0{,}83}
+\expandafter\def\csname E/Si/regime/moex_today/0.5/normal\endcsname{0{,}89}
+\expandafter\def\csname E/Si/regime/move_median/0.5/turbulent\endcsname{0{,}85}
+\expandafter\def\csname E/Si/regime/hist/0.5/turbulent\endcsname{1{,}43}
+\expandafter\def\csname E/Si/regime/cb_quad/0.5/turbulent\endcsname{1{,}39}
+\expandafter\def\csname E/Si/regime/cb_svi/0.5/turbulent\endcsname{1{,}49}
+\expandafter\def\csname E/Si/regime/cb_ssvi/0.5/turbulent\endcsname{1{,}20}
+\expandafter\def\csname E/Si/regime/hist_cb/0.5/turbulent\endcsname{1{,}11}
+\expandafter\def\csname E/Si/regime/gp/0.5/turbulent\endcsname{0{,}93}
+\expandafter\def\csname E/Si/regime/gp_af/0.5/turbulent\endcsname{0{,}92}
+\expandafter\def\csname E/Si/regime/moex_today/0.5/turbulent\endcsname{1{,}03}
+\expandafter\def\csname E/Si/regime/move_median/0.7/calm\endcsname{0{,}32}
+\expandafter\def\csname E/Si/regime/hist/0.7/calm\endcsname{1{,}17}
+\expandafter\def\csname E/Si/regime/cb_quad/0.7/calm\endcsname{1{,}81}
+\expandafter\def\csname E/Si/regime/cb_svi/0.7/calm\endcsname{2{,}00}
+\expandafter\def\csname E/Si/regime/cb_ssvi/0.7/calm\endcsname{1{,}35}
+\expandafter\def\csname E/Si/regime/hist_cb/0.7/calm\endcsname{1{,}08}
+\expandafter\def\csname E/Si/regime/gp/0.7/calm\endcsname{0{,}97}
+\expandafter\def\csname E/Si/regime/gp_af/0.7/calm\endcsname{0{,}96}
+\expandafter\def\csname E/Si/regime/moex_today/0.7/calm\endcsname{0{,}84}
+\expandafter\def\csname E/Si/regime/move_median/0.7/normal\endcsname{0{,}53}
+\expandafter\def\csname E/Si/regime/hist/0.7/normal\endcsname{1{,}25}
+\expandafter\def\csname E/Si/regime/cb_quad/0.7/normal\endcsname{1{,}70}
+\expandafter\def\csname E/Si/regime/cb_svi/0.7/normal\endcsname{1{,}93}
+\expandafter\def\csname E/Si/regime/cb_ssvi/0.7/normal\endcsname{1{,}26}
+\expandafter\def\csname E/Si/regime/hist_cb/0.7/normal\endcsname{1{,}08}
+\expandafter\def\csname E/Si/regime/gp/0.7/normal\endcsname{0{,}93}
+\expandafter\def\csname E/Si/regime/gp_af/0.7/normal\endcsname{0{,}92}
+\expandafter\def\csname E/Si/regime/moex_today/0.7/normal\endcsname{0{,}90}
+\expandafter\def\csname E/Si/regime/move_median/0.7/turbulent\endcsname{0{,}85}
+\expandafter\def\csname E/Si/regime/hist/0.7/turbulent\endcsname{1{,}45}
+\expandafter\def\csname E/Si/regime/cb_quad/0.7/turbulent\endcsname{1{,}72}
+\expandafter\def\csname E/Si/regime/cb_svi/0.7/turbulent\endcsname{1{,}91}
+\expandafter\def\csname E/Si/regime/cb_ssvi/0.7/turbulent\endcsname{1{,}27}
+\expandafter\def\csname E/Si/regime/hist_cb/0.7/turbulent\endcsname{1{,}18}
+\expandafter\def\csname E/Si/regime/gp/0.7/turbulent\endcsname{1{,}05}
+\expandafter\def\csname E/Si/regime/gp_af/0.7/turbulent\endcsname{1{,}02}
+\expandafter\def\csname E/Si/regime/moex_today/0.7/turbulent\endcsname{1{,}04}
+\expandafter\def\csname E/Si/regime/move_median/0.9/calm\endcsname{0{,}32}
+\expandafter\def\csname E/Si/regime/hist/0.9/calm\endcsname{1{,}14}
+\expandafter\def\csname E/Si/regime/cb_quad/0.9/calm\endcsname{3{,}82}
+\expandafter\def\csname E/Si/regime/cb_svi/0.9/calm\endcsname{3{,}85}
+\expandafter\def\csname E/Si/regime/cb_ssvi/0.9/calm\endcsname{2{,}15}
+\expandafter\def\csname E/Si/regime/hist_cb/0.9/calm\endcsname{1{,}16}
+\expandafter\def\csname E/Si/regime/gp/0.9/calm\endcsname{1{,}06}
+\expandafter\def\csname E/Si/regime/gp_af/0.9/calm\endcsname{1{,}05}
+\expandafter\def\csname E/Si/regime/moex_today/0.9/calm\endcsname{0{,}83}
+\expandafter\def\csname E/Si/regime/move_median/0.9/normal\endcsname{0{,}53}
+\expandafter\def\csname E/Si/regime/hist/0.9/normal\endcsname{1{,}25}
+\expandafter\def\csname E/Si/regime/cb_quad/0.9/normal\endcsname{3{,}91}
+\expandafter\def\csname E/Si/regime/cb_svi/0.9/normal\endcsname{3{,}93}
+\expandafter\def\csname E/Si/regime/cb_ssvi/0.9/normal\endcsname{1{,}91}
+\expandafter\def\csname E/Si/regime/hist_cb/0.9/normal\endcsname{1{,}18}
+\expandafter\def\csname E/Si/regime/gp/0.9/normal\endcsname{1{,}11}
+\expandafter\def\csname E/Si/regime/gp_af/0.9/normal\endcsname{1{,}10}
+\expandafter\def\csname E/Si/regime/moex_today/0.9/normal\endcsname{0{,}90}
+\expandafter\def\csname E/Si/regime/move_median/0.9/turbulent\endcsname{0{,}85}
+\expandafter\def\csname E/Si/regime/hist/0.9/turbulent\endcsname{1{,}45}
+\expandafter\def\csname E/Si/regime/cb_quad/0.9/turbulent\endcsname{3{,}60}
+\expandafter\def\csname E/Si/regime/cb_svi/0.9/turbulent\endcsname{3{,}65}
+\expandafter\def\csname E/Si/regime/cb_ssvi/0.9/turbulent\endcsname{1{,}85}
+\expandafter\def\csname E/Si/regime/hist_cb/0.9/turbulent\endcsname{1{,}29}
+\expandafter\def\csname E/Si/regime/gp/0.9/turbulent\endcsname{1{,}22}
+\expandafter\def\csname E/Si/regime/gp_af/0.9/turbulent\endcsname{1{,}20}
+\expandafter\def\csname E/Si/regime/moex_today/0.9/turbulent\endcsname{1{,}03}
+\expandafter\def\csname E/Si/cover/50/random/0.1\endcsname{65}
+\expandafter\def\csname E/Si/cover/80/random/0.1\endcsname{87}
+\expandafter\def\csname E/Si/cover/95/random/0.1\endcsname{95}
+\expandafter\def\csname E/Si/cover/50/random/0.3\endcsname{65}
+\expandafter\def\csname E/Si/cover/80/random/0.3\endcsname{87}
+\expandafter\def\csname E/Si/cover/95/random/0.3\endcsname{95}
+\expandafter\def\csname E/Si/cover/50/random/0.5\endcsname{65}
+\expandafter\def\csname E/Si/cover/80/random/0.5\endcsname{87}
+\expandafter\def\csname E/Si/cover/95/random/0.5\endcsname{96}
+\expandafter\def\csname E/Si/cover/50/random/0.7\endcsname{66}
+\expandafter\def\csname E/Si/cover/80/random/0.7\endcsname{88}
+\expandafter\def\csname E/Si/cover/95/random/0.7\endcsname{96}
+\expandafter\def\csname E/Si/cover/50/random/0.9\endcsname{69}
+\expandafter\def\csname E/Si/cover/80/random/0.9\endcsname{90}
+\expandafter\def\csname E/Si/cover/95/random/0.9\endcsname{97}
+\expandafter\def\csname E/Si/cover/50/wings\endcsname{65}
+\expandafter\def\csname E/Si/cover/80/wings\endcsname{89}
+\expandafter\def\csname E/Si/cover/95/wings\endcsname{96}
+\expandafter\def\csname E/Si/cover/50/slice\endcsname{78}
+\expandafter\def\csname E/Si/cover/80/slice\endcsname{94}
+\expandafter\def\csname E/Si/cover/95/slice\endcsname{98}
+\expandafter\def\csname E/Si/cover/50/far\endcsname{84}
+\expandafter\def\csname E/Si/cover/80/far\endcsname{96}
+\expandafter\def\csname E/Si/cover/95/far\endcsname{99}
+\expandafter\def\csname E/Si/cover/50/topn/40\endcsname{63}
+\expandafter\def\csname E/Si/cover/80/topn/40\endcsname{85}
+\expandafter\def\csname E/Si/cover/95/topn/40\endcsname{94}
+\expandafter\def\csname E/Si/cover/50/topn/20\endcsname{68}
+\expandafter\def\csname E/Si/cover/80/topn/20\endcsname{89}
+\expandafter\def\csname E/Si/cover/95/topn/20\endcsname{96}
+\expandafter\def\csname E/Si/cover/50/topn/10\endcsname{72}
+\expandafter\def\csname E/Si/cover/80/topn/10\endcsname{91}
+\expandafter\def\csname E/Si/cover/95/topn/10\endcsname{97}
+\expandafter\def\csname E/Si/cover/50/topn/5\endcsname{75}
+\expandafter\def\csname E/Si/cover/80/topn/5\endcsname{93}
+\expandafter\def\csname E/Si/cover/95/topn/5\endcsname{98}
+\expandafter\def\csname E/Si/lag/hist/0.5/1\endcsname{1{,}30}
+\expandafter\def\csname E/Si/lag/hist_cb/0.5/1\endcsname{1{,}09}
+\expandafter\def\csname E/Si/lag/gp/0.5/1\endcsname{0{,}90}
+\expandafter\def\csname E/Si/lag/gp_cb/0.5/1\endcsname{0{,}84}
+\expandafter\def\csname E/Si/lag/cb_ssvi/0.5/1\endcsname{1{,}22}
+\expandafter\def\csname E/Si/lag/hist/0.5/2\endcsname{1{,}69}
+\expandafter\def\csname E/Si/lag/hist_cb/0.5/2\endcsname{1{,}25}
+\expandafter\def\csname E/Si/lag/gp/0.5/2\endcsname{0{,}95}
+\expandafter\def\csname E/Si/lag/gp_cb/0.5/2\endcsname{0{,}84}
+\expandafter\def\csname E/Si/lag/cb_ssvi/0.5/2\endcsname{1{,}22}
+\expandafter\def\csname E/Si/lag/hist/0.5/3\endcsname{2{,}08}
+\expandafter\def\csname E/Si/lag/hist_cb/0.5/3\endcsname{1{,}46}
+\expandafter\def\csname E/Si/lag/gp/0.5/3\endcsname{1{,}01}
+\expandafter\def\csname E/Si/lag/gp_cb/0.5/3\endcsname{0{,}84}
+\expandafter\def\csname E/Si/lag/cb_ssvi/0.5/3\endcsname{1{,}22}
+\expandafter\def\csname E/Si/lag/hist/0.5/5\endcsname{2{,}50}
+\expandafter\def\csname E/Si/lag/hist_cb/0.5/5\endcsname{1{,}68}
+\expandafter\def\csname E/Si/lag/gp/0.5/5\endcsname{1{,}01}
+\expandafter\def\csname E/Si/lag/gp_cb/0.5/5\endcsname{0{,}84}
+\expandafter\def\csname E/Si/lag/cb_ssvi/0.5/5\endcsname{1{,}22}
+\expandafter\def\csname E/Si/lag/hist/0.5/10\endcsname{2{,}85}
+\expandafter\def\csname E/Si/lag/hist_cb/0.5/10\endcsname{1{,}72}
+\expandafter\def\csname E/Si/lag/gp/0.5/10\endcsname{0{,}99}
+\expandafter\def\csname E/Si/lag/gp_cb/0.5/10\endcsname{0{,}84}
+\expandafter\def\csname E/Si/lag/cb_ssvi/0.5/10\endcsname{1{,}22}
+\expandafter\def\csname E/Si/lag/hist/0.5/20\endcsname{3{,}16}
+\expandafter\def\csname E/Si/lag/hist_cb/0.5/20\endcsname{1{,}96}
+\expandafter\def\csname E/Si/lag/gp/0.5/20\endcsname{1{,}09}
+\expandafter\def\csname E/Si/lag/gp_cb/0.5/20\endcsname{0{,}84}
+\expandafter\def\csname E/Si/lag/cb_ssvi/0.5/20\endcsname{1{,}22}
+\expandafter\def\csname E/Si/lag/hist/0.9/1\endcsname{1{,}29}
+\expandafter\def\csname E/Si/lag/hist_cb/0.9/1\endcsname{1{,}22}
+\expandafter\def\csname E/Si/lag/gp/0.9/1\endcsname{1{,}14}
+\expandafter\def\csname E/Si/lag/gp_cb/0.9/1\endcsname{1{,}27}
+\expandafter\def\csname E/Si/lag/cb_ssvi/0.9/1\endcsname{1{,}94}
+\expandafter\def\csname E/Si/lag/hist/0.9/2\endcsname{1{,}70}
+\expandafter\def\csname E/Si/lag/hist_cb/0.9/2\endcsname{1{,}47}
+\expandafter\def\csname E/Si/lag/gp/0.9/2\endcsname{1{,}37}
+\expandafter\def\csname E/Si/lag/gp_cb/0.9/2\endcsname{1{,}27}
+\expandafter\def\csname E/Si/lag/cb_ssvi/0.9/2\endcsname{1{,}94}
+\expandafter\def\csname E/Si/lag/hist/0.9/3\endcsname{2{,}06}
+\expandafter\def\csname E/Si/lag/hist_cb/0.9/3\endcsname{1{,}70}
+\expandafter\def\csname E/Si/lag/gp/0.9/3\endcsname{1{,}52}
+\expandafter\def\csname E/Si/lag/gp_cb/0.9/3\endcsname{1{,}27}
+\expandafter\def\csname E/Si/lag/cb_ssvi/0.9/3\endcsname{1{,}94}
+\expandafter\def\csname E/Si/lag/hist/0.9/5\endcsname{2{,}49}
+\expandafter\def\csname E/Si/lag/hist_cb/0.9/5\endcsname{2{,}00}
+\expandafter\def\csname E/Si/lag/gp/0.9/5\endcsname{1{,}69}
+\expandafter\def\csname E/Si/lag/gp_cb/0.9/5\endcsname{1{,}27}
+\expandafter\def\csname E/Si/lag/cb_ssvi/0.9/5\endcsname{1{,}94}
+\expandafter\def\csname E/Si/lag/hist/0.9/10\endcsname{2{,}85}
+\expandafter\def\csname E/Si/lag/hist_cb/0.9/10\endcsname{2{,}14}
+\expandafter\def\csname E/Si/lag/gp/0.9/10\endcsname{1{,}79}
+\expandafter\def\csname E/Si/lag/gp_cb/0.9/10\endcsname{1{,}27}
+\expandafter\def\csname E/Si/lag/cb_ssvi/0.9/10\endcsname{1{,}94}
+\expandafter\def\csname E/Si/lag/hist/0.9/20\endcsname{3{,}16}
+\expandafter\def\csname E/Si/lag/hist_cb/0.9/20\endcsname{2{,}40}
+\expandafter\def\csname E/Si/lag/gp/0.9/20\endcsname{1{,}97}
+\expandafter\def\csname E/Si/lag/gp_cb/0.9/20\endcsname{1{,}27}
+\expandafter\def\csname E/Si/lag/cb_ssvi/0.9/20\endcsname{1{,}94}
+\expandafter\def\csname E/Si/arb/butterfly_days/full/cb_quad\endcsname{9}
+\expandafter\def\csname E/Si/arb/calendar_days/full/cb_quad\endcsname{50}
+\expandafter\def\csname E/Si/arb/any_days/full/cb_quad\endcsname{52}
+\expandafter\def\csname E/Si/arb/repair_mean/full/cb_quad\endcsname{0{,}115}
+\expandafter\def\csname E/Si/arb/butterfly_days/full/cb_ssvi\endcsname{0}
+\expandafter\def\csname E/Si/arb/calendar_days/full/cb_ssvi\endcsname{0}
+\expandafter\def\csname E/Si/arb/any_days/full/cb_ssvi\endcsname{0}
+\expandafter\def\csname E/Si/arb/repair_mean/full/cb_ssvi\endcsname{0{,}000}
+\expandafter\def\csname E/Si/arb/butterfly_days/full/cb_svi\endcsname{23}
+\expandafter\def\csname E/Si/arb/calendar_days/full/cb_svi\endcsname{54}
+\expandafter\def\csname E/Si/arb/any_days/full/cb_svi\endcsname{62}
+\expandafter\def\csname E/Si/arb/repair_mean/full/cb_svi\endcsname{0{,}173}
+\expandafter\def\csname E/Si/arb/butterfly_days/full/gp\endcsname{41}
+\expandafter\def\csname E/Si/arb/calendar_days/full/gp\endcsname{41}
+\expandafter\def\csname E/Si/arb/any_days/full/gp\endcsname{63}
+\expandafter\def\csname E/Si/arb/repair_mean/full/gp\endcsname{0{,}087}
+\expandafter\def\csname E/Si/arb/butterfly_days/full/hist\endcsname{39}
+\expandafter\def\csname E/Si/arb/calendar_days/full/hist\endcsname{46}
+\expandafter\def\csname E/Si/arb/any_days/full/hist\endcsname{66}
+\expandafter\def\csname E/Si/arb/repair_mean/full/hist\endcsname{0{,}114}
+\expandafter\def\csname E/Si/arb/butterfly_days/full/hist_cb\endcsname{41}
+\expandafter\def\csname E/Si/arb/calendar_days/full/hist_cb\endcsname{44}
+\expandafter\def\csname E/Si/arb/any_days/full/hist_cb\endcsname{64}
+\expandafter\def\csname E/Si/arb/repair_mean/full/hist_cb\endcsname{0{,}084}
+\expandafter\def\csname E/Si/arb/butterfly_days/full/moex_today\endcsname{43}
+\expandafter\def\csname E/Si/arb/calendar_days/full/moex_today\endcsname{47}
+\expandafter\def\csname E/Si/arb/any_days/full/moex_today\endcsname{66}
+\expandafter\def\csname E/Si/arb/repair_mean/full/moex_today\endcsname{0{,}092}
+\expandafter\def\csname E/Si/arb/butterfly_days/sparse/cb_quad\endcsname{7}
+\expandafter\def\csname E/Si/arb/calendar_days/sparse/cb_quad\endcsname{45}
+\expandafter\def\csname E/Si/arb/any_days/sparse/cb_quad\endcsname{46}
+\expandafter\def\csname E/Si/arb/repair_mean/sparse/cb_quad\endcsname{0{,}089}
+\expandafter\def\csname E/Si/arb/rmse_before/sparse/cb_quad\endcsname{1{,}88}
+\expandafter\def\csname E/Si/arb/rmse_after/sparse/cb_quad\endcsname{1{,}81}
+\expandafter\def\csname E/Si/arb/zone_share/sparse/cb_quad\endcsname{80}
+\expandafter\def\csname E/Si/arb/butterfly_days/sparse/cb_ssvi\endcsname{0}
+\expandafter\def\csname E/Si/arb/calendar_days/sparse/cb_ssvi\endcsname{0}
+\expandafter\def\csname E/Si/arb/any_days/sparse/cb_ssvi\endcsname{0}
+\expandafter\def\csname E/Si/arb/repair_mean/sparse/cb_ssvi\endcsname{0{,}000}
+\expandafter\def\csname E/Si/arb/rmse_before/sparse/cb_ssvi\endcsname{1{,}32}
+\expandafter\def\csname E/Si/arb/rmse_after/sparse/cb_ssvi\endcsname{1{,}32}
+\expandafter\def\csname E/Si/arb/zone_share/sparse/cb_ssvi\endcsname{80}
+\expandafter\def\csname E/Si/arb/butterfly_days/sparse/cb_svi\endcsname{16}
+\expandafter\def\csname E/Si/arb/calendar_days/sparse/cb_svi\endcsname{50}
+\expandafter\def\csname E/Si/arb/any_days/sparse/cb_svi\endcsname{54}
+\expandafter\def\csname E/Si/arb/repair_mean/sparse/cb_svi\endcsname{0{,}098}
+\expandafter\def\csname E/Si/arb/rmse_before/sparse/cb_svi\endcsname{2{,}13}
+\expandafter\def\csname E/Si/arb/rmse_after/sparse/cb_svi\endcsname{2{,}04}
+\expandafter\def\csname E/Si/arb/zone_share/sparse/cb_svi\endcsname{80}
+\expandafter\def\csname E/Si/arb/butterfly_days/sparse/gp\endcsname{40}
+\expandafter\def\csname E/Si/arb/calendar_days/sparse/gp\endcsname{41}
+\expandafter\def\csname E/Si/arb/any_days/sparse/gp\endcsname{61}
+\expandafter\def\csname E/Si/arb/repair_mean/sparse/gp\endcsname{0{,}110}
+\expandafter\def\csname E/Si/arb/rmse_before/sparse/gp\endcsname{0{,}99}
+\expandafter\def\csname E/Si/arb/rmse_after/sparse/gp\endcsname{0{,}98}
+\expandafter\def\csname E/Si/arb/zone_share/sparse/gp\endcsname{80}
+\expandafter\def\csname E/Si/arb/butterfly_days/sparse/hist\endcsname{39}
+\expandafter\def\csname E/Si/arb/calendar_days/sparse/hist\endcsname{46}
+\expandafter\def\csname E/Si/arb/any_days/sparse/hist\endcsname{66}
+\expandafter\def\csname E/Si/arb/repair_mean/sparse/hist\endcsname{0{,}114}
+\expandafter\def\csname E/Si/arb/rmse_before/sparse/hist\endcsname{1{,}29}
+\expandafter\def\csname E/Si/arb/rmse_after/sparse/hist\endcsname{1{,}36}
+\expandafter\def\csname E/Si/arb/zone_share/sparse/hist\endcsname{80}
+\expandafter\def\csname E/Si/arb/butterfly_days/sparse/hist_cb\endcsname{40}
+\expandafter\def\csname E/Si/arb/calendar_days/sparse/hist_cb\endcsname{41}
+\expandafter\def\csname E/Si/arb/any_days/sparse/hist_cb\endcsname{62}
+\expandafter\def\csname E/Si/arb/repair_mean/sparse/hist_cb\endcsname{0{,}103}
+\expandafter\def\csname E/Si/arb/rmse_before/sparse/hist_cb\endcsname{1{,}13}
+\expandafter\def\csname E/Si/arb/rmse_after/sparse/hist_cb\endcsname{1{,}19}
+\expandafter\def\csname E/Si/arb/zone_share/sparse/hist_cb\endcsname{80}
+\expandafter\def\csname E/Si/arb/butterfly_days/sparse/moex_today\endcsname{43}
+\expandafter\def\csname E/Si/arb/calendar_days/sparse/moex_today\endcsname{47}
+\expandafter\def\csname E/Si/arb/any_days/sparse/moex_today\endcsname{66}
+\expandafter\def\csname E/Si/arb/repair_mean/sparse/moex_today\endcsname{0{,}092}
+\expandafter\def\csname E/Si/arb/rmse_before/sparse/moex_today\endcsname{0{,}92}
+\expandafter\def\csname E/Si/arb/rmse_after/sparse/moex_today\endcsname{1{,}00}
+\expandafter\def\csname E/Si/arb/zone_share/sparse/moex_today\endcsname{80}
+\expandafter\def\csname E/Si/param/gp/g0\endcsname{0{,}70}
+\expandafter\def\csname E/Si/param/gp/g1\endcsname{0{,}95}
+\expandafter\def\csname E/Si/param/gp/g2\endcsname{2{,}33}
+\expandafter\def\csname E/Si/param/gp/t0\endcsname{0{,}88}
+\expandafter\def\csname E/Si/param/gp/t1\endcsname{1{,}64}
+\expandafter\def\csname E/Si/param/gp/t2\endcsname{3{,}62}
+\expandafter\def\csname E/Si/param/gp/ell_T\endcsname{0{,}07}
+\expandafter\def\csname E/Si/param/gp/ts\endcsname{0{,}63}
+\expandafter\def\csname E/Si/param/gp/tloc\endcsname{0{,}98}
+\expandafter\def\csname E/Si/param/gp/ell_x\endcsname{0{,}19}
+\expandafter\def\csname E/Si/param/gp/a\endcsname{0{,}44}
+\expandafter\def\csname E/Si/param/gp/b\endcsname{0{,}89}
+\expandafter\def\csname E/Si/param/gp_cb/g0\endcsname{18{,}90}
+\expandafter\def\csname E/Si/param/gp_cb/g1\endcsname{0{,}45}
+\expandafter\def\csname E/Si/param/gp_cb/g2\endcsname{36{,}99}
+\expandafter\def\csname E/Si/param/gp_cb/t0\endcsname{4{,}87}
+\expandafter\def\csname E/Si/param/gp_cb/t1\endcsname{1{,}41}
+\expandafter\def\csname E/Si/param/gp_cb/t2\endcsname{2{,}78}
+\expandafter\def\csname E/Si/param/gp_cb/ell_T\endcsname{18{,}74}
+\expandafter\def\csname E/Si/param/gp_cb/ts\endcsname{0{,}13}
+\expandafter\def\csname E/Si/param/gp_cb/tloc\endcsname{1{,}32}
+\expandafter\def\csname E/Si/param/gp_cb/ell_x\endcsname{0{,}22}
+\expandafter\def\csname E/Si/param/gp_cb/a\endcsname{0{,}45}
+\expandafter\def\csname E/Si/param/gp_cb/b\endcsname{0{,}86}
+\expandafter\def\csname E/RTS/info/train_days\endcsname{254}
+\expandafter\def\csname E/RTS/info/train_points\endcsname{8\,634}
+\expandafter\def\csname E/RTS/info/train_period\endcsname{2024-10-02\,--\,2025-09-30}
+\expandafter\def\csname E/RTS/info/test_days\endcsname{254}
+\expandafter\def\csname E/RTS/info/test_points\endcsname{8\,655}
+\expandafter\def\csname E/RTS/info/test_period\endcsname{2025-10-01\,--\,2026-09-30}
+\expandafter\def\csname E/RTS/info/points_per_day\endcsname{33}
+\expandafter\def\csname E/RTS/info/series_per_day\endcsname{4}
+\expandafter\def\csname E/RTS/info/gross_removed\endcsname{578}
+\expandafter\def\csname E/RTS/gap/total\endcsname{1\,064}
+\expandafter\def\csname E/RTS/gap/worst\endcsname{29}
+\expandafter\def\csname E/RTS/gap/hist_rmse\endcsname{7{,}8}
+\expandafter\def\csname E/RTS/gap/hist_rmse_rest\endcsname{1{,}9}
+\expandafter\def\csname E/RTS/rmse/hist/random/0.1\endcsname{2{,}02}
+\expandafter\def\csname E/RTS/mae/hist/random/0.1\endcsname{1{,}33}
+\expandafter\def\csname E/RTS/price/hist/random/0.1\endcsname{6{,}7}
+\expandafter\def\csname E/RTS/rmse/cb_quad/random/0.1\endcsname{2{,}48}
+\expandafter\def\csname E/RTS/mae/cb_quad/random/0.1\endcsname{1{,}00}
+\expandafter\def\csname E/RTS/price/cb_quad/random/0.1\endcsname{3{,}8}
+\expandafter\def\csname E/RTS/rmse/cb_svi/random/0.1\endcsname{2{,}56}
+\expandafter\def\csname E/RTS/mae/cb_svi/random/0.1\endcsname{1{,}08}
+\expandafter\def\csname E/RTS/price/cb_svi/random/0.1\endcsname{4{,}2}
+\expandafter\def\csname E/RTS/rmse/cb_ssvi/random/0.1\endcsname{1{,}35}
+\expandafter\def\csname E/RTS/mae/cb_ssvi/random/0.1\endcsname{0{,}96}
+\expandafter\def\csname E/RTS/price/cb_ssvi/random/0.1\endcsname{4{,}9}
+\expandafter\def\csname E/RTS/rmse/hist_cb/random/0.1\endcsname{1{,}44}
+\expandafter\def\csname E/RTS/mae/hist_cb/random/0.1\endcsname{0{,}92}
+\expandafter\def\csname E/RTS/price/hist_cb/random/0.1\endcsname{4{,}4}
+\expandafter\def\csname E/RTS/rmse/gp/random/0.1\endcsname{1{,}31}
+\expandafter\def\csname E/RTS/mae/gp/random/0.1\endcsname{0{,}79}
+\expandafter\def\csname E/RTS/price/gp/random/0.1\endcsname{3{,}5}
+\expandafter\def\csname E/RTS/rmse/gp_af/random/0.1\endcsname{1{,}28}
+\expandafter\def\csname E/RTS/mae/gp_af/random/0.1\endcsname{0{,}79}
+\expandafter\def\csname E/RTS/price/gp_af/random/0.1\endcsname{3{,}5}
+\expandafter\def\csname E/RTS/rmse/moex_today/random/0.1\endcsname{1{,}29}
+\expandafter\def\csname E/RTS/mae/moex_today/random/0.1\endcsname{0{,}93}
+\expandafter\def\csname E/RTS/price/moex_today/random/0.1\endcsname{4{,}9}
+\expandafter\def\csname E/RTS/rmse/gp_cb/random/0.1\endcsname{1{,}15}
+\expandafter\def\csname E/RTS/mae/gp_cb/random/0.1\endcsname{0{,}75}
+\expandafter\def\csname E/RTS/price/gp_cb/random/0.1\endcsname{3{,}5}
+\expandafter\def\csname E/RTS/rmse/gp_indep/random/0.1\endcsname{1{,}32}
+\expandafter\def\csname E/RTS/mae/gp_indep/random/0.1\endcsname{0{,}79}
+\expandafter\def\csname E/RTS/price/gp_indep/random/0.1\endcsname{3{,}5}
+\expandafter\def\csname E/RTS/rmse/gp_homo/random/0.1\endcsname{1{,}32}
+\expandafter\def\csname E/RTS/mae/gp_homo/random/0.1\endcsname{0{,}79}
+\expandafter\def\csname E/RTS/price/gp_homo/random/0.1\endcsname{3{,}5}
+\expandafter\def\csname E/RTS/rmse/gp_param/random/0.1\endcsname{1{,}33}
+\expandafter\def\csname E/RTS/mae/gp_param/random/0.1\endcsname{0{,}81}
+\expandafter\def\csname E/RTS/price/gp_param/random/0.1\endcsname{3{,}7}
+\expandafter\def\csname E/RTS/rmse/best_cb/random/0.1\endcsname{1{,}35}
+\expandafter\def\csname E/RTS/mae/best_cb/random/0.1\endcsname{0{,}96}
+\expandafter\def\csname E/RTS/price/best_cb/random/0.1\endcsname{4{,}9}
+\expandafter\def\csname E/RTS/visible/random/0.1\endcsname{30}
+\expandafter\def\csname E/RTS/bestcb/random/0.1\endcsname{SSVI}
+\expandafter\def\csname E/RTS/rmse/hist/random/0.3\endcsname{2{,}02}
+\expandafter\def\csname E/RTS/mae/hist/random/0.3\endcsname{1{,}31}
+\expandafter\def\csname E/RTS/price/hist/random/0.3\endcsname{6{,}6}
+\expandafter\def\csname E/RTS/rmse/cb_quad/random/0.3\endcsname{2{,}45}
+\expandafter\def\csname E/RTS/mae/cb_quad/random/0.3\endcsname{1{,}10}
+\expandafter\def\csname E/RTS/price/cb_quad/random/0.3\endcsname{4{,}2}
+\expandafter\def\csname E/RTS/rmse/cb_svi/random/0.3\endcsname{2{,}53}
+\expandafter\def\csname E/RTS/mae/cb_svi/random/0.3\endcsname{1{,}19}
+\expandafter\def\csname E/RTS/price/cb_svi/random/0.3\endcsname{4{,}6}
+\expandafter\def\csname E/RTS/rmse/cb_ssvi/random/0.3\endcsname{1{,}40}
+\expandafter\def\csname E/RTS/mae/cb_ssvi/random/0.3\endcsname{0{,}99}
+\expandafter\def\csname E/RTS/price/cb_ssvi/random/0.3\endcsname{5{,}2}
+\expandafter\def\csname E/RTS/rmse/hist_cb/random/0.3\endcsname{1{,}47}
+\expandafter\def\csname E/RTS/mae/hist_cb/random/0.3\endcsname{0{,}92}
+\expandafter\def\csname E/RTS/price/hist_cb/random/0.3\endcsname{4{,}5}
+\expandafter\def\csname E/RTS/rmse/gp/random/0.3\endcsname{1{,}35}
+\expandafter\def\csname E/RTS/mae/gp/random/0.3\endcsname{0{,}81}
+\expandafter\def\csname E/RTS/price/gp/random/0.3\endcsname{3{,}8}
+\expandafter\def\csname E/RTS/rmse/gp_af/random/0.3\endcsname{1{,}33}
+\expandafter\def\csname E/RTS/mae/gp_af/random/0.3\endcsname{0{,}80}
+\expandafter\def\csname E/RTS/price/gp_af/random/0.3\endcsname{3{,}7}
+\expandafter\def\csname E/RTS/rmse/moex_today/random/0.3\endcsname{1{,}30}
+\expandafter\def\csname E/RTS/mae/moex_today/random/0.3\endcsname{0{,}92}
+\expandafter\def\csname E/RTS/price/moex_today/random/0.3\endcsname{5{,}0}
+\expandafter\def\csname E/RTS/rmse/gp_cb/random/0.3\endcsname{1{,}17}
+\expandafter\def\csname E/RTS/mae/gp_cb/random/0.3\endcsname{0{,}77}
+\expandafter\def\csname E/RTS/price/gp_cb/random/0.3\endcsname{3{,}7}
+\expandafter\def\csname E/RTS/rmse/gp_indep/random/0.3\endcsname{1{,}35}
+\expandafter\def\csname E/RTS/mae/gp_indep/random/0.3\endcsname{0{,}81}
+\expandafter\def\csname E/RTS/price/gp_indep/random/0.3\endcsname{3{,}7}
+\expandafter\def\csname E/RTS/rmse/gp_homo/random/0.3\endcsname{1{,}35}
+\expandafter\def\csname E/RTS/mae/gp_homo/random/0.3\endcsname{0{,}81}
+\expandafter\def\csname E/RTS/price/gp_homo/random/0.3\endcsname{3{,}8}
+\expandafter\def\csname E/RTS/rmse/gp_param/random/0.3\endcsname{1{,}37}
+\expandafter\def\csname E/RTS/mae/gp_param/random/0.3\endcsname{0{,}83}
+\expandafter\def\csname E/RTS/price/gp_param/random/0.3\endcsname{3{,}9}
+\expandafter\def\csname E/RTS/rmse/best_cb/random/0.3\endcsname{1{,}40}
+\expandafter\def\csname E/RTS/mae/best_cb/random/0.3\endcsname{0{,}99}
+\expandafter\def\csname E/RTS/price/best_cb/random/0.3\endcsname{5{,}2}
+\expandafter\def\csname E/RTS/visible/random/0.3\endcsname{23}
+\expandafter\def\csname E/RTS/bestcb/random/0.3\endcsname{SSVI}
+\expandafter\def\csname E/RTS/rmse/hist/random/0.5\endcsname{2{,}04}
+\expandafter\def\csname E/RTS/mae/hist/random/0.5\endcsname{1{,}32}
+\expandafter\def\csname E/RTS/price/hist/random/0.5\endcsname{6{,}6}
+\expandafter\def\csname E/RTS/rmse/cb_quad/random/0.5\endcsname{2{,}51}
+\expandafter\def\csname E/RTS/mae/cb_quad/random/0.5\endcsname{1{,}35}
+\expandafter\def\csname E/RTS/price/cb_quad/random/0.5\endcsname{5{,}0}
+\expandafter\def\csname E/RTS/rmse/cb_svi/random/0.5\endcsname{2{,}60}
+\expandafter\def\csname E/RTS/mae/cb_svi/random/0.5\endcsname{1{,}45}
+\expandafter\def\csname E/RTS/price/cb_svi/random/0.5\endcsname{5{,}6}
+\expandafter\def\csname E/RTS/rmse/cb_ssvi/random/0.5\endcsname{1{,}52}
+\expandafter\def\csname E/RTS/mae/cb_ssvi/random/0.5\endcsname{1{,}07}
+\expandafter\def\csname E/RTS/price/cb_ssvi/random/0.5\endcsname{5{,}6}
+\expandafter\def\csname E/RTS/rmse/hist_cb/random/0.5\endcsname{1{,}54}
+\expandafter\def\csname E/RTS/mae/hist_cb/random/0.5\endcsname{0{,}98}
+\expandafter\def\csname E/RTS/price/hist_cb/random/0.5\endcsname{4{,}8}
+\expandafter\def\csname E/RTS/rmse/gp/random/0.5\endcsname{1{,}44}
+\expandafter\def\csname E/RTS/mae/gp/random/0.5\endcsname{0{,}88}
+\expandafter\def\csname E/RTS/price/gp/random/0.5\endcsname{4{,}1}
+\expandafter\def\csname E/RTS/rmse/gp_af/random/0.5\endcsname{1{,}43}
+\expandafter\def\csname E/RTS/mae/gp_af/random/0.5\endcsname{0{,}88}
+\expandafter\def\csname E/RTS/price/gp_af/random/0.5\endcsname{4{,}1}
+\expandafter\def\csname E/RTS/rmse/moex_today/random/0.5\endcsname{1{,}30}
+\expandafter\def\csname E/RTS/mae/moex_today/random/0.5\endcsname{0{,}92}
+\expandafter\def\csname E/RTS/price/moex_today/random/0.5\endcsname{4{,}9}
+\expandafter\def\csname E/RTS/rmse/gp_cb/random/0.5\endcsname{1{,}30}
+\expandafter\def\csname E/RTS/mae/gp_cb/random/0.5\endcsname{0{,}87}
+\expandafter\def\csname E/RTS/price/gp_cb/random/0.5\endcsname{4{,}3}
+\expandafter\def\csname E/RTS/rmse/gp_indep/random/0.5\endcsname{1{,}46}
+\expandafter\def\csname E/RTS/mae/gp_indep/random/0.5\endcsname{0{,}88}
+\expandafter\def\csname E/RTS/price/gp_indep/random/0.5\endcsname{4{,}1}
+\expandafter\def\csname E/RTS/rmse/gp_homo/random/0.5\endcsname{1{,}45}
+\expandafter\def\csname E/RTS/mae/gp_homo/random/0.5\endcsname{0{,}88}
+\expandafter\def\csname E/RTS/price/gp_homo/random/0.5\endcsname{4{,}1}
+\expandafter\def\csname E/RTS/rmse/gp_param/random/0.5\endcsname{1{,}46}
+\expandafter\def\csname E/RTS/mae/gp_param/random/0.5\endcsname{0{,}90}
+\expandafter\def\csname E/RTS/price/gp_param/random/0.5\endcsname{4{,}2}
+\expandafter\def\csname E/RTS/rmse/best_cb/random/0.5\endcsname{1{,}52}
+\expandafter\def\csname E/RTS/mae/best_cb/random/0.5\endcsname{1{,}07}
+\expandafter\def\csname E/RTS/price/best_cb/random/0.5\endcsname{5{,}6}
+\expandafter\def\csname E/RTS/visible/random/0.5\endcsname{17}
+\expandafter\def\csname E/RTS/bestcb/random/0.5\endcsname{SSVI}
+\expandafter\def\csname E/RTS/rmse/hist/random/0.7\endcsname{2{,}04}
+\expandafter\def\csname E/RTS/mae/hist/random/0.7\endcsname{1{,}31}
+\expandafter\def\csname E/RTS/price/hist/random/0.7\endcsname{6{,}6}
+\expandafter\def\csname E/RTS/rmse/cb_quad/random/0.7\endcsname{3{,}61}
+\expandafter\def\csname E/RTS/mae/cb_quad/random/0.7\endcsname{2{,}03}
+\expandafter\def\csname E/RTS/price/cb_quad/random/0.7\endcsname{7{,}6}
+\expandafter\def\csname E/RTS/rmse/cb_svi/random/0.7\endcsname{3{,}66}
+\expandafter\def\csname E/RTS/mae/cb_svi/random/0.7\endcsname{2{,}08}
+\expandafter\def\csname E/RTS/price/cb_svi/random/0.7\endcsname{8{,}1}
+\expandafter\def\csname E/RTS/rmse/cb_ssvi/random/0.7\endcsname{1{,}84}
+\expandafter\def\csname E/RTS/mae/cb_ssvi/random/0.7\endcsname{1{,}28}
+\expandafter\def\csname E/RTS/price/cb_ssvi/random/0.7\endcsname{6{,}6}
+\expandafter\def\csname E/RTS/rmse/hist_cb/random/0.7\endcsname{1{,}67}
+\expandafter\def\csname E/RTS/mae/hist_cb/random/0.7\endcsname{1{,}05}
+\expandafter\def\csname E/RTS/price/hist_cb/random/0.7\endcsname{5{,}2}
+\expandafter\def\csname E/RTS/rmse/gp/random/0.7\endcsname{1{,}59}
+\expandafter\def\csname E/RTS/mae/gp/random/0.7\endcsname{0{,}97}
+\expandafter\def\csname E/RTS/price/gp/random/0.7\endcsname{4{,}6}
+\expandafter\def\csname E/RTS/rmse/gp_af/random/0.7\endcsname{1{,}57}
+\expandafter\def\csname E/RTS/mae/gp_af/random/0.7\endcsname{0{,}96}
+\expandafter\def\csname E/RTS/price/gp_af/random/0.7\endcsname{4{,}6}
+\expandafter\def\csname E/RTS/rmse/moex_today/random/0.7\endcsname{1{,}30}
+\expandafter\def\csname E/RTS/mae/moex_today/random/0.7\endcsname{0{,}93}
+\expandafter\def\csname E/RTS/price/moex_today/random/0.7\endcsname{5{,}0}
+\expandafter\def\csname E/RTS/rmse/gp_cb/random/0.7\endcsname{1{,}59}
+\expandafter\def\csname E/RTS/mae/gp_cb/random/0.7\endcsname{1{,}07}
+\expandafter\def\csname E/RTS/price/gp_cb/random/0.7\endcsname{5{,}3}
+\expandafter\def\csname E/RTS/rmse/gp_indep/random/0.7\endcsname{1{,}62}
+\expandafter\def\csname E/RTS/mae/gp_indep/random/0.7\endcsname{0{,}98}
+\expandafter\def\csname E/RTS/price/gp_indep/random/0.7\endcsname{4{,}6}
+\expandafter\def\csname E/RTS/rmse/gp_homo/random/0.7\endcsname{1{,}60}
+\expandafter\def\csname E/RTS/mae/gp_homo/random/0.7\endcsname{0{,}97}
+\expandafter\def\csname E/RTS/price/gp_homo/random/0.7\endcsname{4{,}6}
+\expandafter\def\csname E/RTS/rmse/gp_param/random/0.7\endcsname{1{,}61}
+\expandafter\def\csname E/RTS/mae/gp_param/random/0.7\endcsname{0{,}98}
+\expandafter\def\csname E/RTS/price/gp_param/random/0.7\endcsname{4{,}6}
+\expandafter\def\csname E/RTS/rmse/best_cb/random/0.7\endcsname{1{,}84}
+\expandafter\def\csname E/RTS/mae/best_cb/random/0.7\endcsname{1{,}28}
+\expandafter\def\csname E/RTS/price/best_cb/random/0.7\endcsname{6{,}6}
+\expandafter\def\csname E/RTS/visible/random/0.7\endcsname{10}
+\expandafter\def\csname E/RTS/bestcb/random/0.7\endcsname{SSVI}
+\expandafter\def\csname E/RTS/rmse/hist/random/0.9\endcsname{2{,}03}
+\expandafter\def\csname E/RTS/mae/hist/random/0.9\endcsname{1{,}31}
+\expandafter\def\csname E/RTS/price/hist/random/0.9\endcsname{6{,}6}
+\expandafter\def\csname E/RTS/rmse/cb_quad/random/0.9\endcsname{4{,}61}
+\expandafter\def\csname E/RTS/mae/cb_quad/random/0.9\endcsname{3{,}17}
+\expandafter\def\csname E/RTS/price/cb_quad/random/0.9\endcsname{16{,}5}
+\expandafter\def\csname E/RTS/rmse/cb_svi/random/0.9\endcsname{4{,}61}
+\expandafter\def\csname E/RTS/mae/cb_svi/random/0.9\endcsname{3{,}17}
+\expandafter\def\csname E/RTS/price/cb_svi/random/0.9\endcsname{16{,}5}
+\expandafter\def\csname E/RTS/rmse/cb_ssvi/random/0.9\endcsname{4{,}01}
+\expandafter\def\csname E/RTS/mae/cb_ssvi/random/0.9\endcsname{2{,}88}
+\expandafter\def\csname E/RTS/price/cb_ssvi/random/0.9\endcsname{15{,}3}
+\expandafter\def\csname E/RTS/rmse/hist_cb/random/0.9\endcsname{1{,}92}
+\expandafter\def\csname E/RTS/mae/hist_cb/random/0.9\endcsname{1{,}23}
+\expandafter\def\csname E/RTS/price/hist_cb/random/0.9\endcsname{6{,}1}
+\expandafter\def\csname E/RTS/rmse/gp/random/0.9\endcsname{1{,}82}
+\expandafter\def\csname E/RTS/mae/gp/random/0.9\endcsname{1{,}15}
+\expandafter\def\csname E/RTS/price/gp/random/0.9\endcsname{5{,}6}
+\expandafter\def\csname E/RTS/rmse/gp_af/random/0.9\endcsname{1{,}81}
+\expandafter\def\csname E/RTS/mae/gp_af/random/0.9\endcsname{1{,}15}
+\expandafter\def\csname E/RTS/price/gp_af/random/0.9\endcsname{5{,}6}
+\expandafter\def\csname E/RTS/rmse/moex_today/random/0.9\endcsname{1{,}30}
+\expandafter\def\csname E/RTS/mae/moex_today/random/0.9\endcsname{0{,}93}
+\expandafter\def\csname E/RTS/price/moex_today/random/0.9\endcsname{5{,}0}
+\expandafter\def\csname E/RTS/rmse/gp_cb/random/0.9\endcsname{2{,}88}
+\expandafter\def\csname E/RTS/mae/gp_cb/random/0.9\endcsname{2{,}10}
+\expandafter\def\csname E/RTS/price/gp_cb/random/0.9\endcsname{11{,}5}
+\expandafter\def\csname E/RTS/rmse/gp_indep/random/0.9\endcsname{1{,}86}
+\expandafter\def\csname E/RTS/mae/gp_indep/random/0.9\endcsname{1{,}17}
+\expandafter\def\csname E/RTS/price/gp_indep/random/0.9\endcsname{5{,}7}
+\expandafter\def\csname E/RTS/rmse/gp_homo/random/0.9\endcsname{1{,}83}
+\expandafter\def\csname E/RTS/mae/gp_homo/random/0.9\endcsname{1{,}16}
+\expandafter\def\csname E/RTS/price/gp_homo/random/0.9\endcsname{5{,}6}
+\expandafter\def\csname E/RTS/rmse/gp_param/random/0.9\endcsname{1{,}83}
+\expandafter\def\csname E/RTS/mae/gp_param/random/0.9\endcsname{1{,}16}
+\expandafter\def\csname E/RTS/price/gp_param/random/0.9\endcsname{5{,}6}
+\expandafter\def\csname E/RTS/rmse/best_cb/random/0.9\endcsname{4{,}01}
+\expandafter\def\csname E/RTS/mae/best_cb/random/0.9\endcsname{2{,}88}
+\expandafter\def\csname E/RTS/price/best_cb/random/0.9\endcsname{15{,}3}
+\expandafter\def\csname E/RTS/visible/random/0.9\endcsname{3}
+\expandafter\def\csname E/RTS/bestcb/random/0.9\endcsname{SSVI}
+\expandafter\def\csname E/RTS/rmse/hist/wings\endcsname{1{,}85}
+\expandafter\def\csname E/RTS/mae/hist/wings\endcsname{1{,}27}
+\expandafter\def\csname E/RTS/price/hist/wings\endcsname{10{,}5}
+\expandafter\def\csname E/RTS/rmse/cb_quad/wings\endcsname{3{,}99}
+\expandafter\def\csname E/RTS/mae/cb_quad/wings\endcsname{2{,}29}
+\expandafter\def\csname E/RTS/price/cb_quad/wings\endcsname{14{,}9}
+\expandafter\def\csname E/RTS/rmse/cb_svi/wings\endcsname{4{,}25}
+\expandafter\def\csname E/RTS/mae/cb_svi/wings\endcsname{2{,}58}
+\expandafter\def\csname E/RTS/price/cb_svi/wings\endcsname{17{,}9}
+\expandafter\def\csname E/RTS/rmse/cb_ssvi/wings\endcsname{2{,}33}
+\expandafter\def\csname E/RTS/mae/cb_ssvi/wings\endcsname{1{,}68}
+\expandafter\def\csname E/RTS/price/cb_ssvi/wings\endcsname{13{,}5}
+\expandafter\def\csname E/RTS/rmse/hist_cb/wings\endcsname{1{,}56}
+\expandafter\def\csname E/RTS/mae/hist_cb/wings\endcsname{1{,}07}
+\expandafter\def\csname E/RTS/price/hist_cb/wings\endcsname{9{,}0}
+\expandafter\def\csname E/RTS/rmse/gp/wings\endcsname{1{,}44}
+\expandafter\def\csname E/RTS/mae/gp/wings\endcsname{0{,}97}
+\expandafter\def\csname E/RTS/price/gp/wings\endcsname{8{,}0}
+\expandafter\def\csname E/RTS/rmse/gp_af/wings\endcsname{1{,}43}
+\expandafter\def\csname E/RTS/mae/gp_af/wings\endcsname{0{,}96}
+\expandafter\def\csname E/RTS/price/gp_af/wings\endcsname{8{,}0}
+\expandafter\def\csname E/RTS/rmse/moex_today/wings\endcsname{1{,}32}
+\expandafter\def\csname E/RTS/mae/moex_today/wings\endcsname{0{,}96}
+\expandafter\def\csname E/RTS/price/moex_today/wings\endcsname{8{,}5}
+\expandafter\def\csname E/RTS/rmse/gp_cb/wings\endcsname{2{,}10}
+\expandafter\def\csname E/RTS/mae/gp_cb/wings\endcsname{1{,}53}
+\expandafter\def\csname E/RTS/price/gp_cb/wings\endcsname{12{,}9}
+\expandafter\def\csname E/RTS/rmse/gp_indep/wings\endcsname{1{,}46}
+\expandafter\def\csname E/RTS/mae/gp_indep/wings\endcsname{0{,}98}
+\expandafter\def\csname E/RTS/price/gp_indep/wings\endcsname{8{,}1}
+\expandafter\def\csname E/RTS/rmse/gp_homo/wings\endcsname{1{,}42}
+\expandafter\def\csname E/RTS/mae/gp_homo/wings\endcsname{0{,}95}
+\expandafter\def\csname E/RTS/price/gp_homo/wings\endcsname{7{,}8}
+\expandafter\def\csname E/RTS/rmse/gp_param/wings\endcsname{1{,}49}
+\expandafter\def\csname E/RTS/mae/gp_param/wings\endcsname{1{,}00}
+\expandafter\def\csname E/RTS/price/gp_param/wings\endcsname{8{,}1}
+\expandafter\def\csname E/RTS/rmse/best_cb/wings\endcsname{2{,}33}
+\expandafter\def\csname E/RTS/mae/best_cb/wings\endcsname{1{,}68}
+\expandafter\def\csname E/RTS/price/best_cb/wings\endcsname{13{,}5}
+\expandafter\def\csname E/RTS/visible/wings\endcsname{19}
+\expandafter\def\csname E/RTS/bestcb/wings\endcsname{SSVI}
+\expandafter\def\csname E/RTS/rmse/hist/slice\endcsname{1{,}97}
+\expandafter\def\csname E/RTS/mae/hist/slice\endcsname{1{,}28}
+\expandafter\def\csname E/RTS/price/hist/slice\endcsname{6{,}5}
+\expandafter\def\csname E/RTS/rmse/cb_quad/slice\endcsname{3{,}20}
+\expandafter\def\csname E/RTS/mae/cb_quad/slice\endcsname{2{,}27}
+\expandafter\def\csname E/RTS/price/cb_quad/slice\endcsname{12{,}7}
+\expandafter\def\csname E/RTS/rmse/cb_svi/slice\endcsname{3{,}20}
+\expandafter\def\csname E/RTS/mae/cb_svi/slice\endcsname{2{,}27}
+\expandafter\def\csname E/RTS/price/cb_svi/slice\endcsname{12{,}7}
+\expandafter\def\csname E/RTS/rmse/cb_ssvi/slice\endcsname{2{,}58}
+\expandafter\def\csname E/RTS/mae/cb_ssvi/slice\endcsname{2{,}00}
+\expandafter\def\csname E/RTS/price/cb_ssvi/slice\endcsname{12{,}2}
+\expandafter\def\csname E/RTS/rmse/hist_cb/slice\endcsname{2{,}08}
+\expandafter\def\csname E/RTS/mae/hist_cb/slice\endcsname{1{,}45}
+\expandafter\def\csname E/RTS/price/hist_cb/slice\endcsname{8{,}0}
+\expandafter\def\csname E/RTS/rmse/gp/slice\endcsname{1{,}94}
+\expandafter\def\csname E/RTS/mae/gp/slice\endcsname{1{,}31}
+\expandafter\def\csname E/RTS/price/gp/slice\endcsname{6{,}9}
+\expandafter\def\csname E/RTS/rmse/gp_af/slice\endcsname{1{,}94}
+\expandafter\def\csname E/RTS/mae/gp_af/slice\endcsname{1{,}32}
+\expandafter\def\csname E/RTS/price/gp_af/slice\endcsname{6{,}9}
+\expandafter\def\csname E/RTS/rmse/moex_today/slice\endcsname{1{,}28}
+\expandafter\def\csname E/RTS/mae/moex_today/slice\endcsname{0{,}92}
+\expandafter\def\csname E/RTS/price/moex_today/slice\endcsname{4{,}9}
+\expandafter\def\csname E/RTS/rmse/gp_cb/slice\endcsname{2{,}37}
+\expandafter\def\csname E/RTS/mae/gp_cb/slice\endcsname{1{,}84}
+\expandafter\def\csname E/RTS/price/gp_cb/slice\endcsname{11{,}2}
+\expandafter\def\csname E/RTS/rmse/gp_indep/slice\endcsname{1{,}97}
+\expandafter\def\csname E/RTS/mae/gp_indep/slice\endcsname{1{,}28}
+\expandafter\def\csname E/RTS/price/gp_indep/slice\endcsname{6{,}5}
+\expandafter\def\csname E/RTS/rmse/gp_homo/slice\endcsname{1{,}97}
+\expandafter\def\csname E/RTS/mae/gp_homo/slice\endcsname{1{,}33}
+\expandafter\def\csname E/RTS/price/gp_homo/slice\endcsname{7{,}1}
+\expandafter\def\csname E/RTS/rmse/gp_param/slice\endcsname{1{,}94}
+\expandafter\def\csname E/RTS/mae/gp_param/slice\endcsname{1{,}30}
+\expandafter\def\csname E/RTS/price/gp_param/slice\endcsname{6{,}9}
+\expandafter\def\csname E/RTS/rmse/best_cb/slice\endcsname{2{,}58}
+\expandafter\def\csname E/RTS/mae/best_cb/slice\endcsname{2{,}00}
+\expandafter\def\csname E/RTS/price/best_cb/slice\endcsname{12{,}2}
+\expandafter\def\csname E/RTS/visible/slice\endcsname{25}
+\expandafter\def\csname E/RTS/bestcb/slice\endcsname{SSVI}
+\expandafter\def\csname E/RTS/rmse/hist/far\endcsname{1{,}80}
+\expandafter\def\csname E/RTS/mae/hist/far\endcsname{1{,}14}
+\expandafter\def\csname E/RTS/price/hist/far\endcsname{5{,}3}
+\expandafter\def\csname E/RTS/rmse/cb_quad/far\endcsname{9{,}30}
+\expandafter\def\csname E/RTS/mae/cb_quad/far\endcsname{6{,}11}
+\expandafter\def\csname E/RTS/price/cb_quad/far\endcsname{28{,}5}
+\expandafter\def\csname E/RTS/rmse/cb_svi/far\endcsname{9{,}30}
+\expandafter\def\csname E/RTS/mae/cb_svi/far\endcsname{6{,}11}
+\expandafter\def\csname E/RTS/price/cb_svi/far\endcsname{28{,}5}
+\expandafter\def\csname E/RTS/rmse/cb_ssvi/far\endcsname{3{,}26}
+\expandafter\def\csname E/RTS/mae/cb_ssvi/far\endcsname{2{,}57}
+\expandafter\def\csname E/RTS/price/cb_ssvi/far\endcsname{14{,}8}
+\expandafter\def\csname E/RTS/rmse/hist_cb/far\endcsname{2{,}27}
+\expandafter\def\csname E/RTS/mae/hist_cb/far\endcsname{1{,}56}
+\expandafter\def\csname E/RTS/price/hist_cb/far\endcsname{8{,}1}
+\expandafter\def\csname E/RTS/rmse/gp/far\endcsname{1{,}84}
+\expandafter\def\csname E/RTS/mae/gp/far\endcsname{1{,}17}
+\expandafter\def\csname E/RTS/price/gp/far\endcsname{5{,}6}
+\expandafter\def\csname E/RTS/rmse/gp_af/far\endcsname{2{,}00}
+\expandafter\def\csname E/RTS/mae/gp_af/far\endcsname{1{,}23}
+\expandafter\def\csname E/RTS/price/gp_af/far\endcsname{5{,}6}
+\expandafter\def\csname E/RTS/rmse/moex_today/far\endcsname{1{,}21}
+\expandafter\def\csname E/RTS/mae/moex_today/far\endcsname{0{,}86}
+\expandafter\def\csname E/RTS/price/moex_today/far\endcsname{4{,}1}
+\expandafter\def\csname E/RTS/rmse/gp_cb/far\endcsname{3{,}27}
+\expandafter\def\csname E/RTS/mae/gp_cb/far\endcsname{2{,}58}
+\expandafter\def\csname E/RTS/price/gp_cb/far\endcsname{15{,}1}
+\expandafter\def\csname E/RTS/rmse/gp_indep/far\endcsname{1{,}80}
+\expandafter\def\csname E/RTS/mae/gp_indep/far\endcsname{1{,}14}
+\expandafter\def\csname E/RTS/price/gp_indep/far\endcsname{5{,}3}
+\expandafter\def\csname E/RTS/rmse/gp_homo/far\endcsname{1{,}85}
+\expandafter\def\csname E/RTS/mae/gp_homo/far\endcsname{1{,}19}
+\expandafter\def\csname E/RTS/price/gp_homo/far\endcsname{5{,}6}
+\expandafter\def\csname E/RTS/rmse/gp_param/far\endcsname{1{,}86}
+\expandafter\def\csname E/RTS/mae/gp_param/far\endcsname{1{,}20}
+\expandafter\def\csname E/RTS/price/gp_param/far\endcsname{5{,}8}
+\expandafter\def\csname E/RTS/rmse/best_cb/far\endcsname{3{,}26}
+\expandafter\def\csname E/RTS/mae/best_cb/far\endcsname{2{,}57}
+\expandafter\def\csname E/RTS/price/best_cb/far\endcsname{14{,}8}
+\expandafter\def\csname E/RTS/visible/far\endcsname{14}
+\expandafter\def\csname E/RTS/bestcb/far\endcsname{SSVI}
+\expandafter\def\csname E/RTS/rmse/hist/topn/40\endcsname{2{,}91}
+\expandafter\def\csname E/RTS/mae/hist/topn/40\endcsname{1{,}85}
+\expandafter\def\csname E/RTS/price/hist/topn/40\endcsname{10{,}6}
+\expandafter\def\csname E/RTS/rmse/cb_quad/topn/40\endcsname{3{,}02}
+\expandafter\def\csname E/RTS/mae/cb_quad/topn/40\endcsname{1{,}33}
+\expandafter\def\csname E/RTS/price/cb_quad/topn/40\endcsname{8{,}2}
+\expandafter\def\csname E/RTS/rmse/cb_svi/topn/40\endcsname{3{,}24}
+\expandafter\def\csname E/RTS/mae/cb_svi/topn/40\endcsname{1{,}59}
+\expandafter\def\csname E/RTS/price/cb_svi/topn/40\endcsname{9{,}8}
+\expandafter\def\csname E/RTS/rmse/cb_ssvi/topn/40\endcsname{2{,}04}
+\expandafter\def\csname E/RTS/mae/cb_ssvi/topn/40\endcsname{1{,}59}
+\expandafter\def\csname E/RTS/price/cb_ssvi/topn/40\endcsname{10{,}8}
+\expandafter\def\csname E/RTS/rmse/hist_cb/topn/40\endcsname{2{,}17}
+\expandafter\def\csname E/RTS/mae/hist_cb/topn/40\endcsname{1{,}42}
+\expandafter\def\csname E/RTS/price/hist_cb/topn/40\endcsname{9{,}5}
+\expandafter\def\csname E/RTS/rmse/gp/topn/40\endcsname{2{,}03}
+\expandafter\def\csname E/RTS/mae/gp/topn/40\endcsname{1{,}22}
+\expandafter\def\csname E/RTS/price/gp/topn/40\endcsname{7{,}3}
+\expandafter\def\csname E/RTS/rmse/gp_af/topn/40\endcsname{1{,}83}
+\expandafter\def\csname E/RTS/mae/gp_af/topn/40\endcsname{1{,}19}
+\expandafter\def\csname E/RTS/price/gp_af/topn/40\endcsname{7{,}4}
+\expandafter\def\csname E/RTS/rmse/moex_today/topn/40\endcsname{1{,}65}
+\expandafter\def\csname E/RTS/mae/moex_today/topn/40\endcsname{1{,}19}
+\expandafter\def\csname E/RTS/price/moex_today/topn/40\endcsname{8{,}0}
+\expandafter\def\csname E/RTS/rmse/gp_cb/topn/40\endcsname{1{,}71}
+\expandafter\def\csname E/RTS/mae/gp_cb/topn/40\endcsname{1{,}23}
+\expandafter\def\csname E/RTS/price/gp_cb/topn/40\endcsname{9{,}0}
+\expandafter\def\csname E/RTS/rmse/gp_indep/topn/40\endcsname{2{,}00}
+\expandafter\def\csname E/RTS/mae/gp_indep/topn/40\endcsname{1{,}22}
+\expandafter\def\csname E/RTS/price/gp_indep/topn/40\endcsname{7{,}5}
+\expandafter\def\csname E/RTS/rmse/gp_homo/topn/40\endcsname{1{,}96}
+\expandafter\def\csname E/RTS/mae/gp_homo/topn/40\endcsname{1{,}17}
+\expandafter\def\csname E/RTS/price/gp_homo/topn/40\endcsname{7{,}2}
+\expandafter\def\csname E/RTS/rmse/gp_param/topn/40\endcsname{2{,}09}
+\expandafter\def\csname E/RTS/mae/gp_param/topn/40\endcsname{1{,}27}
+\expandafter\def\csname E/RTS/price/gp_param/topn/40\endcsname{7{,}7}
+\expandafter\def\csname E/RTS/rmse/best_cb/topn/40\endcsname{2{,}04}
+\expandafter\def\csname E/RTS/mae/best_cb/topn/40\endcsname{1{,}59}
+\expandafter\def\csname E/RTS/price/best_cb/topn/40\endcsname{10{,}8}
+\expandafter\def\csname E/RTS/visible/topn/40\endcsname{40}
+\expandafter\def\csname E/RTS/bestcb/topn/40\endcsname{SSVI}
+\expandafter\def\csname E/RTS/rmse/hist/topn/20\endcsname{2{,}38}
+\expandafter\def\csname E/RTS/mae/hist/topn/20\endcsname{1{,}50}
+\expandafter\def\csname E/RTS/price/hist/topn/20\endcsname{7{,}7}
+\expandafter\def\csname E/RTS/rmse/cb_quad/topn/20\endcsname{2{,}92}
+\expandafter\def\csname E/RTS/mae/cb_quad/topn/20\endcsname{1{,}78}
+\expandafter\def\csname E/RTS/price/cb_quad/topn/20\endcsname{8{,}2}
+\expandafter\def\csname E/RTS/rmse/cb_svi/topn/20\endcsname{3{,}03}
+\expandafter\def\csname E/RTS/mae/cb_svi/topn/20\endcsname{1{,}91}
+\expandafter\def\csname E/RTS/price/cb_svi/topn/20\endcsname{9{,}2}
+\expandafter\def\csname E/RTS/rmse/cb_ssvi/topn/20\endcsname{1{,}92}
+\expandafter\def\csname E/RTS/mae/cb_ssvi/topn/20\endcsname{1{,}38}
+\expandafter\def\csname E/RTS/price/cb_ssvi/topn/20\endcsname{8{,}1}
+\expandafter\def\csname E/RTS/rmse/hist_cb/topn/20\endcsname{2{,}18}
+\expandafter\def\csname E/RTS/mae/hist_cb/topn/20\endcsname{1{,}32}
+\expandafter\def\csname E/RTS/price/hist_cb/topn/20\endcsname{6{,}6}
+\expandafter\def\csname E/RTS/rmse/gp/topn/20\endcsname{2{,}11}
+\expandafter\def\csname E/RTS/mae/gp/topn/20\endcsname{1{,}26}
+\expandafter\def\csname E/RTS/price/gp/topn/20\endcsname{6{,}0}
+\expandafter\def\csname E/RTS/rmse/gp_af/topn/20\endcsname{2{,}06}
+\expandafter\def\csname E/RTS/mae/gp_af/topn/20\endcsname{1{,}24}
+\expandafter\def\csname E/RTS/price/gp_af/topn/20\endcsname{6{,}0}
+\expandafter\def\csname E/RTS/rmse/moex_today/topn/20\endcsname{1{,}46}
+\expandafter\def\csname E/RTS/mae/moex_today/topn/20\endcsname{1{,}05}
+\expandafter\def\csname E/RTS/price/moex_today/topn/20\endcsname{5{,}8}
+\expandafter\def\csname E/RTS/rmse/gp_cb/topn/20\endcsname{1{,}77}
+\expandafter\def\csname E/RTS/mae/gp_cb/topn/20\endcsname{1{,}21}
+\expandafter\def\csname E/RTS/price/gp_cb/topn/20\endcsname{6{,}7}
+\expandafter\def\csname E/RTS/rmse/gp_indep/topn/20\endcsname{2{,}13}
+\expandafter\def\csname E/RTS/mae/gp_indep/topn/20\endcsname{1{,}27}
+\expandafter\def\csname E/RTS/price/gp_indep/topn/20\endcsname{6{,}2}
+\expandafter\def\csname E/RTS/rmse/gp_homo/topn/20\endcsname{2{,}11}
+\expandafter\def\csname E/RTS/mae/gp_homo/topn/20\endcsname{1{,}25}
+\expandafter\def\csname E/RTS/price/gp_homo/topn/20\endcsname{6{,}0}
+\expandafter\def\csname E/RTS/rmse/gp_param/topn/20\endcsname{2{,}14}
+\expandafter\def\csname E/RTS/mae/gp_param/topn/20\endcsname{1{,}28}
+\expandafter\def\csname E/RTS/price/gp_param/topn/20\endcsname{6{,}1}
+\expandafter\def\csname E/RTS/rmse/best_cb/topn/20\endcsname{1{,}92}
+\expandafter\def\csname E/RTS/mae/best_cb/topn/20\endcsname{1{,}38}
+\expandafter\def\csname E/RTS/price/best_cb/topn/20\endcsname{8{,}1}
+\expandafter\def\csname E/RTS/visible/topn/20\endcsname{20}
+\expandafter\def\csname E/RTS/bestcb/topn/20\endcsname{SSVI}
+\expandafter\def\csname E/RTS/rmse/hist/topn/10\endcsname{2{,}14}
+\expandafter\def\csname E/RTS/mae/hist/topn/10\endcsname{1{,}35}
+\expandafter\def\csname E/RTS/price/hist/topn/10\endcsname{6{,}8}
+\expandafter\def\csname E/RTS/rmse/cb_quad/topn/10\endcsname{4{,}63}
+\expandafter\def\csname E/RTS/mae/cb_quad/topn/10\endcsname{2{,}78}
+\expandafter\def\csname E/RTS/price/cb_quad/topn/10\endcsname{13{,}1}
+\expandafter\def\csname E/RTS/rmse/cb_svi/topn/10\endcsname{4{,}67}
+\expandafter\def\csname E/RTS/mae/cb_svi/topn/10\endcsname{2{,}83}
+\expandafter\def\csname E/RTS/price/cb_svi/topn/10\endcsname{13{,}7}
+\expandafter\def\csname E/RTS/rmse/cb_ssvi/topn/10\endcsname{2{,}22}
+\expandafter\def\csname E/RTS/mae/cb_ssvi/topn/10\endcsname{1{,}62}
+\expandafter\def\csname E/RTS/price/cb_ssvi/topn/10\endcsname{9{,}3}
+\expandafter\def\csname E/RTS/rmse/hist_cb/topn/10\endcsname{2{,}02}
+\expandafter\def\csname E/RTS/mae/hist_cb/topn/10\endcsname{1{,}24}
+\expandafter\def\csname E/RTS/price/hist_cb/topn/10\endcsname{6{,}2}
+\expandafter\def\csname E/RTS/rmse/gp/topn/10\endcsname{1{,}91}
+\expandafter\def\csname E/RTS/mae/gp/topn/10\endcsname{1{,}15}
+\expandafter\def\csname E/RTS/price/gp/topn/10\endcsname{5{,}5}
+\expandafter\def\csname E/RTS/rmse/gp_af/topn/10\endcsname{1{,}93}
+\expandafter\def\csname E/RTS/mae/gp_af/topn/10\endcsname{1{,}17}
+\expandafter\def\csname E/RTS/price/gp_af/topn/10\endcsname{5{,}5}
+\expandafter\def\csname E/RTS/rmse/moex_today/topn/10\endcsname{1{,}33}
+\expandafter\def\csname E/RTS/mae/moex_today/topn/10\endcsname{0{,}95}
+\expandafter\def\csname E/RTS/price/moex_today/topn/10\endcsname{5{,}2}
+\expandafter\def\csname E/RTS/rmse/gp_cb/topn/10\endcsname{2{,}21}
+\expandafter\def\csname E/RTS/mae/gp_cb/topn/10\endcsname{1{,}57}
+\expandafter\def\csname E/RTS/price/gp_cb/topn/10\endcsname{8{,}7}
+\expandafter\def\csname E/RTS/rmse/gp_indep/topn/10\endcsname{1{,}96}
+\expandafter\def\csname E/RTS/mae/gp_indep/topn/10\endcsname{1{,}19}
+\expandafter\def\csname E/RTS/price/gp_indep/topn/10\endcsname{5{,}8}
+\expandafter\def\csname E/RTS/rmse/gp_homo/topn/10\endcsname{1{,}91}
+\expandafter\def\csname E/RTS/mae/gp_homo/topn/10\endcsname{1{,}15}
+\expandafter\def\csname E/RTS/price/gp_homo/topn/10\endcsname{5{,}5}
+\expandafter\def\csname E/RTS/rmse/gp_param/topn/10\endcsname{1{,}94}
+\expandafter\def\csname E/RTS/mae/gp_param/topn/10\endcsname{1{,}17}
+\expandafter\def\csname E/RTS/price/gp_param/topn/10\endcsname{5{,}6}
+\expandafter\def\csname E/RTS/rmse/best_cb/topn/10\endcsname{2{,}22}
+\expandafter\def\csname E/RTS/mae/best_cb/topn/10\endcsname{1{,}62}
+\expandafter\def\csname E/RTS/price/best_cb/topn/10\endcsname{9{,}3}
+\expandafter\def\csname E/RTS/visible/topn/10\endcsname{10}
+\expandafter\def\csname E/RTS/bestcb/topn/10\endcsname{SSVI}
+\expandafter\def\csname E/RTS/rmse/hist/topn/5\endcsname{2{,}06}
+\expandafter\def\csname E/RTS/mae/hist/topn/5\endcsname{1{,}31}
+\expandafter\def\csname E/RTS/price/hist/topn/5\endcsname{6{,}6}
+\expandafter\def\csname E/RTS/rmse/cb_quad/topn/5\endcsname{4{,}45}
+\expandafter\def\csname E/RTS/mae/cb_quad/topn/5\endcsname{3{,}00}
+\expandafter\def\csname E/RTS/price/cb_quad/topn/5\endcsname{16{,}3}
+\expandafter\def\csname E/RTS/rmse/cb_svi/topn/5\endcsname{4{,}47}
+\expandafter\def\csname E/RTS/mae/cb_svi/topn/5\endcsname{3{,}03}
+\expandafter\def\csname E/RTS/price/cb_svi/topn/5\endcsname{16{,}7}
+\expandafter\def\csname E/RTS/rmse/cb_ssvi/topn/5\endcsname{3{,}09}
+\expandafter\def\csname E/RTS/mae/cb_ssvi/topn/5\endcsname{2{,}33}
+\expandafter\def\csname E/RTS/price/cb_ssvi/topn/5\endcsname{14{,}0}
+\expandafter\def\csname E/RTS/rmse/hist_cb/topn/5\endcsname{2{,}01}
+\expandafter\def\csname E/RTS/mae/hist_cb/topn/5\endcsname{1{,}30}
+\expandafter\def\csname E/RTS/price/hist_cb/topn/5\endcsname{6{,}9}
+\expandafter\def\csname E/RTS/rmse/gp/topn/5\endcsname{1{,}86}
+\expandafter\def\csname E/RTS/mae/gp/topn/5\endcsname{1{,}15}
+\expandafter\def\csname E/RTS/price/gp/topn/5\endcsname{5{,}8}
+\expandafter\def\csname E/RTS/rmse/gp_af/topn/5\endcsname{1{,}98}
+\expandafter\def\csname E/RTS/mae/gp_af/topn/5\endcsname{1{,}19}
+\expandafter\def\csname E/RTS/price/gp_af/topn/5\endcsname{5{,}9}
+\expandafter\def\csname E/RTS/rmse/moex_today/topn/5\endcsname{1{,}29}
+\expandafter\def\csname E/RTS/mae/moex_today/topn/5\endcsname{0{,}92}
+\expandafter\def\csname E/RTS/price/moex_today/topn/5\endcsname{5{,}0}
+\expandafter\def\csname E/RTS/rmse/gp_cb/topn/5\endcsname{3{,}26}
+\expandafter\def\csname E/RTS/mae/gp_cb/topn/5\endcsname{2{,}44}
+\expandafter\def\csname E/RTS/price/gp_cb/topn/5\endcsname{14{,}6}
+\expandafter\def\csname E/RTS/rmse/gp_indep/topn/5\endcsname{1{,}93}
+\expandafter\def\csname E/RTS/mae/gp_indep/topn/5\endcsname{1{,}21}
+\expandafter\def\csname E/RTS/price/gp_indep/topn/5\endcsname{6{,}2}
+\expandafter\def\csname E/RTS/rmse/gp_homo/topn/5\endcsname{1{,}86}
+\expandafter\def\csname E/RTS/mae/gp_homo/topn/5\endcsname{1{,}15}
+\expandafter\def\csname E/RTS/price/gp_homo/topn/5\endcsname{5{,}7}
+\expandafter\def\csname E/RTS/rmse/gp_param/topn/5\endcsname{1{,}88}
+\expandafter\def\csname E/RTS/mae/gp_param/topn/5\endcsname{1{,}17}
+\expandafter\def\csname E/RTS/price/gp_param/topn/5\endcsname{6{,}0}
+\expandafter\def\csname E/RTS/rmse/best_cb/topn/5\endcsname{3{,}09}
+\expandafter\def\csname E/RTS/mae/best_cb/topn/5\endcsname{2{,}33}
+\expandafter\def\csname E/RTS/price/best_cb/topn/5\endcsname{14{,}0}
+\expandafter\def\csname E/RTS/visible/topn/5\endcsname{5}
+\expandafter\def\csname E/RTS/bestcb/topn/5\endcsname{SSVI}
+\expandafter\def\csname E/RTS/diff/gp_af/best_cb/random/0.1\endcsname{\ensuremath{-}0{,}08}
+\expandafter\def\csname E/RTS/ci/gp_af/best_cb/random/0.1\endcsname{[\ensuremath{-}0{,}16;\ 0{,}02]}
+\expandafter\def\csname E/RTS/diff/gp_af/hist/random/0.1\endcsname{\ensuremath{-}0{,}75}
+\expandafter\def\csname E/RTS/ci/gp_af/hist/random/0.1\endcsname{[\ensuremath{-}0{,}88;\ \ensuremath{-}0{,}62]}
+\expandafter\def\csname E/RTS/diff/gp_af/hist_cb/random/0.1\endcsname{\ensuremath{-}0{,}16}
+\expandafter\def\csname E/RTS/ci/gp_af/hist_cb/random/0.1\endcsname{[\ensuremath{-}0{,}21;\ \ensuremath{-}0{,}12]}
+\expandafter\def\csname E/RTS/diff/gp_af/gp/random/0.1\endcsname{\ensuremath{-}0{,}03}
+\expandafter\def\csname E/RTS/ci/gp_af/gp/random/0.1\endcsname{[\ensuremath{-}0{,}08;\ 0{,}00]}
+\expandafter\def\csname E/RTS/diff/gp_af/gp_cb/random/0.1\endcsname{0{,}13}
+\expandafter\def\csname E/RTS/ci/gp_af/gp_cb/random/0.1\endcsname{[0{,}05;\ 0{,}22]}
+\expandafter\def\csname E/RTS/diff/gp_af/moex_today/random/0.1\endcsname{\ensuremath{-}0{,}02}
+\expandafter\def\csname E/RTS/ci/gp_af/moex_today/random/0.1\endcsname{[\ensuremath{-}0{,}11;\ 0{,}08]}
+\expandafter\def\csname E/RTS/diff/hist_cb/best_cb/random/0.1\endcsname{0{,}09}
+\expandafter\def\csname E/RTS/ci/hist_cb/best_cb/random/0.1\endcsname{[\ensuremath{-}0{,}01;\ 0{,}20]}
+\expandafter\def\csname E/RTS/diff/gp/hist_cb/random/0.1\endcsname{\ensuremath{-}0{,}13}
+\expandafter\def\csname E/RTS/ci/gp/hist_cb/random/0.1\endcsname{[\ensuremath{-}0{,}16;\ \ensuremath{-}0{,}10]}
+\expandafter\def\csname E/RTS/diff/gp/gp_cb/random/0.1\endcsname{0{,}16}
+\expandafter\def\csname E/RTS/ci/gp/gp_cb/random/0.1\endcsname{[0{,}06;\ 0{,}27]}
+\expandafter\def\csname E/RTS/diff/gp/gp_indep/random/0.1\endcsname{\ensuremath{-}0{,}01}
+\expandafter\def\csname E/RTS/ci/gp/gp_indep/random/0.1\endcsname{[\ensuremath{-}0{,}03;\ 0{,}01]}
+\expandafter\def\csname E/RTS/diff/gp/gp_homo/random/0.1\endcsname{\ensuremath{-}0{,}01}
+\expandafter\def\csname E/RTS/ci/gp/gp_homo/random/0.1\endcsname{[\ensuremath{-}0{,}03;\ 0{,}01]}
+\expandafter\def\csname E/RTS/diff/gp/gp_param/random/0.1\endcsname{\ensuremath{-}0{,}02}
+\expandafter\def\csname E/RTS/ci/gp/gp_param/random/0.1\endcsname{[\ensuremath{-}0{,}04;\ \ensuremath{-}0{,}00]}
+\expandafter\def\csname E/RTS/diff/gp_af/best_cb/random/0.3\endcsname{\ensuremath{-}0{,}07}
+\expandafter\def\csname E/RTS/ci/gp_af/best_cb/random/0.3\endcsname{[\ensuremath{-}0{,}15;\ 0{,}02]}
+\expandafter\def\csname E/RTS/diff/gp_af/hist/random/0.3\endcsname{\ensuremath{-}0{,}70}
+\expandafter\def\csname E/RTS/ci/gp_af/hist/random/0.3\endcsname{[\ensuremath{-}0{,}80;\ \ensuremath{-}0{,}59]}
+\expandafter\def\csname E/RTS/diff/gp_af/hist_cb/random/0.3\endcsname{\ensuremath{-}0{,}15}
+\expandafter\def\csname E/RTS/ci/gp_af/hist_cb/random/0.3\endcsname{[\ensuremath{-}0{,}18;\ \ensuremath{-}0{,}12]}
+\expandafter\def\csname E/RTS/diff/gp_af/gp/random/0.3\endcsname{\ensuremath{-}0{,}03}
+\expandafter\def\csname E/RTS/ci/gp_af/gp/random/0.3\endcsname{[\ensuremath{-}0{,}06;\ \ensuremath{-}0{,}01]}
+\expandafter\def\csname E/RTS/diff/gp_af/gp_cb/random/0.3\endcsname{0{,}15}
+\expandafter\def\csname E/RTS/ci/gp_af/gp_cb/random/0.3\endcsname{[0{,}08;\ 0{,}24]}
+\expandafter\def\csname E/RTS/diff/gp_af/moex_today/random/0.3\endcsname{0{,}03}
+\expandafter\def\csname E/RTS/ci/gp_af/moex_today/random/0.3\endcsname{[\ensuremath{-}0{,}06;\ 0{,}13]}
+\expandafter\def\csname E/RTS/diff/hist_cb/best_cb/random/0.3\endcsname{0{,}08}
+\expandafter\def\csname E/RTS/ci/hist_cb/best_cb/random/0.3\endcsname{[\ensuremath{-}0{,}01;\ 0{,}19]}
+\expandafter\def\csname E/RTS/diff/gp/hist_cb/random/0.3\endcsname{\ensuremath{-}0{,}12}
+\expandafter\def\csname E/RTS/ci/gp/hist_cb/random/0.3\endcsname{[\ensuremath{-}0{,}14;\ \ensuremath{-}0{,}10]}
+\expandafter\def\csname E/RTS/diff/gp/gp_cb/random/0.3\endcsname{0{,}18}
+\expandafter\def\csname E/RTS/ci/gp/gp_cb/random/0.3\endcsname{[0{,}10;\ 0{,}28]}
+\expandafter\def\csname E/RTS/diff/gp/gp_indep/random/0.3\endcsname{\ensuremath{-}0{,}00}
+\expandafter\def\csname E/RTS/ci/gp/gp_indep/random/0.3\endcsname{[\ensuremath{-}0{,}02;\ 0{,}02]}
+\expandafter\def\csname E/RTS/diff/gp/gp_homo/random/0.3\endcsname{0{,}00}
+\expandafter\def\csname E/RTS/ci/gp/gp_homo/random/0.3\endcsname{[\ensuremath{-}0{,}01;\ 0{,}01]}
+\expandafter\def\csname E/RTS/diff/gp/gp_param/random/0.3\endcsname{\ensuremath{-}0{,}02}
+\expandafter\def\csname E/RTS/ci/gp/gp_param/random/0.3\endcsname{[\ensuremath{-}0{,}03;\ \ensuremath{-}0{,}01]}
+\expandafter\def\csname E/RTS/diff/gp_af/best_cb/random/0.5\endcsname{\ensuremath{-}0{,}09}
+\expandafter\def\csname E/RTS/ci/gp_af/best_cb/random/0.5\endcsname{[\ensuremath{-}0{,}16;\ \ensuremath{-}0{,}01]}
+\expandafter\def\csname E/RTS/diff/gp_af/hist/random/0.5\endcsname{\ensuremath{-}0{,}61}
+\expandafter\def\csname E/RTS/ci/gp_af/hist/random/0.5\endcsname{[\ensuremath{-}0{,}71;\ \ensuremath{-}0{,}50]}
+\expandafter\def\csname E/RTS/diff/gp_af/hist_cb/random/0.5\endcsname{\ensuremath{-}0{,}11}
+\expandafter\def\csname E/RTS/ci/gp_af/hist_cb/random/0.5\endcsname{[\ensuremath{-}0{,}15;\ \ensuremath{-}0{,}08]}
+\expandafter\def\csname E/RTS/diff/gp_af/gp/random/0.5\endcsname{\ensuremath{-}0{,}02}
+\expandafter\def\csname E/RTS/ci/gp_af/gp/random/0.5\endcsname{[\ensuremath{-}0{,}04;\ 0{,}01]}
+\expandafter\def\csname E/RTS/diff/gp_af/gp_cb/random/0.5\endcsname{0{,}13}
+\expandafter\def\csname E/RTS/ci/gp_af/gp_cb/random/0.5\endcsname{[0{,}06;\ 0{,}20]}
+\expandafter\def\csname E/RTS/diff/gp_af/moex_today/random/0.5\endcsname{0{,}13}
+\expandafter\def\csname E/RTS/ci/gp_af/moex_today/random/0.5\endcsname{[0{,}05;\ 0{,}22]}
+\expandafter\def\csname E/RTS/diff/hist_cb/best_cb/random/0.5\endcsname{0{,}02}
+\expandafter\def\csname E/RTS/ci/hist_cb/best_cb/random/0.5\endcsname{[\ensuremath{-}0{,}06;\ 0{,}11]}
+\expandafter\def\csname E/RTS/diff/gp/hist_cb/random/0.5\endcsname{\ensuremath{-}0{,}10}
+\expandafter\def\csname E/RTS/ci/gp/hist_cb/random/0.5\endcsname{[\ensuremath{-}0{,}12;\ \ensuremath{-}0{,}08]}
+\expandafter\def\csname E/RTS/diff/gp/gp_cb/random/0.5\endcsname{0{,}14}
+\expandafter\def\csname E/RTS/ci/gp/gp_cb/random/0.5\endcsname{[0{,}07;\ 0{,}22]}
+\expandafter\def\csname E/RTS/diff/gp/gp_indep/random/0.5\endcsname{\ensuremath{-}0{,}01}
+\expandafter\def\csname E/RTS/ci/gp/gp_indep/random/0.5\endcsname{[\ensuremath{-}0{,}03;\ \ensuremath{-}0{,}00]}
+\expandafter\def\csname E/RTS/diff/gp/gp_homo/random/0.5\endcsname{\ensuremath{-}0{,}00}
+\expandafter\def\csname E/RTS/ci/gp/gp_homo/random/0.5\endcsname{[\ensuremath{-}0{,}01;\ 0{,}01]}
+\expandafter\def\csname E/RTS/diff/gp/gp_param/random/0.5\endcsname{\ensuremath{-}0{,}02}
+\expandafter\def\csname E/RTS/ci/gp/gp_param/random/0.5\endcsname{[\ensuremath{-}0{,}03;\ \ensuremath{-}0{,}01]}
+\expandafter\def\csname E/RTS/diff/gp_af/best_cb/random/0.7\endcsname{\ensuremath{-}0{,}27}
+\expandafter\def\csname E/RTS/ci/gp_af/best_cb/random/0.7\endcsname{[\ensuremath{-}0{,}36;\ \ensuremath{-}0{,}19]}
+\expandafter\def\csname E/RTS/diff/gp_af/hist/random/0.7\endcsname{\ensuremath{-}0{,}47}
+\expandafter\def\csname E/RTS/ci/gp_af/hist/random/0.7\endcsname{[\ensuremath{-}0{,}56;\ \ensuremath{-}0{,}38]}
+\expandafter\def\csname E/RTS/diff/gp_af/hist_cb/random/0.7\endcsname{\ensuremath{-}0{,}11}
+\expandafter\def\csname E/RTS/ci/gp_af/hist_cb/random/0.7\endcsname{[\ensuremath{-}0{,}14;\ \ensuremath{-}0{,}08]}
+\expandafter\def\csname E/RTS/diff/gp_af/gp/random/0.7\endcsname{\ensuremath{-}0{,}02}
+\expandafter\def\csname E/RTS/ci/gp_af/gp/random/0.7\endcsname{[\ensuremath{-}0{,}05;\ \ensuremath{-}0{,}00]}
+\expandafter\def\csname E/RTS/diff/gp_af/gp_cb/random/0.7\endcsname{\ensuremath{-}0{,}03}
+\expandafter\def\csname E/RTS/ci/gp_af/gp_cb/random/0.7\endcsname{[\ensuremath{-}0{,}11;\ 0{,}05]}
+\expandafter\def\csname E/RTS/diff/gp_af/moex_today/random/0.7\endcsname{0{,}27}
+\expandafter\def\csname E/RTS/ci/gp_af/moex_today/random/0.7\endcsname{[0{,}19;\ 0{,}35]}
+\expandafter\def\csname E/RTS/diff/hist_cb/best_cb/random/0.7\endcsname{\ensuremath{-}0{,}17}
+\expandafter\def\csname E/RTS/ci/hist_cb/best_cb/random/0.7\endcsname{[\ensuremath{-}0{,}26;\ \ensuremath{-}0{,}06]}
+\expandafter\def\csname E/RTS/diff/gp/hist_cb/random/0.7\endcsname{\ensuremath{-}0{,}08}
+\expandafter\def\csname E/RTS/ci/gp/hist_cb/random/0.7\endcsname{[\ensuremath{-}0{,}10;\ \ensuremath{-}0{,}07]}
+\expandafter\def\csname E/RTS/diff/gp/gp_cb/random/0.7\endcsname{\ensuremath{-}0{,}01}
+\expandafter\def\csname E/RTS/ci/gp/gp_cb/random/0.7\endcsname{[\ensuremath{-}0{,}09;\ 0{,}08]}
+\expandafter\def\csname E/RTS/diff/gp/gp_indep/random/0.7\endcsname{\ensuremath{-}0{,}03}
+\expandafter\def\csname E/RTS/ci/gp/gp_indep/random/0.7\endcsname{[\ensuremath{-}0{,}05;\ \ensuremath{-}0{,}01]}
+\expandafter\def\csname E/RTS/diff/gp/gp_homo/random/0.7\endcsname{\ensuremath{-}0{,}01}
+\expandafter\def\csname E/RTS/ci/gp/gp_homo/random/0.7\endcsname{[\ensuremath{-}0{,}02;\ \ensuremath{-}0{,}00]}
+\expandafter\def\csname E/RTS/diff/gp/gp_param/random/0.7\endcsname{\ensuremath{-}0{,}02}
+\expandafter\def\csname E/RTS/ci/gp/gp_param/random/0.7\endcsname{[\ensuremath{-}0{,}03;\ \ensuremath{-}0{,}01]}
+\expandafter\def\csname E/RTS/diff/gp_af/best_cb/random/0.9\endcsname{\ensuremath{-}2{,}20}
+\expandafter\def\csname E/RTS/ci/gp_af/best_cb/random/0.9\endcsname{[\ensuremath{-}2{,}35;\ \ensuremath{-}2{,}04]}
+\expandafter\def\csname E/RTS/diff/gp_af/hist/random/0.9\endcsname{\ensuremath{-}0{,}22}
+\expandafter\def\csname E/RTS/ci/gp_af/hist/random/0.9\endcsname{[\ensuremath{-}0{,}28;\ \ensuremath{-}0{,}16]}
+\expandafter\def\csname E/RTS/diff/gp_af/hist_cb/random/0.9\endcsname{\ensuremath{-}0{,}10}
+\expandafter\def\csname E/RTS/ci/gp_af/hist_cb/random/0.9\endcsname{[\ensuremath{-}0{,}15;\ \ensuremath{-}0{,}06]}
+\expandafter\def\csname E/RTS/diff/gp_af/gp/random/0.9\endcsname{\ensuremath{-}0{,}01}
+\expandafter\def\csname E/RTS/ci/gp_af/gp/random/0.9\endcsname{[\ensuremath{-}0{,}03;\ 0{,}01]}
+\expandafter\def\csname E/RTS/diff/gp_af/gp_cb/random/0.9\endcsname{\ensuremath{-}1{,}07}
+\expandafter\def\csname E/RTS/ci/gp_af/gp_cb/random/0.9\endcsname{[\ensuremath{-}1{,}17;\ \ensuremath{-}0{,}95]}
+\expandafter\def\csname E/RTS/diff/gp_af/moex_today/random/0.9\endcsname{0{,}51}
+\expandafter\def\csname E/RTS/ci/gp_af/moex_today/random/0.9\endcsname{[0{,}42;\ 0{,}61]}
+\expandafter\def\csname E/RTS/diff/hist_cb/best_cb/random/0.9\endcsname{\ensuremath{-}2{,}09}
+\expandafter\def\csname E/RTS/ci/hist_cb/best_cb/random/0.9\endcsname{[\ensuremath{-}2{,}26;\ \ensuremath{-}1{,}93]}
+\expandafter\def\csname E/RTS/diff/gp/hist_cb/random/0.9\endcsname{\ensuremath{-}0{,}10}
+\expandafter\def\csname E/RTS/ci/gp/hist_cb/random/0.9\endcsname{[\ensuremath{-}0{,}14;\ \ensuremath{-}0{,}06]}
+\expandafter\def\csname E/RTS/diff/gp/gp_cb/random/0.9\endcsname{\ensuremath{-}1{,}06}
+\expandafter\def\csname E/RTS/ci/gp/gp_cb/random/0.9\endcsname{[\ensuremath{-}1{,}17;\ \ensuremath{-}0{,}94]}
+\expandafter\def\csname E/RTS/diff/gp/gp_indep/random/0.9\endcsname{\ensuremath{-}0{,}04}
+\expandafter\def\csname E/RTS/ci/gp/gp_indep/random/0.9\endcsname{[\ensuremath{-}0{,}07;\ \ensuremath{-}0{,}02]}
+\expandafter\def\csname E/RTS/diff/gp/gp_homo/random/0.9\endcsname{\ensuremath{-}0{,}01}
+\expandafter\def\csname E/RTS/ci/gp/gp_homo/random/0.9\endcsname{[\ensuremath{-}0{,}02;\ \ensuremath{-}0{,}01]}
+\expandafter\def\csname E/RTS/diff/gp/gp_param/random/0.9\endcsname{\ensuremath{-}0{,}01}
+\expandafter\def\csname E/RTS/ci/gp/gp_param/random/0.9\endcsname{[\ensuremath{-}0{,}02;\ \ensuremath{-}0{,}00]}
+\expandafter\def\csname E/RTS/diff/gp_af/best_cb/wings\endcsname{\ensuremath{-}0{,}89}
+\expandafter\def\csname E/RTS/ci/gp_af/best_cb/wings\endcsname{[\ensuremath{-}1{,}05;\ \ensuremath{-}0{,}74]}
+\expandafter\def\csname E/RTS/diff/gp_af/hist/wings\endcsname{\ensuremath{-}0{,}42}
+\expandafter\def\csname E/RTS/ci/gp_af/hist/wings\endcsname{[\ensuremath{-}0{,}52;\ \ensuremath{-}0{,}32]}
+\expandafter\def\csname E/RTS/diff/gp_af/hist_cb/wings\endcsname{\ensuremath{-}0{,}13}
+\expandafter\def\csname E/RTS/ci/gp_af/hist_cb/wings\endcsname{[\ensuremath{-}0{,}17;\ \ensuremath{-}0{,}08]}
+\expandafter\def\csname E/RTS/diff/gp_af/gp/wings\endcsname{\ensuremath{-}0{,}01}
+\expandafter\def\csname E/RTS/ci/gp_af/gp/wings\endcsname{[\ensuremath{-}0{,}03;\ 0{,}01]}
+\expandafter\def\csname E/RTS/diff/gp_af/gp_cb/wings\endcsname{\ensuremath{-}0{,}66}
+\expandafter\def\csname E/RTS/ci/gp_af/gp_cb/wings\endcsname{[\ensuremath{-}0{,}79;\ \ensuremath{-}0{,}53]}
+\expandafter\def\csname E/RTS/diff/gp_af/moex_today/wings\endcsname{0{,}11}
+\expandafter\def\csname E/RTS/ci/gp_af/moex_today/wings\endcsname{[0{,}03;\ 0{,}19]}
+\expandafter\def\csname E/RTS/diff/hist_cb/best_cb/wings\endcsname{\ensuremath{-}0{,}77}
+\expandafter\def\csname E/RTS/ci/hist_cb/best_cb/wings\endcsname{[\ensuremath{-}0{,}93;\ \ensuremath{-}0{,}61]}
+\expandafter\def\csname E/RTS/diff/gp/hist_cb/wings\endcsname{\ensuremath{-}0{,}12}
+\expandafter\def\csname E/RTS/ci/gp/hist_cb/wings\endcsname{[\ensuremath{-}0{,}16;\ \ensuremath{-}0{,}09]}
+\expandafter\def\csname E/RTS/diff/gp/gp_cb/wings\endcsname{\ensuremath{-}0{,}66}
+\expandafter\def\csname E/RTS/ci/gp/gp_cb/wings\endcsname{[\ensuremath{-}0{,}79;\ \ensuremath{-}0{,}53]}
+\expandafter\def\csname E/RTS/diff/gp/gp_indep/wings\endcsname{\ensuremath{-}0{,}02}
+\expandafter\def\csname E/RTS/ci/gp/gp_indep/wings\endcsname{[\ensuremath{-}0{,}04;\ \ensuremath{-}0{,}00]}
+\expandafter\def\csname E/RTS/diff/gp/gp_homo/wings\endcsname{0{,}02}
+\expandafter\def\csname E/RTS/ci/gp/gp_homo/wings\endcsname{[0{,}00;\ 0{,}04]}
+\expandafter\def\csname E/RTS/diff/gp/gp_param/wings\endcsname{\ensuremath{-}0{,}05}
+\expandafter\def\csname E/RTS/ci/gp/gp_param/wings\endcsname{[\ensuremath{-}0{,}07;\ \ensuremath{-}0{,}04]}
+\expandafter\def\csname E/RTS/diff/gp_af/best_cb/slice\endcsname{\ensuremath{-}0{,}63}
+\expandafter\def\csname E/RTS/ci/gp_af/best_cb/slice\endcsname{[\ensuremath{-}0{,}80;\ \ensuremath{-}0{,}45]}
+\expandafter\def\csname E/RTS/diff/gp_af/hist/slice\endcsname{\ensuremath{-}0{,}03}
+\expandafter\def\csname E/RTS/ci/gp_af/hist/slice\endcsname{[\ensuremath{-}0{,}10;\ 0{,}05]}
+\expandafter\def\csname E/RTS/diff/gp_af/hist_cb/slice\endcsname{\ensuremath{-}0{,}14}
+\expandafter\def\csname E/RTS/ci/gp_af/hist_cb/slice\endcsname{[\ensuremath{-}0{,}19;\ \ensuremath{-}0{,}09]}
+\expandafter\def\csname E/RTS/diff/gp_af/gp/slice\endcsname{0{,}00}
+\expandafter\def\csname E/RTS/ci/gp_af/gp/slice\endcsname{[\ensuremath{-}0{,}03;\ 0{,}03]}
+\expandafter\def\csname E/RTS/diff/gp_af/gp_cb/slice\endcsname{\ensuremath{-}0{,}42}
+\expandafter\def\csname E/RTS/ci/gp_af/gp_cb/slice\endcsname{[\ensuremath{-}0{,}57;\ \ensuremath{-}0{,}26]}
+\expandafter\def\csname E/RTS/diff/gp_af/moex_today/slice\endcsname{0{,}66}
+\expandafter\def\csname E/RTS/ci/gp_af/moex_today/slice\endcsname{[0{,}54;\ 0{,}79]}
+\expandafter\def\csname E/RTS/diff/hist_cb/best_cb/slice\endcsname{\ensuremath{-}0{,}49}
+\expandafter\def\csname E/RTS/ci/hist_cb/best_cb/slice\endcsname{[\ensuremath{-}0{,}67;\ \ensuremath{-}0{,}30]}
+\expandafter\def\csname E/RTS/diff/gp/hist_cb/slice\endcsname{\ensuremath{-}0{,}14}
+\expandafter\def\csname E/RTS/ci/gp/hist_cb/slice\endcsname{[\ensuremath{-}0{,}17;\ \ensuremath{-}0{,}11]}
+\expandafter\def\csname E/RTS/diff/gp/gp_cb/slice\endcsname{\ensuremath{-}0{,}42}
+\expandafter\def\csname E/RTS/ci/gp/gp_cb/slice\endcsname{[\ensuremath{-}0{,}57;\ \ensuremath{-}0{,}26]}
+\expandafter\def\csname E/RTS/diff/gp/gp_indep/slice\endcsname{\ensuremath{-}0{,}03}
+\expandafter\def\csname E/RTS/ci/gp/gp_indep/slice\endcsname{[\ensuremath{-}0{,}10;\ 0{,}05]}
+\expandafter\def\csname E/RTS/diff/gp/gp_homo/slice\endcsname{\ensuremath{-}0{,}03}
+\expandafter\def\csname E/RTS/ci/gp/gp_homo/slice\endcsname{[\ensuremath{-}0{,}04;\ \ensuremath{-}0{,}02]}
+\expandafter\def\csname E/RTS/diff/gp/gp_param/slice\endcsname{0{,}00}
+\expandafter\def\csname E/RTS/ci/gp/gp_param/slice\endcsname{[\ensuremath{-}0{,}02;\ 0{,}02]}
+\expandafter\def\csname E/RTS/diff/gp_af/best_cb/far\endcsname{\ensuremath{-}1{,}27}
+\expandafter\def\csname E/RTS/ci/gp_af/best_cb/far\endcsname{[\ensuremath{-}1{,}59;\ \ensuremath{-}0{,}97]}
+\expandafter\def\csname E/RTS/diff/gp_af/hist/far\endcsname{0{,}20}
+\expandafter\def\csname E/RTS/ci/gp_af/hist/far\endcsname{[0{,}07;\ 0{,}34]}
+\expandafter\def\csname E/RTS/diff/gp_af/hist_cb/far\endcsname{\ensuremath{-}0{,}27}
+\expandafter\def\csname E/RTS/ci/gp_af/hist_cb/far\endcsname{[\ensuremath{-}0{,}43;\ \ensuremath{-}0{,}10]}
+\expandafter\def\csname E/RTS/diff/gp_af/gp/far\endcsname{0{,}16}
+\expandafter\def\csname E/RTS/ci/gp_af/gp/far\endcsname{[0{,}04;\ 0{,}29]}
+\expandafter\def\csname E/RTS/diff/gp_af/gp_cb/far\endcsname{\ensuremath{-}1{,}28}
+\expandafter\def\csname E/RTS/ci/gp_af/gp_cb/far\endcsname{[\ensuremath{-}1{,}57;\ \ensuremath{-}0{,}99]}
+\expandafter\def\csname E/RTS/diff/gp_af/moex_today/far\endcsname{0{,}78}
+\expandafter\def\csname E/RTS/ci/gp_af/moex_today/far\endcsname{[0{,}59;\ 1{,}01]}
+\expandafter\def\csname E/RTS/diff/hist_cb/best_cb/far\endcsname{\ensuremath{-}1{,}00}
+\expandafter\def\csname E/RTS/ci/hist_cb/best_cb/far\endcsname{[\ensuremath{-}1{,}27;\ \ensuremath{-}0{,}73]}
+\expandafter\def\csname E/RTS/diff/gp/hist_cb/far\endcsname{\ensuremath{-}0{,}43}
+\expandafter\def\csname E/RTS/ci/gp/hist_cb/far\endcsname{[\ensuremath{-}0{,}53;\ \ensuremath{-}0{,}34]}
+\expandafter\def\csname E/RTS/diff/gp/gp_cb/far\endcsname{\ensuremath{-}1{,}44}
+\expandafter\def\csname E/RTS/ci/gp/gp_cb/far\endcsname{[\ensuremath{-}1{,}69;\ \ensuremath{-}1{,}18]}
+\expandafter\def\csname E/RTS/diff/gp/gp_indep/far\endcsname{0{,}04}
+\expandafter\def\csname E/RTS/ci/gp/gp_indep/far\endcsname{[\ensuremath{-}0{,}03;\ 0{,}09]}
+\expandafter\def\csname E/RTS/diff/gp/gp_homo/far\endcsname{\ensuremath{-}0{,}02}
+\expandafter\def\csname E/RTS/ci/gp/gp_homo/far\endcsname{[\ensuremath{-}0{,}03;\ \ensuremath{-}0{,}00]}
+\expandafter\def\csname E/RTS/diff/gp/gp_param/far\endcsname{\ensuremath{-}0{,}02}
+\expandafter\def\csname E/RTS/ci/gp/gp_param/far\endcsname{[\ensuremath{-}0{,}04;\ 0{,}00]}
+\expandafter\def\csname E/RTS/diff/gp_af/best_cb/topn/40\endcsname{\ensuremath{-}0{,}21}
+\expandafter\def\csname E/RTS/ci/gp_af/best_cb/topn/40\endcsname{[\ensuremath{-}0{,}62;\ 0{,}33]}
+\expandafter\def\csname E/RTS/diff/gp_af/hist/topn/40\endcsname{\ensuremath{-}1{,}08}
+\expandafter\def\csname E/RTS/ci/gp_af/hist/topn/40\endcsname{[\ensuremath{-}1{,}93;\ \ensuremath{-}0{,}43]}
+\expandafter\def\csname E/RTS/diff/gp_af/hist_cb/topn/40\endcsname{\ensuremath{-}0{,}34}
+\expandafter\def\csname E/RTS/ci/gp_af/hist_cb/topn/40\endcsname{[\ensuremath{-}0{,}61;\ \ensuremath{-}0{,}10]}
+\expandafter\def\csname E/RTS/diff/gp_af/gp/topn/40\endcsname{\ensuremath{-}0{,}19}
+\expandafter\def\csname E/RTS/ci/gp_af/gp/topn/40\endcsname{[\ensuremath{-}0{,}51;\ 0{,}01]}
+\expandafter\def\csname E/RTS/diff/gp_af/gp_cb/topn/40\endcsname{0{,}13}
+\expandafter\def\csname E/RTS/ci/gp_af/gp_cb/topn/40\endcsname{[\ensuremath{-}0{,}20;\ 0{,}63]}
+\expandafter\def\csname E/RTS/diff/gp_af/moex_today/topn/40\endcsname{0{,}19}
+\expandafter\def\csname E/RTS/ci/gp_af/moex_today/topn/40\endcsname{[\ensuremath{-}0{,}23;\ 0{,}72]}
+\expandafter\def\csname E/RTS/diff/hist_cb/best_cb/topn/40\endcsname{0{,}13}
+\expandafter\def\csname E/RTS/ci/hist_cb/best_cb/topn/40\endcsname{[\ensuremath{-}0{,}42;\ 0{,}88]}
+\expandafter\def\csname E/RTS/diff/gp/hist_cb/topn/40\endcsname{\ensuremath{-}0{,}15}
+\expandafter\def\csname E/RTS/ci/gp/hist_cb/topn/40\endcsname{[\ensuremath{-}0{,}27;\ \ensuremath{-}0{,}04]}
+\expandafter\def\csname E/RTS/diff/gp/gp_cb/topn/40\endcsname{0{,}32}
+\expandafter\def\csname E/RTS/ci/gp/gp_cb/topn/40\endcsname{[\ensuremath{-}0{,}19;\ 1{,}11]}
+\expandafter\def\csname E/RTS/diff/gp/gp_indep/topn/40\endcsname{0{,}03}
+\expandafter\def\csname E/RTS/ci/gp/gp_indep/topn/40\endcsname{[\ensuremath{-}0{,}04;\ 0{,}12]}
+\expandafter\def\csname E/RTS/diff/gp/gp_homo/topn/40\endcsname{0{,}06}
+\expandafter\def\csname E/RTS/ci/gp/gp_homo/topn/40\endcsname{[0{,}01;\ 0{,}13]}
+\expandafter\def\csname E/RTS/diff/gp/gp_param/topn/40\endcsname{\ensuremath{-}0{,}06}
+\expandafter\def\csname E/RTS/ci/gp/gp_param/topn/40\endcsname{[\ensuremath{-}0{,}13;\ 0{,}02]}
+\expandafter\def\csname E/RTS/diff/gp_af/best_cb/topn/20\endcsname{0{,}14}
+\expandafter\def\csname E/RTS/ci/gp_af/best_cb/topn/20\endcsname{[\ensuremath{-}0{,}02;\ 0{,}31]}
+\expandafter\def\csname E/RTS/diff/gp_af/hist/topn/20\endcsname{\ensuremath{-}0{,}32}
+\expandafter\def\csname E/RTS/ci/gp_af/hist/topn/20\endcsname{[\ensuremath{-}0{,}42;\ \ensuremath{-}0{,}23]}
+\expandafter\def\csname E/RTS/diff/gp_af/hist_cb/topn/20\endcsname{\ensuremath{-}0{,}12}
+\expandafter\def\csname E/RTS/ci/gp_af/hist_cb/topn/20\endcsname{[\ensuremath{-}0{,}19;\ \ensuremath{-}0{,}06]}
+\expandafter\def\csname E/RTS/diff/gp_af/gp/topn/20\endcsname{\ensuremath{-}0{,}05}
+\expandafter\def\csname E/RTS/ci/gp_af/gp/topn/20\endcsname{[\ensuremath{-}0{,}11;\ \ensuremath{-}0{,}01]}
+\expandafter\def\csname E/RTS/diff/gp_af/gp_cb/topn/20\endcsname{0{,}29}
+\expandafter\def\csname E/RTS/ci/gp_af/gp_cb/topn/20\endcsname{[0{,}12;\ 0{,}46]}
+\expandafter\def\csname E/RTS/diff/gp_af/moex_today/topn/20\endcsname{0{,}60}
+\expandafter\def\csname E/RTS/ci/gp_af/moex_today/topn/20\endcsname{[0{,}44;\ 0{,}75]}
+\expandafter\def\csname E/RTS/diff/hist_cb/best_cb/topn/20\endcsname{0{,}26}
+\expandafter\def\csname E/RTS/ci/hist_cb/best_cb/topn/20\endcsname{[0{,}07;\ 0{,}45]}
+\expandafter\def\csname E/RTS/diff/gp/hist_cb/topn/20\endcsname{\ensuremath{-}0{,}06}
+\expandafter\def\csname E/RTS/ci/gp/hist_cb/topn/20\endcsname{[\ensuremath{-}0{,}09;\ \ensuremath{-}0{,}04]}
+\expandafter\def\csname E/RTS/diff/gp/gp_cb/topn/20\endcsname{0{,}34}
+\expandafter\def\csname E/RTS/ci/gp/gp_cb/topn/20\endcsname{[0{,}16;\ 0{,}53]}
+\expandafter\def\csname E/RTS/diff/gp/gp_indep/topn/20\endcsname{\ensuremath{-}0{,}02}
+\expandafter\def\csname E/RTS/ci/gp/gp_indep/topn/20\endcsname{[\ensuremath{-}0{,}06;\ 0{,}02]}
+\expandafter\def\csname E/RTS/diff/gp/gp_homo/topn/20\endcsname{0{,}01}
+\expandafter\def\csname E/RTS/ci/gp/gp_homo/topn/20\endcsname{[0{,}00;\ 0{,}02]}
+\expandafter\def\csname E/RTS/diff/gp/gp_param/topn/20\endcsname{\ensuremath{-}0{,}03}
+\expandafter\def\csname E/RTS/ci/gp/gp_param/topn/20\endcsname{[\ensuremath{-}0{,}04;\ \ensuremath{-}0{,}02]}
+\expandafter\def\csname E/RTS/diff/gp_af/best_cb/topn/10\endcsname{\ensuremath{-}0{,}29}
+\expandafter\def\csname E/RTS/ci/gp_af/best_cb/topn/10\endcsname{[\ensuremath{-}0{,}47;\ \ensuremath{-}0{,}13]}
+\expandafter\def\csname E/RTS/diff/gp_af/hist/topn/10\endcsname{\ensuremath{-}0{,}21}
+\expandafter\def\csname E/RTS/ci/gp_af/hist/topn/10\endcsname{[\ensuremath{-}0{,}30;\ \ensuremath{-}0{,}11]}
+\expandafter\def\csname E/RTS/diff/gp_af/hist_cb/topn/10\endcsname{\ensuremath{-}0{,}09}
+\expandafter\def\csname E/RTS/ci/gp_af/hist_cb/topn/10\endcsname{[\ensuremath{-}0{,}15;\ \ensuremath{-}0{,}03]}
+\expandafter\def\csname E/RTS/diff/gp_af/gp/topn/10\endcsname{0{,}01}
+\expandafter\def\csname E/RTS/ci/gp_af/gp/topn/10\endcsname{[\ensuremath{-}0{,}04;\ 0{,}08]}
+\expandafter\def\csname E/RTS/diff/gp_af/gp_cb/topn/10\endcsname{\ensuremath{-}0{,}28}
+\expandafter\def\csname E/RTS/ci/gp_af/gp_cb/topn/10\endcsname{[\ensuremath{-}0{,}46;\ \ensuremath{-}0{,}12]}
+\expandafter\def\csname E/RTS/diff/gp_af/moex_today/topn/10\endcsname{0{,}60}
+\expandafter\def\csname E/RTS/ci/gp_af/moex_today/topn/10\endcsname{[0{,}46;\ 0{,}74]}
+\expandafter\def\csname E/RTS/diff/hist_cb/best_cb/topn/10\endcsname{\ensuremath{-}0{,}20}
+\expandafter\def\csname E/RTS/ci/hist_cb/best_cb/topn/10\endcsname{[\ensuremath{-}0{,}37;\ \ensuremath{-}0{,}03]}
+\expandafter\def\csname E/RTS/diff/gp/hist_cb/topn/10\endcsname{\ensuremath{-}0{,}11}
+\expandafter\def\csname E/RTS/ci/gp/hist_cb/topn/10\endcsname{[\ensuremath{-}0{,}14;\ \ensuremath{-}0{,}07]}
+\expandafter\def\csname E/RTS/diff/gp/gp_cb/topn/10\endcsname{\ensuremath{-}0{,}30}
+\expandafter\def\csname E/RTS/ci/gp/gp_cb/topn/10\endcsname{[\ensuremath{-}0{,}49;\ \ensuremath{-}0{,}13]}
+\expandafter\def\csname E/RTS/diff/gp/gp_indep/topn/10\endcsname{\ensuremath{-}0{,}05}
+\expandafter\def\csname E/RTS/ci/gp/gp_indep/topn/10\endcsname{[\ensuremath{-}0{,}09;\ \ensuremath{-}0{,}01]}
+\expandafter\def\csname E/RTS/diff/gp/gp_homo/topn/10\endcsname{0{,}00}
+\expandafter\def\csname E/RTS/ci/gp/gp_homo/topn/10\endcsname{[\ensuremath{-}0{,}00;\ 0{,}01]}
+\expandafter\def\csname E/RTS/diff/gp/gp_param/topn/10\endcsname{\ensuremath{-}0{,}03}
+\expandafter\def\csname E/RTS/ci/gp/gp_param/topn/10\endcsname{[\ensuremath{-}0{,}04;\ \ensuremath{-}0{,}02]}
+\expandafter\def\csname E/RTS/diff/gp_af/best_cb/topn/5\endcsname{\ensuremath{-}1{,}12}
+\expandafter\def\csname E/RTS/ci/gp_af/best_cb/topn/5\endcsname{[\ensuremath{-}1{,}38;\ \ensuremath{-}0{,}89]}
+\expandafter\def\csname E/RTS/diff/gp_af/hist/topn/5\endcsname{\ensuremath{-}0{,}08}
+\expandafter\def\csname E/RTS/ci/gp_af/hist/topn/5\endcsname{[\ensuremath{-}0{,}18;\ 0{,}04]}
+\expandafter\def\csname E/RTS/diff/gp_af/hist_cb/topn/5\endcsname{\ensuremath{-}0{,}03}
+\expandafter\def\csname E/RTS/ci/gp_af/hist_cb/topn/5\endcsname{[\ensuremath{-}0{,}12;\ 0{,}07]}
+\expandafter\def\csname E/RTS/diff/gp_af/gp/topn/5\endcsname{0{,}11}
+\expandafter\def\csname E/RTS/ci/gp_af/gp/topn/5\endcsname{[0{,}04;\ 0{,}20]}
+\expandafter\def\csname E/RTS/diff/gp_af/gp_cb/topn/5\endcsname{\ensuremath{-}1{,}28}
+\expandafter\def\csname E/RTS/ci/gp_af/gp_cb/topn/5\endcsname{[\ensuremath{-}1{,}54;\ \ensuremath{-}1{,}05]}
+\expandafter\def\csname E/RTS/diff/gp_af/moex_today/topn/5\endcsname{0{,}68}
+\expandafter\def\csname E/RTS/ci/gp_af/moex_today/topn/5\endcsname{[0{,}53;\ 0{,}83]}
+\expandafter\def\csname E/RTS/diff/hist_cb/best_cb/topn/5\endcsname{\ensuremath{-}1{,}09}
+\expandafter\def\csname E/RTS/ci/hist_cb/best_cb/topn/5\endcsname{[\ensuremath{-}1{,}32;\ \ensuremath{-}0{,}88]}
+\expandafter\def\csname E/RTS/diff/gp/hist_cb/topn/5\endcsname{\ensuremath{-}0{,}14}
+\expandafter\def\csname E/RTS/ci/gp/hist_cb/topn/5\endcsname{[\ensuremath{-}0{,}19;\ \ensuremath{-}0{,}10]}
+\expandafter\def\csname E/RTS/diff/gp/gp_cb/topn/5\endcsname{\ensuremath{-}1{,}39}
+\expandafter\def\csname E/RTS/ci/gp/gp_cb/topn/5\endcsname{[\ensuremath{-}1{,}63;\ \ensuremath{-}1{,}19]}
+\expandafter\def\csname E/RTS/diff/gp/gp_indep/topn/5\endcsname{\ensuremath{-}0{,}07}
+\expandafter\def\csname E/RTS/ci/gp/gp_indep/topn/5\endcsname{[\ensuremath{-}0{,}11;\ \ensuremath{-}0{,}04]}
+\expandafter\def\csname E/RTS/diff/gp/gp_homo/topn/5\endcsname{\ensuremath{-}0{,}00}
+\expandafter\def\csname E/RTS/ci/gp/gp_homo/topn/5\endcsname{[\ensuremath{-}0{,}01;\ 0{,}00]}
+\expandafter\def\csname E/RTS/diff/gp/gp_param/topn/5\endcsname{\ensuremath{-}0{,}02}
+\expandafter\def\csname E/RTS/ci/gp/gp_param/topn/5\endcsname{[\ensuremath{-}0{,}03;\ \ensuremath{-}0{,}01]}
+\expandafter\def\csname E/RTS/by_visible/hist/0\endcsname{2{,}95}
+\expandafter\def\csname E/RTS/by_visible/cb_quad/0\endcsname{5{,}20}
+\expandafter\def\csname E/RTS/by_visible/cb_svi/0\endcsname{5{,}20}
+\expandafter\def\csname E/RTS/by_visible/cb_ssvi/0\endcsname{4{,}04}
+\expandafter\def\csname E/RTS/by_visible/hist_cb/0\endcsname{2{,}96}
+\expandafter\def\csname E/RTS/by_visible/gp/0\endcsname{2{,}87}
+\expandafter\def\csname E/RTS/by_visible/gp_af/0\endcsname{2{,}80}
+\expandafter\def\csname E/RTS/by_visible/moex_today/0\endcsname{1{,}62}
+\expandafter\def\csname E/RTS/by_visible/hist/1-2\endcsname{2{,}14}
+\expandafter\def\csname E/RTS/by_visible/cb_quad/1-2\endcsname{4{,}28}
+\expandafter\def\csname E/RTS/by_visible/cb_svi/1-2\endcsname{4{,}28}
+\expandafter\def\csname E/RTS/by_visible/cb_ssvi/1-2\endcsname{3{,}43}
+\expandafter\def\csname E/RTS/by_visible/hist_cb/1-2\endcsname{1{,}68}
+\expandafter\def\csname E/RTS/by_visible/gp/1-2\endcsname{1{,}58}
+\expandafter\def\csname E/RTS/by_visible/gp_af/1-2\endcsname{1{,}58}
+\expandafter\def\csname E/RTS/by_visible/moex_today/1-2\endcsname{1{,}35}
+\expandafter\def\csname E/RTS/by_visible/hist/3-4\endcsname{1{,}80}
+\expandafter\def\csname E/RTS/by_visible/cb_quad/3-4\endcsname{3{,}63}
+\expandafter\def\csname E/RTS/by_visible/cb_svi/3-4\endcsname{3{,}63}
+\expandafter\def\csname E/RTS/by_visible/cb_ssvi/3-4\endcsname{1{,}66}
+\expandafter\def\csname E/RTS/by_visible/hist_cb/3-4\endcsname{1{,}27}
+\expandafter\def\csname E/RTS/by_visible/gp/3-4\endcsname{1{,}15}
+\expandafter\def\csname E/RTS/by_visible/gp_af/3-4\endcsname{1{,}15}
+\expandafter\def\csname E/RTS/by_visible/moex_today/3-4\endcsname{1{,}23}
+\expandafter\def\csname E/RTS/by_visible/hist/5-9\endcsname{1{,}45}
+\expandafter\def\csname E/RTS/by_visible/cb_quad/5-9\endcsname{1{,}27}
+\expandafter\def\csname E/RTS/by_visible/cb_svi/5-9\endcsname{1{,}62}
+\expandafter\def\csname E/RTS/by_visible/cb_ssvi/5-9\endcsname{1{,}23}
+\expandafter\def\csname E/RTS/by_visible/hist_cb/5-9\endcsname{1{,}03}
+\expandafter\def\csname E/RTS/by_visible/gp/5-9\endcsname{0{,}92}
+\expandafter\def\csname E/RTS/by_visible/gp_af/5-9\endcsname{0{,}92}
+\expandafter\def\csname E/RTS/by_visible/moex_today/5-9\endcsname{1{,}10}
+\expandafter\def\csname E/RTS/by_visible/hist/10+\endcsname{1{,}16}
+\expandafter\def\csname E/RTS/by_visible/cb_quad/10+\endcsname{0{,}86}
+\expandafter\def\csname E/RTS/by_visible/cb_svi/10+\endcsname{0{,}99}
+\expandafter\def\csname E/RTS/by_visible/cb_ssvi/10+\endcsname{1{,}05}
+\expandafter\def\csname E/RTS/by_visible/hist_cb/10+\endcsname{0{,}90}
+\expandafter\def\csname E/RTS/by_visible/gp/10+\endcsname{0{,}79}
+\expandafter\def\csname E/RTS/by_visible/gp_af/10+\endcsname{0{,}79}
+\expandafter\def\csname E/RTS/by_visible/moex_today/10+\endcsname{1{,}01}
+\expandafter\def\csname E/RTS/by_T/hist/3-7\endcsname{1{,}93}
+\expandafter\def\csname E/RTS/by_T/cb_quad/3-7\endcsname{3{,}94}
+\expandafter\def\csname E/RTS/by_T/cb_svi/3-7\endcsname{3{,}94}
+\expandafter\def\csname E/RTS/by_T/cb_ssvi/3-7\endcsname{1{,}96}
+\expandafter\def\csname E/RTS/by_T/hist_cb/3-7\endcsname{1{,}27}
+\expandafter\def\csname E/RTS/by_T/gp/3-7\endcsname{1{,}16}
+\expandafter\def\csname E/RTS/by_T/gp_af/3-7\endcsname{1{,}16}
+\expandafter\def\csname E/RTS/by_T/moex_today/3-7\endcsname{1{,}47}
+\expandafter\def\csname E/RTS/by_T/hist/8-14\endcsname{2{,}55}
+\expandafter\def\csname E/RTS/by_T/cb_quad/8-14\endcsname{4{,}80}
+\expandafter\def\csname E/RTS/by_T/cb_svi/8-14\endcsname{4{,}81}
+\expandafter\def\csname E/RTS/by_T/cb_ssvi/8-14\endcsname{2{,}10}
+\expandafter\def\csname E/RTS/by_T/hist_cb/8-14\endcsname{1{,}91}
+\expandafter\def\csname E/RTS/by_T/gp/8-14\endcsname{1{,}81}
+\expandafter\def\csname E/RTS/by_T/gp_af/8-14\endcsname{1{,}81}
+\expandafter\def\csname E/RTS/by_T/moex_today/8-14\endcsname{1{,}45}
+\expandafter\def\csname E/RTS/by_T/hist/15-30\endcsname{1{,}98}
+\expandafter\def\csname E/RTS/by_T/cb_quad/15-30\endcsname{3{,}26}
+\expandafter\def\csname E/RTS/by_T/cb_svi/15-30\endcsname{3{,}35}
+\expandafter\def\csname E/RTS/by_T/cb_ssvi/15-30\endcsname{1{,}73}
+\expandafter\def\csname E/RTS/by_T/hist_cb/15-30\endcsname{1{,}69}
+\expandafter\def\csname E/RTS/by_T/gp/15-30\endcsname{1{,}63}
+\expandafter\def\csname E/RTS/by_T/gp_af/15-30\endcsname{1{,}59}
+\expandafter\def\csname E/RTS/by_T/moex_today/15-30\endcsname{1{,}22}
+\expandafter\def\csname E/RTS/by_T/hist/31-60\endcsname{1{,}73}
+\expandafter\def\csname E/RTS/by_T/cb_quad/31-60\endcsname{3{,}03}
+\expandafter\def\csname E/RTS/by_T/cb_svi/31-60\endcsname{3{,}10}
+\expandafter\def\csname E/RTS/by_T/cb_ssvi/31-60\endcsname{1{,}66}
+\expandafter\def\csname E/RTS/by_T/hist_cb/31-60\endcsname{1{,}51}
+\expandafter\def\csname E/RTS/by_T/gp/31-60\endcsname{1{,}43}
+\expandafter\def\csname E/RTS/by_T/gp_af/31-60\endcsname{1{,}38}
+\expandafter\def\csname E/RTS/by_T/moex_today/31-60\endcsname{1{,}18}
+\expandafter\def\csname E/RTS/by_T/hist/61-90\endcsname{1{,}49}
+\expandafter\def\csname E/RTS/by_T/cb_quad/61-90\endcsname{2{,}06}
+\expandafter\def\csname E/RTS/by_T/cb_svi/61-90\endcsname{2{,}15}
+\expandafter\def\csname E/RTS/by_T/cb_ssvi/61-90\endcsname{1{,}43}
+\expandafter\def\csname E/RTS/by_T/hist_cb/61-90\endcsname{1{,}32}
+\expandafter\def\csname E/RTS/by_T/gp/61-90\endcsname{1{,}23}
+\expandafter\def\csname E/RTS/by_T/gp_af/61-90\endcsname{1{,}19}
+\expandafter\def\csname E/RTS/by_T/moex_today/61-90\endcsname{1{,}07}
+\expandafter\def\csname E/RTS/by_T/hist/91-180\endcsname{2{,}54}
+\expandafter\def\csname E/RTS/by_T/cb_quad/91-180\endcsname{4{,}51}
+\expandafter\def\csname E/RTS/by_T/cb_svi/91-180\endcsname{4{,}54}
+\expandafter\def\csname E/RTS/by_T/cb_ssvi/91-180\endcsname{2{,}39}
+\expandafter\def\csname E/RTS/by_T/hist_cb/91-180\endcsname{2{,}27}
+\expandafter\def\csname E/RTS/by_T/gp/91-180\endcsname{2{,}18}
+\expandafter\def\csname E/RTS/by_T/gp_af/91-180\endcsname{2{,}19}
+\expandafter\def\csname E/RTS/by_T/moex_today/91-180\endcsname{1{,}61}
+\expandafter\def\csname E/RTS/by_z/hist/0-0.5\endcsname{2{,}18}
+\expandafter\def\csname E/RTS/by_z/cb_quad/0-0.5\endcsname{2{,}32}
+\expandafter\def\csname E/RTS/by_z/cb_svi/0-0.5\endcsname{2{,}35}
+\expandafter\def\csname E/RTS/by_z/cb_ssvi/0-0.5\endcsname{1{,}66}
+\expandafter\def\csname E/RTS/by_z/hist_cb/0-0.5\endcsname{1{,}67}
+\expandafter\def\csname E/RTS/by_z/gp/0-0.5\endcsname{1{,}58}
+\expandafter\def\csname E/RTS/by_z/gp_af/0-0.5\endcsname{1{,}57}
+\expandafter\def\csname E/RTS/by_z/moex_today/0-0.5\endcsname{1{,}32}
+\expandafter\def\csname E/RTS/by_z/hist/0.5-1\endcsname{2{,}15}
+\expandafter\def\csname E/RTS/by_z/cb_quad/0.5-1\endcsname{2{,}87}
+\expandafter\def\csname E/RTS/by_z/cb_svi/0.5-1\endcsname{2{,}90}
+\expandafter\def\csname E/RTS/by_z/cb_ssvi/0.5-1\endcsname{1{,}71}
+\expandafter\def\csname E/RTS/by_z/hist_cb/0.5-1\endcsname{1{,}76}
+\expandafter\def\csname E/RTS/by_z/gp/0.5-1\endcsname{1{,}69}
+\expandafter\def\csname E/RTS/by_z/gp_af/0.5-1\endcsname{1{,}62}
+\expandafter\def\csname E/RTS/by_z/moex_today/0.5-1\endcsname{1{,}26}
+\expandafter\def\csname E/RTS/by_z/hist/1-2\endcsname{1{,}84}
+\expandafter\def\csname E/RTS/by_z/cb_quad/1-2\endcsname{4{,}04}
+\expandafter\def\csname E/RTS/by_z/cb_svi/1-2\endcsname{4{,}10}
+\expandafter\def\csname E/RTS/by_z/cb_ssvi/1-2\endcsname{1{,}92}
+\expandafter\def\csname E/RTS/by_z/hist_cb/1-2\endcsname{1{,}57}
+\expandafter\def\csname E/RTS/by_z/gp/1-2\endcsname{1{,}47}
+\expandafter\def\csname E/RTS/by_z/gp_af/1-2\endcsname{1{,}48}
+\expandafter\def\csname E/RTS/by_z/moex_today/1-2\endcsname{1{,}29}
+\expandafter\def\csname E/RTS/by_z/hist/>2\endcsname{1{,}92}
+\expandafter\def\csname E/RTS/by_z/cb_quad/>2\endcsname{6{,}64}
+\expandafter\def\csname E/RTS/by_z/cb_svi/>2\endcsname{6{,}73}
+\expandafter\def\csname E/RTS/by_z/cb_ssvi/>2\endcsname{2{,}44}
+\expandafter\def\csname E/RTS/by_z/hist_cb/>2\endcsname{1{,}81}
+\expandafter\def\csname E/RTS/by_z/gp/>2\endcsname{1{,}74}
+\expandafter\def\csname E/RTS/by_z/gp_af/>2\endcsname{1{,}74}
+\expandafter\def\csname E/RTS/by_z/moex_today/>2\endcsname{1{,}40}
+\expandafter\def\csname E/RTS/by_n/hist/1\endcsname{3{,}06}
+\expandafter\def\csname E/RTS/by_n/cb_quad/1\endcsname{4{,}88}
+\expandafter\def\csname E/RTS/by_n/cb_svi/1\endcsname{4{,}92}
+\expandafter\def\csname E/RTS/by_n/cb_ssvi/1\endcsname{2{,}47}
+\expandafter\def\csname E/RTS/by_n/hist_cb/1\endcsname{2{,}79}
+\expandafter\def\csname E/RTS/by_n/gp/1\endcsname{2{,}71}
+\expandafter\def\csname E/RTS/by_n/gp_af/1\endcsname{2{,}62}
+\expandafter\def\csname E/RTS/by_n/moex_today/1\endcsname{1{,}70}
+\expandafter\def\csname E/RTS/by_n/hist/2-5\endcsname{2{,}09}
+\expandafter\def\csname E/RTS/by_n/cb_quad/2-5\endcsname{3{,}85}
+\expandafter\def\csname E/RTS/by_n/cb_svi/2-5\endcsname{3{,}92}
+\expandafter\def\csname E/RTS/by_n/cb_ssvi/2-5\endcsname{1{,}96}
+\expandafter\def\csname E/RTS/by_n/hist_cb/2-5\endcsname{1{,}84}
+\expandafter\def\csname E/RTS/by_n/gp/2-5\endcsname{1{,}77}
+\expandafter\def\csname E/RTS/by_n/gp_af/2-5\endcsname{1{,}76}
+\expandafter\def\csname E/RTS/by_n/moex_today/2-5\endcsname{1{,}36}
+\expandafter\def\csname E/RTS/by_n/hist/6-30\endcsname{1{,}65}
+\expandafter\def\csname E/RTS/by_n/cb_quad/6-30\endcsname{3{,}17}
+\expandafter\def\csname E/RTS/by_n/cb_svi/6-30\endcsname{3{,}22}
+\expandafter\def\csname E/RTS/by_n/cb_ssvi/6-30\endcsname{1{,}58}
+\expandafter\def\csname E/RTS/by_n/hist_cb/6-30\endcsname{1{,}25}
+\expandafter\def\csname E/RTS/by_n/gp/6-30\endcsname{1{,}15}
+\expandafter\def\csname E/RTS/by_n/gp_af/6-30\endcsname{1{,}15}
+\expandafter\def\csname E/RTS/by_n/moex_today/6-30\endcsname{1{,}09}
+\expandafter\def\csname E/RTS/by_n/hist/>30\endcsname{1{,}89}
+\expandafter\def\csname E/RTS/by_n/cb_quad/>30\endcsname{3{,}22}
+\expandafter\def\csname E/RTS/by_n/cb_svi/>30\endcsname{3{,}23}
+\expandafter\def\csname E/RTS/by_n/cb_ssvi/>30\endcsname{1{,}72}
+\expandafter\def\csname E/RTS/by_n/hist_cb/>30\endcsname{1{,}21}
+\expandafter\def\csname E/RTS/by_n/gp/>30\endcsname{1{,}10}
+\expandafter\def\csname E/RTS/by_n/gp_af/>30\endcsname{1{,}10}
+\expandafter\def\csname E/RTS/by_n/moex_today/>30\endcsname{1{,}34}
+\expandafter\def\csname E/RTS/regime/move_median/0.1/calm\endcsname{0{,}48}
+\expandafter\def\csname E/RTS/regime/hist/0.1/calm\endcsname{1{,}58}
+\expandafter\def\csname E/RTS/regime/cb_quad/0.1/calm\endcsname{2{,}53}
+\expandafter\def\csname E/RTS/regime/cb_svi/0.1/calm\endcsname{2{,}61}
+\expandafter\def\csname E/RTS/regime/cb_ssvi/0.1/calm\endcsname{1{,}29}
+\expandafter\def\csname E/RTS/regime/hist_cb/0.1/calm\endcsname{1{,}41}
+\expandafter\def\csname E/RTS/regime/gp/0.1/calm\endcsname{1{,}34}
+\expandafter\def\csname E/RTS/regime/gp_af/0.1/calm\endcsname{1{,}27}
+\expandafter\def\csname E/RTS/regime/moex_today/0.1/calm\endcsname{1{,}12}
+\expandafter\def\csname E/RTS/regime/move_median/0.1/normal\endcsname{0{,}86}
+\expandafter\def\csname E/RTS/regime/hist/0.1/normal\endcsname{1{,}77}
+\expandafter\def\csname E/RTS/regime/cb_quad/0.1/normal\endcsname{2{,}40}
+\expandafter\def\csname E/RTS/regime/cb_svi/0.1/normal\endcsname{2{,}49}
+\expandafter\def\csname E/RTS/regime/cb_ssvi/0.1/normal\endcsname{1{,}28}
+\expandafter\def\csname E/RTS/regime/hist_cb/0.1/normal\endcsname{1{,}38}
+\expandafter\def\csname E/RTS/regime/gp/0.1/normal\endcsname{1{,}26}
+\expandafter\def\csname E/RTS/regime/gp_af/0.1/normal\endcsname{1{,}23}
+\expandafter\def\csname E/RTS/regime/moex_today/0.1/normal\endcsname{1{,}21}
+\expandafter\def\csname E/RTS/regime/move_median/0.1/turbulent\endcsname{1{,}79}
+\expandafter\def\csname E/RTS/regime/hist/0.1/turbulent\endcsname{2{,}60}
+\expandafter\def\csname E/RTS/regime/cb_quad/0.1/turbulent\endcsname{2{,}51}
+\expandafter\def\csname E/RTS/regime/cb_svi/0.1/turbulent\endcsname{2{,}59}
+\expandafter\def\csname E/RTS/regime/cb_ssvi/0.1/turbulent\endcsname{1{,}48}
+\expandafter\def\csname E/RTS/regime/hist_cb/0.1/turbulent\endcsname{1{,}52}
+\expandafter\def\csname E/RTS/regime/gp/0.1/turbulent\endcsname{1{,}33}
+\expandafter\def\csname E/RTS/regime/gp_af/0.1/turbulent\endcsname{1{,}33}
+\expandafter\def\csname E/RTS/regime/moex_today/0.1/turbulent\endcsname{1{,}52}
+\expandafter\def\csname E/RTS/regime/move_median/0.3/calm\endcsname{0{,}48}
+\expandafter\def\csname E/RTS/regime/hist/0.3/calm\endcsname{1{,}55}
+\expandafter\def\csname E/RTS/regime/cb_quad/0.3/calm\endcsname{2{,}21}
+\expandafter\def\csname E/RTS/regime/cb_svi/0.3/calm\endcsname{2{,}34}
+\expandafter\def\csname E/RTS/regime/cb_ssvi/0.3/calm\endcsname{1{,}35}
+\expandafter\def\csname E/RTS/regime/hist_cb/0.3/calm\endcsname{1{,}35}
+\expandafter\def\csname E/RTS/regime/gp/0.3/calm\endcsname{1{,}25}
+\expandafter\def\csname E/RTS/regime/gp_af/0.3/calm\endcsname{1{,}24}
+\expandafter\def\csname E/RTS/regime/moex_today/0.3/calm\endcsname{1{,}08}
+\expandafter\def\csname E/RTS/regime/move_median/0.3/normal\endcsname{0{,}86}
+\expandafter\def\csname E/RTS/regime/hist/0.3/normal\endcsname{1{,}66}
+\expandafter\def\csname E/RTS/regime/cb_quad/0.3/normal\endcsname{2{,}59}
+\expandafter\def\csname E/RTS/regime/cb_svi/0.3/normal\endcsname{2{,}67}
+\expandafter\def\csname E/RTS/regime/cb_ssvi/0.3/normal\endcsname{1{,}32}
+\expandafter\def\csname E/RTS/regime/hist_cb/0.3/normal\endcsname{1{,}34}
+\expandafter\def\csname E/RTS/regime/gp/0.3/normal\endcsname{1{,}23}
+\expandafter\def\csname E/RTS/regime/gp_af/0.3/normal\endcsname{1{,}21}
+\expandafter\def\csname E/RTS/regime/moex_today/0.3/normal\endcsname{1{,}20}
+\expandafter\def\csname E/RTS/regime/move_median/0.3/turbulent\endcsname{1{,}79}
+\expandafter\def\csname E/RTS/regime/hist/0.3/turbulent\endcsname{2{,}68}
+\expandafter\def\csname E/RTS/regime/cb_quad/0.3/turbulent\endcsname{2{,}54}
+\expandafter\def\csname E/RTS/regime/cb_svi/0.3/turbulent\endcsname{2{,}58}
+\expandafter\def\csname E/RTS/regime/cb_ssvi/0.3/turbulent\endcsname{1{,}52}
+\expandafter\def\csname E/RTS/regime/hist_cb/0.3/turbulent\endcsname{1{,}71}
+\expandafter\def\csname E/RTS/regime/gp/0.3/turbulent\endcsname{1{,}56}
+\expandafter\def\csname E/RTS/regime/gp_af/0.3/turbulent\endcsname{1{,}51}
+\expandafter\def\csname E/RTS/regime/moex_today/0.3/turbulent\endcsname{1{,}58}
+\expandafter\def\csname E/RTS/regime/move_median/0.5/calm\endcsname{0{,}48}
+\expandafter\def\csname E/RTS/regime/hist/0.5/calm\endcsname{1{,}58}
+\expandafter\def\csname E/RTS/regime/cb_quad/0.5/calm\endcsname{2{,}33}
+\expandafter\def\csname E/RTS/regime/cb_svi/0.5/calm\endcsname{2{,}45}
+\expandafter\def\csname E/RTS/regime/cb_ssvi/0.5/calm\endcsname{1{,}44}
+\expandafter\def\csname E/RTS/regime/hist_cb/0.5/calm\endcsname{1{,}41}
+\expandafter\def\csname E/RTS/regime/gp/0.5/calm\endcsname{1{,}36}
+\expandafter\def\csname E/RTS/regime/gp_af/0.5/calm\endcsname{1{,}35}
+\expandafter\def\csname E/RTS/regime/moex_today/0.5/calm\endcsname{1{,}10}
+\expandafter\def\csname E/RTS/regime/move_median/0.5/normal\endcsname{0{,}86}
+\expandafter\def\csname E/RTS/regime/hist/0.5/normal\endcsname{1{,}71}
+\expandafter\def\csname E/RTS/regime/cb_quad/0.5/normal\endcsname{2{,}42}
+\expandafter\def\csname E/RTS/regime/cb_svi/0.5/normal\endcsname{2{,}52}
+\expandafter\def\csname E/RTS/regime/cb_ssvi/0.5/normal\endcsname{1{,}44}
+\expandafter\def\csname E/RTS/regime/hist_cb/0.5/normal\endcsname{1{,}46}
+\expandafter\def\csname E/RTS/regime/gp/0.5/normal\endcsname{1{,}37}
+\expandafter\def\csname E/RTS/regime/gp_af/0.5/normal\endcsname{1{,}36}
+\expandafter\def\csname E/RTS/regime/moex_today/0.5/normal\endcsname{1{,}21}
+\expandafter\def\csname E/RTS/regime/move_median/0.5/turbulent\endcsname{1{,}79}
+\expandafter\def\csname E/RTS/regime/hist/0.5/turbulent\endcsname{2{,}67}
+\expandafter\def\csname E/RTS/regime/cb_quad/0.5/turbulent\endcsname{2{,}75}
+\expandafter\def\csname E/RTS/regime/cb_svi/0.5/turbulent\endcsname{2{,}84}
+\expandafter\def\csname E/RTS/regime/cb_ssvi/0.5/turbulent\endcsname{1{,}66}
+\expandafter\def\csname E/RTS/regime/hist_cb/0.5/turbulent\endcsname{1{,}73}
+\expandafter\def\csname E/RTS/regime/gp/0.5/turbulent\endcsname{1{,}59}
+\expandafter\def\csname E/RTS/regime/gp_af/0.5/turbulent\endcsname{1{,}56}
+\expandafter\def\csname E/RTS/regime/moex_today/0.5/turbulent\endcsname{1{,}54}
+\expandafter\def\csname E/RTS/regime/move_median/0.7/calm\endcsname{0{,}48}
+\expandafter\def\csname E/RTS/regime/hist/0.7/calm\endcsname{1{,}56}
+\expandafter\def\csname E/RTS/regime/cb_quad/0.7/calm\endcsname{3{,}81}
+\expandafter\def\csname E/RTS/regime/cb_svi/0.7/calm\endcsname{3{,}84}
+\expandafter\def\csname E/RTS/regime/cb_ssvi/0.7/calm\endcsname{1{,}70}
+\expandafter\def\csname E/RTS/regime/hist_cb/0.7/calm\endcsname{1{,}48}
+\expandafter\def\csname E/RTS/regime/gp/0.7/calm\endcsname{1{,}42}
+\expandafter\def\csname E/RTS/regime/gp_af/0.7/calm\endcsname{1{,}43}
+\expandafter\def\csname E/RTS/regime/moex_today/0.7/calm\endcsname{1{,}10}
+\expandafter\def\csname E/RTS/regime/move_median/0.7/normal\endcsname{0{,}86}
+\expandafter\def\csname E/RTS/regime/hist/0.7/normal\endcsname{1{,}68}
+\expandafter\def\csname E/RTS/regime/cb_quad/0.7/normal\endcsname{3{,}27}
+\expandafter\def\csname E/RTS/regime/cb_svi/0.7/normal\endcsname{3{,}30}
+\expandafter\def\csname E/RTS/regime/cb_ssvi/0.7/normal\endcsname{1{,}74}
+\expandafter\def\csname E/RTS/regime/hist_cb/0.7/normal\endcsname{1{,}50}
+\expandafter\def\csname E/RTS/regime/gp/0.7/normal\endcsname{1{,}43}
+\expandafter\def\csname E/RTS/regime/gp_af/0.7/normal\endcsname{1{,}42}
+\expandafter\def\csname E/RTS/regime/moex_today/0.7/normal\endcsname{1{,}21}
+\expandafter\def\csname E/RTS/regime/move_median/0.7/turbulent\endcsname{1{,}79}
+\expandafter\def\csname E/RTS/regime/hist/0.7/turbulent\endcsname{2{,}71}
+\expandafter\def\csname E/RTS/regime/cb_quad/0.7/turbulent\endcsname{3{,}74}
+\expandafter\def\csname E/RTS/regime/cb_svi/0.7/turbulent\endcsname{3{,}82}
+\expandafter\def\csname E/RTS/regime/cb_ssvi/0.7/turbulent\endcsname{2{,}05}
+\expandafter\def\csname E/RTS/regime/hist_cb/0.7/turbulent\endcsname{2{,}00}
+\expandafter\def\csname E/RTS/regime/gp/0.7/turbulent\endcsname{1{,}88}
+\expandafter\def\csname E/RTS/regime/gp_af/0.7/turbulent\endcsname{1{,}82}
+\expandafter\def\csname E/RTS/regime/moex_today/0.7/turbulent\endcsname{1{,}55}
+\expandafter\def\csname E/RTS/regime/move_median/0.9/calm\endcsname{0{,}48}
+\expandafter\def\csname E/RTS/regime/hist/0.9/calm\endcsname{1{,}56}
+\expandafter\def\csname E/RTS/regime/cb_quad/0.9/calm\endcsname{4{,}53}
+\expandafter\def\csname E/RTS/regime/cb_svi/0.9/calm\endcsname{4{,}53}
+\expandafter\def\csname E/RTS/regime/cb_ssvi/0.9/calm\endcsname{4{,}15}
+\expandafter\def\csname E/RTS/regime/hist_cb/0.9/calm\endcsname{1{,}62}
+\expandafter\def\csname E/RTS/regime/gp/0.9/calm\endcsname{1{,}54}
+\expandafter\def\csname E/RTS/regime/gp_af/0.9/calm\endcsname{1{,}54}
+\expandafter\def\csname E/RTS/regime/moex_today/0.9/calm\endcsname{1{,}11}
+\expandafter\def\csname E/RTS/regime/move_median/0.9/normal\endcsname{0{,}86}
+\expandafter\def\csname E/RTS/regime/hist/0.9/normal\endcsname{1{,}69}
+\expandafter\def\csname E/RTS/regime/cb_quad/0.9/normal\endcsname{4{,}57}
+\expandafter\def\csname E/RTS/regime/cb_svi/0.9/normal\endcsname{4{,}57}
+\expandafter\def\csname E/RTS/regime/cb_ssvi/0.9/normal\endcsname{3{,}80}
+\expandafter\def\csname E/RTS/regime/hist_cb/0.9/normal\endcsname{1{,}67}
+\expandafter\def\csname E/RTS/regime/gp/0.9/normal\endcsname{1{,}59}
+\expandafter\def\csname E/RTS/regime/gp_af/0.9/normal\endcsname{1{,}59}
+\expandafter\def\csname E/RTS/regime/moex_today/0.9/normal\endcsname{1{,}21}
+\expandafter\def\csname E/RTS/regime/move_median/0.9/turbulent\endcsname{1{,}79}
+\expandafter\def\csname E/RTS/regime/hist/0.9/turbulent\endcsname{2{,}69}
+\expandafter\def\csname E/RTS/regime/cb_quad/0.9/turbulent\endcsname{4{,}73}
+\expandafter\def\csname E/RTS/regime/cb_svi/0.9/turbulent\endcsname{4{,}73}
+\expandafter\def\csname E/RTS/regime/cb_ssvi/0.9/turbulent\endcsname{4{,}08}
+\expandafter\def\csname E/RTS/regime/hist_cb/0.9/turbulent\endcsname{2{,}39}
+\expandafter\def\csname E/RTS/regime/gp/0.9/turbulent\endcsname{2{,}26}
+\expandafter\def\csname E/RTS/regime/gp_af/0.9/turbulent\endcsname{2{,}24}
+\expandafter\def\csname E/RTS/regime/moex_today/0.9/turbulent\endcsname{1{,}55}
+\expandafter\def\csname E/RTS/cover/50/random/0.1\endcsname{66}
+\expandafter\def\csname E/RTS/cover/80/random/0.1\endcsname{89}
+\expandafter\def\csname E/RTS/cover/95/random/0.1\endcsname{96}
+\expandafter\def\csname E/RTS/cover/50/random/0.3\endcsname{66}
+\expandafter\def\csname E/RTS/cover/80/random/0.3\endcsname{89}
+\expandafter\def\csname E/RTS/cover/95/random/0.3\endcsname{96}
+\expandafter\def\csname E/RTS/cover/50/random/0.5\endcsname{66}
+\expandafter\def\csname E/RTS/cover/80/random/0.5\endcsname{89}
+\expandafter\def\csname E/RTS/cover/95/random/0.5\endcsname{96}
+\expandafter\def\csname E/RTS/cover/50/random/0.7\endcsname{68}
+\expandafter\def\csname E/RTS/cover/80/random/0.7\endcsname{89}
+\expandafter\def\csname E/RTS/cover/95/random/0.7\endcsname{97}
+\expandafter\def\csname E/RTS/cover/50/random/0.9\endcsname{72}
+\expandafter\def\csname E/RTS/cover/80/random/0.9\endcsname{92}
+\expandafter\def\csname E/RTS/cover/95/random/0.9\endcsname{97}
+\expandafter\def\csname E/RTS/cover/50/wings\endcsname{67}
+\expandafter\def\csname E/RTS/cover/80/wings\endcsname{90}
+\expandafter\def\csname E/RTS/cover/95/wings\endcsname{97}
+\expandafter\def\csname E/RTS/cover/50/slice\endcsname{77}
+\expandafter\def\csname E/RTS/cover/80/slice\endcsname{94}
+\expandafter\def\csname E/RTS/cover/95/slice\endcsname{98}
+\expandafter\def\csname E/RTS/cover/50/far\endcsname{83}
+\expandafter\def\csname E/RTS/cover/80/far\endcsname{96}
+\expandafter\def\csname E/RTS/cover/95/far\endcsname{99}
+\expandafter\def\csname E/RTS/cover/50/topn/40\endcsname{68}
+\expandafter\def\csname E/RTS/cover/80/topn/40\endcsname{90}
+\expandafter\def\csname E/RTS/cover/95/topn/40\endcsname{92}
+\expandafter\def\csname E/RTS/cover/50/topn/20\endcsname{66}
+\expandafter\def\csname E/RTS/cover/80/topn/20\endcsname{87}
+\expandafter\def\csname E/RTS/cover/95/topn/20\endcsname{95}
+\expandafter\def\csname E/RTS/cover/50/topn/10\endcsname{72}
+\expandafter\def\csname E/RTS/cover/80/topn/10\endcsname{91}
+\expandafter\def\csname E/RTS/cover/95/topn/10\endcsname{97}
+\expandafter\def\csname E/RTS/cover/50/topn/5\endcsname{78}
+\expandafter\def\csname E/RTS/cover/80/topn/5\endcsname{93}
+\expandafter\def\csname E/RTS/cover/95/topn/5\endcsname{98}
+\expandafter\def\csname E/RTS/lag/hist/0.5/1\endcsname{1{,}98}
+\expandafter\def\csname E/RTS/lag/hist_cb/0.5/1\endcsname{1{,}47}
+\expandafter\def\csname E/RTS/lag/gp/0.5/1\endcsname{1{,}38}
+\expandafter\def\csname E/RTS/lag/gp_cb/0.5/1\endcsname{1{,}30}
+\expandafter\def\csname E/RTS/lag/cb_ssvi/0.5/1\endcsname{1{,}51}
+\expandafter\def\csname E/RTS/lag/hist/0.5/2\endcsname{2{,}87}
+\expandafter\def\csname E/RTS/lag/hist_cb/0.5/2\endcsname{1{,}91}
+\expandafter\def\csname E/RTS/lag/gp/0.5/2\endcsname{1{,}69}
+\expandafter\def\csname E/RTS/lag/gp_cb/0.5/2\endcsname{1{,}30}
+\expandafter\def\csname E/RTS/lag/cb_ssvi/0.5/2\endcsname{1{,}51}
+\expandafter\def\csname E/RTS/lag/hist/0.5/3\endcsname{3{,}39}
+\expandafter\def\csname E/RTS/lag/hist_cb/0.5/3\endcsname{1{,}98}
+\expandafter\def\csname E/RTS/lag/gp/0.5/3\endcsname{1{,}73}
+\expandafter\def\csname E/RTS/lag/gp_cb/0.5/3\endcsname{1{,}30}
+\expandafter\def\csname E/RTS/lag/cb_ssvi/0.5/3\endcsname{1{,}51}
+\expandafter\def\csname E/RTS/lag/hist/0.5/5\endcsname{4{,}43}
+\expandafter\def\csname E/RTS/lag/hist_cb/0.5/5\endcsname{2{,}21}
+\expandafter\def\csname E/RTS/lag/gp/0.5/5\endcsname{1{,}74}
+\expandafter\def\csname E/RTS/lag/gp_cb/0.5/5\endcsname{1{,}30}
+\expandafter\def\csname E/RTS/lag/cb_ssvi/0.5/5\endcsname{1{,}51}
+\expandafter\def\csname E/RTS/lag/hist/0.5/10\endcsname{5{,}83}
+\expandafter\def\csname E/RTS/lag/hist_cb/0.5/10\endcsname{2{,}33}
+\expandafter\def\csname E/RTS/lag/gp/0.5/10\endcsname{1{,}87}
+\expandafter\def\csname E/RTS/lag/gp_cb/0.5/10\endcsname{1{,}30}
+\expandafter\def\csname E/RTS/lag/cb_ssvi/0.5/10\endcsname{1{,}51}
+\expandafter\def\csname E/RTS/lag/hist/0.5/20\endcsname{7{,}29}
+\expandafter\def\csname E/RTS/lag/hist_cb/0.5/20\endcsname{2{,}61}
+\expandafter\def\csname E/RTS/lag/gp/0.5/20\endcsname{1{,}91}
+\expandafter\def\csname E/RTS/lag/gp_cb/0.5/20\endcsname{1{,}30}
+\expandafter\def\csname E/RTS/lag/cb_ssvi/0.5/20\endcsname{1{,}51}
+\expandafter\def\csname E/RTS/lag/hist/0.9/1\endcsname{2{,}02}
+\expandafter\def\csname E/RTS/lag/hist_cb/0.9/1\endcsname{1{,}91}
+\expandafter\def\csname E/RTS/lag/gp/0.9/1\endcsname{1{,}80}
+\expandafter\def\csname E/RTS/lag/gp_cb/0.9/1\endcsname{2{,}92}
+\expandafter\def\csname E/RTS/lag/cb_ssvi/0.9/1\endcsname{4{,}17}
+\expandafter\def\csname E/RTS/lag/hist/0.9/2\endcsname{2{,}81}
+\expandafter\def\csname E/RTS/lag/hist_cb/0.9/2\endcsname{2{,}37}
+\expandafter\def\csname E/RTS/lag/gp/0.9/2\endcsname{2{,}31}
+\expandafter\def\csname E/RTS/lag/gp_cb/0.9/2\endcsname{2{,}92}
+\expandafter\def\csname E/RTS/lag/cb_ssvi/0.9/2\endcsname{4{,}17}
+\expandafter\def\csname E/RTS/lag/hist/0.9/3\endcsname{3{,}40}
+\expandafter\def\csname E/RTS/lag/hist_cb/0.9/3\endcsname{2{,}65}
+\expandafter\def\csname E/RTS/lag/gp/0.9/3\endcsname{2{,}57}
+\expandafter\def\csname E/RTS/lag/gp_cb/0.9/3\endcsname{2{,}92}
+\expandafter\def\csname E/RTS/lag/cb_ssvi/0.9/3\endcsname{4{,}17}
+\expandafter\def\csname E/RTS/lag/hist/0.9/5\endcsname{4{,}42}
+\expandafter\def\csname E/RTS/lag/hist_cb/0.9/5\endcsname{3{,}15}
+\expandafter\def\csname E/RTS/lag/gp/0.9/5\endcsname{3{,}01}
+\expandafter\def\csname E/RTS/lag/gp_cb/0.9/5\endcsname{2{,}92}
+\expandafter\def\csname E/RTS/lag/cb_ssvi/0.9/5\endcsname{4{,}17}
+\expandafter\def\csname E/RTS/lag/hist/0.9/10\endcsname{5{,}80}
+\expandafter\def\csname E/RTS/lag/hist_cb/0.9/10\endcsname{3{,}55}
+\expandafter\def\csname E/RTS/lag/gp/0.9/10\endcsname{3{,}40}
+\expandafter\def\csname E/RTS/lag/gp_cb/0.9/10\endcsname{2{,}92}
+\expandafter\def\csname E/RTS/lag/cb_ssvi/0.9/10\endcsname{4{,}17}
+\expandafter\def\csname E/RTS/lag/hist/0.9/20\endcsname{7{,}33}
+\expandafter\def\csname E/RTS/lag/hist_cb/0.9/20\endcsname{4{,}11}
+\expandafter\def\csname E/RTS/lag/gp/0.9/20\endcsname{3{,}99}
+\expandafter\def\csname E/RTS/lag/gp_cb/0.9/20\endcsname{2{,}92}
+\expandafter\def\csname E/RTS/lag/cb_ssvi/0.9/20\endcsname{4{,}17}
+\expandafter\def\csname E/RTS/arb/butterfly_days/full/cb_quad\endcsname{10}
+\expandafter\def\csname E/RTS/arb/calendar_days/full/cb_quad\endcsname{30}
+\expandafter\def\csname E/RTS/arb/any_days/full/cb_quad\endcsname{33}
+\expandafter\def\csname E/RTS/arb/repair_mean/full/cb_quad\endcsname{0{,}131}
+\expandafter\def\csname E/RTS/arb/butterfly_days/full/cb_ssvi\endcsname{0}
+\expandafter\def\csname E/RTS/arb/calendar_days/full/cb_ssvi\endcsname{0}
+\expandafter\def\csname E/RTS/arb/any_days/full/cb_ssvi\endcsname{0}
+\expandafter\def\csname E/RTS/arb/repair_mean/full/cb_ssvi\endcsname{0{,}000}
+\expandafter\def\csname E/RTS/arb/butterfly_days/full/cb_svi\endcsname{16}
+\expandafter\def\csname E/RTS/arb/calendar_days/full/cb_svi\endcsname{33}
+\expandafter\def\csname E/RTS/arb/any_days/full/cb_svi\endcsname{38}
+\expandafter\def\csname E/RTS/arb/repair_mean/full/cb_svi\endcsname{0{,}135}
+\expandafter\def\csname E/RTS/arb/butterfly_days/full/gp\endcsname{0}
+\expandafter\def\csname E/RTS/arb/calendar_days/full/gp\endcsname{17}
+\expandafter\def\csname E/RTS/arb/any_days/full/gp\endcsname{17}
+\expandafter\def\csname E/RTS/arb/repair_mean/full/gp\endcsname{0{,}057}
+\expandafter\def\csname E/RTS/arb/butterfly_days/full/hist\endcsname{1}
+\expandafter\def\csname E/RTS/arb/calendar_days/full/hist\endcsname{16}
+\expandafter\def\csname E/RTS/arb/any_days/full/hist\endcsname{16}
+\expandafter\def\csname E/RTS/arb/repair_mean/full/hist\endcsname{0{,}084}
+\expandafter\def\csname E/RTS/arb/butterfly_days/full/hist_cb\endcsname{0}
+\expandafter\def\csname E/RTS/arb/calendar_days/full/hist_cb\endcsname{17}
+\expandafter\def\csname E/RTS/arb/any_days/full/hist_cb\endcsname{17}
+\expandafter\def\csname E/RTS/arb/repair_mean/full/hist_cb\endcsname{0{,}053}
+\expandafter\def\csname E/RTS/arb/butterfly_days/full/moex_today\endcsname{4}
+\expandafter\def\csname E/RTS/arb/calendar_days/full/moex_today\endcsname{14}
+\expandafter\def\csname E/RTS/arb/any_days/full/moex_today\endcsname{16}
+\expandafter\def\csname E/RTS/arb/repair_mean/full/moex_today\endcsname{0{,}052}
+\expandafter\def\csname E/RTS/arb/butterfly_days/sparse/cb_quad\endcsname{7}
+\expandafter\def\csname E/RTS/arb/calendar_days/sparse/cb_quad\endcsname{30}
+\expandafter\def\csname E/RTS/arb/any_days/sparse/cb_quad\endcsname{32}
+\expandafter\def\csname E/RTS/arb/repair_mean/sparse/cb_quad\endcsname{0{,}138}
+\expandafter\def\csname E/RTS/arb/rmse_before/sparse/cb_quad\endcsname{3{,}61}
+\expandafter\def\csname E/RTS/arb/rmse_after/sparse/cb_quad\endcsname{3{,}48}
+\expandafter\def\csname E/RTS/arb/zone_share/sparse/cb_quad\endcsname{92}
+\expandafter\def\csname E/RTS/arb/butterfly_days/sparse/cb_ssvi\endcsname{0}
+\expandafter\def\csname E/RTS/arb/calendar_days/sparse/cb_ssvi\endcsname{0}
+\expandafter\def\csname E/RTS/arb/any_days/sparse/cb_ssvi\endcsname{0}
+\expandafter\def\csname E/RTS/arb/repair_mean/sparse/cb_ssvi\endcsname{0{,}000}
+\expandafter\def\csname E/RTS/arb/rmse_before/sparse/cb_ssvi\endcsname{1{,}78}
+\expandafter\def\csname E/RTS/arb/rmse_after/sparse/cb_ssvi\endcsname{1{,}78}
+\expandafter\def\csname E/RTS/arb/zone_share/sparse/cb_ssvi\endcsname{92}
+\expandafter\def\csname E/RTS/arb/butterfly_days/sparse/cb_svi\endcsname{9}
+\expandafter\def\csname E/RTS/arb/calendar_days/sparse/cb_svi\endcsname{31}
+\expandafter\def\csname E/RTS/arb/any_days/sparse/cb_svi\endcsname{35}
+\expandafter\def\csname E/RTS/arb/repair_mean/sparse/cb_svi\endcsname{0{,}139}
+\expandafter\def\csname E/RTS/arb/rmse_before/sparse/cb_svi\endcsname{3{,}63}
+\expandafter\def\csname E/RTS/arb/rmse_after/sparse/cb_svi\endcsname{3{,}50}
+\expandafter\def\csname E/RTS/arb/zone_share/sparse/cb_svi\endcsname{92}
+\expandafter\def\csname E/RTS/arb/butterfly_days/sparse/gp\endcsname{1}
+\expandafter\def\csname E/RTS/arb/calendar_days/sparse/gp\endcsname{17}
+\expandafter\def\csname E/RTS/arb/any_days/sparse/gp\endcsname{17}
+\expandafter\def\csname E/RTS/arb/repair_mean/sparse/gp\endcsname{0{,}086}
+\expandafter\def\csname E/RTS/arb/rmse_before/sparse/gp\endcsname{1{,}58}
+\expandafter\def\csname E/RTS/arb/rmse_after/sparse/gp\endcsname{1{,}54}
+\expandafter\def\csname E/RTS/arb/zone_share/sparse/gp\endcsname{92}
+\expandafter\def\csname E/RTS/arb/butterfly_days/sparse/hist\endcsname{1}
+\expandafter\def\csname E/RTS/arb/calendar_days/sparse/hist\endcsname{16}
+\expandafter\def\csname E/RTS/arb/any_days/sparse/hist\endcsname{16}
+\expandafter\def\csname E/RTS/arb/repair_mean/sparse/hist\endcsname{0{,}084}
+\expandafter\def\csname E/RTS/arb/rmse_before/sparse/hist\endcsname{2{,}05}
+\expandafter\def\csname E/RTS/arb/rmse_after/sparse/hist\endcsname{2{,}15}
+\expandafter\def\csname E/RTS/arb/zone_share/sparse/hist\endcsname{92}
+\expandafter\def\csname E/RTS/arb/butterfly_days/sparse/hist_cb\endcsname{0}
+\expandafter\def\csname E/RTS/arb/calendar_days/sparse/hist_cb\endcsname{18}
+\expandafter\def\csname E/RTS/arb/any_days/sparse/hist_cb\endcsname{18}
+\expandafter\def\csname E/RTS/arb/repair_mean/sparse/hist_cb\endcsname{0{,}080}
+\expandafter\def\csname E/RTS/arb/rmse_before/sparse/hist_cb\endcsname{1{,}64}
+\expandafter\def\csname E/RTS/arb/rmse_after/sparse/hist_cb\endcsname{1{,}74}
+\expandafter\def\csname E/RTS/arb/zone_share/sparse/hist_cb\endcsname{92}
+\expandafter\def\csname E/RTS/arb/butterfly_days/sparse/moex_today\endcsname{4}
+\expandafter\def\csname E/RTS/arb/calendar_days/sparse/moex_today\endcsname{14}
+\expandafter\def\csname E/RTS/arb/any_days/sparse/moex_today\endcsname{16}
+\expandafter\def\csname E/RTS/arb/repair_mean/sparse/moex_today\endcsname{0{,}052}
+\expandafter\def\csname E/RTS/arb/rmse_before/sparse/moex_today\endcsname{1{,}30}
+\expandafter\def\csname E/RTS/arb/rmse_after/sparse/moex_today\endcsname{1{,}33}
+\expandafter\def\csname E/RTS/arb/zone_share/sparse/moex_today\endcsname{92}
+\expandafter\def\csname E/RTS/param/gp/g0\endcsname{0{,}34}
+\expandafter\def\csname E/RTS/param/gp/g1\endcsname{0{,}11}
+\expandafter\def\csname E/RTS/param/gp/g2\endcsname{0{,}57}
+\expandafter\def\csname E/RTS/param/gp/t0\endcsname{1{,}85}
+\expandafter\def\csname E/RTS/param/gp/t1\endcsname{1{,}69}
+\expandafter\def\csname E/RTS/param/gp/t2\endcsname{1{,}91}
+\expandafter\def\csname E/RTS/param/gp/ell_T\endcsname{2{,}78}
+\expandafter\def\csname E/RTS/param/gp/ts\endcsname{1{,}34}
+\expandafter\def\csname E/RTS/param/gp/tloc\endcsname{1{,}45}
+\expandafter\def\csname E/RTS/param/gp/ell_x\endcsname{0{,}39}
+\expandafter\def\csname E/RTS/param/gp/a\endcsname{0{,}57}
+\expandafter\def\csname E/RTS/param/gp/b\endcsname{1{,}73}
+\expandafter\def\csname E/RTS/param/gp_cb/g0\endcsname{36{,}74}
+\expandafter\def\csname E/RTS/param/gp_cb/g1\endcsname{0{,}04}
+\expandafter\def\csname E/RTS/param/gp_cb/g2\endcsname{17{,}29}
+\expandafter\def\csname E/RTS/param/gp_cb/t0\endcsname{6{,}75}
+\expandafter\def\csname E/RTS/param/gp_cb/t1\endcsname{5{,}65}
+\expandafter\def\csname E/RTS/param/gp_cb/t2\endcsname{5{,}74}
+\expandafter\def\csname E/RTS/param/gp_cb/ell_T\endcsname{7{,}80}
+\expandafter\def\csname E/RTS/param/gp_cb/ts\endcsname{0{,}04}
+\expandafter\def\csname E/RTS/param/gp_cb/tloc\endcsname{1{,}21}
+\expandafter\def\csname E/RTS/param/gp_cb/ell_x\endcsname{0{,}35}
+\expandafter\def\csname E/RTS/param/gp_cb/a\endcsname{0{,}58}
+\expandafter\def\csname E/RTS/param/gp_cb/b\endcsname{1{,}63}
