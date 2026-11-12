@@ -35,7 +35,12 @@ def settle_smiles(board: pd.DataFrame) -> dict:
     return {d: recon.Smiles(g) for d, g in board[ok].groupby("date")}
 
 
-def build_observations(board: pd.DataFrame, sync: pd.DataFrame, p: dict) -> pd.DataFrame:
+def build_observations(board: pd.DataFrame, sync: pd.DataFrame, p: dict, smiles: dict | None = None,
+                       lags: tuple[int, ...] = ()) -> pd.DataFrame:
+    """Сделки дня с IV вчерашней (``hist``) и сегодняшней (``today``) расчётной кривой.
+
+    ``lags`` — дополнительные колонки ``hist_lag{h}``: расчётная кривая h торговых дней назад.
+    """
     obs = sync.merge(board[["date", "expiry", "strike", "T", "z"]], on=["date", "expiry", "strike"])
     obs = obs.rename(columns={"iv_sync": "iv", "k_sync": "k"})
     obs["x"] = obs["k"] / np.sqrt(obs["T"])
@@ -43,18 +48,21 @@ def build_observations(board: pd.DataFrame, sync: pd.DataFrame, p: dict) -> pd.D
     days = obs["T"] * 365
     obs = obs[(days >= p["T_MIN_DAYS"]) & (days <= p["T_MAX_DAYS"]) & (obs["x"].abs() <= p["X_MAX"])]
 
-    smiles = settle_smiles(board)
+    smiles = settle_smiles(board) if smiles is None else smiles
     dates = sorted(board["date"].unique())
-    prev = dict(zip(dates[1:], dates[:-1]))
-    hist, today = np.full(len(obs), np.nan), np.full(len(obs), np.nan)
+    back = {h: dict(zip(dates[h:], dates[:-h])) for h in {1, *lags}}
+    cols = {"today": np.full(len(obs), np.nan), **{h: np.full(len(obs), np.nan) for h in back}}
     for (d, e), g in obs.groupby(["date", "expiry"]):
         idx = obs.index.get_indexer(g.index)
         T = float(g["T"].iloc[0])
-        if d in prev and prev[d] in smiles:
-            hist[idx] = smiles[prev[d]](e, g["k"].to_numpy(), T)
+        for h, prev in back.items():
+            if d in prev and prev[d] in smiles:
+                cols[h][idx] = smiles[prev[d]](e, g["k"].to_numpy(), T)
         if d in smiles:
-            today[idx] = smiles[d](e, g["k"].to_numpy(), T)
-    obs["hist"], obs["today"] = hist, today
+            cols["today"][idx] = smiles[d](e, g["k"].to_numpy(), T)
+    obs["hist"], obs["today"] = cols[1], cols["today"]
+    for h in lags:
+        obs[f"hist_lag{h}"] = cols[h]
     obs = obs.dropna(subset=["hist", "today", "iv"])
     # Очистка грубых ошибок сделок (≈0.5 % точек): одинакова для всех методов.
     gross = (obs["iv"] - obs["today"]).abs() > p["GROSS_ERROR"]
@@ -78,8 +86,8 @@ def predict(vis: pd.DataFrame, hid: pd.DataFrame, p: dict) -> dict[str, np.ndarr
     }
 
 
-def run_day(obs: pd.DataFrame, p: dict) -> list[pd.DataFrame]:
-    obs = obs.reset_index(drop=True)
+def mask_configs(obs: pd.DataFrame, p: dict) -> list[tuple]:
+    """Наборы скрытых точек дня: (схема, параметр, номер повтора, индексы скрытых строк)."""
     n = len(obs)
     rng = np.random.default_rng(int(obs["date"].iloc[0].strftime("%Y%m%d")))
     configs = []
@@ -94,9 +102,14 @@ def run_day(obs: pd.DataFrame, p: dict) -> list[pd.DataFrame]:
         idx = np.flatnonzero(obs["expiry"] == e)
         if 2 <= len(idx) < n:
             configs.append(("slice", np.nan, i, idx))
+    return configs
 
+
+def run_day(obs: pd.DataFrame, p: dict) -> list[pd.DataFrame]:
+    obs = obs.reset_index(drop=True)
+    n = len(obs)
     out = []
-    for scheme, m, seed, hid_idx in configs:
+    for scheme, m, seed, hid_idx in mask_configs(obs, p):
         mask = np.zeros(n, bool)
         mask[hid_idx] = True
         vis, hid = obs[~mask], obs[mask].reset_index(drop=True)

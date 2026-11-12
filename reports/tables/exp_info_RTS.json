@@ -1,0 +1,87 @@
+{
+  "asset": "RTS",
+  "series_gap": {
+    "mask": 0.3,
+    "total": 1064,
+    "worst": 29,
+    "hist_rmse": 7.789807193090968,
+    "hist_rmse_rest": 1.8750270213543783
+  },
+  "train_period": "2024-10-02..2025-09-30",
+  "test_period": "2025-10-01..2026-09-30",
+  "train_days": 254,
+  "test_days": 254,
+  "train_points": 8634,
+  "test_points": 8655,
+  "points_per_day_median": 33.0,
+  "series_per_day_median": 4.0,
+  "gross_removed": 578,
+  "params": {
+    "T_MIN_DAYS": 3,
+    "T_MAX_DAYS": 180,
+    "X_MAX": 0.6,
+    "GROSS_ERROR": 0.05,
+    "MIN_POINTS_PER_DAY": 4,
+    "MASKS": [
+      0.1,
+      0.3,
+      0.5,
+      0.7,
+      0.9
+    ],
+    "SEEDS": 5,
+    "WINGS_Z": 1.0,
+    "RIDGE": 0.0001,
+    "NOISE": 0.01,
+    "TAU_LEVEL": 0.02,
+    "TAU_SLOPE": 0.02,
+    "TAU_SERIES": 0.01,
+    "N_BOOT": 1000,
+    "TRAIN_RANGE": [
+      "2024-10-02",
+      "2025-09-30"
+    ],
+    "TEST_RANGE": [
+      "2025-10-01",
+      "2026-09-30"
+    ],
+    "FAR_KEEP": 2,
+    "TOPN": [
+      5,
+      10,
+      20,
+      40
+    ],
+    "SSVI_RIDGE": 1e-06,
+    "SSVI_FSCALE": null,
+    "LAGS": [
+      1,
+      2,
+      3,
+      5,
+      10,
+      20
+    ],
+    "LAG_MASKS": [
+      0.5,
+      0.9
+    ],
+    "LAG_SEEDS": 2,
+    "ARB_Z_MAX": 2.0,
+    "ARB_STEP": 0.005,
+    "ARB_TICKS": 0.5,
+    "ARB_MASK": 0.7,
+    "ARB_IV_MIN": 0.01,
+    "ARB_IV_MAX": 3.0,
+    "BREAKDOWN_MASK": 0.7,
+    "COVER_LEVELS": [
+      0.5,
+      0.8,
+      0.95
+    ],
+    "EXAMPLE_DATE": "2026-04-14",
+    "EXAMPLE_MASK": 0.9,
+    "GAP_MASK": 0.3,
+    "TICK": 10.0
+  }
+}
