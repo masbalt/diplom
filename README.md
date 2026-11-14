@@ -29,21 +29,21 @@
 
 ## Abstract
 
-Implied volatility surfaces are widely used in option pricing, hedging, and risk management. However, on less liquid markets, option trades are unevenly distributed across strike prices and maturities, making reliable surface reconstruction difficult.
+Implied volatility surfaces are used for option pricing, hedging and risk management. On the Moscow Exchange only about one fifth of the listed strikes trade on a given day, so trades reveal the surface only in part.
 
-This study aims to develop and evaluate an arbitrage-aware method for reconstructing implied volatility surfaces from sparse market transactions using historical market information and dependencies between option contracts with different strikes and maturities. The Moscow Exchange options market, primarily options on USD/RUB futures (Si), serves as the empirical setting.
+This work tests whether market history helps to reconstruct and forecast the surface from a small number of current trades, and proposes a method that uses this history. The method takes a starting curve from history (yesterday's exchange settlement curve, or a one-day-ahead forecast), corrects it with a Gaussian process fitted to the visible trades of the current day, with a covariance learned from the previous year of trades, and then removes static arbitrage by linear programming.
 
-The proposed approach will combine current transaction data with historical volatility curves and cross-contract information. Its reconstruction accuracy and financial consistency will be evaluated against classical methods, including SVI/SSVI, arbitrage-aware smoothing techniques, and historical baselines.
+The method is compared with a quadratic smile, SVI and SSVI, which use current trades only, with simple methods based on yesterday's curve, and with a neural network trained on the same data. Parameters are estimated on one year of trades in options on USD/RUB futures (Si). Accuracy is measured on the next year (254 days, 21,217 trades): real trades are hidden under twelve scenarios and reconstructed from the remaining ones. With 90% of the day's trades hidden the error is 1.12 volatility points against 1.97 for SSVI; with 10% hidden it is 0.80 against 1.05 for the best current-board method. Forecasts for the following days improve when the curve is carried over in normalised moneyness and corrected by the latest trades: trades lead the exchange curve. A neural network with the same starting curve reaches similar accuracy. The main result holds on a 29-day control period whose data were downloaded after the methods were fixed.
 
-Preliminary experiments indicate that historical information can substantially improve reconstruction accuracy when the number of current observations is particularly small. The study will further examine how this advantage depends on data sparsity, assess static-arbitrage violations, and investigate the possibility of short-horizon surface forecasting.
+Known limits: links between option series did not improve accuracy; one erroneous exchange curve in the control period noticeably hurt every method that relies on yesterday's curve; the arbitrage repair costs accuracy when very few trades are visible; on options on RTS futures the forecast and the one-day-ahead starting curve gave no gain.
 
 ## Citation
 
 If you find our work helpful, please cite us.
 ```BibTeX
-@article{citekey,
+@article{sitnikov2026ivs,
     title={Temporal and Cross-Contract Modeling of Sparse Implied Volatility Surfaces: Arbitrage-Aware Reconstruction and Forecasting},
-    author={Name Surname, Name Surname (consultant), Name Surname (advisor)},
+    author={Aleksandr Sitnikov, S. I. Gurov (advisor)},
     year={2026}
 }
 ```
