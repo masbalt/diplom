@@ -103,10 +103,18 @@
       "max_iter": 200,
       "l2_regularization": 1.0
     },
+    "FC_NN": {
+      "width": 32,
+      "epochs": 300,
+      "lr": 0.003,
+      "decay": 0.01,
+      "seeds": 3
+    },
     "FC_BUCKET_LAGS": [
       1,
       5
     ],
+    "GUARD_GAP": 0.3,
     "NP_EPOCHS": 200,
     "NP_BATCH": 16,
     "NP_LR": 0.002,
