@@ -7,15 +7,25 @@
     "hist_rmse": 7.789807193090968,
     "hist_rmse_rest": 1.8750270213543783
   },
+  "series_gap_dyn": {
+    "mask": 0.3,
+    "total": 1064,
+    "worst": 30,
+    "hist_rmse": 7.724004201148276,
+    "hist_rmse_rest": 1.870762692603737
+  },
   "train_period": "2024-10-02..2025-09-30",
   "test_period": "2025-10-01..2026-09-30",
+  "holdout_period": "2026-10-01..2026-11-11",
   "train_days": 254,
   "test_days": 254,
+  "holdout_days": 29,
   "train_points": 8634,
   "test_points": 8655,
+  "holdout_points": 985,
   "points_per_day_median": 33.0,
   "series_per_day_median": 4.0,
-  "gross_removed": 578,
+  "gross_removed": 602,
   "params": {
     "T_MIN_DAYS": 3,
     "T_MAX_DAYS": 180,
@@ -82,6 +92,27 @@
     "EXAMPLE_DATE": "2026-04-14",
     "EXAMPLE_MASK": 0.9,
     "GAP_MASK": 0.3,
+    "HOLDOUT_RANGE": [
+      "2026-10-01",
+      "2026-11-11"
+    ],
+    "FC_AR_WINDOW": 120,
+    "FC_GBM": {
+      "max_depth": 3,
+      "learning_rate": 0.03,
+      "max_iter": 200,
+      "l2_regularization": 1.0
+    },
+    "FC_BUCKET_LAGS": [
+      1,
+      5
+    ],
+    "NP_EPOCHS": 200,
+    "NP_BATCH": 16,
+    "NP_LR": 0.002,
+    "NP_HUBER": 2.0,
+    "NP_SEEDS": 3,
+    "QUOTES_MAX_SPREAD": 0.03,
     "TICK": 10.0
   }
 }
