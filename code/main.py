@@ -1,8 +1,10 @@
 """Единственная точка запуска: данные → синхронизация → пилот → основной эксперимент → рисунки.
 
-    python code/main.py              # полный прогон (Si); из кэша ISS около 25 мин
+    python code/main.py              # полный прогон (Si); из кэша ISS около часа
     python code/main.py --quick      # тестовый прогон пилота на одном месяце, результаты в reports/quick/
     python code/main.py --stages figures            # перерисовать рисунки и TeX-таблицы по сохранённым таблицам
+    python code/main.py --stages forecast figures   # пересчитать только прогноз на h дней (без остального эксперимента)
+    python code/main.py --stages summary figures    # пересчитать сводные таблицы по сохранённым результатам
     python code/main.py --asset RTS --stages data sync experiment   # проверка переносимости на RTS
 
 Параметры — в code/config.py. Числа и таблицы для статьи и слайдов пишутся в paper/generated/.
@@ -26,23 +28,28 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import config as cfg  # noqa: E402
 import figures  # noqa: E402
-from ivs import experiment, pilot, textables  # noqa: E402
+from ivs import experiment, forecast, pilot, quotes, textables  # noqa: E402
 from ivs.data import DEFAULT_TICK, build_boards, client_for, daily_dates  # noqa: E402
 from ivs.intraday import sync_asset  # noqa: E402
 
 STAGES = ["data", "sync", "pilot", "experiment", "figures"]
+# Этапы, которые по умолчанию не запускаются: forecast — только прогноз на h дней без остального эксперимента;
+# summary — пересчёт сводных таблиц RMSE и разностей по сохранённым результатам (методы не пересчитываются).
+EXTRA_STAGES = ["forecast", "summary"]
 PARAMS = ["T_MIN_DAYS", "T_MAX_DAYS", "X_MAX", "GROSS_ERROR", "MIN_POINTS_PER_DAY", "MASKS", "SEEDS",
           "WINGS_Z", "RIDGE", "NOISE", "TAU_LEVEL", "TAU_SLOPE", "TAU_SERIES", "N_BOOT"]
 EXP_PARAMS = ["TRAIN_RANGE", "TEST_RANGE", "FAR_KEEP", "TOPN", "SSVI_RIDGE", "SSVI_FSCALE", "LAGS", "LAG_MASKS",
               "LAG_SEEDS", "ARB_Z_MAX", "ARB_STEP", "ARB_TICKS", "ARB_MASK", "ARB_IV_MIN", "ARB_IV_MAX",
-              "BREAKDOWN_MASK", "COVER_LEVELS", "EXAMPLE_DATE", "EXAMPLE_MASK", "GAP_MASK"]
+              "BREAKDOWN_MASK", "COVER_LEVELS", "EXAMPLE_DATE", "EXAMPLE_MASK", "GAP_MASK", "HOLDOUT_RANGE",
+              "FC_AR_WINDOW", "FC_GBM", "FC_BUCKET_LAGS", "NP_EPOCHS", "NP_BATCH", "NP_LR", "NP_HUBER", "NP_SEEDS",
+              "QUOTES_MAX_SPREAD"]
 
 
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--quick", action="store_true", help="короткий тестовый прогон пилота (config.QUICK_RANGE)")
     ap.add_argument("--asset", default=cfg.ASSET, help="базовый актив (по умолчанию config.ASSET)")
-    ap.add_argument("--stages", nargs="+", choices=STAGES, default=STAGES)
+    ap.add_argument("--stages", nargs="+", choices=STAGES + EXTRA_STAGES, default=STAGES)
     args = ap.parse_args()
 
     asset = args.asset
@@ -55,7 +62,7 @@ def main() -> None:
         tex = cfg.ROOT / "reports" / "quick" / "pilot_numbers.tex"
     else:
         mode, tag, (start, end), daily = "daily", asset, cfg.PILOT_RANGE, cfg.DAILY_RANGE
-        sync_range = (cfg.TRAIN_RANGE[0], cfg.TEST_RANGE[1])
+        sync_range = (cfg.TRAIN_RANGE[0], cfg.HOLDOUT_RANGE[1])
         tables, figs = cfg.TABLES_DIR, cfg.FIGURES_DIR
         tex = cfg.TEX_NUMBERS if main_asset else tables / f"pilot_numbers_{asset}.tex"
     sync_name = f"trades_sync_{asset}" if mode == "daily" else f"trades_sync_{mode}_{asset}"
@@ -76,13 +83,19 @@ def main() -> None:
         print(json.dumps({k: info[k] for k in ["period", "days", "points", "gross_removed"]}, ensure_ascii=False))
         print(pd.read_csv(tables / f"pilot_curve_{tag}.csv").query("method in ['best_cb', 'hist', 'hist_cb']")
               .round(3).to_string(index=False))
-    if "experiment" in args.stages and not args.quick:
+    if {"experiment", "forecast"} & set(args.stages) and not args.quick:
         p = {**params, **{k: getattr(cfg, k) for k in EXP_PARAMS}, "TICK": DEFAULT_TICK[asset]}
         board, sync = experiment.load(cfg.DATA_DIR, asset)
-        obs = experiment.observations(board, sync, p)
-        models = experiment.train(obs, p, cfg.WORKERS_CPU)
-        print(f"train done in {time.time() - t0:.0f} s:", json.dumps({k: round(v, 4) for k, v in models["gp"].items()}))
         context = experiment.day_context(board)
+        # Прогноз на h дней; из него же — начальное приближение динамического варианта (колонка dyn).
+        obs, fc, fc_models = forecast.run(experiment.observations(board, sync, p), context[0], context[1],
+                                          forecast.calendar(board), p, cfg.WORKERS_CPU)
+        forecast.save(fc, fc_models, asset, p, cfg.DATA_DIR, tables)
+        print(f"forecast done in {time.time() - t0:.0f} s: phi =", {h: round(v, 3) for h, v in fc_models["phi"].items()})
+    if "experiment" in args.stages and not args.quick:
+        models = {**experiment.train(obs, p, cfg.WORKERS_CPU), "fc": fc_models}
+        print(f"train done in {time.time() - t0:.0f} s:", json.dumps({k: round(v, 4) for k, v in models["gp"].items()}))
+        quotes.run(obs, context, p, models, cfg.DATA_DIR / "live" / asset, asset, tables)
         res = experiment.run(obs, context, p, models, cfg.WORKERS_CPU)
         lags = experiment.run_lags(obs, p, models, cfg.WORKERS_CPU)
         arb = experiment.run_arbitrage(obs, context, p, models, cfg.WORKERS_CPU)
@@ -91,6 +104,10 @@ def main() -> None:
         print(json.dumps({k: v for k, v in info.items() if k != "params"}, ensure_ascii=False))
         print(pd.read_csv(tables / f"exp_rmse_{asset}.csv").pivot_table(index=["scheme", "mask"], columns="method",
                                                                          values="rmse").round(2).to_string())
+    if "summary" in args.stages and not args.quick:
+        p = {**params, **{k: getattr(cfg, k) for k in EXP_PARAMS}, "TICK": DEFAULT_TICK[asset]}
+        res = pd.read_csv(cfg.DATA_DIR / "processed" / f"exp_results_{asset}.csv.gz", parse_dates=["date", "expiry"])
+        experiment.summary_tables(res, asset, p, tables)
     if "figures" in args.stages and (main_asset or args.quick):
         figures.pilot_figures(tables, figs, tag)
         if not args.quick:

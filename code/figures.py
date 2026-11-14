@@ -140,8 +140,20 @@ LAG_LABELS = {"hist": "только прошлая кривая", "hist_cb": "п
               "gp": "предлагаемый метод с прошлой кривой"}
 
 
-def _line(ax, x, y, meth: str, lo=None, hi=None, label: str | None = None) -> None:
-    color, ls, marker, name = EXP_STYLE[meth]
+# Прогноз на h дней. Цвета: вчерашняя кривая в координате k — тот же, что на остальных рисунках;
+# предлагаемый прогноз — синий, как предлагаемый метод. Маркеры у всех линий разные: красный и
+# зелёные оттенки близки при нарушениях цветового зрения, поэтому линии различаются ещё и формой.
+FC_STYLE = {
+    "fc_strike": (INK_2, ":", None, "кривая дня $t$ при том же страйке"),
+    "fc_k": ("#1baf7a", "-", "^", "кривая дня $t$ при той же денежности $k$"),
+    "fc_x": ("#008300", "-", "s", r"кривая дня $t$ при той же $x=k/\sqrt{T}$"),
+    "fc_ar": ("#e34948", "-", "D", "перенос в $x$ + авторегрессия факторов"),
+    "fc_carry": ("#2a78d6", "-", "o", "перенос в $x$ + перенос поправки"),
+}
+
+
+def _line(ax, x, y, meth: str, lo=None, hi=None, label: str | None = None, styles: dict | None = None) -> None:
+    color, ls, marker, name = (styles or EXP_STYLE)[meth]
     if lo is not None:
         ax.fill_between(x, lo, hi, color=color, alpha=0.14, lw=0)
     ax.plot(x, y, color=color, ls=ls, marker=marker, ms=4, lw=2.0 if ls == "-" else 1.3,
@@ -269,6 +281,36 @@ def exp_example(tables: Path, out: Path, asset: str) -> None:
     save(fig, out, f"exp_example_{asset}")
 
 
+def exp_forecast(tables: Path, out: Path, asset: str) -> None:
+    """Прогноз на h торговых дней: ошибка на сделках дня t + h и разность с переносом в координате k."""
+    t = pd.read_csv(tables / f"exp_forecast_{asset}.csv")
+    d = pd.read_csv(tables / f"exp_forecast_diff_{asset}.csv")
+    lags = sorted(t["h"].unique())
+    pos = {h: i for i, h in enumerate(lags)}
+    fig, axes = plt.subplots(1, 2, figsize=(5.6, 3.1))
+    for meth in FC_STYLE:
+        g = t[t["method"] == meth].sort_values("h")
+        _line(axes[0], g["h"].map(pos), g["rmse"], meth, styles=FC_STYLE)
+        g = d[(d["a"] == meth) & (d["b"] == "fc_k")].sort_values("h")
+        if len(g) and meth != "fc_strike":
+            _line(axes[1], g["h"].map(pos), g["diff"], meth, g["lo"], g["hi"], styles=FC_STYLE)
+    axes[1].axhline(0.0, color=FC_STYLE["fc_k"][0], lw=2.0)   # сам перенос в k — нулевая линия
+    _log_axis(axes[0], 1.1, 3.8)
+    axes[0].set_ylabel("RMSE на сделках дня $t+h$, п.п. IV")
+    axes[0].set_title("а) ошибка прогноза", loc="left")
+    axes[1].set_ylabel("разность RMSE с переносом в $k$, п.п.")
+    axes[1].set_title("б) выигрыш у переноса в $k$", loc="left")
+    axes[1].yaxis.set_major_locator(matplotlib.ticker.MaxNLocator(6))
+    for ax in axes:
+        ax.set_xticks(list(pos.values()), [str(h) for h in lags])
+        ax.set_xlabel("горизонт $h$, торговых дней")
+        ax.tick_params(labelsize=8)
+    h, l = axes[0].get_legend_handles_labels()
+    fig.legend(h, l, loc="lower center", ncol=2, fontsize=7, handlelength=2.2, columnspacing=1.2, bbox_to_anchor=(0.5, -0.02))
+    fig.tight_layout(pad=0.4, rect=(0, 0.2, 1, 1))
+    save(fig, out, f"exp_forecast_{asset}")
+
+
 def experiment_figures(tables: Path, out: Path, asset: str) -> None:
     style()
     exp_main(tables, out, asset)
@@ -276,3 +318,5 @@ def experiment_figures(tables: Path, out: Path, asset: str) -> None:
     exp_lags(tables, out, asset)
     if (tables / f"exp_example_{asset}.csv").exists():
         exp_example(tables, out, asset)
+    if (tables / f"exp_forecast_{asset}.csv").exists():
+        exp_forecast(tables, out, asset)

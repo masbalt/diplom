@@ -8,7 +8,13 @@
     торгуемых контрактов дня);
   * предлагаемый метод оценивается и с шагом исправления арбитража (``gp_af``);
   * отдельные исследования: устаревание истории, статический арбитраж, режимы рынка,
-    точность оценки неопределённости.
+    точность оценки неопределённости;
+  * динамический вариант метода (``gp_dyn``, ``gp_dyn_af``): начальное приближение — прогноз
+    на один день из ivs.forecast вместо вчерашней кривой в координате k;
+  * нейросетевой метод сравнения (ivs.neural) с теми же начальными приближениями;
+  * контрольный период HOLDOUT_RANGE: дни после тестового периода, по которым не принималось
+    ни одного решения. Качество на них считается теми же функциями и пишется в таблицы
+    ``exp_*_holdout_*``.
 
 Случайные маски совпадают с пилотом (тот же генератор и порядок), поэтому числа старых
 методов воспроизводятся один в один.
@@ -25,7 +31,7 @@ import pandas as pd
 from scipy.special import ndtr
 from scipy.stats import norm
 
-from . import arbitrage, gp, pilot, recon, ssvi
+from . import arbitrage, forecast, gp, neural, pilot, recon, ssvi
 
 CURRENT_BOARD = ["cb_quad", "cb_svi", "cb_ssvi"]
 BASE_METHODS = ["hist", "cb_quad", "cb_svi", "cb_ssvi", "hist_cb", "gp", "gp_af", "moex_today"]
@@ -37,8 +43,17 @@ VARIANTS = {
                  "fixed": {"g0": gp.OFF, "g1": gp.OFF, "g2": gp.OFF, "ts": gp.OFF, "ell_T": 1.0}},
     "gp_homo": {"prior": "hist", "fixed": {"b": gp.OFF}},                     # одинаковый шум сделок
     "gp_param": {"prior": "hist", "fixed": {"tloc": gp.OFF, "ell_x": 0.1}},   # только уровень, наклон, кривизна
+    "gp_x": {"prior": "hist_x"},                                              # вчерашняя кривая в координате x
+    "gp_dyn": {"prior": "dyn"},                                               # динамическое начальное приближение
 }
-ARB_METHODS = ["cb_quad", "cb_svi", "cb_ssvi", "hist", "hist_cb", "gp", "moex_today"]
+# Нейросетевой метод сравнения (ivs.neural) с теми же начальными приближениями, что у gp, gp_cb и gp_dyn.
+NEURAL = {"np": "hist", "np_cb": None, "np_dyn": "dyn"}
+# Начальные приближения из ivs.forecast как самостоятельные методы и динамический вариант с исправлением арбитража.
+EXTRA_METHODS = ["hist_x", "dyn", "gp_dyn_af", *NEURAL]
+BREAKDOWN_METHODS = [*BASE_METHODS, "gp_dyn_af"]
+ARB_METHODS = ["cb_quad", "cb_svi", "cb_ssvi", "hist", "hist_cb", "gp", "gp_dyn", "moex_today"]
+ARB_WEIGHTED = ["gp", "gp_dyn"]   # методы с оценкой неопределённости: исправление арбитража с весами
+PARTS = ["test", "holdout"]       # части, на которых считается качество: тестовый и контрольный периоды
 KEEP = ["date", "expiry", "strike", "T", "k", "x", "z", "iv", "n_candles"]
 SD_FLOOR = 1e-4   # нижняя граница неопределённости метода в узле сетки, доли IV
 
@@ -53,13 +68,14 @@ def load(data_dir: Path, asset: str) -> tuple[pd.DataFrame, pd.DataFrame]:
 
 
 def observations(board: pd.DataFrame, sync: pd.DataFrame, p: dict) -> pd.DataFrame:
-    """Наблюдения за TRAIN_RANGE и TEST_RANGE с колонкой ``part`` (train / test)."""
-    lo, hi = pd.Timestamp(p["TRAIN_RANGE"][0]), pd.Timestamp(p["TEST_RANGE"][1])
+    """Наблюдения за TRAIN_RANGE, TEST_RANGE и HOLDOUT_RANGE с колонкой ``part`` (train / test / holdout)."""
+    lo, hi = pd.Timestamp(p["TRAIN_RANGE"][0]), pd.Timestamp(p["HOLDOUT_RANGE"][1])
     sync = sync[(sync["date"] >= lo) & (sync["date"] <= hi)]
     obs = pilot.build_observations(board, sync, p, lags=tuple(h for h in p["LAGS"] if h != 1))
     obs["hist_lag1"] = obs["hist"]
-    obs["part"] = np.where(obs["date"] >= pd.Timestamp(p["TEST_RANGE"][0]), "test", "train")
-    obs = obs[(obs["part"] == "test") | (obs["date"] <= pd.Timestamp(p["TRAIN_RANGE"][1]))]
+    obs["part"] = np.select([obs["date"] >= pd.Timestamp(p["HOLDOUT_RANGE"][0]),
+                             obs["date"] >= pd.Timestamp(p["TEST_RANGE"][0])], ["holdout", "test"], "train")
+    obs = obs[(obs["part"] != "train") | (obs["date"] <= pd.Timestamp(p["TRAIN_RANGE"][1]))]
     return obs.reset_index(drop=True)
 
 
@@ -70,7 +86,8 @@ def _fit_variant(job: tuple) -> tuple[str, dict]:
 
 
 def train(obs: pd.DataFrame, p: dict, workers: int) -> dict:
-    """Параметры всех вариантов метода по дням обучающего периода (в том числе для лагов истории)."""
+    """Параметры всех вариантов метода по дням обучающего периода (в том числе для лагов истории)
+    и веса нейросетевого метода сравнения (ключ ``np``)."""
     tr = obs[obs["part"] == "train"]
     jobs = []
     for name, spec in VARIANTS.items():
@@ -81,7 +98,9 @@ def train(obs: pd.DataFrame, p: dict, workers: int) -> dict:
         days = [gp.arrays(g, col) for _, g in tr.dropna(subset=[col]).groupby("date")]
         jobs.append((f"gp_lag{h}", days, {}))
     with ProcessPoolExecutor(workers) as pool:
-        return dict(pool.map(_fit_variant, jobs))
+        models = dict(pool.map(_fit_variant, jobs))
+    models["np"] = neural.fit_all(tr, NEURAL, p, workers)
+    return models
 
 
 # --- вчерашние кривые и сетка дня -----------------------------------------------
@@ -92,8 +111,12 @@ def day_context(board: pd.DataFrame) -> tuple[dict, dict, pd.Series]:
     return pilot.settle_smiles(board), dict(zip(dates[1:], dates[:-1])), board.groupby("date")["F"].median()
 
 
-def day_grid(obs: pd.DataFrame, s_prev, p: dict, s_today=None) -> pd.DataFrame:
-    """Сетка для проверки арбитража по сериям дня; в узлах — вчерашняя (и сегодняшняя) кривая."""
+def day_grid(obs: pd.DataFrame, s_prev, p: dict, s_today=None, dyn: tuple | None = None) -> pd.DataFrame:
+    """Сетка для проверки арбитража по сериям дня; в узлах — вчерашняя (и сегодняшняя) кривая.
+
+    ``dyn`` — аргументы forecast.dyn_prior (сделки предыдущего дня, ядро разности, доля переноса):
+    тогда в узлах считаются ещё начальные приближения ``hist_x`` и ``dyn``.
+    """
     ser = obs[["expiry", "T"]].drop_duplicates().copy()
     ser["atm"] = [float(s_prev(e, np.array([0.0]), T)[0]) for e, T in zip(ser["expiry"], ser["T"])]
     grid = arbitrage.make_grid(ser, p["ARB_Z_MAX"], p["ARB_STEP"])
@@ -102,7 +125,14 @@ def day_grid(obs: pd.DataFrame, s_prev, p: dict, s_today=None) -> pd.DataFrame:
             grid[col] = np.nan
             for e, g in grid.groupby("expiry"):
                 grid.loc[g.index, col] = smiles(e, g["k"].to_numpy(), float(g["T"].iloc[0]))
+    if dyn is not None:
+        grid["hist_x"], grid["dyn"] = forecast.dyn_prior(grid, s_prev, *dyn)
     return grid
+
+
+def dyn_args(models: dict, vis_prev: pd.DataFrame | None) -> tuple:
+    """Аргументы forecast.dyn_prior для дня: сделки предыдущего дня, ядро разности, доля переноса на один день."""
+    return vis_prev, models["fc"]["resid"], models["fc"]["phi"][1]
 
 
 def gp_weight(vis: pd.DataFrame, grid: pd.DataFrame, P: dict) -> np.ndarray:
@@ -145,9 +175,13 @@ def make_methods(models: dict, p: dict) -> dict:
         "cb_ssvi": lambda vis, hid: ssvi.cb_ssvi(vis, hid, p["SSVI_RIDGE"], p["SSVI_FSCALE"]),
         "hist_cb": lambda vis, hid: recon.hist_cb(vis, hid, prior),
         "moex_today": lambda vis, hid: hid["today"].to_numpy(),
+        "hist_x": lambda vis, hid: hid["hist_x"].to_numpy(),
+        "dyn": lambda vis, hid: hid["dyn"].to_numpy(),
     }
     for name, spec in VARIANTS.items():
         methods[name] = partial(gp.predict, P=models[name], prior=spec["prior"])
+    for name, model in models["np"].items():
+        methods[name] = partial(neural.predict, model=model, name=name)
     return methods
 
 
@@ -158,29 +192,32 @@ def _split(obs: pd.DataFrame, hid_idx: np.ndarray):
 
 
 def run_day(job: tuple, p: dict, models: dict) -> list[pd.DataFrame]:
-    obs, s_prev = job
+    obs, s_prev, vis_prev = job
     obs = obs.reset_index(drop=True)
     methods = make_methods(models, p)
-    grid = day_grid(obs, s_prev, p)
+    grid = day_grid(obs, s_prev, p, dyn=dyn_args(models, vis_prev))
     out = []
     for scheme, param, seed, hid_idx in mask_configs(obs, p):
         vis, hid = _split(obs, hid_idx)
         res = hid[KEEP].copy()
+        res["part"] = obs["part"].iloc[0]
         res["scheme"], res["mask"], res["seed"] = scheme, param, seed
         res["n_obs"], res["n_visible"] = len(obs), len(vis)
         res["n_visible_series"] = hid["expiry"].map(vis["expiry"].value_counts()).fillna(0).to_numpy()
         for name, f in methods.items():
             res[name] = f(vis, hid)
-        res["gp_af"] = repaired(methods["gp"], vis, hid, grid, p, gp_weight(vis, grid, models["gp"]))[1]
+        for name in ARB_WEIGHTED:
+            res[f"{name}_af"] = repaired(methods[name], vis, hid, grid, p, gp_weight(vis, grid, models[name]))[1]
         res["gp_sd"] = gp.predict(vis, hid, models["gp"], return_sd=True)[1]
         out.append(res)
     return out
 
 
 def run(obs: pd.DataFrame, context: tuple, p: dict, models: dict, workers: int) -> pd.DataFrame:
-    """Результаты по скрытым точкам тестового периода для всех схем и методов."""
+    """Результаты по скрытым точкам тестового и контрольного периодов для всех схем и методов."""
     smiles, prev, _ = context
-    jobs = [(g, smiles[prev[d]]) for d, g in obs[obs["part"] == "test"].groupby("date")]
+    by_day = dict(tuple(obs.groupby("date")))
+    jobs = [(g, smiles[prev[d]], by_day.get(prev[d])) for d, g in by_day.items() if g["part"].iloc[0] in PARTS]
     with ProcessPoolExecutor(workers) as pool:
         parts = pool.map(partial(run_day, p=p, models=models), jobs, chunksize=4)
         return pd.concat([df for day in parts for df in day], ignore_index=True)
@@ -228,10 +265,10 @@ def run_lags(obs: pd.DataFrame, p: dict, models: dict, workers: int) -> pd.DataF
 # --- статический арбитраж ---------------------------------------------------------
 
 def _arb_day(job: tuple, p: dict, models: dict) -> list[dict]:
-    obs, s_prev, s_today, F = job
+    obs, s_prev, s_today, F, vis_prev = job
     obs = obs.reset_index(drop=True)
     methods = make_methods(models, p)
-    grid = day_grid(obs, s_prev, p, s_today)
+    grid = day_grid(obs, s_prev, p, s_today, dyn_args(models, vis_prev))
     tol = p["ARB_TICKS"] * p["TICK"] / F
     n = len(obs)
     rng = np.random.default_rng(int(obs["date"].iloc[0].strftime("%Y%m%d")) + 2)
@@ -239,7 +276,7 @@ def _arb_day(job: tuple, p: dict, models: dict) -> list[dict]:
     rows = []
     for scenario, (vis, hid) in [("full", (obs, None)), ("sparse", _split(obs, hid_idx))]:
         for name in ARB_METHODS:
-            weight = gp_weight(vis, grid, models["gp"]) if name == "gp" else None
+            weight = gp_weight(vis, grid, models[name]) if name in ARB_WEIGHTED else None
             pred, after, iv, d = repaired(methods[name], vis, hid, grid, p, weight)
             left = arbitrage.violations(grid, iv + d, tol)
             row = {"date": obs["date"].iloc[0], "scenario": scenario, "method": name, "nodes": len(grid),
@@ -257,7 +294,9 @@ def _arb_day(job: tuple, p: dict, models: dict) -> list[dict]:
 def run_arbitrage(obs: pd.DataFrame, context: tuple, p: dict, models: dict, workers: int) -> pd.DataFrame:
     """Нарушения арбитража на сетке и размер исправления для каждого метода, по дням теста."""
     smiles, prev, F = context
-    jobs = [(g, smiles[prev[d]], smiles[d], float(F[d])) for d, g in obs[obs["part"] == "test"].groupby("date")]
+    by_day = dict(tuple(obs.groupby("date")))
+    jobs = [(g, smiles[prev[d]], smiles[d], float(F[d]), by_day.get(prev[d]))
+            for d, g in by_day.items() if g["part"].iloc[0] == "test"]
     with ProcessPoolExecutor(workers) as pool:
         parts = pool.map(partial(_arb_day, p=p, models=models), jobs, chunksize=4)
         return pd.DataFrame([r for day in parts for r in day])
@@ -389,15 +428,15 @@ def regime_table(res: pd.DataFrame, obs: pd.DataFrame, methods: list[str], masks
     return pd.DataFrame(rows)
 
 
-def series_gap(res: pd.DataFrame, mask: float) -> dict:
-    """Где полный метод (gp) проигрывает варианту без вчерашней кривой (gp_cb), схема random.
+def series_gap(res: pd.DataFrame, mask: float, method: str = "gp") -> dict:
+    """Где метод ``method`` проигрывает варианту без вчерашней кривой (gp_cb), схема random.
 
     Пары «серия, день» сортируются по разности сумм квадратов ошибок. ``worst`` — наименьшее
-    число пар, которые дают всю суммарную разность; ``hist_rmse`` — ошибка вчерашней кривой
-    в этих парах, п.п.
+    число пар, которые дают всю суммарную разность (0, если метод не проигрывает);
+    ``hist_rmse`` — ошибка вчерашней кривой в этих парах, п.п.
     """
     r = res[(res["scheme"] == "random") & np.isclose(res["mask"], mask)]
-    sq = pd.DataFrame({"date": r["date"], "expiry": r["expiry"], "gp": (r["gp"] - r["iv"]) ** 2,
+    sq = pd.DataFrame({"date": r["date"], "expiry": r["expiry"], "gp": (r[method] - r["iv"]) ** 2,
                        "cb": (r["gp_cb"] - r["iv"]) ** 2, "hist": (r["hist"] - r["iv"]) ** 2, "n": 1})
     g = sq.groupby(["date", "expiry"]).sum()
     g = g.assign(diff=g["gp"] - g["cb"]).sort_values("diff", ascending=False)
@@ -420,28 +459,77 @@ def calibration_table(res: pd.DataFrame, P: dict, levels: list[float]) -> pd.Dat
     return pd.DataFrame(rows)
 
 
+def worst_prior_pair(res: pd.DataFrame) -> dict:
+    """Пара «серия, день», которая даёт наибольшую сумму квадратов ошибки вчерашней кривой.
+
+    Считается по разным сделкам (каждая сделка один раз, независимо от схем скрытия).
+    ``share_sse`` — доля этой пары в сумме квадратов ошибки вчерашней кривой по всем сделкам.
+    """
+    u = res.drop_duplicates(["date", "expiry", "strike"])
+    sq = ((u["hist"] - u["iv"]) ** 2).groupby([u["date"], u["expiry"]]).agg(["sum", "size"])
+    date, expiry = sq["sum"].idxmax()
+    worst = sq.loc[(date, expiry)]
+    return {"date": str(pd.Timestamp(date).date()), "expiry": str(pd.Timestamp(expiry).date()),
+            "trades": int(worst["size"]), "hist_err_vp": float(100 * np.sqrt(worst["sum"] / worst["size"])),
+            "share_sse": float(worst["sum"] / sq["sum"].sum()), "pairs": len(sq)}
+
+
+def summary_tables(res: pd.DataFrame, asset: str, p: dict, tables_dir: Path) -> None:
+    """RMSE и разности методов по сценариям для тестового и контрольного периодов.
+
+    Таблицы зависят только от результатов по скрытым сделкам, поэтому пересчитываются без
+    повторного расчёта методов (этап ``summary`` в main.py). Для контрольного периода дополнительно
+    пишутся таблицы без одной пары «серия, день» с наибольшей ошибкой вчерашней кривой
+    (``exp_*_holdout_trim_*``) и описание этой пары (``exp_holdout_outlier_*.json``): так видно,
+    насколько вывод зависит от единичной ошибки расчётной кривой биржи.
+    """
+    methods = BASE_METHODS + [v for v in VARIANTS if v != "gp"] + EXTRA_METHODS
+    pairs = [("gp_af", "best_cb"), ("gp_af", "hist"), ("gp_af", "hist_cb"), ("gp_af", "gp"), ("gp_af", "gp_cb"),
+             ("gp_af", "moex_today"), ("hist_cb", "best_cb"), ("gp", "hist_cb"),
+             *[("gp", v) for v in VARIANTS if v != "gp"],
+             ("gp_dyn_af", "gp_af"), ("gp_dyn_af", "best_cb"), ("gp_dyn_af", "hist"), ("gp_dyn_af", "dyn"),
+             ("gp_dyn_af", "gp_dyn"), ("gp_dyn_af", "gp_cb"), ("gp_dyn_af", "moex_today"), ("gp_dyn", "gp_cb"),
+             ("gp_dyn", "hist"), ("gp_dyn", "dyn"), ("np", "gp"), ("np_cb", "gp_cb"), ("np_dyn", "gp_dyn"),
+             ("gp_dyn_af", "np_dyn"), ("np_dyn", "best_cb"), ("np_dyn", "hist"), ("np_dyn", "dyn")]
+
+    def write(r: pd.DataFrame, tag: str) -> None:
+        rmse = rmse_table(r, methods, p["N_BOOT"])
+        rmse.to_csv(tables_dir / f"exp_rmse_{tag}.csv", index=False)
+        diff_table(r, rmse, pairs, p["N_BOOT"]).to_csv(tables_dir / f"exp_diff_{tag}.csv", index=False)
+
+    for part in PARTS:
+        r = res[res["part"] == part]
+        if len(r):
+            write(r, asset if part == "test" else f"{part}_{asset}")
+    hold = res[res["part"] == "holdout"]
+    if len(hold):
+        worst = worst_prior_pair(hold)
+        same = (hold["date"] == pd.Timestamp(worst["date"])) & (hold["expiry"] == pd.Timestamp(worst["expiry"]))
+        write(hold[~same], f"holdout_trim_{asset}")
+        (tables_dir / f"exp_holdout_outlier_{asset}.json").write_text(json.dumps(worst, ensure_ascii=False, indent=2))
+
+
 def save(obs: pd.DataFrame, res: pd.DataFrame, models: dict, lags: pd.DataFrame | None,
          arb: pd.DataFrame | None, asset: str, p: dict, data_dir: Path, tables_dir: Path,
          example: pd.DataFrame | None = None) -> dict:
-    """Сохраняет результаты по точкам (data/) и сводные таблицы (reports/tables/exp_*)."""
+    """Сохраняет результаты по точкам (data/) и сводные таблицы (reports/tables/exp_*).
+
+    Все таблицы считаются на тестовом периоде. Для контрольного периода пишутся только RMSE и
+    разности методов: ``exp_rmse_holdout_{asset}.csv`` и ``exp_diff_holdout_{asset}.csv``.
+    """
     tables_dir.mkdir(parents=True, exist_ok=True)
     res.to_csv(Path(data_dir) / "processed" / f"exp_results_{asset}.csv.gz", index=False)
-    methods = BASE_METHODS + [v for v in VARIANTS if v != "gp"]
-    rmse = rmse_table(res, methods, p["N_BOOT"])
-    rmse.to_csv(tables_dir / f"exp_rmse_{asset}.csv", index=False)
-    pairs = [("gp_af", "best_cb"), ("gp_af", "hist"), ("gp_af", "hist_cb"), ("gp_af", "gp"), ("gp_af", "gp_cb"),
-             ("gp_af", "moex_today"), ("hist_cb", "best_cb"), ("gp", "hist_cb"),
-             *[("gp", v) for v in VARIANTS if v != "gp"]]
-    diff_table(res, rmse, pairs, p["N_BOOT"]).to_csv(tables_dir / f"exp_diff_{asset}.csv", index=False)
+    summary_tables(res, asset, p, tables_dir)
+    res = res[res["part"] == "test"]
 
     m = p["BREAKDOWN_MASK"]
     days = res["T"] * 365
     by = {
         "T": bucket_table(res.assign(days=days), "days", [0, 7, 14, 30, 60, 90, 181],
-                          ["3–7", "8–14", "15–30", "31–60", "61–90", "91–180"], BASE_METHODS, m),
+                          ["3–7", "8–14", "15–30", "31–60", "61–90", "91–180"], BREAKDOWN_METHODS, m),
         "z": bucket_table(res.assign(az=res["z"].abs()), "az", [-1, 0.5, 1, 2, 100],
-                          ["0–0,5", "0,5–1", "1–2", ">2"], BASE_METHODS, m),
-        "n": bucket_table(res, "n_candles", [0, 1, 5, 30, 1e6], ["1", "2–5", "6–30", ">30"], BASE_METHODS, m),
+                          ["0–0,5", "0,5–1", "1–2", ">2"], BREAKDOWN_METHODS, m),
+        "n": bucket_table(res, "n_candles", [0, 1, 5, 30, 1e6], ["1", "2–5", "6–30", ">30"], BREAKDOWN_METHODS, m),
     }
     for name, t in by.items():
         t.to_csv(tables_dir / f"exp_by_{name}_{asset}.csv", index=False)
@@ -449,10 +537,10 @@ def save(obs: pd.DataFrame, res: pd.DataFrame, models: dict, lags: pd.DataFrame 
         bucket=lambda d: pd.cut(d["n_visible_series"], [-0.5, 0.5, 2.5, 4.5, 9.5, 1e9],
                                 labels=["0", "1–2", "3–4", "5–9", "10+"]))
     vis = pd.DataFrame([{"bucket": b, "n": len(g), **{k: float(100 * np.sqrt(((g[k] - g["iv"]) ** 2).mean()))
-                                                       for k in BASE_METHODS}}
+                                                       for k in BREAKDOWN_METHODS}}
                         for b, g in rr.groupby("bucket", observed=True)])
     vis.to_csv(tables_dir / f"exp_by_visible_{asset}.csv", index=False)
-    regime_table(res, obs, BASE_METHODS, p["MASKS"]).to_csv(tables_dir / f"exp_regimes_{asset}.csv", index=False)
+    regime_table(res, obs, BREAKDOWN_METHODS, p["MASKS"]).to_csv(tables_dir / f"exp_regimes_{asset}.csv", index=False)
     calibration_table(res, models["gp"], p["COVER_LEVELS"]).to_csv(tables_dir / f"exp_calibration_{asset}.csv",
                                                                    index=False)
     if lags is not None:
@@ -461,12 +549,14 @@ def save(obs: pd.DataFrame, res: pd.DataFrame, models: dict, lags: pd.DataFrame 
         arbitrage_table(arb).to_csv(tables_dir / f"exp_arbitrage_{asset}.csv", index=False)
     if example is not None:
         example.to_csv(tables_dir / f"exp_example_{asset}.csv", index=False)
-    (tables_dir / f"gp_params_{asset}.json").write_text(json.dumps(models, ensure_ascii=False, indent=2))
+    saved = {k: v for k, v in models.items() if k != "np"}   # веса сетей восстанавливаются обучением с теми же seed
+    (tables_dir / f"gp_params_{asset}.json").write_text(json.dumps(saved, ensure_ascii=False, indent=2))
 
-    parts = {name: obs[obs["part"] == name] for name in ("train", "test")}
+    parts = {name: obs[obs["part"] == name] for name in ("train", *PARTS) if (obs["part"] == name).any()}
     info = {
         "asset": asset,
         "series_gap": series_gap(res, p["GAP_MASK"]),
+        "series_gap_dyn": series_gap(res, p["GAP_MASK"], "gp_dyn"),
         **{f"{name}_period": f"{o['date'].min().date()}..{o['date'].max().date()}" for name, o in parts.items()},
         **{f"{name}_days": int(o["date"].nunique()) for name, o in parts.items()},
         **{f"{name}_points": len(o) for name, o in parts.items()},

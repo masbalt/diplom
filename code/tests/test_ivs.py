@@ -10,7 +10,7 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from ivs import arbitrage, black76, experiment, gp, pilot, recon, ssvi  # noqa: E402
+from ivs import arbitrage, black76, experiment, forecast, gp, neural, pilot, quotes, recon, ssvi  # noqa: E402
 from ivs.contracts import parse_secids  # noqa: E402
 
 
@@ -198,6 +198,91 @@ class MaskTest(unittest.TestCase):
         visible = d.drop(index=configs["topn"])
         self.assertEqual(len(visible), 5)
         self.assertGreaterEqual(visible["n_candles"].min(), d["n_candles"].iloc[configs["topn"]].max())
+
+
+class ForecastTest(unittest.TestCase):
+    E = pd.Timestamp("2026-10-15")
+
+    def smiles(self, T: float = 0.10) -> recon.Smiles:
+        k = np.linspace(-0.2, 0.2, 41)
+        return recon.Smiles(pd.DataFrame({"expiry": self.E, "T": T, "k": k, "iv_settle": 0.16 + 2.0 * k**2}))
+
+    def test_transfer_rules(self):
+        sm, k, T = self.smiles(T=0.10), np.array([-0.05, 0.0, 0.08]), 0.05
+        curve = lambda q: 0.16 + 2.0 * q**2   # noqa: E731
+        np.testing.assert_allclose(forecast.transfer(sm, self.E, k, T, "k"), curve(k), atol=1e-4)
+        # Та же x = k / sqrt(T): срок уменьшился вдвое, значит кривая читается в точке k * sqrt(2).
+        np.testing.assert_allclose(forecast.transfer(sm, self.E, k, T, "x"), curve(k * np.sqrt(2)), atol=1e-4)
+        # Тот же страйк: фьючерс вырос на 2 %, денежность страйка в день t была больше на ln(1.02).
+        strike = 84000.0 * np.exp(k)
+        np.testing.assert_allclose(forecast.transfer(sm, self.E, k, T, "strike", strike, 84000.0 / 1.02),
+                                   curve(k + np.log(1.02)), atol=1e-4)
+
+    def test_carried_correction(self):
+        d = synthetic_day(level_shift=0.01).assign(n_candles=10.0)
+        vis = d.assign(today=d["hist"])                       # сделки дня t на 1 п.п. выше кривой дня t
+        np.testing.assert_allclose(forecast.smooth_resid(vis, d, gp.INIT), 0.01, atol=0.004)
+        sm = recon.Smiles(d.assign(iv_settle=d["hist"]))
+        hist_x, dyn = forecast.dyn_prior(d, sm, vis, gp.INIT, 0.5)
+        np.testing.assert_allclose(hist_x, d["hist"], atol=1e-6)   # срок не менялся: перенос в x совпадает с кривой
+        np.testing.assert_allclose(dyn - hist_x, 0.005, atol=0.002)
+        np.testing.assert_allclose(forecast.dyn_prior(d, sm, None, gp.INIT, 0.5)[1], hist_x)   # без сделок — сама кривая
+
+    def test_ar_beta_recovers_mean_reversion(self):
+        rng = np.random.default_rng(0)
+        f = np.zeros((4000, 2))
+        for i in range(1, len(f)):
+            f[i] = 0.8 * f[i - 1] + rng.normal(size=2)
+        fac = pd.DataFrame(f, index=pd.date_range("2000-01-03", periods=len(f), freq="B"))
+        beta = forecast.ar_beta(fac, fac, 1, fac.index[-1])
+        np.testing.assert_allclose(beta, -0.2, atol=0.03)     # за день фактор теряет 20 % отклонения
+
+
+class NeuralTest(unittest.TestCase):
+    P = {"NP_EPOCHS": 25, "NP_BATCH": 4, "NP_LR": 3e-3, "NP_HUBER": 2.0, "NP_SEEDS": 1,
+         "WINGS_Z": 1.0, "FAR_KEEP": 1, "TOPN": [5, 10]}
+
+    def day(self, i: int) -> pd.DataFrame:
+        d = synthetic_day(level_shift=0.02 * (-1) ** i, seed=i)
+        return d.assign(date=pd.Timestamp("2026-01-01") + pd.Timedelta(days=i), z=d["x"] / 0.16,
+                        n_candles=10.0, vol_sync=np.arange(len(d), dtype=float))
+
+    def test_learns_level_shift(self):
+        train = pd.concat([self.day(i) for i in range(12)], ignore_index=True)
+        models = neural.fit_all(train, {"np": "hist", "np_cb": None}, self.P, workers=2)
+        d = self.day(20)
+        vis, hid = d.iloc[::2], d.iloc[1::2].reset_index(drop=True)
+        for name in models:
+            pred = neural.predict(vis, hid, models[name], name)
+            self.assertEqual(pred.shape, (len(hid),))
+            # Вчерашняя кривая ошибается на 2 п.п.; сеть по видимым сделкам снимает большую часть сдвига.
+            self.assertLess(np.abs(pred - hid["iv"]).mean(), 0.01)
+
+
+class SummaryTest(unittest.TestCase):
+    def test_worst_prior_pair(self):
+        near, far = pd.Timestamp("2026-11-19"), pd.Timestamp("2027-01-21")
+        d = pd.DataFrame({"date": pd.Timestamp("2026-11-11"), "expiry": [near, near, far, far],
+                          "strike": [84000.0, 85000.0, 78000.0, 90000.0], "iv": 0.20,
+                          "hist": [0.21, 0.19, 0.50, 0.20]})
+        res = pd.concat([d, d], ignore_index=True)   # сделка, скрытая в двух схемах, считается один раз
+        worst = experiment.worst_prior_pair(res)
+        self.assertEqual((worst["date"], worst["expiry"]), ("2026-11-11", "2027-01-21"))
+        self.assertEqual((worst["trades"], worst["pairs"]), (2, 2))
+        self.assertAlmostEqual(worst["hist_err_vp"], 100 * np.sqrt(0.30**2 / 2))
+        self.assertGreater(worst["share_sse"], 0.99)       # почти вся ошибка вчерашней кривой — в одной паре
+
+
+class QuotesTest(unittest.TestCase):
+    def test_summary(self):
+        q = pd.DataFrame({"expiry": pd.Timestamp("2026-10-15"), "bid": [0.15, 0.15, 0.10], "ask": [0.17, 0.17, 0.20]})
+        for m in quotes.METHODS:
+            q[m] = [0.16, 0.18, 0.12]            # внутри спреда первая и третья заявки
+        s = quotes.summary(q, max_spread=0.03).set_index(["subset", "method"])
+        self.assertAlmostEqual(s.loc[("all", "gp_dyn"), "inside"], 2 / 3)
+        self.assertEqual(s.loc[("narrow", "gp_dyn"), "n"], 2)          # третья заявка шире 3 п.п.
+        self.assertAlmostEqual(s.loc[("narrow", "gp_dyn"), "inside"], 0.5)
+        self.assertAlmostEqual(s.loc[("narrow", "gp_dyn"), "mad_vp"], 1.0)
 
 
 if __name__ == "__main__":
