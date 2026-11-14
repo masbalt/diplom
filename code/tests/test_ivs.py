@@ -237,6 +237,53 @@ class ForecastTest(unittest.TestCase):
         beta = forecast.ar_beta(fac, fac, 1, fac.index[-1])
         np.testing.assert_allclose(beta, -0.2, atol=0.03)     # за день фактор теряет 20 % отклонения
 
+    def test_nn_shift_learns_mean_reversion(self):
+        # Уровень серии возвращается к 0.20: изменение за день = -0.5 * (уровень - 0.20). Сеть должна это выучить.
+        rng = np.random.default_rng(0)
+        dates = list(pd.date_range("2025-01-01", periods=120, freq="B"))
+        cal = {"dates": dates, "pos": {d: i for i, d in enumerate(dates)}}
+        rows = []
+        for e in pd.date_range("2026-01-15", periods=6, freq="30D"):
+            lvl = 0.20 + rng.normal(0, 0.03)
+            for d in dates:
+                rows.append({"date": d, "expiry": e, "lvl": lvl})
+                lvl = lvl - 0.5 * (lvl - 0.20) + rng.normal(0, 0.002)
+        L = pd.DataFrame(rows)
+        for f in forecast.FEATURES:
+            if f != "lvl":
+                L[f] = 0.0
+        params = {"width": 16, "max_epochs": 200, "check": 20, "val_days": 40, "lr": 1e-2, "decay": 1e-3, "seeds": 1}
+        shift, epochs = forecast.nn_shift(L, cal, 1, dates[-1], params)
+        want = -0.5 * (L["lvl"].to_numpy() - 0.20)
+        self.assertGreater(epochs, 0)                         # обученная сеть лучше нулевого прогноза
+        self.assertGreater(np.corrcoef(shift.to_numpy(), want)[0, 1], 0.9)
+
+
+class GuardTest(unittest.TestCase):
+    def test_removes_only_untraded_outlier_series(self):
+        k = np.linspace(-0.3, 0.3, 61)
+        days = [pd.Timestamp("2026-10-15"), pd.Timestamp("2026-11-19"), pd.Timestamp("2027-01-21"), pd.Timestamp("2027-03-18")]
+        level = [0.17, 0.18, 0.43, 0.20]                      # третья серия: 43 % при 18 % у соседней со сделками
+        board = pd.concat([pd.DataFrame({"expiry": e, "T": T, "k": k, "iv_settle": lv + k**2})
+                           for e, T, lv in zip(days, [0.02, 0.10, 0.20, 0.35], level)])
+        date = pd.Timestamp("2026-11-10")
+        smiles = {date: recon.Smiles(board)}
+        p = {"GUARD_GAP": 0.3}
+        traded = {(date, days[0]), (date, days[1])}           # сделки были в двух ближних сериях
+        guarded, removed = forecast.guard_curves(smiles, traded, p)
+        # Убрана только третья серия. Четвёртая тоже без сделок, но отстоит от опорной на 2 п.п. из 18.
+        self.assertEqual(list(removed["expiry"]), [days[2]])
+        self.assertNotIn(days[2], guarded[date].series)
+        self.assertIn(days[2], smiles[date].series)           # исходные кривые не меняются
+        # Вместо убранной серии берётся ближайшая по сроку: около 18–20 %, а не 43 %.
+        iv = forecast.transfer(guarded[date], days[2], np.array([0.0]), 0.2, "x")[0]
+        self.assertLess(abs(iv - 0.19), 0.015)
+        # Если по серии в этот день были сделки, её кривая остаётся: сделкам метод верит.
+        kept, _ = forecast.guard_curves(smiles, traded | {(date, days[2])}, p)
+        self.assertIn(days[2], kept[date].series)
+        # Без серий со сделками сравнивать не с чем: ничего не убирается.
+        self.assertIs(forecast.guard_curves(smiles, set(), p)[0][date], smiles[date])
+
 
 class NeuralTest(unittest.TestCase):
     P = {"NP_EPOCHS": 25, "NP_BATCH": 4, "NP_LR": 3e-3, "NP_HUBER": 2.0, "NP_SEEDS": 1,

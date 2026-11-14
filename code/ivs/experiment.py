@@ -11,6 +11,7 @@
     точность оценки неопределённости;
   * динамический вариант метода (``gp_dyn``, ``gp_dyn_af``): начальное приближение — прогноз
     на один день из ivs.forecast вместо вчерашней кривой в координате k;
+  * динамический вариант с защитой от грубой ошибки расчётной кривой (``gp_dyn_g``, ``gp_dyn_g_af``);
   * нейросетевой метод сравнения (ivs.neural) с теми же начальными приближениями;
   * контрольный период HOLDOUT_RANGE: дни после тестового периода, по которым не принималось
     ни одного решения. Качество на них считается теми же функциями и пишется в таблицы
@@ -48,8 +49,9 @@ VARIANTS = {
 }
 # Нейросетевой метод сравнения (ivs.neural) с теми же начальными приближениями, что у gp, gp_cb и gp_dyn.
 NEURAL = {"np": "hist", "np_cb": None, "np_dyn": "dyn"}
-# Начальные приближения из ivs.forecast как самостоятельные методы и динамический вариант с исправлением арбитража.
-EXTRA_METHODS = ["hist_x", "dyn", "gp_dyn_af", *NEURAL]
+# Начальные приближения из ivs.forecast как самостоятельные методы, динамический вариант с исправлением
+# арбитража и он же с защитой от грубой ошибки расчётной кривой (``*_g``, forecast.guard_curves).
+EXTRA_METHODS = ["hist_x", "dyn", "gp_dyn_af", *NEURAL, "dyn_g", "gp_dyn_g", "gp_dyn_g_af"]
 BREAKDOWN_METHODS = [*BASE_METHODS, "gp_dyn_af"]
 ARB_METHODS = ["cb_quad", "cb_svi", "cb_ssvi", "hist", "hist_cb", "gp", "gp_dyn", "moex_today"]
 ARB_WEIGHTED = ["gp", "gp_dyn"]   # методы с оценкой неопределённости: исправление арбитража с весами
@@ -177,9 +179,12 @@ def make_methods(models: dict, p: dict) -> dict:
         "moex_today": lambda vis, hid: hid["today"].to_numpy(),
         "hist_x": lambda vis, hid: hid["hist_x"].to_numpy(),
         "dyn": lambda vis, hid: hid["dyn"].to_numpy(),
+        "dyn_g": lambda vis, hid: hid["dyn_g"].to_numpy(),
     }
     for name, spec in VARIANTS.items():
         methods[name] = partial(gp.predict, P=models[name], prior=spec["prior"])
+    # Динамический вариант с защитой: то же ядро, начальное приближение по кривым после forecast.guard_curves.
+    methods["gp_dyn_g"] = partial(gp.predict, P=models["gp_dyn"], prior="dyn_g")
     for name, model in models["np"].items():
         methods[name] = partial(neural.predict, model=model, name=name)
     return methods
@@ -192,10 +197,13 @@ def _split(obs: pd.DataFrame, hid_idx: np.ndarray):
 
 
 def run_day(job: tuple, p: dict, models: dict) -> list[pd.DataFrame]:
-    obs, s_prev, vis_prev = job
+    obs, s_prev, vis_prev, s_guard = job
     obs = obs.reset_index(drop=True)
     methods = make_methods(models, p)
     grid = day_grid(obs, s_prev, p, dyn=dyn_args(models, vis_prev))
+    # Сетка для варианта с защитой нужна только в дни, когда защита убрала серию из вчерашних кривых.
+    grid_g = None if s_guard is None else day_grid(obs, s_guard, p, dyn=dyn_args(models, vis_prev)).rename(
+        columns={"dyn": "dyn_g"})
     out = []
     for scheme, param, seed, hid_idx in mask_configs(obs, p):
         vis, hid = _split(obs, hid_idx)
@@ -208,16 +216,23 @@ def run_day(job: tuple, p: dict, models: dict) -> list[pd.DataFrame]:
             res[name] = f(vis, hid)
         for name in ARB_WEIGHTED:
             res[f"{name}_af"] = repaired(methods[name], vis, hid, grid, p, gp_weight(vis, grid, models[name]))[1]
+        res["gp_dyn_g_af"] = res["gp_dyn_af"] if grid_g is None else repaired(
+            methods["gp_dyn_g"], vis, hid, grid_g, p, gp_weight(vis, grid_g, models["gp_dyn"]))[1]
         res["gp_sd"] = gp.predict(vis, hid, models["gp"], return_sd=True)[1]
         out.append(res)
     return out
 
 
-def run(obs: pd.DataFrame, context: tuple, p: dict, models: dict, workers: int) -> pd.DataFrame:
-    """Результаты по скрытым точкам тестового и контрольного периодов для всех схем и методов."""
+def run(obs: pd.DataFrame, context: tuple, p: dict, models: dict, workers: int,
+        guarded: dict | None = None) -> pd.DataFrame:
+    """Результаты по скрытым точкам тестового и контрольного периодов для всех схем и методов.
+
+    ``guarded`` — кривые по дням после forecast.guard_curves (для варианта с защитой)."""
     smiles, prev, _ = context
     by_day = dict(tuple(obs.groupby("date")))
-    jobs = [(g, smiles[prev[d]], by_day.get(prev[d])) for d, g in by_day.items() if g["part"].iloc[0] in PARTS]
+    guarded = guarded or smiles
+    jobs = [(g, smiles[prev[d]], by_day.get(prev[d]), None if guarded[prev[d]] is smiles[prev[d]] else guarded[prev[d]])
+            for d, g in by_day.items() if g["part"].iloc[0] in PARTS]
     with ProcessPoolExecutor(workers) as pool:
         parts = pool.map(partial(run_day, p=p, models=models), jobs, chunksize=4)
         return pd.concat([df for day in parts for df in day], ignore_index=True)
@@ -490,7 +505,9 @@ def summary_tables(res: pd.DataFrame, asset: str, p: dict, tables_dir: Path) -> 
              ("gp_dyn_af", "gp_af"), ("gp_dyn_af", "best_cb"), ("gp_dyn_af", "hist"), ("gp_dyn_af", "dyn"),
              ("gp_dyn_af", "gp_dyn"), ("gp_dyn_af", "gp_cb"), ("gp_dyn_af", "moex_today"), ("gp_dyn", "gp_cb"),
              ("gp_dyn", "hist"), ("gp_dyn", "dyn"), ("np", "gp"), ("np_cb", "gp_cb"), ("np_dyn", "gp_dyn"),
-             ("gp_dyn_af", "np_dyn"), ("np_dyn", "best_cb"), ("np_dyn", "hist"), ("np_dyn", "dyn")]
+             ("gp_dyn_af", "np_dyn"), ("np_dyn", "best_cb"), ("np_dyn", "hist"), ("np_dyn", "dyn"),
+             ("gp_dyn_g_af", "gp_dyn_af"), ("gp_dyn_g_af", "gp_af"), ("gp_dyn_g_af", "best_cb"),
+             ("gp_dyn_g_af", "hist"), ("gp_dyn_g_af", "moex_today")]
 
     def write(r: pd.DataFrame, tag: str) -> None:
         rmse = rmse_table(r, methods, p["N_BOOT"])

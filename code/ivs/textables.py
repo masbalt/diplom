@@ -24,10 +24,11 @@ ARB_NAMES = {"cb_quad": "Квадратичная улыбка", "cb_svi": "SVI 
              "hist": "Вчерашняя кривая", "hist_cb": "Вчерашняя кривая + простая поправка",
              "gp": "Предлагаемый метод", "gp_dyn": "Предлагаемый метод, динамический вариант",
              "moex_today": "Кривая биржи дня $t$ (справочно)"}
-FORECAST = ["fc_k", "fc_strike", "fc_x", "fc_ar", "fc_gbm", "fc_carry"]
+FORECAST = ["fc_k", "fc_strike", "fc_x", "fc_ar", "fc_gbm", "fc_nn", "fc_carry"]
 DYN_METHODS = ["hist", "dyn", "gp_af", "gp_dyn_af"]
 NEURAL_PAIRS = [("gp", "np"), ("gp_cb", "np_cb"), ("gp_dyn", "np_dyn")]
 HOLDOUT_METHODS = ["hist", "gp_af", "gp_dyn_af"]
+HOLDOUT_GUARD = "gp_dyn_g_af"   # динамический вариант с защитой: отдельный столбец по всем сделкам
 QUOTE_NAMES = {"ssvi": "SSVI по сделкам дня $t$", "exchange": "Расчётная кривая биржи дня $t$",
                "gp_dyn": "Предлагаемый метод по сделкам дня $t$"}
 REGIMES = {"calm": "спокойные", "normal": "обычные", "turbulent": "бурные"}
@@ -137,6 +138,13 @@ def numbers(tables: Path, asset: str) -> dict[str, str]:
                 out[f"fcb/{row['by']}/{row['h']}/{meth}/{ascii_key(row['bucket'])}"] = _num(row[meth])
     if (tables / f"exp_forecast_holdout_{asset}.csv").exists():
         _forecast_numbers(out, tables, f"holdout_{asset}", "H/")
+    guard = tables / f"exp_guard_{asset}.csv"
+    if guard.exists():
+        for row in pd.read_csv(guard).itertuples():
+            out[f"guard/{row.part}/removed"], out[f"guard/{row.part}/trades"] = str(row.removed), str(row.trades)
+            if row.trades:
+                out[f"guard/{row.part}/rmse_raw"] = _num(row.rmse_raw, 1)
+                out[f"guard/{row.part}/rmse_guard"] = _num(row.rmse_guard, 1)
     quotes = tables / f"exp_quotes_{asset}.csv"
     if quotes.exists():
         q = pd.read_csv(quotes)
@@ -189,6 +197,8 @@ def numbers(tables: Path, asset: str) -> dict[str, str]:
         for h, phi in fc["phi"].items():
             out[f"phi/{h}"] = _num(phi)
             out[f"phicurve/{h}"] = _num(100 * fc["phi_curve"][h], 0)   # в процентах расхождения
+        for h, epochs in fc.get("nn_epochs", {}).items():
+            out[f"nnepochs/{h}"] = str(epochs)
     return out
 
 
@@ -304,12 +314,13 @@ def tab_neural(tables: Path, asset: str) -> list[str]:
 def tab_holdout(tables: Path, asset: str) -> list[str]:
     """Контрольный период. Столбцы: лучший метод текущей доски; методы с историей по всем сделкам;
     те же методы без одной пары «серия, день» с наибольшей ошибкой вчерашней кривой; кривая биржи дня t.
-    Жирным — лучший из четырёх методов в каждой из двух групп."""
+    В первой группе есть ещё динамический вариант с защитой от ошибочной кривой.
+    Жирным — лучший метод в каждой из двух групп."""
     trim = pd.read_csv(tables / f"exp_rmse_holdout_trim_{asset}.csv")
 
     def cells(v, scheme, m):
         w = _pick(trim, scheme, m).set_index("method")["rmse"]
-        full = _best_bold([v["best_cb"], *[v[k] for k in HOLDOUT_METHODS]])
+        full = _best_bold([v["best_cb"], *[v[k] for k in HOLDOUT_METHODS], v[HOLDOUT_GUARD]])
         cut = _best_bold([w["best_cb"], *[w[k] for k in HOLDOUT_METHODS]])
         return [*full, *cut[1:], _num(v["moex_today"])]
 
@@ -364,11 +375,17 @@ def tab_params(tables: Path, asset: str) -> list[str]:
     return lines
 
 
+def _current(tables: Path, asset: str) -> bool:
+    """Есть ли по активу таблицы текущей версии расчёта (со всеми методами, которые нужны статье)."""
+    path = tables / f"exp_rmse_{asset}.csv"
+    return path.exists() and HOLDOUT_GUARD in set(pd.read_csv(path, usecols=["method"])["method"])
+
+
 def write(tables: Path, out: Path, asset: str, extra_assets: list[str]) -> None:
     """Пишет exp_numbers.tex и строки таблиц для основного актива и для активов из ``extra_assets``,
     если по ним есть результаты."""
     out.mkdir(parents=True, exist_ok=True)
-    assets = [asset] + [a for a in extra_assets if (tables / f"exp_rmse_{a}.csv").exists()]
+    assets = [asset] + [a for a in extra_assets if _current(tables, a)]
     lines = ["% Сгенерировано code/main.py (этап figures) — не редактировать вручную.",
              "\\newcommand{\\E}[1]{\\csname E/#1\\endcsname}"]
     for a in assets:

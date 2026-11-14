@@ -11,11 +11,16 @@
 Модели добавляют к fc_x прогноз изменения, их параметры оцениваются на обучающем периоде:
   fc_ar     — авторегрессия пяти факторов общей поверхности дня (возврат к скользящему среднему);
   fc_gbm    — градиентный бустинг изменения уровня серии по признакам дня t;
+  fc_nn     — небольшая нейросеть с теми же признаками и той же целью, что у бустинга;
   fc_carry  — перенос поправки: доля phi_h сглаженной разности между сделками дня t
               и расчётной кривой того же дня.
 
 Динамическое начальное приближение (колонка ``dyn``) — это fc_carry при h = 1. Предлагаемый метод
 (ivs.gp) с ним вместо вчерашней кривой в координате k — вариант ``gp_dyn`` основного эксперимента.
+
+Защита от грубой ошибки расчётной кривой (``guard_curves``): кривая серии без сделок, которая
+отстоит от соседних серий со сделками больше чем на долю GUARD_GAP их уровня, в историю не
+берётся. Начальное приближение с защитой — колонка ``dyn_g``.
 """
 from __future__ import annotations
 
@@ -23,18 +28,21 @@ import json
 from concurrent.futures import ProcessPoolExecutor
 from functools import partial
 
+import copy
+
 import numpy as np
 import pandas as pd
+import torch
 from scipy.linalg import cho_factor, cho_solve
 from sklearn.ensemble import HistGradientBoostingRegressor
 
 from . import gp, pilot
 
 RULES = {"fc_k": "k", "fc_strike": "strike", "fc_x": "x"}
-MODELS = ["fc_ar", "fc_gbm", "fc_carry"]
+MODELS = ["fc_ar", "fc_gbm", "fc_nn", "fc_carry"]
 METHODS = [*RULES, *MODELS]
-PAIRS = [("fc_strike", "fc_k"), ("fc_x", "fc_k"), ("fc_ar", "fc_k"), ("fc_gbm", "fc_k"), ("fc_carry", "fc_k"),
-         ("fc_ar", "fc_x"), ("fc_gbm", "fc_x"), ("fc_carry", "fc_x")]
+PAIRS = [("fc_strike", "fc_k"), ("fc_x", "fc_k"), ("fc_ar", "fc_k"), ("fc_gbm", "fc_k"), ("fc_nn", "fc_k"),
+         ("fc_carry", "fc_k"), ("fc_ar", "fc_x"), ("fc_gbm", "fc_x"), ("fc_nn", "fc_x"), ("fc_carry", "fc_x")]
 KEEP = ["date", "expiry", "strike", "T", "k", "x", "sqrtT", "z", "iv", "today", "n_candles", "part"]
 X_GRID = np.linspace(-0.6, 0.6, 13)   # узлы по x для факторов общей поверхности дня
 SKEW_X = 0.3                          # наклон и кривизна серии считаются по точкам x = -0.3, 0, 0.3
@@ -97,14 +105,88 @@ def dyn_prior(pts: pd.DataFrame, sm, vis: pd.DataFrame | None, P: dict, phi: flo
     return hist_x, hist_x + phi * smooth_resid(vis, pts, P)
 
 
-def add_prior(obs: pd.DataFrame, smiles: dict, prev: dict, P: dict, phi: float) -> pd.DataFrame:
-    """Колонки ``hist_x`` и ``dyn`` для каждой сделки: начальные приближения из данных предыдущего дня."""
+def add_prior(obs: pd.DataFrame, smiles: dict, prev: dict, P: dict, phi: float,
+              names: tuple[str, str] = ("hist_x", "dyn")) -> pd.DataFrame:
+    """Колонки ``names`` для каждой сделки: вчерашняя кривая в координате x и динамическое начальное
+    приближение, оба из данных предыдущего дня."""
     obs = obs.reset_index(drop=True)
     by_day = dict(tuple(obs.groupby("date")))
     hist_x, dyn = np.full(len(obs), np.nan), np.full(len(obs), np.nan)
     for d, q in by_day.items():
         hist_x[q.index], dyn[q.index] = dyn_prior(q, smiles[prev[d]], by_day.get(prev[d]), P, phi)
-    return obs.assign(hist_x=hist_x, dyn=dyn)
+    return obs.assign(**{names[0]: hist_x, names[1]: dyn})
+
+
+# --- защита от грубой ошибки расчётной кривой ------------------------------------------
+
+def traded_pairs(board: pd.DataFrame) -> set:
+    """Пары (день, серия), в которых были сделки по опционам вне денег."""
+    return set(board[board["vol_otm"] > 0].groupby(["date", "expiry"]).groups)
+
+
+def _on_grid(series: tuple) -> np.ndarray:
+    """Кривая серии (T, k, iv) в узлах X_GRID по x; NaN там, где кривая не задана."""
+    T, ks, iv = series
+    k = X_GRID * np.sqrt(T)
+    out = np.full(len(X_GRID), np.nan)
+    ok = (k >= ks.min()) & (k <= ks.max())
+    out[ok] = np.interp(k[ok], ks, iv)
+    return out
+
+
+def guard_curves(smiles: dict, traded: set, p: dict) -> tuple[dict, pd.DataFrame]:
+    """Наборы кривых по дням без серий с грубой ошибкой и список убранных серий.
+
+    Проверяются только серии, по которым в этот день не было сделок: кривую такой серии биржа строит
+    без опоры на рынок. Опорой служат серии со сделками: кривая сравнивается с интерполяцией двух
+    ближайших таких серий по sqrt(T), а если серия со сделками есть только с одной стороны — с ней.
+    Если медиана расхождения по узлам X_GRID больше доли GUARD_GAP от уровня опорной кривой, серия
+    убирается из набора кривых дня. Тогда при переносе её заменяет ближайшая по сроку серия в
+    координате x (см. ``transfer``). В дни, когда ничего не убрано, возвращается тот же объект,
+    что в ``smiles``.
+    """
+    out, rows = {}, []
+    for d, sm in smiles.items():
+        out[d] = sm
+        ser = sorted(sm.series.items(), key=lambda kv: kv[1][0])
+        anchors = [i for i, (e, _) in enumerate(ser) if (d, e) in traded]
+        if not anchors:
+            continue
+        curves = {i: _on_grid(ser[i][1]) for i in anchors}
+        sqrtT = [np.sqrt(s[0]) for _, s in ser]
+        bad = {}
+        for i, (e, s) in enumerate(ser):
+            if i in curves:
+                continue
+            lo, hi = [j for j in anchors if j < i], [j for j in anchors if j > i]
+            if lo and hi:
+                w = (sqrtT[i] - sqrtT[lo[-1]]) / (sqrtT[hi[0]] - sqrtT[lo[-1]])
+                ref = (1 - w) * curves[lo[-1]] + w * curves[hi[0]]
+            else:
+                ref = curves[lo[-1]] if lo else curves[hi[0]]
+            gap = _on_grid(s) - ref
+            gap = gap[np.isfinite(gap)]
+            if len(gap) >= 5 and abs(np.median(gap)) > p["GUARD_GAP"] * np.nanmedian(ref):
+                bad[e] = {"T_days": 365 * s[0], "gap_vp": float(100 * np.median(gap)),
+                          "ref_vp": float(100 * np.nanmedian(ref))}
+        if bad:
+            out[d] = copy.copy(sm)
+            out[d].series = {e: s for e, s in sm.series.items() if e not in bad}
+            rows += [{"date": d, "expiry": e, **v} for e, v in bad.items()]
+    return out, pd.DataFrame(rows, columns=["date", "expiry", "T_days", "gap_vp", "ref_vp"])
+
+
+def guard_effect(obs: pd.DataFrame, removed: pd.DataFrame, prev: dict) -> pd.DataFrame:
+    """Что изменила защита, по частям данных: сколько серий убрано из истории, сколько сделок следующего
+    дня это затронуло и какова ошибка начального приближения на этих сделках без защиты и с ней."""
+    days = obs.groupby("part")["date"].unique()
+    rows = []
+    for part in days.index:
+        used = removed[removed["date"].isin([prev[d] for d in days[part] if d in prev])]   # вчерашние кривые этой части
+        o = obs[(obs["part"] == part) & ((obs["dyn_g"] - obs["dyn"]).abs() > 1e-9)]
+        err = lambda col: float(100 * np.sqrt(((o[col] - o["iv"]) ** 2).mean())) if len(o) else float("nan")  # noqa: E731
+        rows.append({"part": part, "removed": len(used), "trades": len(o), "rmse_raw": err("dyn"), "rmse_guard": err("dyn_g")})
+    return pd.DataFrame(rows)
 
 
 # --- прогнозы правил для всех дней и горизонтов --------------------------------------
@@ -203,15 +285,67 @@ def level_table(smiles: dict, cal: dict, p: dict) -> pd.DataFrame:
     return L
 
 
-def gbm_shift(L: pd.DataFrame, cal: dict, h: int, train_end: pd.Timestamp, params: dict) -> pd.Series:
-    """Прогноз изменения уровня серии за h дней для каждой пары (день, серия)."""
+def level_target(L: pd.DataFrame, cal: dict, h: int, train_end: pd.Timestamp) -> tuple[np.ndarray, np.ndarray]:
+    """Изменение уровня серии за h дней и признак «строка годится для обучения» (день прогноза не
+    позже конца обучающего периода)."""
     pos, dates = cal["pos"], cal["dates"]
     target = L["date"].map(lambda d: dates[pos[d] + h] if pos[d] + h < len(dates) else pd.NaT)
     future = L.set_index(["date", "expiry"])["lvl"]
     y = future.reindex(pd.MultiIndex.from_arrays([target, L["expiry"]])).to_numpy() - L["lvl"].to_numpy()
-    fit = np.isfinite(y) & np.asarray(target <= train_end)
+    return y, np.isfinite(y) & np.asarray(target <= train_end)
+
+
+def gbm_shift(L: pd.DataFrame, cal: dict, h: int, train_end: pd.Timestamp, params: dict) -> pd.Series:
+    """Прогноз изменения уровня серии за h дней для каждой пары (день, серия): градиентный бустинг."""
+    y, fit = level_target(L, cal, h, train_end)
     model = HistGradientBoostingRegressor(random_state=0, **params).fit(L.loc[fit, FEATURES], y[fit])
     return pd.Series(model.predict(L[FEATURES]), index=pd.MultiIndex.from_frame(L[["date", "expiry"]]))
+
+
+def nn_shift(L: pd.DataFrame, cal: dict, h: int, train_end: pd.Timestamp, params: dict) -> tuple[pd.Series, int]:
+    """То же, что ``gbm_shift``, но нейросетью; возвращает прогноз и выбранное число эпох.
+
+    Сеть: два скрытых слоя, признаки нормированы по обучающим строкам, пропуски заменены нулём.
+    Число эпох выбирается по последним ``val_days`` дням обучающего периода: сети учатся на более
+    ранних днях, и берётся число эпох с наименьшей ошибкой на этих днях. Ноль эпох означает, что
+    любая обученная сеть хуже нулевого прогноза; тогда прогноз изменения равен нулю. С выбранным
+    числом эпох сети обучаются заново на всём обучающем периоде, прогноз — среднее по сетям.
+    """
+    y, fit = level_target(L, cal, h, train_end)
+    X = L[FEATURES].to_numpy(float)
+    Z = np.nan_to_num((X - np.nanmean(X[fit], axis=0)) / (np.nanstd(X[fit], axis=0) + 1e-12))
+    scale = float(y[fit].std())
+    torch.set_num_threads(1)
+    Zt, yt = torch.tensor(Z, dtype=torch.float32), torch.tensor(np.nan_to_num(y) / scale, dtype=torch.float32)
+    val = fit & np.asarray(L["date"] > train_end - pd.Timedelta(days=params["val_days"]))
+    index = pd.MultiIndex.from_frame(L[["date", "expiry"]])
+
+    def train(rows: np.ndarray, epochs: int, seed: int, watch: np.ndarray | None = None):
+        torch.manual_seed(seed)
+        width = params["width"]
+        net = torch.nn.Sequential(torch.nn.Linear(len(FEATURES), width), torch.nn.GELU(),
+                                  torch.nn.Linear(width, width), torch.nn.GELU(), torch.nn.Linear(width, 1))
+        opt = torch.optim.AdamW(net.parameters(), lr=params["lr"], weight_decay=params["decay"])
+        rows_t, losses = torch.tensor(rows), []
+        for epoch in range(epochs):
+            opt.zero_grad()
+            torch.nn.functional.huber_loss(net(Zt[rows_t]).squeeze(-1), yt[rows_t]).backward()
+            opt.step()
+            if watch is not None and (epoch + 1) % params["check"] == 0:
+                with torch.no_grad():
+                    losses.append(float(((net(Zt[torch.tensor(watch)]).squeeze(-1) - yt[torch.tensor(watch)]) ** 2).mean()))
+        return net, losses
+
+    seeds = range(params["seeds"])
+    curve = np.mean([train(fit & ~val, params["max_epochs"], seed, watch=val)[1] for seed in seeds], axis=0)
+    zero = float((yt[torch.tensor(val)] ** 2).mean())            # ошибка нулевого прогноза на тех же днях
+    epochs = int(np.argmin([zero, *curve])) * params["check"]
+    if epochs == 0:
+        return pd.Series(0.0, index=index), 0
+    nets = [train(fit, epochs, seed)[0] for seed in seeds]
+    with torch.no_grad():
+        preds = [net(Zt).squeeze(-1).numpy() * scale for net in nets]
+    return pd.Series(np.mean(preds, axis=0), index=index), epochs
 
 
 def fit_apply(fr: pd.DataFrame, smiles: dict, cal: dict, p: dict) -> tuple[pd.DataFrame, dict]:
@@ -219,13 +353,13 @@ def fit_apply(fr: pd.DataFrame, smiles: dict, cal: dict, p: dict) -> tuple[pd.Da
 
     В параметрах: ``phi`` — доля переноса поправки для каждого горизонта; ``phi_curve`` — её часть,
     которая объясняется сдвигом самой расчётной кривой биржи за h дней; ``ar_beta`` — коэффициенты
-    авторегрессии факторов.
+    авторегрессии факторов; ``nn_epochs`` — выбранное число эпох нейросети.
     """
     train_end = pd.Timestamp(p["TRAIN_RANGE"][1])
     fac = factor_table(smiles, p)
     dev = fac - fac.rolling(p["FC_AR_WINDOW"], min_periods=p["FC_AR_WINDOW"] // 3).mean()
     L = level_table(smiles, cal, p)
-    models = {"phi": {}, "phi_curve": {}, "ar_beta": {}}
+    models = {"phi": {}, "phi_curve": {}, "ar_beta": {}, "nn_epochs": {}}
     parts = []
     for h, r in fr.groupby("h"):
         r = r.copy()
@@ -236,8 +370,10 @@ def fit_apply(fr: pd.DataFrame, smiles: dict, cal: dict, p: dict) -> tuple[pd.Da
         beta = ar_beta(dev, fac, h, train_end)
         d_fac = np.nan_to_num(dev.reindex(r["origin"]).to_numpy() * beta)
         r["fc_ar"] = r["fc_x"] + (_basis(r["x"].to_numpy(), r["sqrtT"].to_numpy()) * d_fac).sum(axis=1)
-        shift = gbm_shift(L, cal, h, train_end, p["FC_GBM"])
-        r["fc_gbm"] = r["fc_x"] + shift.reindex(pd.MultiIndex.from_frame(r[["origin", "expiry"]])).fillna(0.0).to_numpy()
+        at = pd.MultiIndex.from_frame(r[["origin", "expiry"]])
+        r["fc_gbm"] = r["fc_x"] + gbm_shift(L, cal, h, train_end, p["FC_GBM"]).reindex(at).fillna(0.0).to_numpy()
+        nn, models["nn_epochs"][int(h)] = nn_shift(L, cal, h, train_end, p["FC_NN"])
+        r["fc_nn"] = r["fc_x"] + nn.reindex(at).fillna(0.0).to_numpy()
         r["fc_carry"] = r["fc_x"] + phi * r["corr"]
         models["phi"][int(h)], models["ar_beta"][int(h)] = phi, [float(b) for b in beta]
         parts.append(r)
@@ -276,26 +412,33 @@ def bucket_table(fr: pd.DataFrame, horizons: list[int]) -> pd.DataFrame:
 
 # --- полный расчёт и сохранение -----------------------------------------------------------
 
-def run(obs: pd.DataFrame, smiles: dict, prev: dict, cal: dict, p: dict, workers: int):
+def run(obs: pd.DataFrame, smiles: dict, prev: dict, cal: dict, p: dict, workers: int, guarded: dict | None = None):
     """Оценивает модели на обучающем периоде и считает прогнозы на остальных днях.
 
-    Возвращает (наблюдения с колонками ``hist_x`` и ``dyn``, прогнозы по сделкам тестового и
-    контрольного периодов, параметры моделей). ``resid`` в параметрах — ядро для разности
+    Возвращает (наблюдения с колонками ``hist_x``, ``dyn`` и ``dyn_g``, прогнозы по сделкам тестового
+    и контрольного периодов, параметры моделей). ``resid`` в параметрах — ядро для разности
     «сделка − кривая того же дня», ``phi`` — доля переноса поправки для каждого горизонта.
+    ``guarded`` — кривые по дням после ``guard_curves``; по ним считается ``dyn_g``.
     """
     P = fit_resid(obs)
     fr, models = fit_apply(frames(obs, smiles, cal, p["LAGS"], P, workers), smiles, cal, p)
     models["resid"] = P
     out = add_prior(obs, smiles, prev, P, models["phi"][1])
+    out = add_prior(out, guarded or smiles, prev, P, models["phi"][1], names=("hist_xg", "dyn_g"))
     out.attrs = dict(obs.attrs)
     return out, fr[fr["part"] != "train"].reset_index(drop=True), models
 
 
-def save(fr: pd.DataFrame, models: dict, asset: str, p: dict, data_dir, tables_dir) -> None:
-    """Прогнозы по сделкам (data/), сводные таблицы и параметры моделей ``reports/tables/exp_forecast_*``."""
+def save(fr: pd.DataFrame, models: dict, asset: str, p: dict, data_dir, tables_dir,
+         guard: tuple[pd.DataFrame, pd.DataFrame] | None = None) -> None:
+    """Прогнозы по сделкам (data/), сводные таблицы и параметры моделей ``reports/tables/exp_forecast_*``.
+    ``guard`` — список убранных защитой серий и её эффект (``exp_guard_*``)."""
     tables_dir.mkdir(parents=True, exist_ok=True)
     fr.to_csv(data_dir / "processed" / f"exp_forecast_results_{asset}.csv.gz", index=False)
     (tables_dir / f"exp_forecast_params_{asset}.json").write_text(json.dumps(models, ensure_ascii=False, indent=2))
+    if guard is not None:
+        guard[0].to_csv(tables_dir / f"exp_guard_removed_{asset}.csv", index=False)
+        guard[1].to_csv(tables_dir / f"exp_guard_{asset}.csv", index=False)
     for part in ("test", "holdout"):
         r = fr[fr["part"] == part]
         if len(r):

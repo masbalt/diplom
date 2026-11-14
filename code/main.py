@@ -41,7 +41,7 @@ PARAMS = ["T_MIN_DAYS", "T_MAX_DAYS", "X_MAX", "GROSS_ERROR", "MIN_POINTS_PER_DA
 EXP_PARAMS = ["TRAIN_RANGE", "TEST_RANGE", "FAR_KEEP", "TOPN", "SSVI_RIDGE", "SSVI_FSCALE", "LAGS", "LAG_MASKS",
               "LAG_SEEDS", "ARB_Z_MAX", "ARB_STEP", "ARB_TICKS", "ARB_MASK", "ARB_IV_MIN", "ARB_IV_MAX",
               "BREAKDOWN_MASK", "COVER_LEVELS", "EXAMPLE_DATE", "EXAMPLE_MASK", "GAP_MASK", "HOLDOUT_RANGE",
-              "FC_AR_WINDOW", "FC_GBM", "FC_BUCKET_LAGS", "NP_EPOCHS", "NP_BATCH", "NP_LR", "NP_HUBER", "NP_SEEDS",
+              "FC_AR_WINDOW", "FC_GBM", "FC_NN", "FC_BUCKET_LAGS", "GUARD_GAP", "NP_EPOCHS", "NP_BATCH", "NP_LR", "NP_HUBER", "NP_SEEDS",
               "QUOTES_MAX_SPREAD"]
 
 
@@ -88,15 +88,17 @@ def main() -> None:
         board, sync = experiment.load(cfg.DATA_DIR, asset)
         context = experiment.day_context(board)
         # Прогноз на h дней; из него же — начальное приближение динамического варианта (колонка dyn).
+        guarded, removed = forecast.guard_curves(context[0], forecast.traded_pairs(board), p)
         obs, fc, fc_models = forecast.run(experiment.observations(board, sync, p), context[0], context[1],
-                                          forecast.calendar(board), p, cfg.WORKERS_CPU)
-        forecast.save(fc, fc_models, asset, p, cfg.DATA_DIR, tables)
+                                          forecast.calendar(board), p, cfg.WORKERS_CPU, guarded)
+        forecast.save(fc, fc_models, asset, p, cfg.DATA_DIR, tables,
+                      guard=(removed, forecast.guard_effect(obs, removed, context[1])))
         print(f"forecast done in {time.time() - t0:.0f} s: phi =", {h: round(v, 3) for h, v in fc_models["phi"].items()})
     if "experiment" in args.stages and not args.quick:
         models = {**experiment.train(obs, p, cfg.WORKERS_CPU), "fc": fc_models}
         print(f"train done in {time.time() - t0:.0f} s:", json.dumps({k: round(v, 4) for k, v in models["gp"].items()}))
         quotes.run(obs, context, p, models, cfg.DATA_DIR / "live" / asset, asset, tables)
-        res = experiment.run(obs, context, p, models, cfg.WORKERS_CPU)
+        res = experiment.run(obs, context, p, models, cfg.WORKERS_CPU, guarded)
         lags = experiment.run_lags(obs, p, models, cfg.WORKERS_CPU)
         arb = experiment.run_arbitrage(obs, context, p, models, cfg.WORKERS_CPU)
         example = experiment.example_day(obs, context, p, models) if main_asset else None
